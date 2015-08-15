@@ -6,6 +6,7 @@ end
 require("Utils")
 require("MapController")
 require("WaveController")
+require("UnitController")
 require("BuildGrid")
 
 function Precache( context )
@@ -56,6 +57,7 @@ function CLegionDefence:InitGameMode()
 
 	self:SetupMapController()
 	self:SetupWaveController()
+	self:SetupUnitController()
 
 	ListenToGameEvent("dota_player_pick_hero", Dynamic_Wrap(CLegionDefence, "OnPlayerPickedHero"), self)
 

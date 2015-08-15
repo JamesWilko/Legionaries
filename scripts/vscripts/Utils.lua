@@ -1,4 +1,12 @@
 
+function BroadcastCenterMessage( sMessage, fDuration )
+	local centerMessage = {
+		message = sMessage,
+		duration = fDuration
+	}
+	FireGameEvent( "show_center_message", centerMessage )
+end
+
 function math.round(num, idp)
 	local mult = 10 ^ (idp or 0)
 	return math.floor(num * mult + 0.5) / mult

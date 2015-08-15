@@ -20,6 +20,13 @@
 
 "CustomEvents"
 {
+	"legion_wave_start"
+	{
+		"nWaveNumber"					"short"
+		"sEnemyName"					"string"
+		"nTotalEnemies"					"long"
+	}
+
 	"legion_wave_complete"
 	{
 		"nWaveNumber"					"short"

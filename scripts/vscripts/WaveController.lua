@@ -19,7 +19,11 @@ function CWaveController:Setup()
 	self._current_wave = 0
 	self._wave_in_progress = false
 
+	self._next_wave_time = 15
+	self._time_between_waves = 60
+	self._end_of_wave_time = 3
 	self._think_time = 1
+
 	self._think_ent = IsValidEntity(self._think_ent) and self._think_ent or Entities:CreateByClassname("info_target")
 	self._think_ent:SetThink("OnThink", self, "WaveControllerThink", self._think_time)
 
@@ -28,17 +32,26 @@ function CWaveController:Setup()
 end
 
 function CWaveController:OnThink()
-	
-	-- Start spawning waves at 15s
-	if not self:IsWaveRunning() then
-		local time = GameRules:GetDOTATime(false, false)
-		if time > 15 then
-			self:StartNextWave()
-		end
-	end
 
 	self._map_controller = self._map_controller or GameRules.LegionDefence:GetMapController()
 	self._spawned_units = self._spawned_units or {}
+
+	-- Countdown to end of wave
+	if self:IsWaveRunning() and self._wave_complete ~= nil then
+		self._wave_complete = self._wave_complete - self._think_time
+		if self._wave_complete <= 0 then
+			self:WaveCompleted()
+			self._wave_complete = nil
+		end
+	end
+
+	-- Countdown to next wave
+	if not self:IsWaveRunning() then
+		local time = GameRules:GetDOTATime(false, false)
+		if time >= self._next_wave_time then
+			self:StartNextWave()
+		end
+	end
 
 	-- Spawn a unit at every spawn point every think
 	if self:IsWaveRunning() and self:CurrentWaveHasSpawnsRemaining() then
@@ -92,10 +105,19 @@ function CWaveController:StartWave( iWave )
 	self._current_wave = iWave
 	if self:GetWave() then
 
+		-- Start wave
 		self._wave_in_progress = true
-
 		self._wave_spawns_remaining = table.copy(self:GetWave())
 
+		-- Call start wave event
+		local data = {
+			["nWaveNumber"] = self._current_wave,
+			["sEnemyName"] = nil,
+			["nTotalEnemies"] = self:GetNumberOfSpawnsInWave(),
+		}
+		FireGameEvent( "legion_wave_start", data )
+
+		-- Print wave info to console
 		print(string.format("Starting Wave %i", iWave))
 		self:PrintWaveEnemyList( iWave )
 
@@ -115,6 +137,14 @@ end
 
 function CWaveController:GetWave( iWave )
 	return self._waves_list[tostring(iWave or self._current_wave)]
+end
+
+function CWaveController:GetNumberOfSpawnsInWave( iWave )
+	local n = 0
+	for k, v in pairs( self:GetWave(iWave) ) do
+		n = n + v
+	end
+	return n
 end
 
 function CWaveController:CurrentWaveHasSpawnsRemaining()
@@ -165,7 +195,7 @@ function CWaveController:OnUnitKilled( event )
 				
 				local remain = self:GetRemainingUnitsInCurrentWave()
 				if remain <= 0 then
-					self:WaveCompleted()
+					self:WavePreCompleted()
 				end
 
 			end
@@ -200,6 +230,11 @@ function CWaveController:GetRemainingUnitsInCurrentWave()
 
 end
 
+function CWaveController:WavePreCompleted()
+	print(string.format("All units in wave %i killed!", self._current_wave))
+	self._wave_complete = self._end_of_wave_time
+end
+
 function CWaveController:WaveCompleted()
 
 	print(string.format("Completed Wave %i", self._current_wave))
@@ -208,7 +243,7 @@ function CWaveController:WaveCompleted()
 	local data = {
 		["nWaveNumber"] = self._current_wave,
 		["sEnemyName"] = nil,
-		["nTotalEnemies"] = nil,
+		["nTotalEnemies"] = self:GetNumberOfSpawnsInWave(),
 		["nEnemiesKilled"] = nil,
 		["nEnemiesLeaked"] = nil,
 		["lFastestPlayer"] = nil,
@@ -217,5 +252,8 @@ function CWaveController:WaveCompleted()
 
 	-- Wave no longer in progress
 	self._wave_in_progress = false
+
+	-- Set next wave time
+	self._next_wave_time = GameRules:GetDOTATime(false, false) + self._time_between_waves
 
 end

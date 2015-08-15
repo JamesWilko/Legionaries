@@ -95,16 +95,7 @@ function spawn_unit_tower:GetSpawnUnit()
 end
 
 function spawn_unit_tower:SpawnUnitAtPosition( vPosition )
-
 	if self:GetSpawnUnit() then
-
-		local hUnit = CreateUnitByName( self:GetSpawnUnit(), vPosition, false, self:GetCaster(), self:GetCaster():GetOwner(), self:GetCaster():GetTeamNumber() )
-		if hUnit ~= nil then
-			hUnit:SetOwner( self:GetCaster() )
-			hUnit:SetControllableByPlayer( self:GetCaster():GetPlayerID(), true )
-			hUnit:SetAngles( 0, 90, 0 )
-		end
-		
+		GameRules.LegionDefence:GetUnitController():SpawnUnit( self:GetCaster():GetOwner(), self:GetCaster():GetTeamNumber(), self:GetSpawnUnit(), vPosition )
 	end
-
 end

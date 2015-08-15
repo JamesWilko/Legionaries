@@ -39,7 +39,7 @@ function modifier_upgrade_unit_think:OnIntervalThink()
 			return nil
 		end
 
-		-- Stop victory gesture once spawned and started the gesture
+		-- Stop upgrade gesture once spawned and started the gesture
 		if self._hUnit then
 			self._hUnit:RemoveGesture( ACT_DOTA_VICTORY )
 			UTIL_Remove( self:GetParent() )
@@ -49,21 +49,21 @@ function modifier_upgrade_unit_think:OnIntervalThink()
 		-- Get unit position and rotation
 		local vPosition = self:GetCaster():GetOrigin()
 		local vAngles = self:GetCaster():GetAnglesAsVector()
+		local cUnitController = GameRules.LegionDefence:GetUnitController()
 
-		-- Spawn in new unit and show victory gesture
-		local hUnit = CreateUnitByName( self:GetAbility():GetUpgradeClass(), vPosition, false, nil, self:GetCaster(), self:GetCaster():GetTeamNumber() )
+		-- Spawn in new unit and show upgrade gesture
+		local hUnit = cUnitController:SpawnUnit( self:GetCaster():GetOwner(), self:GetCaster():GetTeamNumber(), self:GetAbility():GetUpgradeClass(), vPosition )
 		if hUnit ~= nil then
 
-			hUnit:SetOwner( self:GetCaster() )
-			hUnit:SetControllableByPlayer( self:GetCaster():GetOwner():GetPlayerID(), true )
-			hUnit:SetOrigin( vPosition )
-			hUnit:SetAngles( vAngles.x, vAngles.y, vAngles.z )
-
+			-- Do upgrade gesture
 			hUnit:StartGesture( ACT_DOTA_VICTORY )
 
-			self._hUnit = hUnit
+			-- Remove and unregister old unit
+			cUnitController:UnregisterUnit( self:GetCaster() )
 			UTIL_Remove( self:GetCaster() )
 
+			-- Stop upgrade gesture after it plays
+			self._hUnit = hUnit
 			return 0.1
 
 		end
