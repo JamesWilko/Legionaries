@@ -3,6 +3,10 @@ if CUnitController == nil then
 	CUnitController = class({})
 end
 
+CUnitController.LEGION_UNITS_FILE = "scripts/npc/npc_units_custom.txt"
+CUnitController.LEGION_NPC_UNIT = "npc_legion_"
+CUnitController.DEFAULT_GOLD_COST = 100
+
 function CLegionDefence:SetupUnitController()
 	self.unit_controller = CUnitController()
 	self.unit_controller:Setup()
@@ -14,11 +18,45 @@ end
 
 function CUnitController:Setup()
 
+	self._unit_types = self._unit_types or {}
 	self._player_units = self._player_units or {}
+
+	self:LoadUnitTypes()
 
 	ListenToGameEvent("legion_wave_start", Dynamic_Wrap(CUnitController, "HandleOnWaveStart"), self)
 	ListenToGameEvent("legion_wave_complete", Dynamic_Wrap(CUnitController, "HandleOnWaveComplete"), self)
 
+end
+
+---------------------------------------
+-- Registering Unit Types
+---------------------------------------
+function CUnitController:LoadUnitTypes()
+
+	-- Load custom units file and load data
+	local units = LoadKeyValues( CUnitController.LEGION_UNITS_FILE )
+	for unit_name, values in pairs( units ) do
+		if string.lower(string.sub(unit_name, 1, #CUnitController.LEGION_NPC_UNIT)) == CUnitController.LEGION_NPC_UNIT then
+			self:RegisterUnitType( unit_name, values )
+		end
+	end
+
+end
+
+function CUnitController:RegisterUnitType( sUnitType, tKeyValues )
+	assert( sUnitType ~= nil, "Can not register a unit type, unless specifying a unit type name!" )
+	local unit_data = {
+		gold_cost = tKeyValues["GoldCost"] or CUnitController.DEFAULT_GOLD_COST,
+	}
+	self._unit_types[sUnitType] = unit_data
+end
+
+function CUnitController:GetUnitTypeData( sUnitType )
+	return self._unit_types[sUnitType]
+end
+
+function CUnitController:GetUnitTypeGoldCost( sUnitType )
+	return self._unit_types[sUnitType] and self._unit_types[sUnitType].gold_cost or CUnitController.DEFAULT_GOLD_COST
 end
 
 ---------------------------------------
@@ -85,9 +123,6 @@ function CUnitController:SwapUnit( old_unit, new_unit )
 
 end
 
----------------------------------------
--- Accessors
----------------------------------------
 function CUnitController:GetAllUnits()
 	local t = {}
 	for i, player in pairs( self._player_units ) do
@@ -96,6 +131,16 @@ function CUnitController:GetAllUnits()
 		end
 	end
 	return t
+end
+
+function CUnitController:GetUnitData( tUnit )
+	for i, player in pairs( self._player_units ) do
+		for k, v in pairs( player ) do
+			if v.unit == tUnit then
+				return v
+			end
+		end
+	end
 end
 
 ---------------------------------------
@@ -112,7 +157,7 @@ function CUnitController:SpawnUnit( ePlayer, lTeam, sUnitClass, vPosition, bRegi
 		hUnit:SetOwner( ePlayer )
 		hUnit:SetControllableByPlayer( ePlayer:GetPlayerID(), true )
 		hUnit:SetAngles( 0, 90, 0 )
-		hUnit:SetMoveCapability( DOTA_UNIT_CAP_MOVE_NONE )
+		hUnit:SetMoveCapability( GameRules.LegionDefence:GetWaveController():IsWaveRunning() and DOTA_UNIT_CAP_MOVE_NONE or DOTA_UNIT_CAP_MOVE_GROUND )
 
 		if bRegisterUnit then
 			self:RegisterUnit( ePlayer, lTeam, hUnit )

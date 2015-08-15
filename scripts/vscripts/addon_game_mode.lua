@@ -4,6 +4,7 @@ if CLegionDefence == nil then
 end
 
 require("Utils")
+require("GameUtils")
 require("MapController")
 require("WaveController")
 require("UnitController")
@@ -19,6 +20,8 @@ function Precache( context )
 	]]
 
 	-- PrecacheResource( "particle_folder", "particles/units/heroes/hero_lina/", context )
+
+	PrecacheResource("particle_folder", "particles/units/heroes/hero_alchemist/", context)
 
 	PrecacheResource( "model", "models/items/dragon_knight/sword_davion.vmdl", context )
 	PrecacheResource( "model", "models/items/dragon_knight/shield_davion.vmdl", context )
@@ -75,9 +78,28 @@ end
 
 -- Debug, give player all levels
 function CLegionDefence:OnPlayerPickedHero( event )
+
 	local hero = EntIndexToHScript( event.heroindex )
 	if hero then
-		hero:SetAbilityPoints(25)
+
+		-- Give player starting gold
+		PlayerResource:SetGold( hero:GetOwner():GetPlayerID(), 300, true )
+		PlayerResource:SetGold( hero:GetOwner():GetPlayerID(), 0, false )
+
+		-- Make all abilities max level
+		for i = 0, hero:GetAbilityCount() - 1, 1 do
+			local ability = hero:GetAbilityByIndex(i)
+			if ability then
+				ability:SetLevel( ability:GetMaxLevel() )
+			end
+		end
+
+		-- Remove skill points
+		hero:SetAbilityPoints(0)
+
+		-- Give items
 		-- hero:AddItemByName("item_necronomicon")
+
 	end
+
 end

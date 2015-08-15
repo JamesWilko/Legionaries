@@ -10,25 +10,30 @@
 	{
 		"BaseClass"						"ability_lua"
 		"AbilityTextureName"			"wisp_relocate"
-		"ScriptFile"					"abilities/upgrade_unit"
+		"ScriptFile"					"abilities/upgrades/upgrade_unit"
+
+		"AbilityCastRange"				"100"
+		"AbilityCastPoint"				"0.4"
 
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"FightRecapLevel"				"1"
 		"MaxLevel"						"1"
 		
-		"AbilityCastRange"				"100"
-		"AbilityCastPoint"				"0.4"
-
-		"AbilityCooldown"				"0.0"
+		"AbilityCooldown"				"2.0"
 		"AbilityDuration"				"1.0"
 		"AbilityManaCost"				"0"
 
 		"AbilitySpecial"
 		{
-			"01"
+			"02"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"GoldCost"					"50"
+			}
+			"02"
 			{
 				"var_type"					"FIELD_FLOAT"
-				"upgrade_delay"				"2"
+				"UpgradeDelay"				"2"
 			}
 		}
 	}
@@ -42,17 +47,17 @@
 		"AbilityTextureName"			"lina_dragon_slave"
 		"ScriptFile"					"abilities/spawn_fire_tower_tier_one"
 
+		"AbilityCastRange"				"800"
+		"AbilityCastPoint"				"0.4"
+
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_NONE"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_NONE"
 		"FightRecapLevel"				"1"
 		"MaxLevel"						"1"
-		
-		"AbilityCastRange"				"800"
-		"AbilityCastPoint"				"0.4"
 
-		"AbilityCooldown"				"0.0"
-		"AbilityDuration"				"0.6875"
+		"AbilityCooldown"				"1.0"
+		"AbilityDuration"				"1.0"
 		"AbilityManaCost"				"0"
 
 		"AbilitySpecial"
@@ -60,12 +65,17 @@
 			"01"
 			{
 				"var_type"					"FIELD_INTEGER"
-				"spawn_effect_aoe"			"60"
+				"GoldCost"					"50"
 			}
 			"02"
 			{
+				"var_type"					"FIELD_INTEGER"
+				"SpawnEffectAOE"			"60"
+			}
+			"03"
+			{
 				"var_type"					"FIELD_FLOAT"
-				"spawn_delay"				"1"
+				"SpawnDelay"				"1"
 			}
 		}
 	}
@@ -76,28 +86,35 @@
 		"AbilityTextureName"			"lina_light_strike_array"
 		"ScriptFile"					"abilities/spawn_fire_tower_tier_two"
 	
+		"AbilityCastRange"				"800"
+		"AbilityCastPoint"				"0.4"
+
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_NONE"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_NONE"
 		"FightRecapLevel"				"1"
-		
-		"AbilityCastRange"				"800"
-		"AbilityCastPoint"				"0.45 0.45 0.45 0.45"
+		"MaxLevel"						"1"
 
-		"AbilityCooldown"				"0.0"
-		"AbilityDuration"				"0.6875 0.6875 0.6875 0.6875"
-		"AbilityManaCost"				"0 0 0 0"
+		"AbilityCooldown"				"1.0"
+		"AbilityDuration"				"1.0"
+		"AbilityManaCost"				"0"
 
 		"AbilitySpecial"
 		{
 			"01"
 			{
 				"var_type"					"FIELD_INTEGER"
-				"spawn_effect_aoe"			"100"
+				"GoldCost"					"100"
 			}
 			"02"
 			{
+				"var_type"					"FIELD_INTEGER"
+				"SpawnEffectAOE"			"80"
+			}
+			"03"
+			{
 				"var_type"					"FIELD_FLOAT"
-				"spawn_delay"				"1"
+				"SpawnDelay"				"1"
 			}
 		}
 	}

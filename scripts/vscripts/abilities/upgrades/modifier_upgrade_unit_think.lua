@@ -9,7 +9,7 @@ end
 
 function modifier_upgrade_unit_think:OnCreated( kv )
 
-	self._delay = self:GetAbility():GetSpecialValueFor( "upgrade_delay" )
+	self._delay = self:GetAbility():GetSpecialValueFor( "UpgradeDelay" )
 
 	if IsServer() then
 

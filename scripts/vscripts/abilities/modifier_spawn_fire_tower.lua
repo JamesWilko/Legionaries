@@ -9,8 +9,8 @@ end
 
 function modifier_spawn_fire_tower:OnCreated( kv )
 
-	self.effect_aoe = self:GetAbility():GetSpecialValueFor( "spawn_effect_aoe" )
-	self.spawn_delay_time = self:GetAbility():GetSpecialValueFor( "spawn_delay" )
+	self.effect_aoe = self:GetAbility():GetSpecialValueFor( "SpawnEffectAOE" )
+	self.spawn_delay_time = self:GetAbility():GetSpecialValueFor( "SpawnDelay" )
 
 	if IsServer() then
 
