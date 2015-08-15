@@ -1,0 +1,27 @@
+"LegionWaves" 
+{
+	"1"
+	{
+		"npc_human_footman"	"10"
+	}
+
+	"2"
+	{
+		"npc_human_footman"	"15"
+	}
+
+	"3"
+	{
+		"npc_human_footman"	"20"
+	}
+
+	"4"
+	{
+		"npc_human_footman"	"25"
+	}
+
+	"5"
+	{
+		"npc_human_footman"	"30"
+	}
+}

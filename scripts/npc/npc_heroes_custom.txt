@@ -1,0 +1,27 @@
+// Dota Heroes File
+// NOTE: This is not for creating new heroes, this is for taking a currently existing hero as a template and overriding
+// the specified key-value combinations.  Use override_hero <hero_to_override> for this.
+"DOTAHeroes"
+{
+	"npc_legion_hero_ember_spirit"
+	{
+		"override_hero"				"npc_dota_hero_ember_spirit"
+		"Ability1"					"spawn_fire_tower_tier_one"
+		"Ability2"					"spawn_fire_tower_tier_two"
+		"Ability3"					""
+		"Ability4"					""
+		"Ability5"					""
+		// "Ability3"					"spawn_fire_tower_tier_three"
+		// "Ability4"					"spawn_fire_tower_tier_four"
+		// "Ability5"					"spawn_fire_tower_tier_five"
+		// "Ability6"					"spawn_fire_tower_tier_six"
+		"VisionNighttimeRange"		"1800"
+	}
+
+	"npc_legion_hero_zuus"
+	{
+		"override_hero"				"npc_dota_hero_zuus"	// Hero to override
+		"Ability1"					"spawn_fire_tower_tier_one"		// Ability 1
+		"VisionNighttimeRange"		"1800"					// Range of vision at night time.
+	}
+}

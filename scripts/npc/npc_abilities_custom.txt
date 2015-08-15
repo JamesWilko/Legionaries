@@ -1,0 +1,105 @@
+// Dota Heroes File
+"DOTAAbilities"
+{
+	"Version"		"1"
+
+	//-------------------------------------------------------------------------
+	// Upgrade Units
+	//-------------------------------------------------------------------------
+	"upgrade_unit"
+	{
+		"BaseClass"						"ability_lua"
+		"AbilityTextureName"			"wisp_relocate"
+		"ScriptFile"					"abilities/upgrade_unit"
+
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"FightRecapLevel"				"1"
+		"MaxLevel"						"1"
+		
+		"AbilityCastRange"				"100"
+		"AbilityCastPoint"				"0.4"
+
+		"AbilityCooldown"				"0.0"
+		"AbilityDuration"				"1.0"
+		"AbilityManaCost"				"0"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"upgrade_delay"				"2"
+			}
+		}
+	}
+
+	//-------------------------------------------------------------------------
+	// Spawn Fire Tower Units
+	//-------------------------------------------------------------------------
+	"spawn_fire_tower_tier_one"
+	{
+		"BaseClass"						"ability_lua"
+		"AbilityTextureName"			"lina_dragon_slave"
+		"ScriptFile"					"abilities/spawn_fire_tower_tier_one"
+
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_NONE"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_NONE"
+		"FightRecapLevel"				"1"
+		"MaxLevel"						"1"
+		
+		"AbilityCastRange"				"800"
+		"AbilityCastPoint"				"0.4"
+
+		"AbilityCooldown"				"0.0"
+		"AbilityDuration"				"0.6875"
+		"AbilityManaCost"				"0"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"spawn_effect_aoe"			"60"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"spawn_delay"				"1"
+			}
+		}
+	}
+
+	"spawn_fire_tower_tier_two"
+	{
+		"BaseClass"						"ability_lua"
+		"AbilityTextureName"			"lina_light_strike_array"
+		"ScriptFile"					"abilities/spawn_fire_tower_tier_two"
+	
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_NONE"
+		"FightRecapLevel"				"1"
+		
+		"AbilityCastRange"				"800"
+		"AbilityCastPoint"				"0.45 0.45 0.45 0.45"
+
+		"AbilityCooldown"				"0.0"
+		"AbilityDuration"				"0.6875 0.6875 0.6875 0.6875"
+		"AbilityManaCost"				"0 0 0 0"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"spawn_effect_aoe"			"100"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"spawn_delay"				"1"
+			}
+		}
+	}
+
+}
