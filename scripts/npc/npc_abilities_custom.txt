@@ -103,8 +103,6 @@
 		"AbilityCastPoint"				"0.4"
 
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
-		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_NONE"
-		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_NONE"
 		"FightRecapLevel"				"1"
 		"MaxLevel"						"1"
 
@@ -142,8 +140,6 @@
 		"AbilityCastPoint"				"0.4"
 
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
-		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_NONE"
-		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_NONE"
 		"FightRecapLevel"				"1"
 		"MaxLevel"						"1"
 
