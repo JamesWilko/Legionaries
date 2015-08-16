@@ -9,6 +9,7 @@ require("controllers/MapController")
 require("controllers/WaveController")
 require("controllers/UnitController")
 require("controllers/HeroController")
+require("controllers/KingController")
 require("BuildGrid")
 
 function Precache( context )
@@ -26,6 +27,9 @@ function Precache( context )
 
 	PrecacheResource( "model", "models/items/dragon_knight/sword_davion.vmdl", context )
 	PrecacheResource( "model", "models/items/dragon_knight/shield_davion.vmdl", context )
+
+	-- King Units
+	PrecacheUnitByNameSync( "npc_dota_hero_omniknight", context )
 
 	PrecacheUnitByNameSync( "npc_dota_hero_clinkz", context )
 	PrecacheUnitByNameSync( "npc_dota_hero_dragon_knight", context )
@@ -64,6 +68,7 @@ function CLegionDefence:InitGameMode()
 	self:SetupWaveController()
 	self:SetupUnitController()
 	self:SetupHeroController()
+	self:SetupKingController()
 
 	ListenToGameEvent("dota_player_pick_hero", Dynamic_Wrap(CLegionDefence, "OnPlayerPickedHero"), self)
 

@@ -4,6 +4,91 @@
 	"Version"	"1"
 
 	//-------------------------------------------------------------------------
+	// King Units
+	//-------------------------------------------------------------------------
+	"npc_legion_king_radiant"
+	{
+		// General
+		//----------------------------------------------------------------
+		"BaseClass"				"npc_dota_creature"
+		"Model"					"models/heroes/omniknight/omniknight.vmdl"
+		"ModelScale"			"1.5"
+		"SoundSet"				"Hero_DragonKnight"
+		"GameSoundsFile"		"soundevents/game_sounds_heroes/game_sounds_dragon_knight.vsndevts"
+
+		// Abilities
+		//----------------------------------------------------------------
+		// "Ability1"				"sell_unit_fire"
+
+		// Status
+		//----------------------------------------------------------------
+		"Level"					"50"
+		"StatusHealth"			"2500"
+		"StatusHealthRegen"		"2"
+		"StatusMana"			"1000"
+		"StatusManaRegen"		"2"
+		"HasInventory"			"0"
+		"ConsideredHero"		"1"
+		"HealthBarOffset"		"350"
+
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"			"5"
+		"MagicalResistance"		"2"
+
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
+		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
+		"AttackDamageMin"			"200.0"
+		"AttackDamageMax"			"200.0"
+		"AttackRate"				"1.0"
+		"AttackAnimationPoint"		"0.5"
+		"AttackAcquisitionRange"	"500"
+		"AttackRange"				"500"
+		"AttackRangeBuffer"			"250"
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
+		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRONG"
+
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"  "DOTA_UNIT_CAP_MOVE_NONE"
+		"MovementSpeed"         "0"
+		"MovementTurnRate"      "0.7"
+
+		// Bounds
+		//----------------------------------------------------------------
+		"BoundsHullName"        "DOTA_HULL_SIZE_FILLER"
+		"RingRadius"            "100"
+
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"    "1800"
+		"VisionNighttimeRange"  "1400"
+
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"              "DOTA_TEAM_GOODGUYS"
+		"UnitRelationShipClass" "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+		// Creature Data
+		//----------------------------------------------------------------
+		"Creature"
+		{
+				"DisableClumpingBehavior"       "1"
+				"AttachWearables"
+				{
+						"Wearable1" { "ItemDef" "13" }
+						"Wearable2" { "ItemDef" "42" }
+						"Wearable3" { "ItemDef" "43" }
+						"Wearable4" { "ItemDef" "44" }
+						"Wearable5" { "ItemDef" "45" }
+						"Wearable6" { "ItemDef" "46" }
+				}
+		}
+	}
+
+	//-------------------------------------------------------------------------
 	// Fire Tower Units
 	//-------------------------------------------------------------------------
 	"npc_legion_fire_tier1_level1"

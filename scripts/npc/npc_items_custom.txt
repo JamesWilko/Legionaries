@@ -1,80 +1,123 @@
 "DOTAAbilities"
 {
-	//=================================================================================================================
-	// Recipe: Arcane Boots
-	//=================================================================================================================
-	"item_recipe_arcane_boots2"
-	{
-		"ID"							"1005"
 
-		"BaseClass"						"item_recipe_arcane_boots"
+	//-------------------------------------------------------------------------
+	// King Upgrades
+	//-------------------------------------------------------------------------
+	"item_legion_king_upgrade_health"
+	{
+		"ID"							"4201"
+		"BaseClass"						"item_datadriven"
 
 		// Item Info
 		//-------------------------------------------------------------------------------------------------------------
-		"ItemCost"						"0"	
-		"ItemShopTags"					""
-		
-		// Recipe
-		//-------------------------------------------------------------------------------------------------------------
-		"ItemRecipe"					"1"
-		"ItemResult"					"item_arcane_boots2"
-		"ItemRequirements"
-		{
-			"01"						"item_energy_booster;item_arcane_boots"
-		}
-	}
-	
-	//=================================================================================================================
-	// Arcane Boots II
-	//=================================================================================================================
-	"item_arcane_boots2"
-	{
-		"ID"							"1006"
-
-		// General
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-		"BaseClass"						"item_arcane_boots"
-
-		// Stats		
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCooldown"				"55.0"
-
-		// Item Info
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityManaCost"				"25"
-		"ItemCost"						"2450"
-		"ItemShopTags"					"move_speed;boost_mana;mana_pool"
+		"ItemCost"						"0"
+		"ItemShopTags"					"king;health;upgrade"
 		"ItemQuality"					"rare"
-		"ItemDeclarations"				"DECLARE_PURCHASES_TO_SPECTATORS"
-		"ItemDisassembleRule"			"0"
-		"ItemAlertable"					"1"
-		"ItemAliases"					"mana;mb"
-		
-		// Special	
-		//-------------------------------------------------------------------------------------------------------------
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_TO_SPECTATORS | DECLARE_PURCHASES_IN_SPEECH"
+		"ItemAliases"					"health"
+		"AbilityTextureName"			"item_vitality_booster"
+
 		"AbilitySpecial"
 		{
 			"01"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"bonus_movement"		"75"
+				"PurchaseCurrency"		"1" // Custom currency for purchasing this upgrade, 0 for gold, 1 for gems
 			}
 			"02"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"bonus_mana"			"500"
-			}
-			"03"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"replenish_radius"		"600"
-			}
-			"04"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"replenish_amount"		"250"
+				"Cost"					"100"
 			}
 		}
 	}
+
+	"item_legion_king_upgrade_regen"
+	{
+		"ID"							"4202"
+		"BaseClass"						"item_datadriven"
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"0"
+		"ItemShopTags"					"king;health;upgrade;regen;"
+		"ItemQuality"					"rare"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_TO_SPECTATORS | DECLARE_PURCHASES_IN_SPEECH"
+		"ItemAliases"					"health;regen"
+		"AbilityTextureName"			"item_ring_of_regen"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"PurchaseCurrency"		"1" // Custom currency for purchasing this upgrade, 0 for gold, 1 for gems
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"Cost"					"100"
+			}
+		}
+	}
+
+	"item_legion_king_upgrade_armour"
+	{
+		"ID"							"4203"
+		"BaseClass"						"item_datadriven"
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"0"
+		"ItemShopTags"					"king;armour;armor;upgrade;resist;"
+		"ItemQuality"					"rare"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_TO_SPECTATORS | DECLARE_PURCHASES_IN_SPEECH"
+		"ItemAliases"					"armour;armor"
+		"AbilityTextureName"			"item_chainmail"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"PurchaseCurrency"		"1" // Custom currency for purchasing this upgrade, 0 for gold, 1 for gems
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"Cost"					"100"
+			}
+		}
+	}
+
+	"item_legion_king_upgrade_attack"
+	{
+		"ID"							"4204"
+		"BaseClass"						"item_datadriven"
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"0"
+		"ItemShopTags"					"king;attack;upgrade;damage"
+		"ItemQuality"					"rare"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_TO_SPECTATORS | DECLARE_PURCHASES_IN_SPEECH"
+		"ItemAliases"					"attack;damage"
+		"AbilityTextureName"			"item_claymore"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"PurchaseCurrency"		"1" // Custom currency for purchasing this upgrade, 0 for gold, 1 for gems
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"Cost"					"100"
+			}
+		}
+	}
+
 }

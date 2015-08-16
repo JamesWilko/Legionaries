@@ -1,0 +1,63 @@
+"dota_shops"
+{
+	"consumables"
+	{
+		"item"		"item_legion_king_upgrade_health"
+		"item"		"item_legion_king_upgrade_regen"
+		"item"		"item_legion_king_upgrade_armour"
+		"item"		"item_legion_king_upgrade_attack"
+	}
+
+	"attributes"
+	{
+		"item"		"item_branches"
+	}
+
+	"weapons_armor"
+	{
+	}
+	
+	"misc"
+	{
+	}	
+	
+	// Level 1 - Green Recipes
+	"basics"
+	{
+	}
+
+	// Level 2 - Blue Recipes
+	"support"
+	{
+	}
+	
+	"magics"
+	{
+	}
+	
+	// Level 3 - Purple Recipes
+	"defense"
+	{
+	}
+	
+	"weapons"
+	{
+	}
+	
+	// Level 4 - Orange / Orb / Artifacts
+	"artifacts"
+	{
+	}
+
+	"sideshop1"
+	{
+	}
+
+	"sideshop2"
+	{
+	}
+	
+	"secretshop"
+	{
+	}
+}
