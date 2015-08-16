@@ -170,6 +170,7 @@ function CUnitController:SpawnUnit( ePlayer, lTeam, sUnitClass, vPosition, bRegi
 
 	local hUnit = CreateUnitByName( sUnitClass, vPosition, false, nil, ePlayer, lTeam )
 	if hUnit ~= nil then
+
 		hUnit:SetOwner( ePlayer )
 		hUnit:SetControllableByPlayer( ePlayer:GetPlayerID(), true )
 		hUnit:SetAngles( 0, 90, 0 )
@@ -180,6 +181,7 @@ function CUnitController:SpawnUnit( ePlayer, lTeam, sUnitClass, vPosition, bRegi
 		end
 
 		return hUnit
+		
 	end
 
 	return nil

@@ -65,7 +65,7 @@ function CWaveController:OnThink()
 			local vPosition = RandomVectorInTrigger( ent )
 			if unit_to_spawn then
 
-				local hUnit = CreateUnitByName( unit_to_spawn, vPosition, true, nil, nil, DOTA_TEAM_BADGUYS )
+				local hUnit = CreateUnitByName( unit_to_spawn, vPosition, true, nil, nil, spawn.team )
 				local entTargetZone = self._map_controller:GetTargetZoneForTeam( spawn.team )
 				local vTarget = RandomVectorInTrigger( entTargetZone )
 

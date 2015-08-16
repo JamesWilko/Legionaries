@@ -107,7 +107,10 @@ end
 function RandomVectorInTrigger( entTrigger )
 	if entTrigger.GetBounds and entTrigger.GetCenter then
 		local bounds = entTrigger:GetBounds()
-		local vPosition = entTrigger:GetCenter() + bounds.Mins + (RandomFloat(-2, 0) * bounds.Mins)
+		local x = RandomFloat(0, 2) * bounds.Maxs.x
+		local y = RandomFloat(0, 2) * bounds.Maxs.y
+		local z = RandomFloat(0, 2) * bounds.Maxs.z
+		local vPosition = entTrigger:GetCenter() + bounds.Mins + Vector( x, y, z )
 		return vPosition
 	end
 	return Vector(0, 0, 0)

@@ -5,9 +5,9 @@ end
 
 require("Utils")
 require("GameUtils")
-require("MapController")
-require("WaveController")
-require("UnitController")
+require("controllers/MapController")
+require("controllers/WaveController")
+require("controllers/UnitController")
 require("BuildGrid")
 
 function Precache( context )
@@ -53,6 +53,7 @@ function CLegionDefence:InitGameMode()
 
 	self._GameMode:SetAnnouncerDisabled( true )
 	self._GameMode:SetFixedRespawnTime( 3 )
+	self._GameMode:SetFogOfWarDisabled( true )
 	
 	GameRules:SetGoldPerTick( 0 )
 	GameRules:SetPreGameTime( 3 )
