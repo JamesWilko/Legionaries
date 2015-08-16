@@ -58,19 +58,19 @@ function CWaveController:OnThink()
 	-- Spawn a unit at every spawn point every think
 	if self:IsWaveRunning() and self:CurrentWaveHasSpawnsRemaining() and (self._wave_start_time + self._before_wave_time) < time then
 
+		local unit_to_spawn = self:GetAndPopNextSpawnInWave()
 		for k, spawn in pairs( self._map_controller:SpawnZones() ) do
 
 			local ent = spawn.entity
 			local vPosition = RandomVectorInTrigger( ent )
-			local unit = self:GetAndPopNextSpawnInWave()
-			if unit then
+			if unit_to_spawn then
 
-				local hUnit = CreateUnitByName( unit, vPosition, true, nil, nil, DOTA_TEAM_BADGUYS )
+				local hUnit = CreateUnitByName( unit_to_spawn, vPosition, true, nil, nil, DOTA_TEAM_BADGUYS )
 				local entTargetZone = self._map_controller:GetTargetZoneForTeam( spawn.team )
 				local vTarget = RandomVectorInTrigger( entTargetZone )
 
 				if hUnit ~= nil then
-					
+
 					hUnit:SetAngles( 0, -90, 0 )
 
 					self._spawned_units[spawn.team] = self._spawned_units[spawn.team] or {}
