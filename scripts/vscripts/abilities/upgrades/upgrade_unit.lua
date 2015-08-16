@@ -6,6 +6,7 @@ end
 UPGRADE_FAIL_REASON_WAVE_RUNNING 		= 1
 UPGRADE_FAIL_REASON_CANT_AFFORD 		= 2
 UPGRADE_FAIL_REASON_ALREADY_UPGRADING 	= 3
+UPGRADE_FAIL_REASON_SOLD				= 4
 
 LinkLuaModifier( "modifier_upgrade_unit_think", "abilities/upgrades/modifier_upgrade_unit_think", LUA_MODIFIER_MOTION_NONE )
 
@@ -32,6 +33,12 @@ function upgrade_unit:CastFilterResult()
 
 	end
 
+	-- Prevent upgrading while being sold
+	if self:GetCaster()._selling then
+		self._fail_reason = UPGRADE_FAIL_REASON_SOLD
+		return UF_FAIL_CUSTOM
+	end
+
 	-- Prevent double-upgrading
 	if self:GetCaster()._upgrading then
 		self._fail_reason = UPGRADE_FAIL_REASON_ALREADY_UPGRADING
@@ -49,6 +56,9 @@ function upgrade_unit:GetCustomCastError()
 	if self._fail_reason == UPGRADE_FAIL_REASON_CANT_AFFORD then
 		return "#legion_can_not_upgrade_during_round"
 	end
+	if self._fail_reason == UPGRADE_FAIL_REASON_SOLD then
+		return "#legion_can_not_upgrade_being_sold"
+	end
 	if self._fail_reason == UPGRADE_FAIL_REASON_ALREADY_UPGRADING then
 		return "#legion_can_not_upgrade_already_upgrading"
 	end
@@ -61,7 +71,6 @@ function upgrade_unit:OnSpellStart()
 	-- Prevent unit from moving
 	self:GetCaster():SetMoveCapability( DOTA_UNIT_CAP_MOVE_NONE )
 	self:GetCaster():StartGesture( ACT_DOTA_TELEPORT )
-
 	self:GetCaster()._upgrading = true
 
 	-- Spend gold

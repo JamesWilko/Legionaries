@@ -19,7 +19,7 @@
 		// Upgrades
 		//----------------------------------------------------------------
 		"Ability1"				"upgrade_unit"	// Allow this unit to upgrade to a better unit
-		"Ability2"				"sell_unit"
+		"Ability2"				"sell_unit_fire"
 
 		// Status
 		//----------------------------------------------------------------
@@ -103,7 +103,7 @@
 
 		// Abilities
 		//----------------------------------------------------------------
-		"Ability1"				"sell_unit"
+		"Ability1"				"sell_unit_fire"
 
 		// Status
 		//----------------------------------------------------------------
