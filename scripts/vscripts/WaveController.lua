@@ -21,6 +21,7 @@ function CWaveController:Setup()
 
 	self._next_wave_time = 15
 	self._time_between_waves = 60
+	self._before_wave_time = 3
 	self._end_of_wave_time = 3
 	self._think_time = 1
 
@@ -36,6 +37,8 @@ function CWaveController:OnThink()
 	self._map_controller = self._map_controller or GameRules.LegionDefence:GetMapController()
 	self._spawned_units = self._spawned_units or {}
 
+	local time = GameRules:GetDOTATime(false, false)
+
 	-- Countdown to end of wave
 	if self:IsWaveRunning() and self._wave_complete ~= nil then
 		self._wave_complete = self._wave_complete - self._think_time
@@ -47,14 +50,13 @@ function CWaveController:OnThink()
 
 	-- Countdown to next wave
 	if not self:IsWaveRunning() then
-		local time = GameRules:GetDOTATime(false, false)
 		if time >= self._next_wave_time then
 			self:StartNextWave()
 		end
 	end
 
 	-- Spawn a unit at every spawn point every think
-	if self:IsWaveRunning() and self:CurrentWaveHasSpawnsRemaining() then
+	if self:IsWaveRunning() and self:CurrentWaveHasSpawnsRemaining() and (self._wave_start_time + self._before_wave_time) < time then
 
 		for k, spawn in pairs( self._map_controller:SpawnZones() ) do
 
@@ -68,6 +70,7 @@ function CWaveController:OnThink()
 				local vTarget = RandomVectorInTrigger( entTargetZone )
 
 				if hUnit ~= nil then
+					
 					hUnit:SetAngles( 0, -90, 0 )
 
 					self._spawned_units[spawn.team] = self._spawned_units[spawn.team] or {}
@@ -112,6 +115,7 @@ function CWaveController:StartWave( iWave )
 		-- Start wave
 		self._wave_in_progress = true
 		self._wave_spawns_remaining = table.copy(self:GetWave())
+		self._wave_start_time = GameRules:GetDOTATime(false, false)
 
 		-- Call start wave event
 		local data = {
