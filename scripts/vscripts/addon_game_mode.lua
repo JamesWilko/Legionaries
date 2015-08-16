@@ -8,6 +8,7 @@ require("GameUtils")
 require("controllers/MapController")
 require("controllers/WaveController")
 require("controllers/UnitController")
+require("controllers/HeroController")
 require("BuildGrid")
 
 function Precache( context )
@@ -62,6 +63,7 @@ function CLegionDefence:InitGameMode()
 	self:SetupMapController()
 	self:SetupWaveController()
 	self:SetupUnitController()
+	self:SetupHeroController()
 
 	ListenToGameEvent("dota_player_pick_hero", Dynamic_Wrap(CLegionDefence, "OnPlayerPickedHero"), self)
 
@@ -94,6 +96,9 @@ function CLegionDefence:OnPlayerPickedHero( event )
 				ability:SetLevel( ability:GetMaxLevel() )
 			end
 		end
+
+		-- Heroes can't attack
+		hero:SetAttackCapability( DOTA_UNIT_CAP_NO_ATTACK )
 
 		-- Remove skill points
 		hero:SetAbilityPoints(0)
