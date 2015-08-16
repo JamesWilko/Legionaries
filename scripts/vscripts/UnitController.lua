@@ -3,9 +3,15 @@ if CUnitController == nil then
 	CUnitController = class({})
 end
 
-CUnitController.LEGION_UNITS_FILE = "scripts/npc/npc_units_custom.txt"
-CUnitController.LEGION_NPC_UNIT = "npc_legion_"
-CUnitController.DEFAULT_GOLD_COST = 100
+CUnitController.LEGION_UNITS_FILE 			= "scripts/npc/npc_units_custom.txt"
+CUnitController.LEGION_ABILITIES_FILE 		= "scripts/npc/npc_abilities_custom.txt"
+CUnitController.LEGION_NPC_UNIT 			= "npc_legion_"
+CUnitController.LEGION_SPAWN_ABILITY 		= "spawn_"
+CUnitController.LEGION_UPGRADE_ABILITY		= "upgrade_unit"
+CUnitController.DEFAULT_GOLD_COST 			= 100
+
+CUnitController.SELL_MULTIPLIER_SAME_WAVE 	= 1
+CUnitController.SELL_MULTIPLIER_DIFF_WAVE 	= 0.5
 
 function CLegionDefence:SetupUnitController()
 	self.unit_controller = CUnitController()
@@ -19,6 +25,7 @@ end
 function CUnitController:Setup()
 
 	self._unit_types = self._unit_types or {}
+	self._ability_costs = self._ability_costs or {}
 	self._player_units = self._player_units or {}
 
 	self:LoadUnitTypes()
@@ -46,7 +53,7 @@ end
 function CUnitController:RegisterUnitType( sUnitType, tKeyValues )
 	assert( sUnitType ~= nil, "Can not register a unit type, unless specifying a unit type name!" )
 	local unit_data = {
-		gold_cost = tKeyValues["GoldCost"] or CUnitController.DEFAULT_GOLD_COST,
+		-- gold_cost = tKeyValues["GoldCost"] or CUnitController.DEFAULT_GOLD_COST,
 	}
 	self._unit_types[sUnitType] = unit_data
 end
@@ -57,6 +64,15 @@ end
 
 function CUnitController:GetUnitTypeGoldCost( sUnitType )
 	return self._unit_types[sUnitType] and self._unit_types[sUnitType].gold_cost or CUnitController.DEFAULT_GOLD_COST
+end
+
+function CUnitController:GetUnitTypeTotalGoldCost( sUnitType )
+	if self._unit_types[sUnitType].total_cost == nil then
+
+
+
+	end
+	return self._unit_types[sUnitType].total_cost
 end
 
 ---------------------------------------
@@ -167,6 +183,55 @@ function CUnitController:SpawnUnit( ePlayer, lTeam, sUnitClass, vPosition, bRegi
 	end
 
 	return nil
+
+end
+
+---------------------------------------
+-- Unit Gold Costs
+---------------------------------------
+function CUnitController:AddCostToUnit( hUnit, lCost, hParentUnit )
+
+	if self._wave_controller == nil then
+		self._wave_controller = GameRules.LegionDefence:GetWaveController()
+	end
+
+	-- Add cost and current wave to unit
+	hUnit._total_gold_cost = hUnit._total_gold_cost or {}
+	local cost = {
+		wave = self._wave_controller:GetCurrentWave(),
+		cost = lCost
+	}
+	table.insert( hUnit._total_gold_cost, cost )
+
+	-- Transfer previous costs to new unit
+	if hParentUnit ~= nil and hParentUnit._total_gold_cost then
+		for k, v in pairs( hParentUnit._total_gold_cost ) do
+			table.insert( hUnit._total_gold_cost, v )
+		end
+	end
+
+end
+
+function CUnitController:GetTotalCostOfUnit( hUnit )
+	local cost = 0
+	for k, v in pairs( hUnit._total_gold_cost ) do
+		cost = cost + v.cost
+	end
+	return cost
+end
+
+function CUnitController:GetCurrentSellCostOfUnit( hUnit )
+
+	if self._wave_controller == nil then
+		self._wave_controller = GameRules.LegionDefence:GetWaveController()
+	end
+
+	local cost = 0
+	for k, v in pairs( hUnit._total_gold_cost ) do
+		local multi = self._wave_controller:GetCurrentWave() == v.wave and CUnitController.SELL_MULTIPLIER_SAME_WAVE or CUnitController.SELL_MULTIPLIER_DIFF_WAVE
+		cost = cost + v.cost * multi
+	end
+	return cost
 
 end
 

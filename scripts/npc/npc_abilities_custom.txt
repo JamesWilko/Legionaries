@@ -4,6 +4,32 @@
 	"Version"		"1"
 
 	//-------------------------------------------------------------------------
+	// Sell Units
+	//-------------------------------------------------------------------------
+	"sell_unit"
+	{
+		"BaseClass"						"ability_lua"
+		"AbilityTextureName"			"alchemist_goblins_greed"
+		"ScriptFile"					"abilities/sell_unit"
+
+		"AbilityCastRange"				"100"
+		"AbilityCastPoint"				"0.4"
+
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"FightRecapLevel"				"1"
+		"MaxLevel"						"1"
+		
+		"AbilityCooldown"				"2.0"
+		"AbilityDuration"				"1.0"
+		"AbilityManaCost"				"0"
+
+		"AbilitySpecial"
+		{
+		}
+	}
+
+
+	//-------------------------------------------------------------------------
 	// Upgrade Units
 	//-------------------------------------------------------------------------
 	"upgrade_unit"
@@ -25,7 +51,7 @@
 
 		"AbilitySpecial"
 		{
-			"02"
+			"01"
 			{
 				"var_type"					"FIELD_INTEGER"
 				"GoldCost"					"50"

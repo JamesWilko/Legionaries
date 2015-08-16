@@ -105,4 +105,3 @@ function upgrade_unit:SpendGoldCost()
 		PlayGoldParticlesForCost( self._gold_cost, self:GetCaster() )
 	end
 end
-

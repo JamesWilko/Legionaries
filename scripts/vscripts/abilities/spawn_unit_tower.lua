@@ -124,7 +124,9 @@ end
 
 function spawn_unit_tower:SpawnUnitAtPosition( vPosition )
 	if self:GetSpawnUnit() then
-		GameRules.LegionDefence:GetUnitController():SpawnUnit( self:GetCaster():GetOwner(), self:GetCaster():GetTeamNumber(), self:GetSpawnUnit(), vPosition )
+		local unitController = GameRules.LegionDefence:GetUnitController()
+		local hUnit = unitController:SpawnUnit( self:GetCaster():GetOwner(), self:GetCaster():GetTeamNumber(), self:GetSpawnUnit(), vPosition )
+		unitController:AddCostToUnit( hUnit, self._gold_cost )
 	end
 end
 

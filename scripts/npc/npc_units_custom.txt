@@ -12,26 +12,22 @@
 		//----------------------------------------------------------------
 		"BaseClass"             "npc_dota_creature"
 		"Model"                 "models/heroes/dragon_knight/dragon_knight.vmdl"
-		"ModelScale"            "0.85"
+		"ModelScale"            "0.8"
 		"SoundSet"              "Hero_DragonKnight"
 		"GameSoundsFile"        "soundevents/game_sounds_heroes/game_sounds_dragon_knight.vsndevts"
-
-		// Legion Defence Info
-		//----------------------------------------------------------------
-		"GoldCost"				"50"
 
 		// Upgrades
 		//----------------------------------------------------------------
 		"Ability1"				"upgrade_unit"	// Allow this unit to upgrade to a better unit
+		"Ability2"				"sell_unit"
 
 		// Status
 		//----------------------------------------------------------------
+		"Level"                 "2"
 		"StatusHealth"          "420"
 		"StatusHealthRegen"     "0.25"
 		"StatusMana"            "0"
 		"StatusManaRegen"       "0"
-		"Level"                 "2"
-		"ConsideredHero"        "1"
 		"HasInventory"          "0"
 
 		// Armor
@@ -101,21 +97,21 @@
 		//----------------------------------------------------------------
 		"BaseClass"             "npc_dota_creature"
 		"Model"                 "models/heroes/dragon_knight/dragon_knight.vmdl"
-		"ModelScale"            "0.95"
-		"Level"                 "4"
+		"ModelScale"            "0.9"
+		"SoundSet"              "Hero_DragonKnight"
+		"GameSoundsFile"        "soundevents/game_sounds_heroes/game_sounds_dragon_knight.vsndevts"
 
 		// Abilities
 		//----------------------------------------------------------------
-		// "Ability1"				"human_defend"
-		// "Ability2"				"human_backpack"
+		"Ability1"				"sell_unit"
 
 		// Status
 		//----------------------------------------------------------------
+		"Level"                 "4"
 		"StatusHealth"          "800"
 		"StatusHealthRegen"     "0.25"
 		"StatusMana"            "0"
 		"StatusManaRegen"       "0"
-		"ConsideredHero"        "0"
 		"HasInventory"          "0"
 
 		// Armor
@@ -197,13 +193,22 @@
 		"BaseClass"             "npc_dota_creature"
 		"Model"                 "models/heroes/dragon_knight/dragon_knight.vmdl"
 		"ModelScale"            "0.7"
-		"Level"                 "2"
-		"HasInventory"          "1"
+		"SoundSet"              "Hero_DragonKnight"
+		"GameSoundsFile"        "soundevents/game_sounds_heroes/game_sounds_dragon_knight.vsndevts"
 
 		// Abilities
 		//----------------------------------------------------------------
 		// "Ability1"              "human_defend"
 		// "Ability2"              "human_backpack"
+
+		// Status
+		//----------------------------------------------------------------
+		"Level"                 "2"
+		"StatusHealth"          "420"
+		"StatusHealthRegen"     "0.25"
+		"StatusMana"            "0"
+		"StatusManaRegen"       "0"
+		"HasInventory"          "1"
 
 		// Armor
 		//----------------------------------------------------------------
@@ -236,13 +241,6 @@
 		"MovementCapabilities"  "DOTA_UNIT_CAP_MOVE_GROUND"
 		"MovementSpeed"         "270"
 		"MovementTurnRate"      "0.6"
-
-		// Status
-		//----------------------------------------------------------------
-		"StatusHealth"          "420"
-		"StatusHealthRegen"     "0.25"
-		"StatusMana"            "0"
-		"StatusManaRegen"       "0"
 
 		// Vision
 		//----------------------------------------------------------------

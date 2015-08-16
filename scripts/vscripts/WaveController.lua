@@ -96,6 +96,10 @@ function CWaveController:OnThink()
 	return self._think_time
 end
 
+function CWaveController:GetCurrentWave()
+	return self._current_wave
+end
+
 function CWaveController:IsWaveRunning()
 	return self._wave_in_progress
 end
