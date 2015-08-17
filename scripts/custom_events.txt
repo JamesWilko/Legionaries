@@ -22,18 +22,28 @@
 {
 	"legion_wave_start"
 	{
-		"nWaveNumber"					"short"
-		"sEnemyName"					"string"
-		"nTotalEnemies"					"long"
+		"nWaveNumber"			"short"
+		"sEnemyName"			"string"
+		"nTotalEnemies"			"long"
 	}
 
 	"legion_wave_complete"
 	{
-		"nWaveNumber"					"short"
-		"sEnemyName"					"string"
-		"nTotalEnemies"					"long"
-		"nEnemiesKilled"				"long"
-		"nEnemiesLeaked"				"long"
-		"lFastestPlayer"				"long"
+		"nWaveNumber"			"short"
+		"sEnemyName"			"string"
+		"nTotalEnemies"			"long"
+		"nEnemiesKilled"		"long"
+		"nEnemiesLeaked"		"long"
+		"lFastestPlayer"		"long"
+	}
+
+	//---------------------------------
+	// Server Only
+	//---------------------------------
+	"currency_soft_limit"
+	{
+		"lPlayer"				"long"
+		"sCurrency"				"string"
+		"lAmount"				"long"
 	}
 }

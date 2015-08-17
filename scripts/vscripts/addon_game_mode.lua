@@ -5,6 +5,7 @@ end
 
 require("Utils")
 require("GameUtils")
+require("controllers/CurrencyController")
 require("controllers/MapController")
 require("controllers/WaveController")
 require("controllers/UnitController")
@@ -65,6 +66,8 @@ function CLegionDefence:InitGameMode()
 	GameRules:SetCustomGameSetupTimeout( 3 )
 
 	self:SetupMapController()
+	self:SetupCurrencyController()
+
 	self:SetupWaveController()
 	self:SetupUnitController()
 	self:SetupHeroController()
