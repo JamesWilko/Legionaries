@@ -1,4 +1,7 @@
 
+require("currencies/currency_gems")
+require("currencies/currency_food")
+
 if CCurrencyController == nil then
 	CCurrencyController = class({})
 end
@@ -28,6 +31,14 @@ function CCurrencyController:Setup()
 	self._currency_types = {}
 	self._currencies = {}
 
+	-- Create currencies
+	local CurrencyGems = CCurrencyGems()
+	CurrencyGems:Register( self )
+
+	local CurrencyFood = CCurrencyFood()
+	CurrencyFood:Register( self )
+
+	-- Setup events
 	ListenToGameEvent("legion_wave_complete", Dynamic_Wrap(CCurrencyController, "HandleOnWaveComplete"), self)
 
 end
@@ -35,7 +46,7 @@ end
 function CCurrencyController:RegisterCurrency( sCurrency, iDefaultAmount, enumLimitType, iDefaultLimit )
 
 	assert( type(sCurrency) == "string", "Currencies must be registered with a string as their id." )
-	assert( enumLimitType == CURRENCY_LIMIT_NONE or enumLimitType == CURRENCY_LIMIT_NONE or enumLimitType == CURRENCY_LIMIT_SOFT,
+	assert( (enumLimitType == CURRENCY_LIMIT_NONE or enumLimitType == CURRENCY_LIMIT_HARD or enumLimitType == CURRENCY_LIMIT_SOFT),
 	"Unrecognized currency limit type! Please specify a currency limit type specified in CurrencyController." )
 
 	self._currency_types[sCurrency] = {
@@ -43,6 +54,8 @@ function CCurrencyController:RegisterCurrency( sCurrency, iDefaultAmount, enumLi
 		limit_type = enumLimitType,
 		limit_amount = iDefaultLimit or CCurrencyController.CURRENCY_DEFAULT_LIMIT,
 	}
+
+	print(string.format("Registered currency '%s'", sCurrency))
 
 end
 
@@ -99,7 +112,7 @@ end
 function CCurrencyController:TakeCurrency( sCurrency, hPlayer, iAmount )
 
 	assert( self._currency_types[sCurrency] ~= nil, "Currencies must be registered before they can be used!" )
-	assert( iAmount <= 0, "TakeCurrency must remove a negative amount to the player currency, use AddCurrency to add currency!" )
+	iAmount = math.abs(iAmount)
 
 	local id = self:_GetPlayerId( hPlayer )
 	self:_CreateCurrencyPlayerTable( sCurrency, id )
@@ -112,6 +125,8 @@ function CCurrencyController:TakeCurrency( sCurrency, hPlayer, iAmount )
 		self._currencies[sCurrency][id].amount = 0
 	end
 
+	print(string.format("Remaining %s : %i", sCurrency, self._currencies[sCurrency][id].amount))
+
 	return self._currencies[sCurrency][id].amount
 
 end
@@ -123,6 +138,17 @@ function CCurrencyController:GetCurrency( sCurrency, hPlayer )
 	local id = self:_GetPlayerId( hPlayer )
 	self:_CreateCurrencyPlayerTable( sCurrency, id )
 	return self._currencies[sCurrency][id].amount
+
+end
+
+function CCurrencyController:CanAfford( sCurrency, hPlayer, iAmount )
+
+	assert( self._currency_types[sCurrency] ~= nil, "Currencies must be registered before they can be retrieved!" )
+
+	local id = self:_GetPlayerId( hPlayer )
+	self:_CreateCurrencyPlayerTable( sCurrency, id )
+
+	return iAmount <= self._currencies[sCurrency][id].amount
 
 end
 
@@ -156,7 +182,7 @@ function CCurrencyController:HandleOnWaveComplete( event )
 
 			for player_id, player in pairs( data ) do
 
-				if data.amount > data.limit then
+				if (data.amount or 0) > (data.limit or 0) then
 					-- Fire currency limit event
 					local amount = data.amount - data.limit
 					local data = {
