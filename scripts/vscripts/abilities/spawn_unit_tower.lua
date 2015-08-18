@@ -3,10 +3,12 @@ if spawn_unit_tower == nil then
 	spawn_unit_tower = class({})
 end
 
-BUILD_UNIT_FAIL_REASON_WAVE_RUNNING 	= 1
-BUILD_UNIT_FAIL_REASON_CANT_AFFORD 		= 2
-BUILD_UNIT_FAIL_REASON_NOT_IN_ZONE 		= 3
-BUILD_UNIT_FAIL_REASON_OCCUPIED 		= 4
+BUILD_UNIT_FAIL_REASON_WAVE_RUNNING 			= 1
+BUILD_UNIT_FAIL_REASON_CANT_AFFORD_GOLD 		= 2
+BUILD_UNIT_FAIL_REASON_NOT_IN_ZONE 				= 3
+BUILD_UNIT_FAIL_REASON_OCCUPIED 				= 4
+BUILD_UNIT_FAIL_REASON_CANT_AFFORD_GEMS 		= 5
+BUILD_UNIT_FAIL_REASON_CANT_AFFORD_POPULATION 	= 6
 
 LinkLuaModifier( "modifier_spawn_fire_tower", "abilities/modifier_spawn_fire_tower", LUA_MODIFIER_MOTION_NONE )
 
@@ -30,10 +32,16 @@ function spawn_unit_tower:CastFilterResultLocation( vTargetPosition )
 	-- Can only build if can afford
 	self._gold_cost = self:GetSpecialValueFor( "GoldCost" )
 	if self:GetOwner():GetGold() < self._gold_cost then
-		self._fail_reason = BUILD_UNIT_FAIL_REASON_CANT_AFFORD
+		self._fail_reason = BUILD_UNIT_FAIL_REASON_CANT_AFFORD_GOLD
 		return UF_FAIL_CUSTOM
 	end
 
+	self._population_cost = self:GetSpecialValueFor( "PopulationCost" )
+	if not GameRules.LegionDefence:GetCurrencyController():CanAfford( CURRENCY_FOOD, self:GetOwner(), self._population_cost ) then
+		self._fail_reason = BUILD_UNIT_FAIL_REASON_CANT_AFFORD_POPULATION
+		return UF_FAIL_CUSTOM
+	end
+	
 	-- Can not build if out of a build zone, or if another unit is already there
 	if self:CanBuildInLocation( vTargetPosition ) then
 
@@ -59,8 +67,12 @@ function spawn_unit_tower:GetCustomCastErrorLocation( vLocation )
 	end
 
 	-- Check if can afford to build
-	if self._fail_reason == BUILD_UNIT_FAIL_REASON_CANT_AFFORD then
-		return "#legion_can_not_build_cant_afford"
+	if self._fail_reason == BUILD_UNIT_FAIL_REASON_CANT_AFFORD_GOLD then
+		return "#legion_can_not_build_cant_afford_gold"
+	end
+
+	if self._fail_reason == BUILD_UNIT_FAIL_REASON_CANT_AFFORD_POPULATION then
+		return "#legion_can_not_build_cant_afford_population"
 	end
 
 	-- Check build locations
@@ -112,7 +124,7 @@ function spawn_unit_tower:OnSpellStart()
 	local vTargetPosition = self:GetCursorPosition()
 	vTargetPosition = BuildGrid:RoundPositionToGrid( vTargetPosition )
 
-	self:SpendGoldCost()
+	self:SpendSpawnCost()
 	self:SpawnUnitAtPosition( vTargetPosition )
 
 end
@@ -130,13 +142,19 @@ function spawn_unit_tower:SpawnUnitAtPosition( vPosition )
 	end
 end
 
-function spawn_unit_tower:SpendGoldCost()
+function spawn_unit_tower:SpendSpawnCost()
 
 	-- Deduct Gold Cost
 	if self._gold_cost == nil then
 		self._gold_cost = self:GetSpecialValueFor( "GoldCost" )
 	end
 	self:GetOwner():ModifyGold( -self._gold_cost, true, DOTA_ModifyGold_AbilityCost )
+
+	-- Deduct Population Cost
+	if self._population_cost == nil then
+		self._population_cost = self:GetSpecialValueFor( "PopulationCost" )
+	end
+	GameRules.LegionDefence:GetCurrencyController():TakeCurrency( CURRENCY_FOOD, self:GetOwner(), self._population_cost )
 
 	-- Play particles and sounds
 	PlayGoldParticlesForCost( self._gold_cost, self:GetCaster() )

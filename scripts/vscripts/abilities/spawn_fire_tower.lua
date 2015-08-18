@@ -12,7 +12,7 @@ function spawn_fire_tower:OnSpellStart()
 	local vTargetPosition = self:GetCursorPosition()
 	vTargetPosition = BuildGrid:RoundPositionToGrid( vTargetPosition )
 
-	self:SpendGoldCost()
+	self:SpendSpawnCost()
 
 	local kv = {}
 	CreateModifierThinker( self:GetCaster(), self, "modifier_spawn_fire_tower", kv, vTargetPosition, self:GetCaster():GetTeamNumber(), false )

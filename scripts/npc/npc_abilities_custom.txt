@@ -120,9 +120,14 @@
 			"02"
 			{
 				"var_type"					"FIELD_INTEGER"
-				"SpawnEffectAOE"			"60"
+				"PopulationCost"			"2"
 			}
 			"03"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"SpawnEffectAOE"			"60"
+			}
+			"04"
 			{
 				"var_type"					"FIELD_FLOAT"
 				"SpawnDelay"				"1"
