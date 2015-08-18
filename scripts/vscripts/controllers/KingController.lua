@@ -20,6 +20,12 @@ CKingController.UPGRADE_AMOUNTS = {
 	["armour"] = 2,
 	["attack"] = 25,
 }
+CKingController.UPGRADE_COSTS = {
+	["health"] = 80,
+	["regen"] = 80,
+	["armour"] = 80,
+	["attack"] = 80,
+}
 
 function CLegionDefence:SetupKingController()
 	self.king_controller = CKingController()
@@ -84,6 +90,20 @@ function CKingController:HandleOnItemPurchased( event )
 			UTIL_Remove(v)
 		end
 
+		-- Get upgrade type
+		local upgrade_purchased = string.lower(string.sub(event.itemname, #CKingController.KING_UPGRADE_ITEM + 1, #event.itemname))
+
+		-- Check if can afford upgrade
+		local currency_controller = GameRules.LegionDefence:GetCurrencyController()
+		local cost = CKingController.UPGRADE_COSTS[ upgrade_purchased ]
+		if not currency_controller:CanAfford( CURRENCY_GEMS, event.PlayerID, cost ) then
+			print("Could not afford upgrade!")
+			return
+		end
+
+		-- Deduct purchase
+		currency_controller:TakeCurrency( CURRENCY_GEMS, event.PlayerID, cost )
+
 		-- Find purchasers king
 		local hPlayer = PlayerResource:GetPlayer( event.PlayerID )
 		local hKing = self:GetKingForTeam( hPlayer:GetTeamNumber() )
@@ -92,7 +112,6 @@ function CKingController:HandleOnItemPurchased( event )
 		end
 
 		-- Do upgrade
-		local upgrade_purchased = string.lower(string.sub(event.itemname, #CKingController.KING_UPGRADE_ITEM + 1, #event.itemname))
 		local func = CKingController.ITEM_UPGRADE_TYPE[upgrade_purchased]
 		self[func]( self, hPlayer, hKing )
 
