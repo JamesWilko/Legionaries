@@ -1,0 +1,27 @@
+<root>
+
+	<styles>
+		<include src="file://{resources}/styles/dotastyles.css" />
+		<include src="file://{resources}/styles/custom_game/currencies.css" />
+	</styles>
+
+	<scripts>
+		<include src="file://{resources}/scripts/custom_game/currencies_display.js" />
+	</scripts>
+
+	<Panel class="CurrenciesPanel">
+
+		<Panel class="CurrencyLine">
+			<Label id="CurrencyName" text="#legion_currency_gold" /><Label text="    " /><Label id="CurrencyGold" text="-/-" />
+		</Panel>
+		<Panel class="CurrencyLine">
+			<Label id="CurrencyName" text="#legion_currency_gems" /><Label text="    " /><Label id="CurrencyGems" text="-/-" />
+		</Panel>
+		<Panel class="CurrencyLine">
+			<Label id="CurrencyName" text="#legion_currency_food" /><Label text="    " /><Label id="CurrencyFood" text="-/-" />
+		</Panel>
+
+	</Panel>
+
+</root>
+

@@ -7,7 +7,7 @@ GameUI.SetMouseCallback( function( eventName, arg )
 	var CONTINUE_PROCESSING_EVENT = false;
 
 	var LEGION_UNIT_NAME = "npc_legion_";
-	var LEGION_CAN_CONTROL_TOWERS = true;
+	var LEGION_CAN_CONTROL_TOWERS = false;
 
 	if ( GameUI.GetClickBehaviors() !== CLICK_BEHAVIORS.DOTA_CLICK_BEHAVIOR_NONE )
 		return CONTINUE_PROCESSING_EVENT;
