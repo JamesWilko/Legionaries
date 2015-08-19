@@ -111,14 +111,18 @@ end
 ---------------------------------------
 function CCurrencyController:SetupNetTableDataForPlayer( sCurrency, iPlayerId )
 
+	assert( type(iPlayerId) == "number", "Player ID must be a number to create a player data table!" )
+
 	-- Add player to the registered players table
 	local add_player = true
 	for k, v in ipairs(self._players) do
 		if v == iPlayerId then
 			add_player = false
+			break
 		end
 	end
 	if add_player then
+		print(string.format("Adding player '%i' to players currency table", iPlayerId))
 		table.insert( self._players, iPlayerId )
 	end
 
@@ -290,30 +294,55 @@ function CCurrencyController:ModifyCurrencyLimit( sCurrency, hPlayer, iNewLimit 
 
 end
 
+function CCurrencyController:GetCurrencyLimit( sCurrency, hPlayer )
+
+	if IsServer() then
+
+		assert( self._currency_types[sCurrency] ~= nil, "Currencies must be registered before they can be used!" )
+
+		local player_id = self:GetPlayerId( hPlayer )
+
+		-- Get current currency
+		local nettable = self:GetCurrencyNetTable( sCurrency )
+		local data = CustomNetTables:GetTableValue( nettable, tostring(player_id) )
+
+		-- Handle nil data
+		if data == nil then
+			data = self:SetupNetTableDataForPlayer( sCurrency, player_id )
+		end
+
+		return data.limit
+
+	end
+
+end
+
 ---------------------------------------
 -- Handlers
 ---------------------------------------
 function CCurrencyController:HandleOnWaveComplete( event )
 
 	-- Process end of wave soft limits
-	--[[
-	for currency_name, data in pairs( self._currencies ) do
-		if self:GetCurrencyLimitType( currency_name ) == CURRENCY_LIMIT_SOFT then
+	for currency, cur_data in pairs( self._currency_types ) do
+		if self:GetCurrencyLimitType( currency ) == CURRENCY_LIMIT_SOFT then
 
-			for player_id, player in pairs( data ) do
+			for i, player_id in pairs( self._players ) do
 
-				if (data.amount or 0) > (data.limit or 0) then
-					-- Fire currency limit event
-					local amount = data.amount - data.limit
+				local amount = self:GetCurrencyAmount( currency, player_id )
+				local limit = self:GetCurrencyLimit( currency, player_id )
+				if limit < amount then
+
+					-- Process overflow amount
+					local overflow = amount - limit
 					local data = {
 						["lPlayer"] = player_id,
-						["sCurrency"] = currency_name,
-						["lAmount"] = nil,
+						["sCurrency"] = currency,
+						["lAmount"] = overflow,
 					}
 					FireGameEventLocal( "currency_soft_limit", data )
 
 					-- Set currency to limit
-					self._currencies[currency_name][player_id].amount = data.limit
+					self:SetCurrency( currency, player_id, limit )
 
 				end
 
@@ -321,6 +350,5 @@ function CCurrencyController:HandleOnWaveComplete( event )
 
 		end
 	end
-	]]
 
 end

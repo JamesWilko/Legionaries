@@ -215,16 +215,13 @@ function CUnitController:GetCurrentSellCostOfUnit( hUnit, sCurrency )
 	sCurrency = sCurrency or CURRENCY_GOLD
 
 	-- Add up costs, use wave multiplier if not the same wave as the cost was added to the unit
-	print("--")
 	local cost = 0
 	for k, v in pairs( hUnit._total_costs ) do
 		if v.currency == sCurrency then
 			local multi = self._wave_controller:GetCurrentWave() == v.wave and CUnitController.SELL_MULTIPLIER_SAME_WAVE or CUnitController.SELL_MULTIPLIER_DIFF_WAVE
 			cost = cost + math.floor(v.cost * multi)
-			print("adding cost : " .. math.floor(v.cost * multi) .. " = " .. cost)
 		end
 	end
-	print("total cost : " .. cost)
 	return cost
 
 end
