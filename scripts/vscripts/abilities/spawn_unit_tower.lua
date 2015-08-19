@@ -31,7 +31,7 @@ function spawn_unit_tower:CastFilterResultLocation( vTargetPosition )
 
 	-- Can only build if can afford
 	self._gold_cost = self:GetSpecialValueFor( "GoldCost" )
-	if self:GetOwner():GetGold() < self._gold_cost then
+	if not GameRules.LegionDefence:GetCurrencyController():CanAfford( CURRENCY_GOLD, self:GetOwner(), self._gold_cost ) then
 		self._fail_reason = BUILD_UNIT_FAIL_REASON_CANT_AFFORD_GOLD
 		return UF_FAIL_CUSTOM
 	end
@@ -136,9 +136,20 @@ end
 
 function spawn_unit_tower:SpawnUnitAtPosition( vPosition )
 	if self:GetSpawnUnit() then
+
 		local unitController = GameRules.LegionDefence:GetUnitController()
 		local hUnit = unitController:SpawnUnit( self:GetCaster():GetOwner(), self:GetCaster():GetTeamNumber(), self:GetSpawnUnit(), vPosition )
-		unitController:AddCostToUnit( hUnit, self._gold_cost )
+
+		if self._gold_cost == nil then
+			self._gold_cost = self:GetSpecialValueFor( "GoldCost" ) or 0
+		end
+		if self._population_cost == nil then
+			self._population_cost = self:GetSpecialValueFor( "PopulationCost" ) or 0
+		end
+
+		unitController:AddCostToUnit( hUnit, CURRENCY_GOLD , self._gold_cost )
+		unitController:AddCostToUnit( hUnit, CURRENCY_FOOD , self._population_cost )
+
 	end
 end
 
@@ -148,13 +159,13 @@ function spawn_unit_tower:SpendSpawnCost()
 	if self._gold_cost == nil then
 		self._gold_cost = self:GetSpecialValueFor( "GoldCost" )
 	end
-	self:GetOwner():ModifyGold( -self._gold_cost, true, DOTA_ModifyGold_AbilityCost )
+	GameRules.LegionDefence:GetCurrencyController():ModifyCurrency( CURRENCY_GOLD, self:GetOwner(), -self._gold_cost )
 
 	-- Deduct Population Cost
 	if self._population_cost == nil then
 		self._population_cost = self:GetSpecialValueFor( "PopulationCost" )
 	end
-	GameRules.LegionDefence:GetCurrencyController():TakeCurrency( CURRENCY_FOOD, self:GetOwner(), self._population_cost )
+	GameRules.LegionDefence:GetCurrencyController():ModifyCurrency( CURRENCY_FOOD, self:GetOwner(), -self._population_cost )
 
 	-- Play particles and sounds
 	PlayGoldParticlesForCost( self._gold_cost, self:GetCaster() )

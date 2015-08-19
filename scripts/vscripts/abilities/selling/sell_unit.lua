@@ -60,8 +60,8 @@ function sell_unit:OnSpellStart()
 	self:GetCaster():StartGesture( ACT_DOTA_TELEPORT )
 	self:GetCaster()._selling = true
 
-	-- Give gold back to player
-	self:GiveGoldToPlayer()
+	-- Give gold and food back to player
+	self:ReturnSpawnCostToPlayer()
 
 	-- Play modifier
 	if self:ModifierToRun() then
@@ -76,13 +76,21 @@ function sell_unit:OnSpellStart()
 
 end
 
-function sell_unit:GiveGoldToPlayer()
+function sell_unit:ReturnSpawnCostToPlayer()
 
-	-- Return gold to player and play particles
 	if self._owner_id ~= nil then
-		local gold_amount = GameRules.LegionDefence:GetUnitController():GetCurrentSellCostOfUnit( self:GetCaster() )
-		PlayerResource:ModifyGold( self._owner_id, gold_amount, true, DOTA_ModifyGold_SellItem )
+
+		-- Return gold to player
+		local gold_amount = GameRules.LegionDefence:GetUnitController():GetCurrentSellCostOfUnit( self:GetCaster(), CURRENCY_GOLD )
+		GameRules.LegionDefence:GetCurrencyController():ModifyCurrency( CURRENCY_GOLD, self._owner_id, gold_amount )
+
+		-- Return food cost to player
+		local food_amount = GameRules.LegionDefence:GetUnitController():GetTotalCostOfUnit( self:GetCaster(), CURRENCY_FOOD )
+		GameRules.LegionDefence:GetCurrencyController():ModifyCurrency( CURRENCY_FOOD, self._owner_id, food_amount )
+
+		-- Play gold particles
 		PlayGoldParticlesForCost( gold_amount, self:GetCaster() )
+
 	end
 
 end

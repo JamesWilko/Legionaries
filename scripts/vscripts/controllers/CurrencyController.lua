@@ -1,7 +1,4 @@
 
-require("currencies/currency_gems")
-require("currencies/currency_food")
-
 if CCurrencyController == nil then
 	CCurrencyController = class({})
 end
@@ -22,153 +19,275 @@ CURRENCY_LIMIT_NONE = 0
 CURRENCY_LIMIT_HARD = 1 -- Hard limit, cap to this value at all times
 CURRENCY_LIMIT_SOFT = 2 -- Soft limit, currency can go over this value, but will be lost at end of wave
 
+-- Currency ids, use these as the nettable names
+CURRENCY_GOLD = "CurrencyGold"
+CCurrencyController.GOLD_DEFAULT_AMOUNT = 300
+
+CURRENCY_GEMS = "CurrencyGems"
+CCurrencyController.GEMS_DEFAULT_AMOUNT = 100
+CCurrencyController.GEMS_DEFAULT_LIMIT = 200
+
+CURRENCY_FOOD = "CurrencyFood"
+CCurrencyController.FOOD_DEFAULT_AMOUNT = 20
+CCurrencyController.FOOD_DEFAULT_LIMIT = 20
+
 CCurrencyController.CURRENCY_DEFAULT_AMOUNT = 0
 CCurrencyController.CURRENCY_DEFAULT_LIMIT = -1
 
 function CCurrencyController:Setup()
 
-	-- Table for containing currencies for players
+	-- Table for containing currencies types, and players with currencies
 	self._currency_types = {}
-	self._currencies = {}
+	self._players = {}
 
 	-- Create currencies
-	local CurrencyGems = CCurrencyGems()
-	CurrencyGems:Register( self )
+	local gold = {
+		default_amount = CCurrencyController.GOLD_DEFAULT_AMOUNT,
+		limit_type = CURRENCY_LIMIT_NONE,
+	}
+	self:RegisterCurrency( CURRENCY_GOLD, CURRENCY_GOLD, gold )
 
-	local CurrencyFood = CCurrencyFood()
-	CurrencyFood:Register( self )
+	local gems = {
+		default_amount = CCurrencyController.GEMS_DEFAULT_AMOUNT,
+		limit = CCurrencyController.GEMS_DEFAULT_LIMIT,
+		limit_type = CURRENCY_LIMIT_SOFT,
+	}
+	self:RegisterCurrency( CURRENCY_GEMS, CURRENCY_GEMS, gems )
+
+	local food = {
+		default_amount = CCurrencyController.FOOD_DEFAULT_AMOUNT,
+		limit = CCurrencyController.FOOD_DEFAULT_LIMIT,
+		limit_type = CURRENCY_LIMIT_HARD,
+	}
+	self:RegisterCurrency( CURRENCY_FOOD, CURRENCY_FOOD, food )
 
 	-- Setup events
 	ListenToGameEvent("legion_wave_complete", Dynamic_Wrap(CCurrencyController, "HandleOnWaveComplete"), self)
 
 end
 
-function CCurrencyController:RegisterCurrency( sCurrency, iDefaultAmount, enumLimitType, iDefaultLimit )
+---------------------------------------
+-- Currencies
+---------------------------------------
+function CCurrencyController:RegisterCurrency( sCurrency, sNettable, tData )
 
 	assert( type(sCurrency) == "string", "Currencies must be registered with a string as their id." )
-	assert( (enumLimitType == CURRENCY_LIMIT_NONE or enumLimitType == CURRENCY_LIMIT_HARD or enumLimitType == CURRENCY_LIMIT_SOFT),
-	"Unrecognized currency limit type! Please specify a currency limit type specified in CurrencyController." )
+	assert( type(sNettable) == "string", "Currencies must be registered with a string as their net table." )
 
+	-- Create data table
 	self._currency_types[sCurrency] = {
-		default_amount = iDefaultAmount or CCurrencyController.CURRENCY_DEFAULT_AMOUNT,
-		limit_type = enumLimitType,
-		limit_amount = iDefaultLimit or CCurrencyController.CURRENCY_DEFAULT_LIMIT,
+		net_table = sNettable,
+		default_amount = tData.default_amount or CCurrencyController.CURRENCY_DEFAULT_AMOUNT,
+		limit_type = tData.limit_type or CURRENCY_LIMIT_NONE,
+		limit_amount = tData.limit or CCurrencyController.CURRENCY_DEFAULT_LIMIT,
 	}
 
 	print(string.format("Registered currency '%s'", sCurrency))
 
 end
 
+function CCurrencyController:GetCurrencyNetTable( sCurrency )
+	assert( self._currency_types[sCurrency] ~= nil, "Currencies must be registered before they can be used!" )
+	return self._currency_types[sCurrency].net_table
+end
+
+function CCurrencyController:GetCurrencyDefaultAmount( sCurrency )
+	assert( self._currency_types[sCurrency] ~= nil, "Currencies must be registered before they can be used!" )
+	return self._currency_types[sCurrency].default_amount
+end
+
+function CCurrencyController:GetCurrencyDefaultLimit( sCurrency )
+	assert( self._currency_types[sCurrency] ~= nil, "Currencies must be registered before they can be used!" )
+	return self._currency_types[sCurrency].limit_amount
+end
+
+function CCurrencyController:GetCurrencyLimitType( sCurrency )
+	assert( self._currency_types[sCurrency] ~= nil, "Currencies must be registered before they can be used!" )
+	return self._currency_types[sCurrency].limit_type
+end
+
 ---------------------------------------
 -- Helper Functions
 ---------------------------------------
-function CCurrencyController:_CreateCurrencyPlayerTable( sCurrency, iPlayerId )
+function CCurrencyController:SetupNetTableDataForPlayer( sCurrency, iPlayerId )
 
-	if self._currencies[sCurrency] == nil then
-		self._currencies[sCurrency] = {}
+	-- Add player to the registered players table
+	local add_player = true
+	for k, v in ipairs(self._players) do
+		if v == iPlayerId then
+			add_player = false
+		end
+	end
+	if add_player then
+		table.insert( self._players, iPlayerId )
 	end
 
-	if self._currencies[sCurrency][iPlayerId] == nil then
-
-		local currency_data = self._currency_types[sCurrency]
-		self._currencies[sCurrency][iPlayerId] = {
-			amount = currency_data.default_amount or CCurrencyController.CURRENCY_DEFAULT_AMOUNT,
-			limit = currency_data.limit_amount or CCurrencyController.CURRENCY_DEFAULT_LIMIT
-		}
-
-	end
+	-- Create default player data
+	local data = {
+		amount = self:GetCurrencyDefaultAmount(sCurrency),
+		limit = self:GetCurrencyDefaultLimit(sCurrency)
+	}
+	return data
 
 end
 
-function CCurrencyController:_GetPlayerId( hPlayer )
+function CCurrencyController:GetPlayerId( hPlayer )
 	return type(hPlayer) == "number" and hPlayer or hPlayer:GetPlayerID()
 end
 
 ---------------------------------------
 -- Currency Amounts
 ---------------------------------------
-function CCurrencyController:AddCurrency( sCurrency, hPlayer, iAmount )
+function CCurrencyController:SetCurrency( sCurrency, hPlayer, iAmount )
 
-	assert( self._currency_types[sCurrency] ~= nil, "Currencies must be registered before they can be used!" )
-	assert( iAmount >= 0, "AddCurrency must add a positive amount to the player currency, use TakeCurrency to remove currency!" )
+	if IsServer() then
 
-	local id = self:_GetPlayerId( hPlayer )
-	self:_CreateCurrencyPlayerTable( sCurrency, id )
+		assert( self._currency_types[sCurrency] ~= nil, "Currencies must be registered before they can be used!" )
 
-	-- Add currency to player
-	self._currencies[sCurrency][id].amount = self._currencies[sCurrency][id].amount + iAmount
+		local player_id = self:GetPlayerId( hPlayer )
 
-	-- Hard limit currency
-	if self._currency_types[sCurrency].limit_type == CURRENCY_LIMIT_HARD then
-		if self._currencies[sCurrency][id].amount > self._currencies[sCurrency][id].limit then
-			self._currencies[sCurrency][id].amount = self._currencies[sCurrency][id].limit
+		-- Get current currency
+		local nettable = self:GetCurrencyNetTable( sCurrency )
+		local data = CustomNetTables:GetTableValue( nettable, tostring(player_id) )
+
+		-- Handle nil data
+		if data == nil then
+			data = self:SetupNetTableDataForPlayer( sCurrency, player_id )
 		end
-	end
 
-	return self._currencies[sCurrency][id].amount
+		-- Add currency amount
+		data.amount = iAmount
+
+		-- Hard limit currency amount
+		if self:GetCurrencyLimitType(sCurrency) == CURRENCY_LIMIT_HARD and data.amount > data.limit then
+			data.amount = data.limit
+		end
+		if data.amount < 0 then
+			data.amount = 0
+		end
+
+		-- Set net table
+		CustomNetTables:SetTableValue( nettable, tostring(player_id), data )
+
+		return data.amount
+
+	end
 
 end
 
-function CCurrencyController:TakeCurrency( sCurrency, hPlayer, iAmount )
+function CCurrencyController:ModifyCurrency( sCurrency, hPlayer, iAmount )
 
-	assert( self._currency_types[sCurrency] ~= nil, "Currencies must be registered before they can be used!" )
-	iAmount = math.abs(iAmount)
+	if IsServer() then
 
-	local id = self:_GetPlayerId( hPlayer )
-	self:_CreateCurrencyPlayerTable( sCurrency, id )
+		assert( self._currency_types[sCurrency] ~= nil, "Currencies must be registered before they can be used!" )
 
-	-- Take currency
-	self._currencies[sCurrency][id].amount = self._currencies[sCurrency][id].amount - iAmount
+		local player_id = self:GetPlayerId( hPlayer )
 
-	-- Prevent currency from going negative
-	if self._currencies[sCurrency][id].amount < 0 then
-		self._currencies[sCurrency][id].amount = 0
+		-- Get current currency
+		local nettable = self:GetCurrencyNetTable( sCurrency )
+		local data = CustomNetTables:GetTableValue( nettable, tostring(player_id) )
+
+		-- Handle nil data
+		if data == nil then
+			data = self:SetupNetTableDataForPlayer( sCurrency, player_id )
+		end
+
+		-- Add currency amount
+		data.amount = data.amount + iAmount
+
+		-- Hard limit currency amount
+		if self:GetCurrencyLimitType(sCurrency) == CURRENCY_LIMIT_HARD and data.amount > data.limit then
+			data.amount = data.limit
+		end
+		if data.amount < 0 then
+			data.amount = 0
+		end
+
+		-- Set net table
+		CustomNetTables:SetTableValue( nettable, tostring(player_id), data )
+
+		return data.amount
+
 	end
-
-	print(string.format("Remaining %s : %i", sCurrency, self._currencies[sCurrency][id].amount))
-
-	return self._currencies[sCurrency][id].amount
 
 end
 
-function CCurrencyController:GetCurrency( sCurrency, hPlayer )
+function CCurrencyController:GetCurrencyAmount( sCurrency, hPlayer )
 
-	assert( self._currency_types[sCurrency] ~= nil, "Currencies must be registered before they can be retrieved!" )
+	if IsServer() then
 
-	local id = self:_GetPlayerId( hPlayer )
-	self:_CreateCurrencyPlayerTable( sCurrency, id )
-	return self._currencies[sCurrency][id].amount
+		assert( self._currency_types[sCurrency] ~= nil, "Currencies must be registered before they can be used!" )
+
+		local player_id = self:GetPlayerId( hPlayer )
+
+		-- Get current currency
+		local nettable = self:GetCurrencyNetTable( sCurrency )
+		local data = CustomNetTables:GetTableValue( nettable, tostring(player_id) )
+
+		-- Handle nil data
+		if data == nil then
+			data = self:SetupNetTableDataForPlayer( sCurrency, player_id )
+		end
+
+		return data.amount
+
+	end
 
 end
 
 function CCurrencyController:CanAfford( sCurrency, hPlayer, iAmount )
 
-	assert( self._currency_types[sCurrency] ~= nil, "Currencies must be registered before they can be retrieved!" )
+	if IsServer() then
 
-	local id = self:_GetPlayerId( hPlayer )
-	self:_CreateCurrencyPlayerTable( sCurrency, id )
+		assert( self._currency_types[sCurrency] ~= nil, "Currencies must be registered before they can be used!" )
 
-	return iAmount <= self._currencies[sCurrency][id].amount
+		local player_id = self:GetPlayerId( hPlayer )
+
+		-- Get current currency
+		local nettable = self:GetCurrencyNetTable( sCurrency )
+		local data = CustomNetTables:GetTableValue( nettable, tostring(player_id) )
+
+		-- Handle nil data
+		if data == nil then
+			data = self:SetupNetTableDataForPlayer( sCurrency, player_id )
+		end
+
+		return (iAmount <= data.amount)
+
+	end
 
 end
 
 ---------------------------------------
 -- Currency Limits
 ---------------------------------------
-function CCurrencyController:SetCurrencyLimit( sCurrency, hPlayer, iLimit )
-	local id = self:_GetPlayerId( hPlayer )
-	self:_CreateCurrencyPlayerTable( sCurrency, id )
-	return self._currencies[sCurrency][id].limit
-end
+function CCurrencyController:ModifyCurrencyLimit( sCurrency, hPlayer, iNewLimit )
 
-function CCurrencyController:GetCurrencyLimit( sCurrency, hPlayer )
-	local id = self:_GetPlayerId( hPlayer )
-	self:_CreateCurrencyPlayerTable( sCurrency, id )
-	return self._currencies[sCurrency][id].limit
-end
+	if IsServer() then
 
-function CCurrencyController:GetCurrencyLimitType( sCurrency )
-	return self._currency_types[sCurrency].limit_type
+		assert( self._currency_types[sCurrency] ~= nil, "Currencies must be registered before they can be used!" )
+
+		local player_id = self:GetPlayerId( hPlayer )
+
+		-- Get current currency
+		local nettable = self:GetCurrencyNetTable( sCurrency )
+		local data = CustomNetTables:GetTableValue( nettable, tostring(player_id) )
+
+		-- Handle nil data
+		if data == nil then
+			data = self:SetupNetTableDataForPlayer( sCurrency, player_id )
+		end
+
+		-- Set currency limit
+		data.limit = iNewLimit
+
+		-- Set net table
+		CustomNetTables:SetTableValue( nettable, tostring(player_id), data )
+
+		return data.limit
+
+	end
+
 end
 
 ---------------------------------------
@@ -177,6 +296,7 @@ end
 function CCurrencyController:HandleOnWaveComplete( event )
 
 	-- Process end of wave soft limits
+	--[[
 	for currency_name, data in pairs( self._currencies ) do
 		if self:GetCurrencyLimitType( currency_name ) == CURRENCY_LIMIT_SOFT then
 
@@ -201,5 +321,6 @@ function CCurrencyController:HandleOnWaveComplete( event )
 
 		end
 	end
+	]]
 
 end

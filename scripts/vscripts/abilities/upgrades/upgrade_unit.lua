@@ -26,7 +26,7 @@ function upgrade_unit:CastFilterResult()
 		local gold = PlayerResource:GetGold( data.player:GetPlayerID() )
 		self._owner_id = data.player:GetPlayerID()
 
-		if gold < self._gold_cost then
+		if not GameRules.LegionDefence:GetCurrencyController():CanAfford( CURRENCY_GOLD, self._owner_id, self._gold_cost ) then
 			self._fail_reason = UPGRADE_FAIL_REASON_CANT_AFFORD
 			return UF_FAIL_CUSTOM
 		end
@@ -109,8 +109,8 @@ function upgrade_unit:SpendGoldCost()
 	if self._gold_cost == nil then
 		self._gold_cost = self:GetSpecialValueFor( "GoldCost" )
 	end
-	if PlayerResource and GameRules.LegionDefence and self._owner_id ~= nil then
-		PlayerResource:ModifyGold( self._owner_id, -self._gold_cost, true, DOTA_ModifyGold_AbilityCost )
+	if GameRules.LegionDefence and self._owner_id ~= nil then
+		GameRules.LegionDefence:GetCurrencyController():ModifyCurrency( CURRENCY_GOLD, self._owner_id, -self._gold_cost )
 		PlayGoldParticlesForCost( self._gold_cost, self:GetCaster() )
 	end
 end

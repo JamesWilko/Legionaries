@@ -32,6 +32,7 @@ function CUnitController:Setup()
 
 	ListenToGameEvent("legion_wave_start", Dynamic_Wrap(CUnitController, "HandleOnWaveStart"), self)
 	ListenToGameEvent("legion_wave_complete", Dynamic_Wrap(CUnitController, "HandleOnWaveComplete"), self)
+	ListenToGameEvent("entity_killed", Dynamic_Wrap(CUnitController, "HandleOnEntityKilled"), self)
 
 end
 
@@ -64,15 +65,6 @@ end
 
 function CUnitController:GetUnitTypeGoldCost( sUnitType )
 	return self._unit_types[sUnitType] and self._unit_types[sUnitType].gold_cost or CUnitController.DEFAULT_GOLD_COST
-end
-
-function CUnitController:GetUnitTypeTotalGoldCost( sUnitType )
-	if self._unit_types[sUnitType].total_cost == nil then
-
-
-
-	end
-	return self._unit_types[sUnitType].total_cost
 end
 
 ---------------------------------------
@@ -116,26 +108,6 @@ function CUnitController:UnregisterUnit( unit )
 
 	Warning(string.format("Could not find unit to unregister: %s", unit_id))
 	return false
-
-end
-
-function CUnitController:SwapUnit( old_unit, new_unit )
-
-	for i, player in pairs( self._player_units ) do
-		for k, v in pairs( player ) do
-
-			if v.unit == old_unit then
-				print(string.format("Swapping unit class from '%s' to '%s' for: %s", v.class, new_unit:GetUnitName(), v.id))
-				v.unit = new_unit
-				v.class = new_unit:GetUnitName()
-				return v.id
-			end
-
-		end
-	end
-
-	Warning(string.format("Attempted to swap a unit which was not registered: %s", unit_id))
-	return nil
 
 end
 
@@ -189,50 +161,70 @@ function CUnitController:SpawnUnit( ePlayer, lTeam, sUnitClass, vPosition, bRegi
 end
 
 ---------------------------------------
--- Unit Gold Costs
+-- Unit Costs
 ---------------------------------------
-function CUnitController:AddCostToUnit( hUnit, lCost, hParentUnit )
+function CUnitController:AddCostToUnit( hUnit, sCurrency, lCost, hParentUnit )
 
 	if self._wave_controller == nil then
 		self._wave_controller = GameRules.LegionDefence:GetWaveController()
+	end
+
+	hUnit._total_costs = hUnit._total_costs or {}
+
+	-- Transfer previous costs to new unit
+	if hParentUnit ~= nil and hParentUnit._total_costs then
+		for k, v in pairs( hParentUnit._total_costs ) do
+			table.insert( hUnit._total_costs, v )
+		end
+		hParentUnit._total_costs = nil
 	end
 
 	-- Add cost and current wave to unit
-	hUnit._total_gold_cost = hUnit._total_gold_cost or {}
 	local cost = {
 		wave = self._wave_controller:GetCurrentWave(),
-		cost = lCost
+		currency = sCurrency,
+		cost = lCost,
 	}
-	table.insert( hUnit._total_gold_cost, cost )
+	table.insert( hUnit._total_costs, cost )
 
-	-- Transfer previous costs to new unit
-	if hParentUnit ~= nil and hParentUnit._total_gold_cost then
-		for k, v in pairs( hParentUnit._total_gold_cost ) do
-			table.insert( hUnit._total_gold_cost, v )
+end
+
+function CUnitController:GetTotalCostOfUnit( hUnit, sCurrency )
+
+	-- Use gold as the currency if not specified
+	sCurrency = sCurrency or CURRENCY_GOLD
+
+	-- Add up costs
+	local cost = 0
+	for k, v in pairs( hUnit._total_costs ) do
+		if v.currency == sCurrency then
+			cost = cost + v.cost
 		end
 	end
-
-end
-
-function CUnitController:GetTotalCostOfUnit( hUnit )
-	local cost = 0
-	for k, v in pairs( hUnit._total_gold_cost ) do
-		cost = cost + v.cost
-	end
 	return cost
+
 end
 
-function CUnitController:GetCurrentSellCostOfUnit( hUnit )
+function CUnitController:GetCurrentSellCostOfUnit( hUnit, sCurrency )
 
 	if self._wave_controller == nil then
 		self._wave_controller = GameRules.LegionDefence:GetWaveController()
 	end
 
+	-- Use gold as the currency if not specified
+	sCurrency = sCurrency or CURRENCY_GOLD
+
+	-- Add up costs, use wave multiplier if not the same wave as the cost was added to the unit
+	print("--")
 	local cost = 0
-	for k, v in pairs( hUnit._total_gold_cost ) do
-		local multi = self._wave_controller:GetCurrentWave() == v.wave and CUnitController.SELL_MULTIPLIER_SAME_WAVE or CUnitController.SELL_MULTIPLIER_DIFF_WAVE
-		cost = cost + v.cost * multi
+	for k, v in pairs( hUnit._total_costs ) do
+		if v.currency == sCurrency then
+			local multi = self._wave_controller:GetCurrentWave() == v.wave and CUnitController.SELL_MULTIPLIER_SAME_WAVE or CUnitController.SELL_MULTIPLIER_DIFF_WAVE
+			cost = cost + math.floor(v.cost * multi)
+			print("adding cost : " .. math.floor(v.cost * multi) .. " = " .. cost)
+		end
 	end
+	print("total cost : " .. cost)
 	return cost
 
 end
@@ -265,6 +257,9 @@ function CUnitController:HandleOnWaveComplete( event )
 
 		-- Freeze all units again and respawn dead units
 		for i, player in pairs( self._player_units ) do
+
+			local killed_unit_index = 0
+
 			for k, v in pairs( player ) do
 
 				if IsValidEntity(v.unit) and v.unit:IsAlive() then
@@ -278,12 +273,38 @@ function CUnitController:HandleOnWaveComplete( event )
 				else
 
 					-- Unit is dead, so spawn a new unit and update references
-					local unit = self:SpawnUnit( v.player, v.team, v.class, v.position, true )
-					if not unit then
+					local hUnit = self:SpawnUnit( v.player, v.team, v.class, v.position )
+					if hUnit then
+
+						hUnit._total_costs = v.cost_data
+						self._player_units[i][k].unit = hUnit
+						self._player_units[i][k].cost_data = nil
+
+					else
 						Warning(string.format("Attempted to respawn unit, but failed! (%s)", v.id))
 					end
-					self._player_units[i][k].unit = unit
 
+				end
+
+			end
+		end
+
+		self._killed_units = {}
+
+	end
+
+end
+
+function CUnitController:HandleOnEntityKilled( event )
+	
+	local hUnit = EntIndexToHScript( event.entindex_killed )
+	if hUnit and hUnit._total_costs then
+
+		for i, player in pairs( self._player_units ) do
+			for k, v in pairs( player ) do
+
+				if v.unit == hUnit then
+					v.cost_data = hUnit._total_costs
 				end
 
 			end

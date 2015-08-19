@@ -58,9 +58,15 @@ function modifier_upgrade_unit_think:OnIntervalThink()
 			-- Do upgrade gesture
 			hUnit:StartGesture( ACT_DOTA_VICTORY )
 
-			-- Transfer gold cost to new unit
+			-- Get upgrade costs
 			local gold_cost = self:GetAbility():GetSpecialValueFor( "GoldCost" )
-			cUnitController:AddCostToUnit( hUnit, gold_cost, self:GetCaster() )
+			local food_cost = cUnitController:GetTotalCostOfUnit( self:GetCaster(), CURRENCY_FOOD )
+			
+			-- Transfer gold cost to new unit
+			cUnitController:AddCostToUnit( hUnit, CURRENCY_GOLD, gold_cost, self:GetCaster() )
+
+			-- Transfer population cost to new unit
+			cUnitController:AddCostToUnit( hUnit, CURRENCY_FOOD, food_cost, self:GetCaster() )
 			
 			-- Remove and unregister old unit
 			cUnitController:UnregisterUnit( self:GetCaster() )

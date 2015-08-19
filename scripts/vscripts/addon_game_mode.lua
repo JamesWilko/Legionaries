@@ -94,8 +94,7 @@ function CLegionDefence:OnPlayerPickedHero( event )
 	if hero then
 
 		-- Give player starting gold
-		PlayerResource:SetGold( hero:GetOwner():GetPlayerID(), 300, true )
-		PlayerResource:SetGold( hero:GetOwner():GetPlayerID(), 0, false )
+		self:GetCurrencyController():SetupNetTableDataForPlayer( CURRENCY_GOLD, hero:GetOwner():GetPlayerID() )
 
 		-- Make all abilities max level
 		for i = 0, hero:GetAbilityCount() - 1, 1 do
