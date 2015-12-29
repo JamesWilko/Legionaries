@@ -7,24 +7,38 @@ CKingController.KING_CLASSES = {
 	[1] = "npc_legion_king_radiant",
 	[2] = "npc_legion_king_radiant",
 }
-CKingController.KING_UPGRADE_ITEM = "item_legion_king_upgrade_"
-CKingController.ITEM_UPGRADE_TYPE = {
-	["health"] = "UpgradeHealth",
-	["regen"] = "UpgradeRegen",
-	["armour"] = "UpgradeArmour",
-	["attack"] = "UpgradeAttack",
-}
-CKingController.UPGRADE_AMOUNTS = {
-	["health"] = 500,
-	["regen"] = 2,
-	["armour"] = 2,
-	["attack"] = 25,
-}
-CKingController.UPGRADE_COSTS = {
-	["health"] = 80,
-	["regen"] = 80,
-	["armour"] = 80,
-	["attack"] = 80,
+
+CKingController.NET_TABLE = "KingUpgradeData"
+CKingController.KEY_HEALTH = "health"
+CKingController.KEY_REGEN = "regen"
+CKingController.KEY_ARMOUR = "armour"
+CKingController.KEY_ATTACK = "attack"
+
+CKingController.UPGRADES = {
+	[CKingController.KEY_HEALTH] = {
+		per_level = 500,
+		cost = 80,
+		currency = CURRENCY_GEMS,
+		func = function(controller, hPlayer, hKing) controller:UpgradeHealth(hPlayer, hKing) end
+	},
+	[CKingController.KEY_REGEN] = {
+		per_level = 2,
+		cost = 80,
+		currency = CURRENCY_GEMS,
+		func = function(controller, hPlayer, hKing) controller:UpgradeRegen(hPlayer, hKing) end
+	},
+	[CKingController.KEY_ARMOUR] = {
+		per_level = 2,
+		cost = 80,
+		currency = CURRENCY_GEMS,
+		func = function(controller, hPlayer, hKing) controller:UpgradeArmour(hPlayer, hKing) end
+	},
+	[CKingController.KEY_ATTACK] = {
+		per_level = 25,
+		cost = 80,
+		currency = CURRENCY_GEMS,
+		func = function(controller, hPlayer, hKing) controller:UpgradeAttack(hPlayer, hKing) end
+	}
 }
 
 function CLegionDefence:SetupKingController()
@@ -53,8 +67,12 @@ function CKingController:Setup()
 
 	end
 
+	-- Send upgrade information to the players
+	CustomNetTables:SetTableValue( CKingController.NET_TABLE, "data", CKingController.UPGRADES )
+
+	-- Setup events
 	ListenToGameEvent("entity_killed", Dynamic_Wrap(CKingController, "HandleOnEntityKilled"), self)
-	ListenToGameEvent("dota_item_purchased", Dynamic_Wrap(CKingController, "HandleOnItemPurchased"), self)
+	CustomGameEventManager:RegisterListener( "legion_purchase_king_upgrade", Dynamic_Wrap(CKingController, "HandleOnUpgradePurchased") )
 
 end
 
@@ -81,62 +99,55 @@ end
 ---------------------------------------
 --	King Item Upgrades
 ---------------------------------------
-function CKingController:HandleOnItemPurchased( event )
+function CKingController.HandleOnUpgradePurchased( iPlayerId, eventArgs )
 
-	if string.lower(string.sub(event.itemname, 1, #CKingController.KING_UPGRADE_ITEM)) == CKingController.KING_UPGRADE_ITEM then
+	local self = GameRules.LegionDefence:GetKingController()
+	local upgradeTable = CKingController.UPGRADES[eventArgs.sUpgradeId]
 
-		-- Remove upgrade item purchased
-		for k, v in pairs( Entities:FindAllByName(event.itemname) ) do
-			UTIL_Remove(v)
-		end
+	iPlayerId = iPlayerId - 1
 
-		-- Get upgrade type
-		local upgrade_purchased = string.lower(string.sub(event.itemname, #CKingController.KING_UPGRADE_ITEM + 1, #event.itemname))
-
-		-- Check if can afford upgrade
-		local currency_controller = GameRules.LegionDefence:GetCurrencyController()
-		local cost = CKingController.UPGRADE_COSTS[ upgrade_purchased ]
-		if not currency_controller:CanAfford( CURRENCY_GEMS, event.PlayerID, cost ) then
-			print("Could not afford upgrade!")
-			return
-		end
-
-		-- Deduct purchase
-		currency_controller:TakeCurrency( CURRENCY_GEMS, event.PlayerID, cost )
-
-		-- Find purchasers king
-		local hPlayer = PlayerResource:GetPlayer( event.PlayerID )
-		local hKing = self:GetKingForTeam( hPlayer:GetTeamNumber() )
-		if not hKing then
-			return
-		end
-
-		-- Do upgrade
-		local func = CKingController.ITEM_UPGRADE_TYPE[upgrade_purchased]
-		self[func]( self, hPlayer, hKing )
-
+	-- Check if can afford upgrade
+	local currency_controller = GameRules.LegionDefence:GetCurrencyController()
+	if not currency_controller:CanAfford( upgradeTable.currency, iPlayerId, upgradeTable.cost ) then
+		return false, "could_not_affort"
 	end
+
+	-- Deduct purchase
+	currency_controller:ModifyCurrency( upgradeTable.currency, iPlayerId, -upgradeTable.cost )
+
+	-- Find purchasers king
+	local hPlayer = PlayerResource:GetPlayer( iPlayerId )
+	local hKing = self:GetKingForTeam( hPlayer:GetTeamNumber() )
+	if not hKing then
+		return false, "no_king_unit"
+	end
+
+	-- Run upgrade function
+	if upgradeTable.func then
+		upgradeTable.func( self, hPlayer, hKing )
+	end
+	return true
 
 end
 
 function CKingController:UpgradeHealth( hPlayer, hKing )
-	-- print("CKingController:UpgradeHealth")
-	hKing:SetMaxHealth( hKing:GetMaxHealth() + CKingController.UPGRADE_AMOUNTS["health"] )
+	local increaseAmount = CKingController.UPGRADES[CKingController.KEY_HEALTH].per_level
+	hKing:SetMaxHealth( hKing:GetMaxHealth() + increaseAmount )
 end
 
 function CKingController:UpgradeRegen( hPlayer, hKing )
-	-- print("CKingController:UpgradeRegen")
-	hKing:SetBaseHealthRegen( hKing:GetBaseHealthRegen() + CKingController.UPGRADE_AMOUNTS["regen"] )
-	hKing:SetBaseManaRegen( hKing:GetManaRegen() + CKingController.UPGRADE_AMOUNTS["regen"] )
+	local increaseAmount = CKingController.UPGRADES[CKingController.KEY_REGEN].per_level
+	hKing:SetBaseHealthRegen( hKing:GetBaseHealthRegen() + increaseAmount )
+	hKing:SetBaseManaRegen( hKing:GetManaRegen() + increaseAmount )
 end
 
 function CKingController:UpgradeArmour( hPlayer, hKing )
-	-- print("CKingController:UpgradeArmour")
-	hKing:SetPhysicalArmorBaseValue( hKing:GetPhysicalArmorBaseValue() + CKingController.UPGRADE_AMOUNTS["armour"] )
+	local increaseAmount = CKingController.UPGRADES[CKingController.KEY_ARMOUR].per_level
+	hKing:SetPhysicalArmorBaseValue( hKing:GetPhysicalArmorBaseValue() + increaseAmount )
 end
 
 function CKingController:UpgradeAttack( hPlayer, hKing )
-	-- print("CKingController:UpgradeAttack")
-	hKing:SetBaseDamageMax( hKing:GetBaseDamageMax() + CKingController.UPGRADE_AMOUNTS["attack"] )
-	hKing:SetBaseDamageMin( hKing:GetBaseDamageMin() + CKingController.UPGRADE_AMOUNTS["attack"] )
+	local increaseAmount = CKingController.UPGRADES[CKingController.KEY_ATTACK].per_level
+	hKing:SetBaseDamageMax( hKing:GetBaseDamageMax() + increaseAmount )
+	hKing:SetBaseDamageMin( hKing:GetBaseDamageMin() + increaseAmount )
 end
