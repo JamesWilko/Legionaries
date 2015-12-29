@@ -19,13 +19,19 @@ CURRENCY_LIMIT_NONE = 0
 CURRENCY_LIMIT_HARD = 1 -- Hard limit, cap to this value at all times
 CURRENCY_LIMIT_SOFT = 2 -- Soft limit, currency can go over this value, but will be lost at end of wave
 
+CURRENCY_INCOME_NONE = 0
+CURRENCY_INCOME_PER_ROUND = 1 -- Income is added at the end of every round
+CURRENCY_INCOME_PER_MINUTE = 2 -- Income is added continuously of a rate of X per minute
+
 -- Currency ids, use these as the nettable names
 CURRENCY_GOLD = "CurrencyGold"
 CCurrencyController.GOLD_DEFAULT_AMOUNT = 300
+CCurrencyController.GOLD_DEFAULT_INCOME = 10
 
 CURRENCY_GEMS = "CurrencyGems"
-CCurrencyController.GEMS_DEFAULT_AMOUNT = 100
+CCurrencyController.GEMS_DEFAULT_AMOUNT = 80
 CCurrencyController.GEMS_DEFAULT_LIMIT = 200
+CCurrencyController.GEMS_DEFAULT_INCOME = 20
 
 CURRENCY_FOOD = "CurrencyFood"
 CCurrencyController.FOOD_DEFAULT_AMOUNT = 20
@@ -33,6 +39,7 @@ CCurrencyController.FOOD_DEFAULT_LIMIT = 20
 
 CCurrencyController.CURRENCY_DEFAULT_AMOUNT = 0
 CCurrencyController.CURRENCY_DEFAULT_LIMIT = -1
+CCurrencyController.INCOME_THINK_DELAY = 1
 
 function CCurrencyController:Setup()
 
@@ -44,24 +51,34 @@ function CCurrencyController:Setup()
 	local gold = {
 		default_amount = CCurrencyController.GOLD_DEFAULT_AMOUNT,
 		limit_type = CURRENCY_LIMIT_NONE,
+		income_type = CURRENCY_INCOME_PER_MINUTE,
+		default_income = CCurrencyController.GOLD_DEFAULT_INCOME,
 	}
-	self:RegisterCurrency( CURRENCY_GOLD, CURRENCY_GOLD, gold )
+	self:RegisterCurrency( CURRENCY_GOLD, gold )
 
 	local gems = {
 		default_amount = CCurrencyController.GEMS_DEFAULT_AMOUNT,
 		limit = CCurrencyController.GEMS_DEFAULT_LIMIT,
 		limit_type = CURRENCY_LIMIT_SOFT,
+		income_type = CURRENCY_INCOME_PER_MINUTE,
+		default_income = CCurrencyController.GEMS_DEFAULT_INCOME,
 	}
-	self:RegisterCurrency( CURRENCY_GEMS, CURRENCY_GEMS, gems )
+	self:RegisterCurrency( CURRENCY_GEMS, gems )
 
 	local food = {
 		default_amount = CCurrencyController.FOOD_DEFAULT_AMOUNT,
 		limit = CCurrencyController.FOOD_DEFAULT_LIMIT,
 		limit_type = CURRENCY_LIMIT_HARD,
 	}
-	self:RegisterCurrency( CURRENCY_FOOD, CURRENCY_FOOD, food )
+	self:RegisterCurrency( CURRENCY_FOOD, food )
+
+	-- Setup income think
+	if IsServer() then
+		GameRules:GetGameModeEntity():SetThink( "OnIncomeThink", self, "CurrencyControllerIncomeThink", CCurrencyController.INCOME_THINK_DELAY )
+	end
 
 	-- Setup events
+	ListenToGameEvent("dota_player_pick_hero", Dynamic_Wrap(CCurrencyController, "OnPlayerPickedHero"), self)
 	ListenToGameEvent("legion_wave_complete", Dynamic_Wrap(CCurrencyController, "HandleOnWaveComplete"), self)
 
 end
@@ -69,17 +86,18 @@ end
 ---------------------------------------
 -- Currencies
 ---------------------------------------
-function CCurrencyController:RegisterCurrency( sCurrency, sNettable, tData )
+function CCurrencyController:RegisterCurrency( sCurrency, tData )
 
 	assert( type(sCurrency) == "string", "Currencies must be registered with a string as their id." )
-	assert( type(sNettable) == "string", "Currencies must be registered with a string as their net table." )
 
 	-- Create data table
 	self._currency_types[sCurrency] = {
-		net_table = sNettable,
+		net_table = sCurrency,
 		default_amount = tData.default_amount or CCurrencyController.CURRENCY_DEFAULT_AMOUNT,
 		limit_type = tData.limit_type or CURRENCY_LIMIT_NONE,
 		limit_amount = tData.limit or CCurrencyController.CURRENCY_DEFAULT_LIMIT,
+		income_type = tData.income_type or CURRENCY_INCOME_NONE,
+		default_income = tData.default_income or 0,
 	}
 
 	print(string.format("Registered currency '%s'", sCurrency))
@@ -106,6 +124,11 @@ function CCurrencyController:GetCurrencyLimitType( sCurrency )
 	return self._currency_types[sCurrency].limit_type
 end
 
+function CCurrencyController:GetCurrencyDefaultIncome( sCurrency )
+	assert( self._currency_types[sCurrency] ~= nil, "Currencies must be registered before they can be used!" )
+	return self._currency_types[sCurrency].default_income
+end
+
 ---------------------------------------
 -- Helper Functions
 ---------------------------------------
@@ -129,7 +152,9 @@ function CCurrencyController:SetupNetTableDataForPlayer( sCurrency, iPlayerId )
 	-- Create default player data
 	local data = {
 		amount = self:GetCurrencyDefaultAmount(sCurrency),
-		limit = self:GetCurrencyDefaultLimit(sCurrency)
+		limit = self:GetCurrencyDefaultLimit(sCurrency),
+		income = self:GetCurrencyDefaultIncome(sCurrency),
+		income_accrued = 0,
 	}
 	return data
 
@@ -317,10 +342,7 @@ function CCurrencyController:GetCurrencyLimit( sCurrency, hPlayer )
 
 end
 
----------------------------------------
--- Handlers
----------------------------------------
-function CCurrencyController:HandleOnWaveComplete( event )
+function CCurrencyController:ProcessEndOfWaveLimits()
 
 	-- Process end of wave soft limits
 	for currency, cur_data in pairs( self._currency_types ) do
@@ -348,6 +370,76 @@ function CCurrencyController:HandleOnWaveComplete( event )
 
 			end
 
+		end
+	end
+
+end
+
+---------------------------------------
+-- Incomes
+---------------------------------------
+function CCurrencyController:OnIncomeThink()
+
+	if IsServer() then
+
+		-- Run through all currencies for all players
+		for currency, currencyData in pairs(self._currency_types) do
+			if currencyData.income_type == CURRENCY_INCOME_PER_MINUTE then
+				for i, player_id in pairs( self._players ) do
+
+					-- Get currency table for player
+					local nettable = self:GetCurrencyNetTable( currency )
+					local playerData = CustomNetTables:GetTableValue( nettable, tostring(player_id) )
+					if playerData then
+
+						-- Increment income earned during think delay
+						local income_amount = playerData.income * (CCurrencyController.INCOME_THINK_DELAY / 60)
+						playerData.income_accrued = (playerData.income_accrued or 0) + income_amount
+
+						-- Add income to money
+						if playerData.income_accrued >= 1 then
+
+							local immediate_income = math.floor(playerData.income_accrued)
+							playerData.income_accrued = playerData.income_accrued - immediate_income
+							self:ModifyCurrency( currency, player_id, immediate_income )
+
+						end
+
+					end
+
+				end
+			end
+		end
+
+		-- Think again
+		return CCurrencyController.INCOME_THINK_DELAY
+
+	end
+
+end
+
+function CCurrencyController:ProcessEndOfWaveIncome()
+
+end
+
+---------------------------------------
+-- Handlers
+---------------------------------------
+function CCurrencyController:HandleOnWaveComplete( event )
+	self:ProcessEndOfWaveLimits()
+	self:ProcessEndOfWaveIncome()
+end
+
+function CCurrencyController:OnPlayerPickedHero( event )
+
+	-- Setup player currencies once they've picked their hero
+	local hero = EntIndexToHScript( event.heroindex )
+	if hero then
+		local playerId = hero:GetOwner():GetPlayerID()
+		for currency, currencyData in pairs(self._currency_types) do
+			local nettable = self:GetCurrencyNetTable( currency )
+			local data = self:SetupNetTableDataForPlayer( currency, playerId )
+			CustomNetTables:SetTableValue( nettable, tostring(playerId), data )
 		end
 	end
 
