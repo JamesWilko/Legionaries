@@ -26,7 +26,7 @@ CURRENCY_INCOME_PER_MINUTE = 2 -- Income is added continuously of a rate of X pe
 -- Currency ids, use these as the nettable names
 CURRENCY_GOLD = "CurrencyGold"
 CCurrencyController.GOLD_DEFAULT_AMOUNT = 300
-CCurrencyController.GOLD_DEFAULT_INCOME = 10
+CCurrencyController.GOLD_DEFAULT_INCOME = 0
 
 CURRENCY_GEMS = "CurrencyGems"
 CCurrencyController.GEMS_DEFAULT_AMOUNT = 80
@@ -51,7 +51,7 @@ function CCurrencyController:Setup()
 	local gold = {
 		default_amount = CCurrencyController.GOLD_DEFAULT_AMOUNT,
 		limit_type = CURRENCY_LIMIT_NONE,
-		income_type = CURRENCY_INCOME_PER_MINUTE,
+		income_type = CURRENCY_INCOME_PER_ROUND,
 		default_income = CCurrencyController.GOLD_DEFAULT_INCOME,
 	}
 	self:RegisterCurrency( CURRENCY_GOLD, gold )
@@ -154,7 +154,7 @@ function CCurrencyController:SetupNetTableDataForPlayer( sCurrency, iPlayerId )
 		amount = self:GetCurrencyDefaultAmount(sCurrency),
 		limit = self:GetCurrencyDefaultLimit(sCurrency),
 		income = self:GetCurrencyDefaultIncome(sCurrency),
-		income_accrued = 0,
+		income_accrued = 0.0,
 	}
 	return data
 
@@ -394,16 +394,25 @@ function CCurrencyController:OnIncomeThink()
 
 						-- Increment income earned during think delay
 						local income_amount = playerData.income * (CCurrencyController.INCOME_THINK_DELAY / 60)
-						playerData.income_accrued = (playerData.income_accrued or 0) + income_amount
+						playerData.income_accrued = playerData.income_accrued + income_amount
 
-						-- Add income to money
+						-- When income is able to be added
 						if playerData.income_accrued >= 1 then
 
+							-- Add income to currency amounts
 							local immediate_income = math.floor(playerData.income_accrued)
 							playerData.income_accrued = playerData.income_accrued - immediate_income
 							self:ModifyCurrency( currency, player_id, immediate_income )
 
+							-- Get updated datatable before saving income
+							local updatedData = CustomNetTables:GetTableValue( nettable, tostring(player_id) )
+							updatedData.income_accrued = playerData.income_accrued
+							playerData = updatedData
+
 						end
+
+						-- Set new accrued income in net table
+						CustomNetTables:SetTableValue( nettable, tostring(player_id), playerData )
 
 					end
 
