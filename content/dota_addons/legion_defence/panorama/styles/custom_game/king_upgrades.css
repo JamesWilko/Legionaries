@@ -88,3 +88,9 @@
 {
 	opacity: 0.1;
 }
+
+.hidden
+{
+	visibility: collapse;
+	opacity: 0;
+}

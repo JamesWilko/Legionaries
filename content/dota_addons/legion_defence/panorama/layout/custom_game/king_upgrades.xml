@@ -21,7 +21,7 @@
 								>
 						<DOTAItemImage hittest="false" class="UpgradeImage" id="UpgradeImage-attack" itemname="item_claymore" />
 				</Button>
-				<Panel class="UpgradeCost">
+				<Panel class="UpgradeCost" id="UpgradeCost-attack">
 					<Image class="UpgradeCostIcon" id="UpgradeCostIcon-attack" src="file://{images}/custom_game/icons/icon_gems_small.png" />
 					<Label class="UpgradeCostText" id="UpgradeCostText-attack" text="??" />
 				</Panel>
@@ -35,7 +35,7 @@
 								>
 						<DOTAItemImage hittest="false" class="UpgradeImage" id="UpgradeImage-health" itemname="item_vitality_booster" />
 				</Button>
-				<Panel class="UpgradeCost">
+				<Panel class="UpgradeCost" id="UpgradeCost-health">
 					<Image class="UpgradeCostIcon" id="UpgradeCostIcon-health" src="file://{images}/custom_game/icons/icon_gems_small.png" />
 					<Label class="UpgradeCostText" id="UpgradeCostText-health" text="??" />
 				</Panel>
@@ -49,7 +49,7 @@
 								>
 						<DOTAItemImage hittest="false" class="UpgradeImage" id="UpgradeImage-regen" itemname="item_ring_of_regen" />
 				</Button>
-				<Panel class="UpgradeCost">
+				<Panel class="UpgradeCost" id="UpgradeCost-regen">
 					<Image class="UpgradeCostIcon" id="UpgradeCostIcon-regen" src="file://{images}/custom_game/icons/icon_gems_small.png" />
 					<Label class="UpgradeCostText" id="UpgradeCostText-regen" text="??" />
 				</Panel>
@@ -63,7 +63,7 @@
 								>
 						<DOTAItemImage hittest="false" class="UpgradeImage" id="UpgradeImage-armour" itemname="item_platemail" />
 				</Button>
-				<Panel class="UpgradeCost">
+				<Panel class="UpgradeCost" id="UpgradeCost-armour">
 					<Image class="UpgradeCostIcon" id="UpgradeCostIcon-armour" src="file://{images}/custom_game/icons/icon_gems_small.png" />
 					<Label class="UpgradeCostText" id="UpgradeCostText-armour" text="??" />
 				</Panel>
@@ -77,7 +77,7 @@
 								>
 						<DOTAItemImage hittest="false" id="UpgradeImage-heal" itemname="item_cheese" />
 				</Button>
-				<Panel class="UpgradeCostNoIcon">
+				<Panel class="UpgradeCostNoIcon" id="UpgradeCost-heal">
 					<Label class="UpgradeCostTextNoIcon" id="UpgradeCostText-heal" text="x?" />
 				</Panel>
 			</Panel>

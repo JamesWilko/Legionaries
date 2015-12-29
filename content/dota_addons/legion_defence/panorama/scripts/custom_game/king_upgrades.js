@@ -38,10 +38,15 @@ function OnKingUpgradeDataChanged()
 		}
 		var upgradeCurrency = GetKingUpgradesData()[sUpgrade]["currency"];
 
+		var upgradePanel = $("#UpgradeCost-" + sUpgrade);
+		if(upgradePanel)
+		{
+			upgradePanel.SetHasClass( "hidden", realCostPerLevel < 0 );
+		}
+
 		var upgradeText = $("#UpgradeCostText-" + sUpgrade);
 		if(upgradeText)
 		{
-			
 			upgradeText.text = costPerLevel;
 		}
 
