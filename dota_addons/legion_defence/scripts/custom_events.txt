@@ -37,6 +37,11 @@
 		"lFastestPlayer"		"long"
 	}
 
+	"legion_purchase_king_upgrade"
+	{
+		"sUpgradeId"			"string"
+	}
+
 	//---------------------------------
 	// Server Only
 	//---------------------------------
