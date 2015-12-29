@@ -92,9 +92,10 @@ function CLegionDefence:OnPlayerPickedHero( event )
 
 	local hero = EntIndexToHScript( event.heroindex )
 	if hero then
-
-		-- Give player starting gold
-		self:GetCurrencyController():SetupNetTableDataForPlayer( CURRENCY_GOLD, hero:GetOwner():GetPlayerID() )
+		
+		-- Remove Dota gold
+		hero:SetGold(0, false)
+		hero:SetGold(0, true)
 
 		-- Make all abilities max level
 		for i = 0, hero:GetAbilityCount() - 1, 1 do
