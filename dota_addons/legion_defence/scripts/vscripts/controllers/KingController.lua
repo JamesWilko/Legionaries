@@ -133,21 +133,36 @@ end
 function CKingController:UpgradeHealth( hPlayer, hKing )
 	local increaseAmount = CKingController.UPGRADES[CKingController.KEY_HEALTH].per_level
 	hKing:SetMaxHealth( hKing:GetMaxHealth() + increaseAmount )
+	self:SpawnUpgradeParticles(hKing)
 end
 
 function CKingController:UpgradeRegen( hPlayer, hKing )
 	local increaseAmount = CKingController.UPGRADES[CKingController.KEY_REGEN].per_level
 	hKing:SetBaseHealthRegen( hKing:GetBaseHealthRegen() + increaseAmount )
 	hKing:SetBaseManaRegen( hKing:GetManaRegen() + increaseAmount )
+	self:SpawnUpgradeParticles(hKing)
 end
 
 function CKingController:UpgradeArmour( hPlayer, hKing )
 	local increaseAmount = CKingController.UPGRADES[CKingController.KEY_ARMOUR].per_level
 	hKing:SetPhysicalArmorBaseValue( hKing:GetPhysicalArmorBaseValue() + increaseAmount )
+	self:SpawnUpgradeParticles(hKing)
 end
 
 function CKingController:UpgradeAttack( hPlayer, hKing )
 	local increaseAmount = CKingController.UPGRADES[CKingController.KEY_ATTACK].per_level
 	hKing:SetBaseDamageMax( hKing:GetBaseDamageMax() + increaseAmount )
 	hKing:SetBaseDamageMin( hKing:GetBaseDamageMin() + increaseAmount )
+	self:SpawnUpgradeParticles(hKing)
+end
+
+function CKingController:SpawnUpgradeParticles( hKing )
+
+	EmitSoundOnLocationForAllies( hKing:GetOrigin(), "Hero_Omniknight.Purification", hKing )
+
+	local nFXIndex = ParticleManager:CreateParticle( "particles/units/heroes/hero_omniknight/omniknight_purification.vpcf", PATTACH_WORLDORIGIN, hKing )
+	ParticleManager:SetParticleControl( nFXIndex, 0, hKing:GetOrigin() )
+	ParticleManager:SetParticleControl( nFXIndex, 1, Vector( 450, 1, 1 ) )
+	ParticleManager:ReleaseParticleIndex( nFXIndex )
+
 end
