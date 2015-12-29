@@ -18,16 +18,33 @@ function UpdateFood()
 function UpdateCurrency( sCurrency )
 {
 	var currencyDisplay = $( "#" + sCurrency );
-	if ( currencyDisplay )
+	var currencyIncomeDisplay = $( "#" + sCurrency + "Income" );
+	if ( currencyDisplay && currencyIncomeDisplay )
 	{
 		var data = CustomNetTables.GetTableValue( sCurrency, Players.GetLocalPlayer().toString() );
-		if( data["limit"] >= 0 )
+		if(data)
 		{
-			currencyDisplay.text = data["amount"].toString() + " / " + data["limit"].toString();
+			if( data["limit"] >= 0 )
+			{
+				currencyDisplay.text = data["amount"].toString() + " / " + data["limit"].toString();
+			}
+			else
+			{
+				currencyDisplay.text = data["amount"].toString();
+			}
+			if( data["income"] > 0 )
+			{
+				currencyIncomeDisplay.text = "+" + data["income"];
+			}
+			else
+			{
+				currencyIncomeDisplay.text = "";
+			}
 		}
 		else
 		{
-			currencyDisplay.text = data["amount"].toString();
+			currencyDisplay.text = "-";
+			currencyIncomeDisplay.text = "";
 		}
 	}
 }
@@ -37,4 +54,8 @@ function UpdateCurrency( sCurrency )
 	CustomNetTables.SubscribeNetTableListener( "CurrencyGold", UpdateGold );
 	CustomNetTables.SubscribeNetTableListener( "CurrencyGems", UpdateGems );
 	CustomNetTables.SubscribeNetTableListener( "CurrencyFood", UpdateFood );
+
+	UpdateGold();
+	UpdateGems();
+	UpdateFood();
 })();

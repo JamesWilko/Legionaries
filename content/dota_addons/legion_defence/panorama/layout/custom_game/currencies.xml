@@ -12,16 +12,23 @@
 	<Panel class="CurrenciesPanel">
 
 		<Panel class="CurrencyLine">
-			<Label id="CurrencyName" text="#legion_currency_gold" /><Label text="    " /><Label id="CurrencyGold" text="-/-" />
+			<Label id="CurrencyName" text="#legion_currency_gold" />
+			<Label text="    " />
+			<Label id="CurrencyGold" text="-/-" />
+			<Label id="CurrencyGoldIncome" text="" />
 		</Panel>
 		<Panel class="CurrencyLine">
-			<Label id="CurrencyName" text="#legion_currency_gems" /><Label text="    " /><Label id="CurrencyGems" text="-/-" />
+			<Label id="CurrencyName" text="#legion_currency_gems" />
+			<Label text="    " />
+			<Label id="CurrencyGems" text="-/-" />
+			<Label id="CurrencyGemsIncome" text="" />
 		</Panel>
 		<Panel class="CurrencyLine">
-			<Label id="CurrencyName" text="#legion_currency_food" /><Label text="    " /><Label id="CurrencyFood" text="-/-" />
+			<Label id="CurrencyName" text="#legion_currency_food" />
+			<Label text="    " />
+			<Label id="CurrencyFood" text="-/-" />
 		</Panel>
 
 	</Panel>
 
 </root>
-

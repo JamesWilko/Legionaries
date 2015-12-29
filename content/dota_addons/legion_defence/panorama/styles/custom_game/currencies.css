@@ -33,6 +33,16 @@
 	horizontal-align: left;
 }
 
+#CurrencyGoldIncome
+{
+	font-size: 16px;
+	text-shadow: 0px 1px 3px 2.5 #000000;
+	color: yellow;
+	vertical-align: bottom;
+	horizontal-align: right;
+	text-align: right;
+}
+
 #CurrencyGems
 {
 	text-transform: uppercase;
@@ -40,6 +50,16 @@
 	color: aqua;
 	vertical-align: bottom;
 	horizontal-align: left;
+}
+
+#CurrencyGemsIncome
+{
+	font-size: 16px;
+	text-shadow: 0px 1px 3px 2.5 #000000;
+	color: aqua;
+	vertical-align: bottom;
+	horizontal-align: right;
+	text-align: right;
 }
 
 #CurrencyFood
