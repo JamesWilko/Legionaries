@@ -2,8 +2,16 @@
 {
 	custom_net_tables =
 	[
+		//-----------------------------
+		// Currencies
+		//-----------------------------
 		"CurrencyGold",
 		"CurrencyGems",
 		"CurrencyFood",
+
+		//-----------------------------
+		// Gameplay
+		//-----------------------------
+		"UpcomingWaveData",
 	]
 }
