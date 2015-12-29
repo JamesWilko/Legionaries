@@ -23,7 +23,8 @@
 
 .UpgradePanel:hover
 {
-	background-color: red;
+	background-color: #4c0000;
+	border: 1px solid white;
 }
 
 #UpgradeButton
@@ -59,4 +60,31 @@
 {
 	vertical-align: center;
 	text-align: left;
+}
+
+.UpgradeCostNoIcon
+{
+	margin-left: -4px;
+	padding-left: 2px;
+	vertical-align: bottom;
+	horizontal-align: right;
+	min-width: 20px;
+	min-height: 20px;
+	background-color: #000000e0;
+}
+
+.UpgradeCostTextNoIcon
+{
+	color: aqua;
+	text-shadow: 1px 1px 2px 2 #000000;
+	font-size: 16px;
+	font-weight: bold;
+	vertical-align: center;
+	text-align: left;
+	margin-left: 4px;
+}
+
+.SoldOut
+{
+	opacity: 0.1;
 }

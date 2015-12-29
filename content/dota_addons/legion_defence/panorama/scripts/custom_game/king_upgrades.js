@@ -5,7 +5,8 @@ var m_KingUpgrades = [
 	"health",
 	"regen",
 	"armour",
-	"attack"
+	"attack",
+	"heal"
 ];
 var m_CurrencyIcons = new Array();
 m_CurrencyIcons["CurrencyGems"] = "file://{images}/custom_game/icons/icon_gems_small.png";
@@ -17,17 +18,43 @@ function OnKingUpgradeDataChanged()
 	for(var i = 0; i < m_KingUpgrades.length; ++i)
 	{
 		var sUpgrade = m_KingUpgrades[i];
+		var realCostPerLevel = GetKingUpgradesData()[sUpgrade]["cost"];
+		if(typeof realCostPerLevel === "object")
+		{
+			var localPlayerId = Game.GetLocalPlayerID();
+			if(realCostPerLevel[localPlayerId])
+			{
+				realCostPerLevel = realCostPerLevel[localPlayerId];
+			}
+			else
+			{
+				realCostPerLevel = realCostPerLevel["default"];
+			}
+		}
+		var costPerLevel = realCostPerLevel;
+		if(GetKingUpgradesData()[sUpgrade]["display_cost"])
+		{
+			costPerLevel = GetKingUpgradesData()[sUpgrade]["display_cost"];
+		}
+		var upgradeCurrency = GetKingUpgradesData()[sUpgrade]["currency"];
 
 		var upgradeText = $("#UpgradeCostText-" + sUpgrade);
 		if(upgradeText)
 		{
-			upgradeText.text = GetKingUpgradesData()[sUpgrade]["cost"];
+			
+			upgradeText.text = costPerLevel;
+		}
+
+		var upgradeImage = $("#UpgradeImage-" + sUpgrade);
+		if(upgradeImage)
+		{
+			upgradeImage.SetHasClass( "SoldOut", realCostPerLevel < 0 );
 		}
 
 		var upgradeCurrency = $("#UpgradeCostIcon-" + sUpgrade);
 		if(upgradeCurrency)
 		{
-			upgradeCurrency.src = m_CurrencyIcons[ GetKingUpgradesData()[sUpgrade]["currency"] ];
+			upgradeCurrency.src = m_CurrencyIcons[upgradeCurrency];
 		}
 	}
 }
@@ -39,7 +66,6 @@ function GetKingUpgradesData()
 
 function UpgradeShowTooltip( sUpgradeId )
 {
-	var costPerLevel = GetKingUpgradesData()[sUpgradeId]["cost"];
 	var incrPerLevel = GetKingUpgradesData()[sUpgradeId]["per_level"];
 
 	// Update tooltip prices and description

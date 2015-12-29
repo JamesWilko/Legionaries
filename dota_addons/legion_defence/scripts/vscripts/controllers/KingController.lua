@@ -13,6 +13,7 @@ CKingController.KEY_HEALTH = "health"
 CKingController.KEY_REGEN = "regen"
 CKingController.KEY_ARMOUR = "armour"
 CKingController.KEY_ATTACK = "attack"
+CKingController.KEY_HEAL = "heal"
 
 CKingController.UPGRADES = {
 	[CKingController.KEY_HEALTH] = {
@@ -38,8 +39,16 @@ CKingController.UPGRADES = {
 		cost = 80,
 		currency = CURRENCY_GEMS,
 		func = function(controller, hPlayer, hKing) controller:UpgradeAttack(hPlayer, hKing) end
+	},
+	[CKingController.KEY_HEAL] = {
+		per_level = 100,
+		cost = { default = 0 },
+		display_cost = "x1",
+		currency = CURRENCY_GEMS,
+		func = function(controller, hPlayer, hKing) controller:InstaHealKing(hPlayer, hKing) end
 	}
 }
+CKingController.MAXIMUM_HEALS_PER_PLAYER = 1
 
 function CLegionDefence:SetupKingController()
 	self.king_controller = CKingController()
@@ -53,6 +62,7 @@ end
 function CKingController:Setup()
 
 	self._kings = {}
+	self._used_heals = {}
 
 	-- Spawn kings
 	local spawns = GameRules.LegionDefence:GetMapController():KingSpawns()
@@ -106,14 +116,28 @@ function CKingController.HandleOnUpgradePurchased( iPlayerId, eventArgs )
 
 	iPlayerId = iPlayerId - 1
 
+	-- Get upgrade price
+	local cost = upgradeTable.cost
+	if type(cost) == "table" then
+		cost = upgradeTable.cost[iPlayerId]
+		if cost == nil then
+			cost = upgradeTable.cost["default"]
+		end
+	end
+
+	-- Don't allow purchasing if cost is negative
+	if cost < 0 then
+		return false, "unavailable"
+	end
+
 	-- Check if can afford upgrade
 	local currency_controller = GameRules.LegionDefence:GetCurrencyController()
-	if not currency_controller:CanAfford( upgradeTable.currency, iPlayerId, upgradeTable.cost ) then
+	if not currency_controller:CanAfford( upgradeTable.currency, iPlayerId, cost ) then
 		return false, "could_not_affort"
 	end
 
 	-- Deduct purchase
-	currency_controller:ModifyCurrency( upgradeTable.currency, iPlayerId, -upgradeTable.cost )
+	currency_controller:ModifyCurrency( upgradeTable.currency, iPlayerId, -cost )
 
 	-- Find purchasers king
 	local hPlayer = PlayerResource:GetPlayer( iPlayerId )
@@ -161,6 +185,66 @@ function CKingController:SpawnUpgradeParticles( hKing )
 	EmitSoundOnLocationForAllies( hKing:GetOrigin(), "Hero_Omniknight.Purification", hKing )
 
 	local nFXIndex = ParticleManager:CreateParticle( "particles/units/heroes/hero_omniknight/omniknight_purification.vpcf", PATTACH_WORLDORIGIN, hKing )
+	ParticleManager:SetParticleControl( nFXIndex, 0, hKing:GetOrigin() )
+	ParticleManager:SetParticleControl( nFXIndex, 1, Vector( 450, 1, 1 ) )
+	ParticleManager:ReleaseParticleIndex( nFXIndex )
+
+end
+
+---------------------------------------
+--	King Instaheal
+---------------------------------------
+function CKingController:InstaHealKing( hPlayer, hKing )
+
+	local playerId = hPlayer:GetPlayerID()
+
+	-- Setup player data if it doesn't exist
+	self._used_heals[playerId] = self._used_heals[playerId] or 0
+
+	-- Can player heal the king
+	if self._used_heals[playerId] < CKingController.MAXIMUM_HEALS_PER_PLAYER then
+
+		-- Perform the heal
+		self:PerformHeal( hPlayer, hKing )
+
+		-- Increment heals by this player
+		self._used_heals[playerId] = self._used_heals[playerId] + 1
+
+		-- Update net table with heals,
+		-- use negative to count used heals yet show button as disabled
+		CKingController.UPGRADES[CKingController.KEY_HEAL]["cost"][playerId] = -self._used_heals[playerId]
+		CustomNetTables:SetTableValue( CKingController.NET_TABLE, "data", CKingController.UPGRADES )
+
+		return true
+
+	end
+
+	return false
+
+end
+
+function CKingController:PerformHeal( hPlayer, hKing )
+
+	local heal_percent = CKingController.UPGRADES[CKingController.KEY_HEAL].per_level / 100
+
+	-- Set health
+	local max_health = hKing:GetMaxHealth()
+	local new_health = max_health * heal_percent
+	if new_health > hKing:GetHealth() then
+		hKing:SetHealth(new_health)
+	end
+
+	-- Set mana
+	local max_mana = hKing:GetMaxMana()
+	local new_mana = max_health * heal_percent
+	if new_mana > hKing:GetMana() then
+		hKing:SetMana(max_mana)
+	end
+
+	-- Show particles and sounds
+	EmitSoundOnLocationForAllies( hKing:GetOrigin(), "Hero_Omniknight.GuardianAngel.Cast", hKing )
+
+	local nFXIndex = ParticleManager:CreateParticle( "particles/units/heroes/hero_omniknight/omniknight_guardian_angel_ally.vpcf", PATTACH_WORLDORIGIN, hKing )
 	ParticleManager:SetParticleControl( nFXIndex, 0, hKing:GetOrigin() )
 	ParticleManager:SetParticleControl( nFXIndex, 1, Vector( 450, 1, 1 ) )
 	ParticleManager:ReleaseParticleIndex( nFXIndex )

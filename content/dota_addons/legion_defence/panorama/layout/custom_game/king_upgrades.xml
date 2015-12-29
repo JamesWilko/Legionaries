@@ -13,7 +13,7 @@
 
 		<Panel class="KingUpgradesPanel" hittest="false">
 
-			<Panel class="UpgradePanel">
+			<Panel class="UpgradePanel" id="UpgradePanel-attack">
 				<Button class="UpgradeButton"
 								onmouseover="UpgradeShowTooltip( 'attack' )"
 								onmouseout="UpgradeHideTooltip( 'attack' )"
@@ -27,7 +27,7 @@
 				</Panel>
 			</Panel>
 
-			<Panel class="UpgradePanel">
+			<Panel class="UpgradePanel" id="UpgradePanel-health">
 				<Button class="UpgradeButton"
 								onmouseover="UpgradeShowTooltip( 'health' )"
 								onmouseout="UpgradeHideTooltip( 'health' )"
@@ -41,7 +41,7 @@
 				</Panel>
 			</Panel>
 
-			<Panel class="UpgradePanel">
+			<Panel class="UpgradePanel" id="UpgradePanel-regen">
 				<Button class="UpgradeButton"
 								onmouseover="UpgradeShowTooltip( 'regen' )"
 								onmouseout="UpgradeHideTooltip( 'regen' )"
@@ -55,7 +55,7 @@
 				</Panel>
 			</Panel>
 
-			<Panel class="UpgradePanel">
+			<Panel class="UpgradePanel" id="UpgradePanel-armour">
 				<Button class="UpgradeButton"
 								onmouseover="UpgradeShowTooltip( 'armour' )"
 								onmouseout="UpgradeHideTooltip( 'armour' )"
@@ -68,21 +68,19 @@
 					<Label class="UpgradeCostText" id="UpgradeCostText-armour" text="??" />
 				</Panel>
 			</Panel>
-	<!-- 
-			<Panel class="UpgradePanel">
-				<Button id="UpgradeButton"
-								onmouseover="UpgradeShowTooltip()"
-								onmouseout="UpgradeHideTooltip()"
-								onactivate="UpgradeAbility()"
+
+			<Panel class="UpgradePanel" id="UpgradePanel-heal">
+				<Button class="UpgradeButton"
+								onmouseover="UpgradeShowTooltip( 'heal' )"
+								onmouseout="UpgradeHideTooltip( 'heal' )"
+								onactivate="UpgradeAbility( 'heal' )"
 								>
-						<DOTAItemImage hittest="false" id="UpgradeImage" itemname="item_cheese" />
+						<DOTAItemImage hittest="false" id="UpgradeImage-heal" itemname="item_cheese" />
 				</Button>
-				<Panel id="UpgradeCost">
-					<Image id="UpgradeCostIcon" src="file://{images}/custom_game/icons/icon_gems_small.png" />
-					<Label id="UpgradeCostText" text="80" />
+				<Panel class="UpgradeCostNoIcon">
+					<Label class="UpgradeCostTextNoIcon" id="UpgradeCostText-heal" text="x?" />
 				</Panel>
 			</Panel>
-	-->
 
 		</Panel>
 
