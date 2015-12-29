@@ -37,11 +37,16 @@
 	</script>
 
 	<Panel>
+		
 		<!-- <CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/action_bar.xml" /> -->
 		<!-- <CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/inventory.xml" /> -->
 		<!-- <CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/buff_list.xml" /> -->
+
 		<CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/hud_main.xml" />
 		<CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/currencies.xml" />
+		<CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/king_upgrades.xml" />
+		<!-- <CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/king_upgrade_tooltip.xml" /> -->
+
 	</Panel>
 
 </root>
