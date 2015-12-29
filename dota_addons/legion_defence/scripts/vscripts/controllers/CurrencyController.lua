@@ -429,6 +429,32 @@ end
 
 function CCurrencyController:ProcessEndOfWaveIncome()
 
+	if IsServer() then
+
+		-- Run through all currencies for all players
+		for currency, currencyData in pairs(self._currency_types) do
+			if currencyData.income_type == CURRENCY_INCOME_PER_ROUND then
+				for i, player_id in pairs( self._players ) do
+
+					-- Get currency table for player
+					local nettable = self:GetCurrencyNetTable( currency )
+					local playerData = CustomNetTables:GetTableValue( nettable, tostring(player_id) )
+					if playerData then
+
+						-- Add income to currency amounts
+						self:ModifyCurrency( currency, player_id, playerData.income )
+
+					end
+
+				end
+			end
+		end
+
+		-- Think again
+		return CCurrencyController.INCOME_THINK_DELAY
+
+	end
+
 end
 
 ---------------------------------------
