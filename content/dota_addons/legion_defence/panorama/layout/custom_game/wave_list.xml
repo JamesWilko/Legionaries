@@ -1,0 +1,17 @@
+<root>
+
+	<styles>
+		<include src="file://{resources}/styles/dotastyles.css" />
+		<include src="file://{resources}/styles/custom_game/wave_list.css" />
+	</styles>
+
+	<scripts>
+		<include src="file://{resources}/scripts/custom_game/waves_list.js" />
+	</scripts>
+
+	<Panel class="WaveListPanel">
+		<Panel class="WavesContainer" id="WavesContainer">
+		</Panel>
+	</Panel>
+
+</root>

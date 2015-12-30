@@ -1,0 +1,17 @@
+<root>
+
+	<styles>
+		<include src="file://{resources}/styles/dotastyles.css" />
+		<include src="file://{resources}/styles/custom_game/wave_list.css" />
+	</styles>
+
+	<scripts>
+		<!-- <include src="file://{resources}/scripts/custom_game/next_round_timer.js" /> -->
+	</scripts>
+
+	<Panel class="UpcomingWaveHero">
+		<Image id="HeroImage" src="file://{images}/heroes/npc_dota_hero_abaddon.png"/>
+		<Image id="CompleteOverlay" class="CompleteOverlay" src="file://{images}/custom_game/skull.png"/>
+	</Panel>
+
+</root>

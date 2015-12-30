@@ -1,0 +1,56 @@
+
+.WaveListPanel
+{
+	horizontal-align: center;
+	vertical-align: top;
+	margin-right: 0px;
+	padding: 8px;
+}
+
+.WavesContainer
+{
+	flow-children: right;
+}
+
+.UpcomingWaveHero
+{
+	width: 98px;
+	height: 50px;
+	margin: 2px 4px 2px 4px;
+	border: 1px solid black;
+    background-color: black;
+    box-shadow: fill black 0px 0px 8px 2px;
+}
+
+.BossWave
+{
+	box-shadow: fill red 0px 0px 8px 2px;
+}
+
+.UpcomingWaveHero:hover
+{
+	border: 1px solid white;
+}
+
+.Complete
+{
+	opacity: 0.05;
+}
+
+.CompleteOverlay
+{
+	z-index: 1;
+	horizontal-align: center;
+	vertical-align: center;
+}
+
+.Hidden
+{
+	width: 0px;
+	height: 0px;
+}
+
+.CurrentWave
+{
+	box-shadow: fill #ffff0088 0px 0px 8px 2px;
+}

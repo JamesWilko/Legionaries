@@ -34,6 +34,7 @@ CWaveController.ENEMY_TEAMS = {
 }
 
 CWaveController.WAVE_INFO_TABLE = "UpcomingWaveData"
+CWaveController.NUM_WAVES_IN_SET = 10
 
 function CLegionDefence:SetupWaveController()
 	self.wave_controller = CWaveController()
@@ -52,11 +53,13 @@ function CWaveController:Setup()
 	self._current_wave = 0
 	self._wave_in_progress = false
 
-	self:SetNextWaveTime( 6000 )
+	self:SetNextWaveTime( 15 )
 	self._time_between_waves = 60
 	self._before_wave_time = 3
 	self._end_of_wave_time = 3
 	self._think_time = 1
+
+	self:UpdateWavesData()
 
 	-- Think entity for this controller
 	self._think_ent = IsValidEntity(self._think_ent) and self._think_ent or Entities:CreateByClassname("info_target")
@@ -153,6 +156,36 @@ function CWaveController:SetNextWaveTime( time )
 	CustomNetTables:SetTableValue( CWaveController.WAVE_INFO_TABLE, "next_wave_time", { time = time } )
 end
 
+function CWaveController:UpdateWavesData()
+
+	local wave_data = {}
+
+	-- Build list of current wave set
+	local set_size = CWaveController.NUM_WAVES_IN_SET
+	local start_of_set = math.floor(self:GetCurrentWave() / set_size) * set_size + 1
+	local end_of_set = math.floor((self:GetCurrentWave() + set_size) / set_size) * set_size
+
+	for i = start_of_set, end_of_set, 1 do
+
+		local data = {
+			wave = self._waves_list[tostring(i)],
+			complete = i < self:GetCurrentWave()
+		}
+
+		table.insert( wave_data, data )
+
+	end
+
+	wave_data["next_wave"] = self:GetCurrentWave() + 1
+	wave_data["set_size"] = set_size
+	wave_data["start_of_set"] = start_of_set
+	wave_data["end_of_set"] = end_of_set
+
+	-- Send data to players
+	CustomNetTables:SetTableValue( CWaveController.WAVE_INFO_TABLE, "waves", wave_data )
+
+end
+
 function CWaveController:StartWave( iWave )
 
 	self._current_wave = iWave
@@ -160,8 +193,15 @@ function CWaveController:StartWave( iWave )
 
 		-- Start wave
 		self._wave_in_progress = true
-		self._wave_spawns_remaining = table.copy(self:GetWave())
 		self._wave_start_time = GameRules:GetDOTATime(false, false)
+
+		-- Only add NPC units to the spawns instead of data
+		self._wave_spawns_remaining = {}
+		for k, v in pairs( self:GetWave() ) do
+			if string.sub(k, 1, 4) == "npc_" then
+				self._wave_spawns_remaining[k] = v
+			end
+		end
 
 		-- Call start wave event
 		local data = {
@@ -196,7 +236,9 @@ end
 function CWaveController:GetNumberOfSpawnsInWave( iWave )
 	local n = 0
 	for k, v in pairs( self:GetWave(iWave) ) do
-		n = n + v
+		if string.sub(k, 1, 4) == "npc_" then
+			n = n + v
+		end
 	end
 	return n
 end
@@ -230,7 +272,9 @@ function CWaveController:PrintWaveEnemyList( iWave )
 
 		print(string.format("Wave %i Enemies", iWave))
 		for k, v in pairs( self._waves_list[tostring(iWave)] ) do
-			print(string.format("\t%s x%i", k, v))
+			if string.sub(k, 1, 4) == "npc_" then
+				print(string.format("\t%s x%i", k, v))
+			end
 		end
 		print("-----")
 
@@ -345,6 +389,9 @@ function CWaveController:WaveCompleted()
 
 	-- Set next wave time
 	self:SetNextWaveTime( GameRules:GetDOTATime(false, false) + self._time_between_waves )
+
+	-- Update next waves data
+	self:UpdateWavesData()
 
 end
 
