@@ -13,6 +13,10 @@ CUnitController.DEFAULT_GOLD_COST 			= 100
 CUnitController.SELL_MULTIPLIER_SAME_WAVE 	= 1
 CUnitController.SELL_MULTIPLIER_DIFF_WAVE 	= 0.5
 
+CUnitController.CLEARED_WAVE_TELEPORT_INITIAL_DELAY = 2.0
+CUnitController.CLEARED_WAVE_TELEPORT_DELAY = 0.1
+CUnitController.CLEARED_WAVE_TELEPORT_MAX_TIME = 1.0
+
 function CLegionDefence:SetupUnitController()
 	self.unit_controller = CUnitController()
 	self.unit_controller:Setup()
@@ -29,6 +33,8 @@ function CUnitController:Setup()
 	self._player_units = self._player_units or {}
 
 	self:LoadUnitTypes()
+
+	self._think_ent = IsValidEntity(self._think_ent) and self._think_ent or Entities:CreateByClassname("info_target")
 
 	ListenToGameEvent("legion_wave_start", Dynamic_Wrap(CUnitController, "HandleOnWaveStart"), self)
 	ListenToGameEvent("legion_wave_complete", Dynamic_Wrap(CUnitController, "HandleOnWaveComplete"), self)
@@ -323,14 +329,71 @@ function CUnitController:OnLaneCleared( laneId, iPlayerId )
 	local hPlayer = PlayerResource:GetPlayer( iPlayerId )
 	local fallbackZone = GameRules.LegionDefence:GetMapController():GetFallbackZoneForTeam( hPlayer:GetTeam() )
 
+	-- Give all units teleport delays and positions
 	for k, v in pairs( self:GetAllUnitsForPlayer(iPlayerId) ) do
 		if IsValidEntity(v.unit) and v.unit:IsAlive() then
 
 			local teleportPos = RandomVectorInTrigger(fallbackZone)
 			teleportPos = GetGroundPosition(teleportPos, v.unit)
-			v.unit:SetOrigin( teleportPos )
+
+			v.teleport_pos = teleportPos
+			v.teleport_delay = math.random() * CUnitController.CLEARED_WAVE_TELEPORT_MAX_TIME
 
 		end
+	end
+
+	-- Start teleporting units after a delay
+	self._think_ent:SetThink("LaneClearedTeleportUnits", self, "WaveControllerThink", CUnitController.CLEARED_WAVE_TELEPORT_INITIAL_DELAY)
+
+end
+
+function CUnitController:LaneClearedTeleportUnits()
+
+	local canStopTimer = true
+
+	-- Iterate througha all units and check if they need teleporting
+	for i, player in pairs( self._player_units ) do
+		for k, v in pairs( player ) do
+			if IsValidEntity(v.unit) and v.unit:IsAlive() and v.teleport_delay ~= nil then
+
+				if v.teleport_delay <= 0 then
+
+					local nFXIndex = nil
+
+					-- Show particles at unit position
+					nFXIndex = ParticleManager:CreateParticle( "particles/units/heroes/hero_wisp/wisp_relocate_teleport_c.vpcf", PATTACH_WORLDORIGIN, v.unit )
+					ParticleManager:SetParticleControl( nFXIndex, 0, v.unit:GetOrigin() )
+					ParticleManager:ReleaseParticleIndex( nFXIndex )
+
+					-- Show particles at destination
+					nFXIndex = ParticleManager:CreateParticle( "particles/units/heroes/hero_wisp/wisp_relocate_teleport.vpcf", PATTACH_WORLDORIGIN, v.unit )
+					ParticleManager:SetParticleControl( nFXIndex, 0, v.teleport_pos )
+					ParticleManager:SetParticleControl( nFXIndex, 1, RandomVector(360) )
+					ParticleManager:ReleaseParticleIndex( nFXIndex )
+
+					-- Play sounds
+					EmitSoundOnLocationWithCaster( v.unit:GetOrigin(), "Hero_Wisp.Tether.Target", v.unit )
+					EmitSoundOnLocationWithCaster( v.teleport_pos, "Hero_Wisp.Tether.Target", v.unit )
+
+					-- Teleport unit
+					v.unit:SetOrigin( v.teleport_pos )
+					v.teleport_delay = nil
+					v.teleport_pos = nil
+
+				else
+					v.teleport_delay = v.teleport_delay - CUnitController.CLEARED_WAVE_TELEPORT_DELAY
+					canStopTimer = false
+				end
+
+			end
+		end
+	end
+
+	-- Refresh timer if units still need to be teleported
+	if not canStopTimer then
+		return CUnitController.CLEARED_WAVE_TELEPORT_DELAY
+	else
+		return nil
 	end
 
 end

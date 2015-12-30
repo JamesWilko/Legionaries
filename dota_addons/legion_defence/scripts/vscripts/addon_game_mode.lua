@@ -38,6 +38,7 @@ function Precache( context )
 	PrecacheUnitByNameSync( "npc_dota_hero_ember_spirit", context )
 	PrecacheUnitByNameSync( "npc_dota_hero_lina", context )
 	PrecacheUnitByNameSync( "npc_dota_hero_zuus", context )
+	PrecacheUnitByNameSync( "npc_dota_hero_wisp", context )
 
 	PrecacheUnitByNameSync( "npc_dota_furion_treant", context )
 
