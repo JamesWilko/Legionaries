@@ -121,6 +121,10 @@ function CUnitController:GetAllUnits()
 	return t
 end
 
+function CUnitController:GetAllUnitsForPlayer( iPlayerId )
+	return self._player_units[iPlayerId]
+end
+
 function CUnitController:GetUnitData( tUnit )
 	for i, player in pairs( self._player_units ) do
 		for k, v in pairs( player ) do
@@ -307,6 +311,26 @@ function CUnitController:HandleOnEntityKilled( event )
 			end
 		end
 
+	end
+
+end
+
+---------------------------------------
+-- Lane Wave Clear Handles
+---------------------------------------
+function CUnitController:OnLaneCleared( laneId, iPlayerId )
+
+	local hPlayer = PlayerResource:GetPlayer( iPlayerId )
+	local fallbackZone = GameRules.LegionDefence:GetMapController():GetFallbackZoneForTeam( hPlayer:GetTeam() )
+
+	for k, v in pairs( self:GetAllUnitsForPlayer(iPlayerId) ) do
+		if IsValidEntity(v.unit) and v.unit:IsAlive() then
+
+			local teleportPos = RandomVectorInTrigger(fallbackZone)
+			teleportPos = GetGroundPosition(teleportPos, v.unit)
+			v.unit:SetOrigin( teleportPos )
+
+		end
 	end
 
 end

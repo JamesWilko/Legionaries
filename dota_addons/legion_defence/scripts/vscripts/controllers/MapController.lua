@@ -17,11 +17,7 @@ function CMapController:Setup()
 	self._map_entities = {
 		["spawn_zone"] = {
 			class = "trigger_dota",
-			name = "legion_spawn_zone",
-			team_ids = {
-				[1] = DOTA_TEAM_GOODGUYS,
-				[2] = DOTA_TEAM_BADGUYS,
-			}
+			name = "legion_spawn_zone"
 		},
 		["build_zone"] = {
 			class = "trigger_dota",
@@ -29,15 +25,15 @@ function CMapController:Setup()
 		},
 		["target_zone"] = {
 			class = "trigger_dota",
-			name = "legion_target_zone",
-			team_ids = {
-				[1] = DOTA_TEAM_GOODGUYS,
-				[2] = DOTA_TEAM_BADGUYS,
-			}
+			name = "legion_target_zone"
 		},
 		["king_spawns"] = {
 			class = "info_target",
 			name = "legion_king_spawn"
+		},
+		["fallback_zone"] = {
+			class = "trigger_dota",
+			name = "legion_fallback_zone"
 		},
 	}
 
@@ -50,6 +46,7 @@ function CMapController:Setup()
 	self:FindBuildZones()
 	self:FindTargetZones()
 	self:FindKingSpawns()
+	self:FindFallbackZones()
 
 end
 
@@ -124,6 +121,15 @@ function CMapController:_GetTeamEntity( tblData, iTeam )
 	return nil
 end
 
+function CMapController:_GetLaneEntity( tblData, laneId, iTeam )
+	for k, v in ipairs( tblData ) do
+		if v.lane == laneId then
+			return v.entity
+		end
+	end
+	return self:_GetTeamEntity( tblData, iTeam )
+end
+
 -------------------------
 -- Spawn Zones
 -------------------------
@@ -138,6 +144,10 @@ end
 
 function CMapController:GetSpawnZoneForTeam( iTeam )
 	return self:_GetTeamEntity( self._spawn_zones, iTeam )
+end
+
+function CMapController:GetSpawnZoneForLane( laneId, iTeam )
+	return self:_GetLaneEntity( self._spawn_zones, laneId, iTeam )
 end
 
 -------------------------
@@ -156,6 +166,10 @@ function CMapController:GetBuildZoneForTeam( iTeam )
 	return self:_GetTeamEntity( self._build_zones, iTeam )
 end
 
+function CMapController:GetBuildZoneForLane( laneId, iTeam )
+	return self:_GetLaneEntity( self._build_zones, laneId, iTeam )
+end
+
 -------------------------
 -- Target Points
 -------------------------
@@ -172,6 +186,10 @@ function CMapController:GetTargetZoneForTeam( iTeam )
 	return self:_GetTeamEntity( self._target_zones, iTeam )
 end
 
+function CMapController:GetTargetZoneForLane( laneId, iTeam )
+	return self:_GetLaneEntity( self._target_zones, laneId, iTeam )
+end
+
 -------------------------
 -- King Spawn Points
 -------------------------
@@ -186,4 +204,24 @@ end
 
 function CMapController:GetSpawnForKing( iTeam )
 	return self:_GetTeamEntity( self._king_spawns, iTeam )
+end
+
+-------------------------
+-- Fallback Zones
+-------------------------
+function CMapController:FindFallbackZones()
+	self._fallback_zones = {}
+	self:_StoreGamemodeEntitiesOfClass( self._fallback_zones, self._map_entities.fallback_zone )
+end
+
+function CMapController:FallbackZones()
+	return self._fallback_zones
+end
+
+function CMapController:GetFallbackZoneForTeam( iTeam )
+	return self:_GetTeamEntity( self._fallback_zones, iTeam )
+end
+
+function CMapController:GetFallbackZoneForLane( laneId, iTeam )
+	return self:_GetLaneEntity( self._fallback_zones, laneId, iTeam )
 end

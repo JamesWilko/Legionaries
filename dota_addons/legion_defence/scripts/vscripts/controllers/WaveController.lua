@@ -234,14 +234,17 @@ end
 function CWaveController:OnUnitKilled( event )
 
 	local unit = EntIndexToHScript(event.entindex_killed)
-	for i, lane in pairs( self._spawned_units ) do
+	for laneId, lane in pairs( self._spawned_units ) do
 		for k, v in pairs( lane ) do
 			if IsValidEntity(v.unit) and v.unit == unit then
 				
 				-- Remaining units in this lane
-				local remainInLane = self:GetRemainingUnitsInLane(i)
+				local remainInLane = self:GetRemainingUnitsInLane(laneId)
 				if remainInLane <= 0 then
-					-- Teleport units to catch zone
+					local playerId = GameRules.LegionDefence:GetLaneController():GetPlayerForLane( laneId )
+					if playerId ~= nil then
+						GameRules.LegionDefence:GetUnitController():OnLaneCleared( laneId, playerId )
+					end
 				end
 
 				-- Remaining units in wave
