@@ -19,7 +19,7 @@ function UpdateCurrency( sCurrency )
 {
 	var currencyDisplay = $( "#" + sCurrency );
 	var currencyIncomeDisplay = $( "#" + sCurrency + "Income" );
-	if ( currencyDisplay && currencyIncomeDisplay )
+	if ( currencyDisplay )
 	{
 		var data = CustomNetTables.GetTableValue( sCurrency, Players.GetLocalPlayer().toString() );
 		if(data)
@@ -32,13 +32,16 @@ function UpdateCurrency( sCurrency )
 			{
 				currencyDisplay.text = data["amount"].toString();
 			}
-			if( data["income"] > 0 )
+			if( currencyIncomeDisplay )
 			{
-				currencyIncomeDisplay.text = "+" + data["income"];
-			}
-			else
-			{
-				currencyIncomeDisplay.text = "";
+				if( data["income"] > 0 )
+				{
+					currencyIncomeDisplay.text = "+" + data["income"];
+				}
+				else
+				{
+					currencyIncomeDisplay.text = "";
+				}
 			}
 		}
 		else
