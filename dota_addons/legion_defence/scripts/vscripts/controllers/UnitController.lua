@@ -330,7 +330,7 @@ function CUnitController:OnLaneCleared( laneId, iPlayerId )
 	local fallbackZone = GameRules.LegionDefence:GetMapController():GetFallbackZoneForTeam( hPlayer:GetTeam() )
 
 	-- Give all units teleport delays and positions
-	for k, v in pairs( self:GetAllUnitsForPlayer(iPlayerId) ) do
+	for k, v in pairs( self:GetAllUnitsForPlayer(iPlayerId) or {} ) do
 		if IsValidEntity(v.unit) and v.unit:IsAlive() then
 
 			local teleportPos = RandomVectorInTrigger(fallbackZone)
