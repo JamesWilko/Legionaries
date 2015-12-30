@@ -8,7 +8,16 @@ function UpdateTimer()
 		if(next_round_time > 0)
 		{
 			var dota_time = Game.GetDOTATime(false, false);
-			$("#time").text = Math.ceil(next_round_time - dota_time);
+			var time = next_round_time - dota_time;
+			if(time <= 0)
+			{
+				$("#time").text = $.Localize("legion_round_in_progress");
+			}
+			else
+			{
+				$("#time").text = Math.ceil(time);
+			}
+			$("#time").SetHasClass( "TimerSmall", time <= 0 );
 		}
 		else
 		{
