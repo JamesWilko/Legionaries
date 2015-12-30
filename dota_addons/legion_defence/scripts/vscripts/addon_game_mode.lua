@@ -11,6 +11,7 @@ require("controllers/WaveController")
 require("controllers/UnitController")
 require("controllers/HeroController")
 require("controllers/KingController")
+require("controllers/LaneController")
 require("BuildGrid")
 
 function Precache( context )
@@ -65,9 +66,9 @@ function CLegionDefence:InitGameMode()
 	GameRules:SetPreGameTime( 3 )
 	GameRules:SetCustomGameSetupTimeout( 3 )
 
+	self:SetupLaneController()
 	self:SetupMapController()
 	self:SetupCurrencyController()
-
 	self:SetupWaveController()
 	self:SetupUnitController()
 	self:SetupHeroController()
