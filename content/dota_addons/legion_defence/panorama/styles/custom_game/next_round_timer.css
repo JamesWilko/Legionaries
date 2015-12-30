@@ -1,0 +1,43 @@
+
+.TimerPanel
+{
+	horizontal-align: center;
+	vertical-align: top;
+	margin-right: 600px;
+	width: 128px;
+}
+
+.TimerBackground
+{
+	flow-children: down;
+	text-align: center;
+	horizontal-align: center;
+	background-image: url("file://{images}/custom_game/timer_banner.png");
+	background-size: 100% 100%;
+	padding: 8px 8px 16px 8px;
+}
+
+.TimerText
+{
+	text-transform: uppercase;
+	text-shadow: 0px 1px 3px 2.5 #000000;
+	color: white;
+	vertical-align: bottom;
+	text-align: center;
+}
+
+.TimerTime
+{
+	text-transform: uppercase;
+	text-shadow: 0px 1px 3px 2.5 #000000;
+	color: yellow;
+	horizontal-align: center;
+	vertical-align: bottom;
+	font-size: 24px;
+	margin-top: -10px;
+}
+
+.TimerSmall
+{
+	font-size: 32px;
+}

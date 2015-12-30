@@ -31,8 +31,8 @@
 		GameUI.SetDefaultUIEnabled( DotaDefaultUIElement_t.DOTA_DEFAULT_UI_SHOP_SUGGESTEDITEMS, false );
 		*/
 
-		GameUI.SetDefaultUIEnabled( DotaDefaultUIElement_t.DOTA_DEFAULT_UI_INVENTORY_GOLD, false );
-		GameUI.SetDefaultUIEnabled( DotaDefaultUIElement_t.DOTA_DEFAULT_UI_SHOP_SUGGESTEDITEMS, false );
+		GameUI.SetDefaultUIEnabled( DotaDefaultUIElement_t.DOTA_DEFAULT_UI_TOP_TIMEOFDAY, false );
+		GameUI.SetDefaultUIEnabled( DotaDefaultUIElement_t.DOTA_DEFAULT_UI_TOP_HEROES, false );
 
 	</script>
 
@@ -45,6 +45,7 @@
 		<CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/hud_main.xml" />
 		<CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/currencies.xml" />
 		<CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/king_upgrades.xml" />
+		<CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/next_round_timer.xml" />
 		<!-- <CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/king_upgrade_tooltip.xml" /> -->
 
 	</Panel>

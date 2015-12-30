@@ -1,0 +1,21 @@
+<root>
+
+	<styles>
+		<include src="file://{resources}/styles/dotastyles.css" />
+		<include src="file://{resources}/styles/custom_game/next_round_timer.css" />
+	</styles>
+
+	<scripts>
+		<include src="file://{resources}/scripts/custom_game/next_round_timer.js" />
+	</scripts>
+
+	<Panel class="TimerPanel">
+
+		<Panel class="TimerBackground">
+			<Label class="TimerText" text="Next round in" />
+			<Label class="TimerTime" id="time" text="-" />
+		</Panel>
+
+	</Panel>
+
+</root>

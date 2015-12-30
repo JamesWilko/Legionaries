@@ -33,6 +33,8 @@ CWaveController.ENEMY_TEAMS = {
 	[DOTA_TEAM_BADGUYS] = DOTA_TEAM_GOODGUYS
 }
 
+CWaveController.WAVE_INFO_TABLE = "UpcomingWaveData"
+
 function CLegionDefence:SetupWaveController()
 	self.wave_controller = CWaveController()
 	self.wave_controller:Setup()
@@ -50,15 +52,17 @@ function CWaveController:Setup()
 	self._current_wave = 0
 	self._wave_in_progress = false
 
-	self._next_wave_time = 15
+	self:SetNextWaveTime( 6000 )
 	self._time_between_waves = 60
 	self._before_wave_time = 3
 	self._end_of_wave_time = 3
 	self._think_time = 1
 
+	-- Think entity for this controller
 	self._think_ent = IsValidEntity(self._think_ent) and self._think_ent or Entities:CreateByClassname("info_target")
 	self._think_ent:SetThink("OnThink", self, "WaveControllerThink", self._think_time)
 
+	-- Events
 	ListenToGameEvent("entity_killed", Dynamic_Wrap(CWaveController, "OnUnitKilled"), self)
 
 end
@@ -142,6 +146,11 @@ end
 
 function CWaveController:IsWaveRunning()
 	return self._wave_in_progress
+end
+
+function CWaveController:SetNextWaveTime( time )
+	self._next_wave_time = time
+	CustomNetTables:SetTableValue( CWaveController.WAVE_INFO_TABLE, "next_wave_time", { time = time } )
 end
 
 function CWaveController:StartWave( iWave )
@@ -335,7 +344,7 @@ function CWaveController:WaveCompleted()
 	self._wave_in_progress = false
 
 	-- Set next wave time
-	self._next_wave_time = GameRules:GetDOTATime(false, false) + self._time_between_waves
+	self:SetNextWaveTime( GameRules:GetDOTATime(false, false) + self._time_between_waves )
 
 end
 
