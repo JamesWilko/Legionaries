@@ -2,15 +2,10 @@
 {
 	"consumables"
 	{
-		"item"		"item_legion_king_upgrade_health"
-		"item"		"item_legion_king_upgrade_regen"
-		"item"		"item_legion_king_upgrade_armour"
-		"item"		"item_legion_king_upgrade_attack"
 	}
 
 	"attributes"
 	{
-		"item"		"item_branches"
 	}
 
 	"weapons_armor"

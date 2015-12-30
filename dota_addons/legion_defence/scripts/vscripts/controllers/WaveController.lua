@@ -3,6 +3,17 @@ if CWaveController == nil then
 	CWaveController = class({})
 end
 
+-- Modifiers are in npc_items_custom.txt
+CWaveController.ARMOUR_TIERS = {
+	["item_name"] = "item_leaked_unit_armour_bonuses",
+	[1] = {
+		modifier = "modifier_armour_bonus_leaked_unit_1"
+	},
+	[2] = {
+		modifier = "modifier_armour_bonus_leaked_unit_2"
+	}
+}
+
 function CLegionDefence:SetupWaveController()
 	self.wave_controller = CWaveController()
 	self.wave_controller:Setup()
@@ -71,8 +82,10 @@ function CWaveController:OnThink()
 
 				if hUnit ~= nil then
 
+					-- TODO: Make units face spawn zone regardless of spawn position
 					hUnit:SetAngles( 0, -90, 0 )
 
+					-- TODO: Units need to be assigned to a player lane, once lane is clear (OnUnitKilled) then teleport remaining player units to the catch zone
 					self._spawned_units[spawn.team] = self._spawned_units[spawn.team] or {}
 					table.insert( self._spawned_units[spawn.team], { unit = hUnit, target = vTarget } )
 
@@ -97,6 +110,7 @@ function CWaveController:OnThink()
 
 	-- Think again
 	return self._think_time
+	
 end
 
 function CWaveController:GetCurrentWave()
@@ -263,5 +277,49 @@ function CWaveController:WaveCompleted()
 
 	-- Set next wave time
 	self._next_wave_time = GameRules:GetDOTATime(false, false) + self._time_between_waves
+
+end
+
+----------------------------------
+-- Unit Functions
+----------------------------------
+function CWaveController:GetArmourModifierItem()
+	-- Cache the armour item so we don't continuously destroy and recreate it for no reason
+	if not self.__hArmourItem then
+		self.__hArmourItem = CreateItem(CWaveController.ARMOUR_TIERS["item_name"], nil, nil)
+	end
+	return self.__hArmourItem
+end
+
+function CWaveController:IsUnitAWaveUnit( hUnit )
+
+	for i, team in pairs( self._spawned_units ) do
+		for k, v in pairs( team ) do
+			if v.unit == hUnit then
+				return true
+			end
+		end
+	end
+
+	return false
+
+end
+
+function CWaveController:AttemptIncreaseArmourOnUnit( hUnit, iArmourTier )
+
+	if self:IsUnitAWaveUnit(hUnit) then
+
+		-- Check unit doesn't already have this armour buff
+		local modifier = CWaveController.ARMOUR_TIERS[iArmourTier].modifier
+		if not hUnit:FindModifierByName(modifier) then
+
+			-- Apply modifier from armour item to the leaked unit
+			if self:GetArmourModifierItem() then
+				self:GetArmourModifierItem():ApplyDataDrivenModifier(hUnit, hUnit, modifier, nil)
+			end
+
+		end
+
+	end
 
 end

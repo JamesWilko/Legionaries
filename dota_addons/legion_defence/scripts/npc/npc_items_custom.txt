@@ -2,120 +2,34 @@
 {
 
 	//-------------------------------------------------------------------------
-	// King Upgrades
+	// Unit Armour Bonuses
 	//-------------------------------------------------------------------------
-	"item_legion_king_upgrade_health"
+	"item_leaked_unit_armour_bonuses"
 	{
-		"ID"							"4201"
+		"ID"							"2102"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"BaseClass"						"item_datadriven"
-
-		// Item Info
-		//-------------------------------------------------------------------------------------------------------------
-		"ItemCost"						"0"
-		"ItemShopTags"					"king;health;upgrade"
-		"ItemQuality"					"rare"
-		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_TO_SPECTATORS | DECLARE_PURCHASES_IN_SPEECH"
-		"ItemAliases"					"health"
-		"AbilityTextureName"			"item_vitality_booster"
-
-		"AbilitySpecial"
+		"AbilityTextureName"			"item_medallion_of_courage"
+ 
+		"Modifiers"
 		{
-			"01"
+			"modifier_armour_bonus_leaked_unit_1"
 			{
-				"var_type"				"FIELD_INTEGER"
-				"PurchaseCurrency"		"1" // Custom currency for purchasing this upgrade, 0 for gold, 1 for gems
+				"Passive"				"1"
+				"IsHidden"				"0"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"	"2"
+				}
 			}
-			"02"
+			"modifier_armour_bonus_leaked_unit_2"
 			{
-				"var_type"				"FIELD_INTEGER"
-				"Cost"					"100"
-			}
-		}
-	}
-
-	"item_legion_king_upgrade_regen"
-	{
-		"ID"							"4202"
-		"BaseClass"						"item_datadriven"
-
-		// Item Info
-		//-------------------------------------------------------------------------------------------------------------
-		"ItemCost"						"0"
-		"ItemShopTags"					"king;health;upgrade;regen;"
-		"ItemQuality"					"rare"
-		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_TO_SPECTATORS | DECLARE_PURCHASES_IN_SPEECH"
-		"ItemAliases"					"health;regen"
-		"AbilityTextureName"			"item_ring_of_regen"
-
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"PurchaseCurrency"		"1" // Custom currency for purchasing this upgrade, 0 for gold, 1 for gems
-			}
-			"02"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"Cost"					"100"
-			}
-		}
-	}
-
-	"item_legion_king_upgrade_armour"
-	{
-		"ID"							"4203"
-		"BaseClass"						"item_datadriven"
-
-		// Item Info
-		//-------------------------------------------------------------------------------------------------------------
-		"ItemCost"						"0"
-		"ItemShopTags"					"king;armour;armor;upgrade;resist;"
-		"ItemQuality"					"rare"
-		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_TO_SPECTATORS | DECLARE_PURCHASES_IN_SPEECH"
-		"ItemAliases"					"armour;armor"
-		"AbilityTextureName"			"item_chainmail"
-
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"PurchaseCurrency"		"1" // Custom currency for purchasing this upgrade, 0 for gold, 1 for gems
-			}
-			"02"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"Cost"					"100"
-			}
-		}
-	}
-
-	"item_legion_king_upgrade_attack"
-	{
-		"ID"							"4204"
-		"BaseClass"						"item_datadriven"
-
-		// Item Info
-		//-------------------------------------------------------------------------------------------------------------
-		"ItemCost"						"0"
-		"ItemShopTags"					"king;attack;upgrade;damage"
-		"ItemQuality"					"rare"
-		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_TO_SPECTATORS | DECLARE_PURCHASES_IN_SPEECH"
-		"ItemAliases"					"attack;damage"
-		"AbilityTextureName"			"item_claymore"
-
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"PurchaseCurrency"		"1" // Custom currency for purchasing this upgrade, 0 for gold, 1 for gems
-			}
-			"02"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"Cost"					"100"
+				"Passive"				"1"
+				"IsHidden"				"0"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"	"3"
+				}
 			}
 		}
 	}
