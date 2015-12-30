@@ -19,8 +19,8 @@ function CMapController:Setup()
 			class = "trigger_dota",
 			name = "legion_spawn_zone",
 			team_ids = {
-				[1] = DOTA_TEAM_BADGUYS,
-				[2] = DOTA_TEAM_GOODGUYS,
+				[1] = DOTA_TEAM_GOODGUYS,
+				[2] = DOTA_TEAM_BADGUYS,
 			}
 		},
 		["build_zone"] = {
@@ -31,8 +31,8 @@ function CMapController:Setup()
 			class = "trigger_dota",
 			name = "legion_target_zone",
 			team_ids = {
-				[1] = DOTA_TEAM_BADGUYS,
-				[2] = DOTA_TEAM_GOODGUYS,
+				[1] = DOTA_TEAM_GOODGUYS,
+				[2] = DOTA_TEAM_BADGUYS,
 			}
 		},
 		["king_spawns"] = {
@@ -63,18 +63,47 @@ function CMapController:_StoreGamemodeEntitiesOfClass( dest_table, class_table )
 		local name = string.sub( ent:GetName(), 1, #class_table.name )
 		if name == class_table.name then
 
-			local team = string.split(ent:GetName(), "_")
-			team = tonumber(team[#team])
+			-- Get team and lane info from name
+			local teamlane = string.split(ent:GetName(), "_")
+			teamlane = teamlane[#teamlane]
+
+			local team = nil
+			local lane = nil
+
+			-- Check if team and lane info exist
+			if string.find(teamlane, "#") then
+				
+				-- Exists, split info and use both
+				teamlane = string.split(teamlane, "#")
+				team = tonumber(teamlane[1])
+				lane = tonumber(teamlane[2])
+
+			else
+
+				-- Lane info doesn't exist, use default lane
+				team = tonumber(teamlane)
+				lane = 0
+
+			end
+
 			if team and type(team) == "number" then 
 				
+				-- Find team ID
 				local team_index = class_table.team_ids and class_table.team_ids[team]
 				if team_index == nil then
 					team_index = self._team_ids[team] or DOTA_TEAM_NEUTRALS
 				end
 
+				-- Register lane
+				if lane and lane > 0 then
+					GameRules.LegionDefence:GetLaneController():RegisterLane( lane, team_index )
+				end
+
+				-- Add entity
 				local data = {
 					entity = ent,
 					team = team_index,
+					lane = lane or 0,
 				}
 				table.insert( dest_table, data )
 
