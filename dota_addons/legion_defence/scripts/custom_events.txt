@@ -51,4 +51,15 @@
 		"sCurrency"				"string"
 		"lAmount"				"long"
 	}
+
+	//---------------------------------
+	// Client Only
+	//---------------------------------
+	"show_upcoming_wave_tooltip"
+	{
+	}
+
+	"hide_upcoming_wave_tooltip"
+	{
+	}
 }

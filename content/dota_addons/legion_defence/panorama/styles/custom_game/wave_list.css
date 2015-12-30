@@ -5,10 +5,12 @@
 	vertical-align: top;
 	margin-right: 0px;
 	padding: 8px;
+	width: 100%;
 }
 
 .WavesContainer
 {
+	horizontal-align: center;
 	flow-children: right;
 }
 

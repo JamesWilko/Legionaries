@@ -9,8 +9,8 @@
 		<include src="file://{resources}/scripts/custom_game/waves_list.js" />
 	</scripts>
 
-	<Panel class="WaveListPanel">
-		<Panel class="WavesContainer" id="WavesContainer">
+	<Panel class="WaveListPanel" hittest="false">
+		<Panel class="WavesContainer" id="WavesContainer" hittest="false">
 		</Panel>
 	</Panel>
 
