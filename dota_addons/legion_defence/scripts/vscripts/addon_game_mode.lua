@@ -4,7 +4,6 @@ if CLegionDefence == nil then
 end
 
 require("Utils")
-require("GameUtils")
 require("controllers/CurrencyController")
 require("controllers/MapController")
 require("controllers/WaveController")
@@ -13,6 +12,7 @@ require("controllers/HeroController")
 require("controllers/KingController")
 require("controllers/LaneController")
 require("BuildGrid")
+require("GameUtils")
 
 function Precache( context )
 	--[[
@@ -25,7 +25,7 @@ function Precache( context )
 
 	-- PrecacheResource( "particle_folder", "particles/units/heroes/hero_lina/", context )
 
-	PrecacheResource("particle_folder", "particles/units/heroes/hero_alchemist/", context)
+	PrecacheResource("particle_folder", "particles/currencies/", context)
 
 	PrecacheResource( "model", "models/items/dragon_knight/sword_davion.vmdl", context )
 	PrecacheResource( "model", "models/items/dragon_knight/shield_davion.vmdl", context )

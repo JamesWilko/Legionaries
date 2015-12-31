@@ -40,6 +40,7 @@ CCurrencyController.FOOD_DEFAULT_LIMIT = 20
 CCurrencyController.CURRENCY_DEFAULT_AMOUNT = 0
 CCurrencyController.CURRENCY_DEFAULT_LIMIT = -1
 CCurrencyController.INCOME_THINK_DELAY = 1
+CCurrencyController.SHOW_PARTICLES_FOR_PASSIVE_INCOME = false
 
 function CCurrencyController:Setup()
 
@@ -204,7 +205,7 @@ function CCurrencyController:SetCurrency( sCurrency, hPlayer, iAmount )
 
 end
 
-function CCurrencyController:ModifyCurrency( sCurrency, hPlayer, iAmount )
+function CCurrencyController:ModifyCurrency( sCurrency, hPlayer, iAmount, bSupressParticles )
 
 	if IsServer() then
 
@@ -230,6 +231,20 @@ function CCurrencyController:ModifyCurrency( sCurrency, hPlayer, iAmount )
 		end
 		if data.amount < 0 then
 			data.amount = 0
+		end
+
+		-- Play particles
+		if not bSupressParticles then
+
+			local player = PlayerResource:GetPlayer( player_id )
+			if player then
+				if iAmount < 0 then
+					PlayCurrencyLostParticles( sCurrency, -iAmount, player:GetAssignedHero() )
+				elseif iAmount > 0 then
+					PlayCurrencyGainedParticles( sCurrency, iAmount, player:GetAssignedHero() )
+				end
+			end
+
 		end
 
 		-- Set net table
@@ -402,7 +417,7 @@ function CCurrencyController:OnIncomeThink()
 							-- Add income to currency amounts
 							local immediate_income = math.floor(playerData.income_accrued)
 							playerData.income_accrued = playerData.income_accrued - immediate_income
-							self:ModifyCurrency( currency, player_id, immediate_income )
+							self:ModifyCurrency( currency, player_id, immediate_income, not CCurrencyController.SHOW_PARTICLES_FOR_PASSIVE_INCOME )
 
 							-- Get updated datatable before saving income
 							local updatedData = CustomNetTables:GetTableValue( nettable, tostring(player_id) )

@@ -88,9 +88,6 @@ function sell_unit:ReturnSpawnCostToPlayer()
 		local food_amount = GameRules.LegionDefence:GetUnitController():GetTotalCostOfUnit( self:GetCaster(), CURRENCY_FOOD )
 		GameRules.LegionDefence:GetCurrencyController():ModifyCurrency( CURRENCY_FOOD, self._owner_id, food_amount )
 
-		-- Play gold particles
-		PlayGoldParticlesForCost( gold_amount, self:GetCaster() )
-
 	end
 
 end

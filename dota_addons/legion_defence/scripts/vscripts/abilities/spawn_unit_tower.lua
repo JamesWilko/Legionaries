@@ -167,7 +167,4 @@ function spawn_unit_tower:SpendSpawnCost()
 	end
 	GameRules.LegionDefence:GetCurrencyController():ModifyCurrency( CURRENCY_FOOD, self:GetOwner(), -self._population_cost )
 
-	-- Play particles and sounds
-	PlayGoldParticlesForCost( self._gold_cost, self:GetCaster() )
-
 end

@@ -1,21 +1,76 @@
 
--- Play gold particles and sounds based on price
-function PlayGoldParticlesForCost( lPrice, eUnit )
+local CurrencyParticles = {
+	[CURRENCY_GOLD] = {
+		lost = {
+			particle = "particles/currencies/spent_coins.vpcf",
+			sound = "General.Coins",
+			soundLarge = "General.CoinsBig",
+			amountLarge = 200,
+			numParticles = function(lPrice) return math.ceil(lPrice / 4) end,
+		},
+		gained = {
+			particle = "particles/currencies/returned_coins.vpcf",
+			sound = "General.Coins",
+			soundLarge = "General.CoinsBig",
+			amountLarge = 200,
+			numParticles = function(lPrice) return math.ceil(lPrice / 4) end,
+		}
+	},
+	[CURRENCY_GEMS] = {
+		lost = {
+			particle = "particles/currencies/spent_gems.vpcf",
+			sound = "General.Coins",
+			soundLarge = "General.CoinsBig",
+			amountLarge = 250,
+			numParticles = function(lPrice) return math.ceil(lPrice / 2) end,
+		},
+		gained = {
+			particle = "particles/currencies/returned_gems.vpcf",
+			sound = "General.Coins",
+			soundLarge = "General.CoinsBig",
+			amountLarge = 250,
+			numParticles = function(lPrice) return math.ceil(lPrice / 2) end,
+		}
+	}
+}
 
-	-- Play coin sounds
-	eUnit:EmitSound( lPrice < 200 and "General.Coins" or "General.CoinsBig" )
+function PlayCurrencyLostParticles( sCurrency, lPrice, eUnit )
 
-	local nCoins = ParticleManager:CreateParticle("particles/generic_gameplay/lasthit_coins.vpcf", PATTACH_POINT, eUnit)
-	ParticleManager:SetParticleControl( nCoins, 1, eUnit:GetCenter() )
-	ParticleManager:ReleaseParticleIndex( nCoins )
+	local data = CurrencyParticles[sCurrency] and CurrencyParticles[sCurrency].lost
+	if data then
 
-	if lPrice > 200 then
-		local big_particles = math.floor(lPrice / 200)
-		for i = 0, big_particles - 1 do
-			local nCoins = ParticleManager:CreateParticle("particles/units/heroes/hero_alchemist/alchemist_lasthit_coins.vpcf", PATTACH_POINT, eUnit)
-			ParticleManager:SetParticleControl( nCoins, 1, eUnit:GetCenter() )
-			ParticleManager:ReleaseParticleIndex( nCoins )
-		end
+		eUnit:EmitSound( lPrice < data.amountLarge and data.sound or data.soundLarge )
+
+		local particle = ParticleManager:CreateParticle(data.particle, PATTACH_POINT_FOLLOW, eUnit)
+		ParticleManager:SetParticleControl( particle, 1, eUnit:GetCenter() )
+		ParticleManager:SetParticleControl( particle, 2, Vector(data.numParticles(lPrice), 0, 0) )
+		ParticleManager:SetParticleControl( particle, 3, Vector(0.2, 0.2, 0.2) )
+
+		ParticleManager:SetParticleControlEnt( particle, 4, eUnit, PATTACH_POINT_FOLLOW, "attach_hitloc", eUnit:GetCenter(), true )
+
+		ParticleManager:ReleaseParticleIndex( particle )
+
+	end
+
+end
+
+function PlayCurrencyGainedParticles( sCurrency, lPrice, eUnit )
+
+	local data = CurrencyParticles[sCurrency] and CurrencyParticles[sCurrency].gained
+	if data then
+
+		eUnit:EmitSound( lPrice < data.amountLarge and data.sound or data.soundLarge )
+
+		local particle = ParticleManager:CreateParticle(data.particle, PATTACH_POINT_FOLLOW, eUnit)
+		ParticleManager:SetParticleControl( particle, 1, eUnit:GetCenter() )
+		ParticleManager:SetParticleControl( particle, 2, Vector(data.numParticles(lPrice), 0, 0) )
+		ParticleManager:SetParticleControl( particle, 3, Vector(0.2, 0.2, 0.2) )
+		ParticleManager:SetParticleControl( particle, 4, eUnit:GetCenter() + Vector(0, 0, 100) )
+
+		ParticleManager:SetParticleControlEnt( particle, 4, eUnit, PATTACH_POINT_FOLLOW, "attach_hitloc", eUnit:GetCenter(), true )
+
+		ParticleManager:ReleaseParticleIndex( particle )
+
 	end
 
 end

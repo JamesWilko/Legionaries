@@ -111,6 +111,5 @@ function upgrade_unit:SpendGoldCost()
 	end
 	if GameRules.LegionDefence and self._owner_id ~= nil then
 		GameRules.LegionDefence:GetCurrencyController():ModifyCurrency( CURRENCY_GOLD, self._owner_id, -self._gold_cost )
-		PlayGoldParticlesForCost( self._gold_cost, self:GetCaster() )
 	end
 end
