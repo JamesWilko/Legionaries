@@ -30,10 +30,6 @@
 		GameUI.SetDefaultUIEnabled( DotaDefaultUIElement_t.DOTA_DEFAULT_UI_INVENTORY_GOLD, false );
 		GameUI.SetDefaultUIEnabled( DotaDefaultUIElement_t.DOTA_DEFAULT_UI_SHOP_SUGGESTEDITEMS, false );
 		*/
-
-		GameUI.SetDefaultUIEnabled( DotaDefaultUIElement_t.DOTA_DEFAULT_UI_TOP_TIMEOFDAY, false );
-		GameUI.SetDefaultUIEnabled( DotaDefaultUIElement_t.DOTA_DEFAULT_UI_TOP_HEROES, false );
-
 	</script>
 
 	<Panel>
@@ -42,10 +38,10 @@
 		<!-- <CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/inventory.xml" /> -->
 		<!-- <CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/buff_list.xml" /> -->
 
-		<CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/currencies.xml" />
-		<CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/king_upgrades.xml" />
-		<CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/wave_list.xml" />
 		<CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/hud_main.xml" />
+		<CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/wave_list.xml" />
+		<CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/sidebar_left.xml" />
+		<CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/tooltip.xml" />
 
 	</Panel>
 

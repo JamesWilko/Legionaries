@@ -1,0 +1,30 @@
+<root>
+
+	<styles>
+		<include src="file://{resources}/styles/dotastyles.css" />
+		<include src="file://{resources}/styles/custom_game/tooltip.css" />
+		<include src="file://{resources}/styles/custom_game/colours.css" />
+	</styles>
+
+	<scripts>
+		<include src="file://{resources}/scripts/custom_game/tooltip.js" />
+	</scripts>
+
+	<Panel class="TooltipContainer" hittest="false">
+
+		<Panel id="Tooltip" class="TooltipPanel" hittest="false">
+
+			<Label class="TooltipTitle" id="TooltipTitle" text="Upgrade Attack" hittest="false"/>
+			<Label class="TooltipDesc" id="TooltipDesc" text="Upgrades the king's attack to deal more damage with every hit." hittest="false"/>
+			<Panel class="Spacer" hittest="false"/>
+
+			<Panel class="TooltipValue" id="TooltipValue" hittest="false">
+				<Label text="ATTACK INCREASE:" id="TooltipValueName" hittest="false"/>
+				<Label text="50" id="TooltipValueValue" hittest="false"/>
+			</Panel>
+
+		</Panel>
+
+	</Panel>
+
+</root>

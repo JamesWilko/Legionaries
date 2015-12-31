@@ -10,8 +10,7 @@
 	</scripts>
 
 	<Panel class="WaveListPanel" hittest="false">
-		<Panel class="WavesContainer" id="WavesContainer" hittest="false">
-		</Panel>
+		<Panel class="WavesContainer" id="WavesContainer" hittest="false" />
 	</Panel>
 
 </root>

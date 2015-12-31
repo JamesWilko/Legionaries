@@ -1,12 +1,16 @@
+
 .KingUpgradesPanel
 {
 	horizontal-align: left;
-	vertical-align: top;
-	flow-children: down;
+	vertical-align: center;
 	border: 1px solid black;
 	background-color: #272823;
 	padding: 8px;
-	position: 0px 164px 0px;
+}
+
+.UpgradesList
+{
+	flow-children: down;
 }
 
 .UpgradePanel
@@ -27,7 +31,7 @@
 	border: 1px solid white;
 }
 
-#UpgradeButton
+.UpgradeButton
 {
 	vertical-align: center;
 	horizontal-align: center;

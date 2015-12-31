@@ -5,6 +5,7 @@
 
 	<scripts>
 		<include src="file://{resources}/scripts/custom_game/legion_mouse_control.js" />
+		<include src="file://{resources}/scripts/custom_game/disable_default_ui.js" />
 	</scripts>
 
 	<Panel class="DemoHud" hittest="false">

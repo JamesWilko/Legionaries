@@ -1,0 +1,26 @@
+<root>
+
+	<styles>
+		<!-- <include src="file://{resources}/styles/dotastyles.css" /> -->
+		<include src="file://{resources}/styles/custom_game/king_upgrades.css" />
+	</styles>
+
+	<scripts>
+		<include src="file://{resources}/scripts/custom_game/king_upgrade_item.js" />
+	</scripts>
+
+	<Panel class="UpgradePanel">
+		<Button class="UpgradeButton"
+						onmouseover="ShowTooltip( $.GetContextPanel() )"
+						onmouseout="HideTooltip( $.GetContextPanel() )"
+						onactivate="PurchaseUpgrade( $.GetContextPanel() )"
+						>
+				<DOTAItemImage hittest="false" class="UpgradeImage" id="UpgradeImage" itemname="item_claymore" />
+		</Button>
+		<Panel class="UpgradeCost" hittest="false">
+			<Image class="UpgradeCostIcon" id="CostImage" src="file://{images}/custom_game/icons/icon_gems_small.png" hittest="false" />
+			<Label class="UpgradeCostText" id="CostText" text="??" hittest="false" />
+		</Panel>
+	</Panel>
+
+</root>

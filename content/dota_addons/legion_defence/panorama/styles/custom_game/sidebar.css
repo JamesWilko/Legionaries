@@ -1,0 +1,52 @@
+
+.Parent
+{
+	width: 100%;
+	height: 100%;
+}
+
+.Sidebar
+{
+	height: 100%;
+}
+
+.ChildList
+{
+}
+
+.Left
+{
+	horizontal-align: left;
+	margin-left: -1px;
+}
+
+.Right
+{
+	horizontal-align: left;
+	margin-right: -1px;
+}
+
+.Bottom
+{
+	vertical-align: bottom;
+}
+
+.Top
+{
+	vertical-align: top;
+}
+
+.CenterVertical
+{
+	vertical-align: center;
+}
+
+.FlowDown
+{
+	flow-children: down;
+}
+
+.VerticalSpacer
+{
+	margin-top: 8px;
+}
