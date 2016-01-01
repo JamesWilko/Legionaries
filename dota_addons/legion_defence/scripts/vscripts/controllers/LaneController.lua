@@ -72,6 +72,13 @@ function CLaneController:OnPlayerPickedHero( event )
 			if lane.player == nil and lane.team == playerTeamId then
 				lane.player = playerId
 				print(string.format("%i player assigned to lane %i", playerId, id))
+
+				local data = {
+					["lPlayer"] = playerId,
+					["lLane"] = id,
+				}
+				FireGameEvent( "legion_player_assigned_lane", data )
+
 				break
 			end
 		end
