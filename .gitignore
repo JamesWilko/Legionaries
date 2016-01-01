@@ -1,0 +1,8 @@
+*.vtex_c
+*.vxml_c
+*.vcss_c
+*.fla
+*.as
+*.vmat_c
+*.vjs_c
+Thumbs.db
