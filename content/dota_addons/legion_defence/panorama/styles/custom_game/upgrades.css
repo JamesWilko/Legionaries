@@ -1,0 +1,57 @@
+
+.UpgradePanel
+{
+	horizontal-align: center;
+	border: 1px solid black;
+	height: 1000px;
+	margin-right: 8px;
+	padding: 8px;
+	flow-children: down;
+}
+
+.Upgrade
+{
+	width: 80px;
+	height: 60px;
+	background-color: #000000;
+	border: 1px solid black;
+}
+
+.Upgrade:hover
+{
+	background-color: #4c0000;
+	border: 1px solid white;
+}
+
+.UpgradeButton
+{
+	width: 80px;
+	height: 60px;
+	saturation: 0.9;
+	border: 1px solid black;
+	horizontal-align: center;
+}
+
+.UpgradeButton:hover
+{
+	saturation: 1.0;
+	border: 1px solid white;
+}
+
+.UpgradeText
+{
+	horizontal-align: center;
+	font-family: Radiance,FZLanTingHei-R-GBK,TH Sarabun New,Gulim,MingLiU;
+	font-size: 20px;
+	color: white;
+	text-shadow: 2px 2px 8px 3.0 #000000ff;
+}
+
+.UpgradeValue
+{
+	horizontal-align: center;
+	font-family: Radiance,FZLanTingHei-R-GBK,TH Sarabun New,Gulim,MingLiU;
+	font-size: 28px;
+	color: yellow;
+	text-shadow: 2px 2px 8px 3.0 #000000ff;
+}

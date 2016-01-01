@@ -10,6 +10,14 @@
 	height: 100%;
 }
 
+.InventoryBar
+{
+	height: 164px;
+	width: 29.5%;
+	background-color: #222222;
+	padding: 8px;
+}
+
 .ChildList
 {
 }
@@ -22,7 +30,7 @@
 
 .Right
 {
-	horizontal-align: left;
+	horizontal-align: right;
 	margin-right: -1px;
 }
 
@@ -44,6 +52,11 @@
 .FlowDown
 {
 	flow-children: down;
+}
+
+.FlowRight
+{
+	flow-children: right;
 }
 
 .VerticalSpacer
