@@ -23,12 +23,14 @@
 	height: 60px;
 	background-color: #000000;
 	border: 1px solid black;
+	saturation: 0.9;
 }
 
 .UpgradePanel:hover
 {
 	background-color: #4c0000;
 	border: 1px solid white;
+	saturation: 1.0;
 }
 
 .UpgradeButton
