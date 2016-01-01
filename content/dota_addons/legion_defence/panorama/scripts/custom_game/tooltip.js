@@ -4,7 +4,7 @@ var m_TooltipValueStyles = [];
 var m_TooltipOffset = [14, 12];
 
 var m_OneFrame = 1.0 / 60.0;
-var m_ScreenHeight;
+var m_ScreenSize = [];
 var m_PanoramaHeight = 1080.0;
 var m_PanoramaScaling;
 
@@ -54,9 +54,24 @@ function UpdateTooltipPosition()
 {
 	if(m_Tooltip)
 	{
+		// Put tooltip at mouse position
 		var mousePos = GameUI.GetCursorPosition();
-		m_Tooltip.style.marginLeft = (mousePos[0] + m_TooltipOffset[0]) / m_PanoramaScaling + "px";
-		m_Tooltip.style.marginTop = (mousePos[1] + m_TooltipOffset[1]) / m_PanoramaScaling + "px";
+		var posX = mousePos[0] + m_TooltipOffset[0];
+		var posY = mousePos[1] + m_TooltipOffset[1];
+
+		// Flip tooltip if it's too close to an edge
+		if(posX + m_Tooltip.desiredlayoutwidth > $.GetContextPanel().GetParent().actuallayoutwidth)
+		{
+			posX -= m_Tooltip.desiredlayoutwidth;
+		}
+		if(posY + m_Tooltip.desiredlayoutwidth > $.GetContextPanel().GetParent().actuallayoutheight)
+		{
+			posY -= m_Tooltip.desiredlayoutheight;
+		}
+
+		// Move tooltip to correct position with scaling
+		m_Tooltip.style.marginLeft = posX / m_PanoramaScaling + "px";
+		m_Tooltip.style.marginTop = posY / m_PanoramaScaling + "px";
 	}
 	$.Schedule(m_OneFrame, UpdateTooltipPosition);
 }
@@ -64,8 +79,9 @@ function UpdateTooltipPosition()
 function SetupTooltip()
 {
 	// Calculate screen scaling to set positions correctly
-	m_ScreenHeight = m_Tooltip.GetParent().actuallayoutheight;
-	m_PanoramaScaling = m_ScreenHeight / m_PanoramaHeight;
+	m_ScreenSize[0] = m_Tooltip.GetParent().actuallayoutwidth;
+	m_ScreenSize[1] = m_Tooltip.GetParent().actuallayoutheight;
+	m_PanoramaScaling = m_ScreenSize[1] / m_PanoramaHeight;
 
 	UpdateTooltipPosition();
 }

@@ -18,6 +18,16 @@
 	max-width: 300px;
 }
 
+.Right
+{
+	horizontal-align: right;
+}
+
+.Bottom
+{
+	vertical-align: bottom;
+}
+
 .TooltipTitle
 {
 	text-transform: uppercase;
