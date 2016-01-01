@@ -279,7 +279,7 @@ function CCurrencyController:GetCurrencyAmount( sCurrency, hPlayer )
 
 end
 
-function CCurrencyController:CanAfford( sCurrency, hPlayer, iAmount )
+function CCurrencyController:CanAfford( sCurrency, hPlayer, iAmount, bPlaySound )
 
 	if IsServer() then
 
@@ -296,7 +296,13 @@ function CCurrencyController:CanAfford( sCurrency, hPlayer, iAmount )
 			data = self:SetupNetTableDataForPlayer( sCurrency, player_id )
 		end
 
-		return (iAmount <= data.amount)
+		-- Play sound
+		local canAfford = iAmount <= data.amount
+		if not canAfford and bPlaySound then
+			EmitSoundOnClient("General.InvalidTarget_Invulnerable", PlayerResource:GetPlayer(player_id))	
+		end
+
+		return canAfford
 
 	end
 

@@ -139,7 +139,7 @@ function CKingController.HandleOnUpgradePurchased( iPlayerId_Wrong, eventArgs )
 
 	-- Check if can afford upgrade
 	local currency_controller = GameRules.LegionDefence:GetCurrencyController()
-	if not currency_controller:CanAfford( upgradeTable.currency, iPlayerId, cost ) then
+	if not currency_controller:CanAfford( upgradeTable.currency, iPlayerId, cost, true ) then
 		return false, "could_not_affort"
 	end
 
