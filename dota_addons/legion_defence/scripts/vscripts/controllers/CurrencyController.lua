@@ -31,7 +31,7 @@ CCurrencyController.GOLD_DEFAULT_INCOME = 0
 CURRENCY_GEMS = "CurrencyGems"
 CCurrencyController.GEMS_DEFAULT_AMOUNT = 80
 CCurrencyController.GEMS_DEFAULT_LIMIT = 200
-CCurrencyController.GEMS_DEFAULT_INCOME = 20
+CCurrencyController.GEMS_DEFAULT_INCOME = 0
 
 CURRENCY_FOOD = "CurrencyFood"
 CCurrencyController.FOOD_DEFAULT_AMOUNT = 0
@@ -399,6 +399,35 @@ end
 ---------------------------------------
 -- Incomes
 ---------------------------------------
+function CCurrencyController:SetCurrencyIncome( sCurrency, hPlayer, iNewIncome )
+
+	if IsServer() then
+
+		assert( self._currency_types[sCurrency] ~= nil, "Currencies must be registered before they can be used!" )
+
+		local player_id = self:GetPlayerId( hPlayer )
+
+		-- Get current currency
+		local nettable = self:GetCurrencyNetTable( sCurrency )
+		local data = CustomNetTables:GetTableValue( nettable, tostring(player_id) )
+
+		-- Handle nil data
+		if data == nil then
+			data = self:SetupNetTableDataForPlayer( sCurrency, player_id )
+		end
+
+		-- Set currency income
+		data.income = iNewIncome
+		
+		-- Set net table
+		CustomNetTables:SetTableValue( nettable, tostring(player_id), data )
+
+		return data.income
+
+	end
+
+end
+
 function CCurrencyController:OnIncomeThink()
 
 	if IsServer() then

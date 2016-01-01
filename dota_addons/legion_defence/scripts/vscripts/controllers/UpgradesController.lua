@@ -38,7 +38,7 @@ CUpgradeController.UPGRADES =
 		default = 1,
 		max_level = ((CFoodController.MAXIMUM_FOOD - CFoodController.DEFAULT_FOOD) / CFoodController.FOOD_PER_LEVEL) + 1,
 		display_image = "item_tango",
-		value = 5,
+		value = CFoodController.FOOD_PER_LEVEL,
 		func = function( playerId, upgradeLevel, levelsAdded )
 			GameRules.LegionDefence:GetFoodController():OnPurchasedFoodUpgrade( playerId, upgradeLevel, levelsAdded )
 		end
@@ -52,10 +52,12 @@ CUpgradeController.UPGRADES =
 			}
 		},
 		default = 1,
-		max_level = 7,
+		max_level = ((CMineController.MAXIMUM_MINERS - CMineController.DEFAULT.miners) / CMineController.UPGRADE_MINERS) + 1,
 		display_image = "item_boots",
-		value = 1,
-		func = function( playerId, upgradeLevel, levelsAdded ) end
+		value = CMineController.UPGRADE_MINERS,
+		func = function( playerId, upgradeLevel, levelsAdded )
+			GameRules.LegionDefence:GetMineController():OnPurchasedMinerUpgrade( playerId, upgradeLevel, levelsAdded )
+		end
 	},
 	[CUpgradeController.UPGRADE_MINER_SPEED] =
 	{
@@ -66,10 +68,12 @@ CUpgradeController.UPGRADES =
 			}
 		},
 		default = 1,
-		max_level = 20,
+		max_level = ((CMineController.MAXIMUM_MINING_SPEED - CMineController.DEFAULT.income_per_miner) / CMineController.UPGRADE_MINING_SPEED) + 1,
 		display_image = "item_mithril_hammer",
-		value = 0.25,
-		func = function( playerId, upgradeLevel, levelsAdded ) end
+		value = CMineController.UPGRADE_MINING_SPEED,
+		func = function( playerId, upgradeLevel, levelsAdded )
+			GameRules.LegionDefence:GetMineController():OnPurchasedMiningSpeedUpgrade( playerId, upgradeLevel, levelsAdded )
+		end
 	}
 }
 
