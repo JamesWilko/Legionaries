@@ -16,9 +16,9 @@ function OnKingUpgradeDataChanged()
 	// Remove old panels
 	if(m_UpgradePanels)
 	{
-		for(var i = 0; i < m_UpgradePanels.length; ++i)
+		for(var key in m_UpgradePanels)
 		{
-			m_UpgradePanels[i].GetParent().RemoveAndDeleteChildren()
+			m_UpgradePanels[key].RemoveAndDeleteChildren()
 		}
 		m_UpgradePanels = [];
 	}
@@ -29,7 +29,7 @@ function OnKingUpgradeDataChanged()
 		var upgrade = m_KingUpgrades[key];
 		var panel = $.CreatePanel( "Panel", $("#UpgradesList"), upgrade );
 		panel.BLoadLayout( "file://{resources}/layout/custom_game/king_upgrade_item.xml", true, false );
-		m_UpgradePanels[upgrade] = panel;
+		m_UpgradePanels[upgrade] = panel.GetParent();
 	}
 }
 
