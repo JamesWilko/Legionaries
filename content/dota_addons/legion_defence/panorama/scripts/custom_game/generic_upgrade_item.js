@@ -13,6 +13,15 @@ function ShowTooltip( panel )
 {
 	var upgradesData = CustomNetTables.GetTableValue( "Upgrades", "upgrades" );
 	var upgradeData = upgradesData[panel.id.toString()];
+	var upgradeLevelData = CustomNetTables.GetTableValue( "Upgrades", panel.id.toString() );
+
+	var max_level = false;
+	if(upgradeLevelData &&
+		upgradeLevelData[Players.GetLocalPlayer()] &&
+		upgradeLevelData[Players.GetLocalPlayer()] == upgradeData["max_level"])
+	{
+		max_level = true;
+	}
 
 	var title = $.Localize(panel.id);
 	var desc = $.Localize(panel.id + "_Description");
@@ -23,25 +32,37 @@ function ShowTooltip( panel )
 	var data = {
 		"panelId" : panel.id,
 		"title" : title.toUpperCase(),
-		"desc" : desc,
-		"value-1-name" : value_name,
-		"value-1-value" : value,
-		"value-1-value-color" : "yellow",
+		"desc" : desc
 	};
 
-	// Add cost information
-	var i = 2;
-	for(var key in upgradeData["cost"])
+	if(!max_level)
 	{
-		var costData = upgradeData["cost"][key];
-		var currency = costData["currency"];
-		var amount = costData["amount"];
+		// Add value info
+		data["value-1-name"] = value_name;
+		data["value-1-value"] = value;
+		data["value-1-value-color"] = "yellow";
 
-		data["value-" + i + "-name"] = $.Localize(m_CurrencyLocals[currency] + "_cost");
-		data["value-" + i + "-value"] = costData["amount"];
-		data["value-" + i + "-value-color"] = m_CurrencyColours[currency];
+		// Add cost information
+		var i = 2;
+		for(var key in upgradeData["cost"])
+		{
+			var costData = upgradeData["cost"][key];
+			var currency = costData["currency"];
+			var amount = costData["amount"];
 
-		i++;
+			data["value-" + i + "-name"] = $.Localize(m_CurrencyLocals[currency] + "_cost");
+			data["value-" + i + "-value"] = costData["amount"];
+			data["value-" + i + "-value-color"] = m_CurrencyColours[currency];
+
+			i++;
+		}
+	}
+	else
+	{
+		// Show max level info
+		data["value-1-name"] = "";
+		data["value-1-value"] = $.Localize("legion_upgrade_max_level");
+		data["value-1-value-color"] = "red";
 	}
 
 	// Send event

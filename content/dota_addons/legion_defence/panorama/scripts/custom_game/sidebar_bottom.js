@@ -33,6 +33,10 @@ function OnUpgradesUpdated()
 			if(upgradeLevelData && upgradeLevelData[Players.GetLocalPlayer()])
 			{
 				upgradeLevel = upgradeLevelData[Players.GetLocalPlayer()];
+				if(upgradeLevel == upgrade["max_level"])
+				{
+					upgradeLevel = $.Localize("legion_upgrade_max_level_short");
+				}
 			}
 
 			panel.FindChild("Text").text = $.Localize(key + "_Short");
