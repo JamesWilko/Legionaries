@@ -26,7 +26,7 @@ function ShowTooltip( panel )
 		var isBoss = boss != undefined && boss == "true";
 		if(isBoss)
 		{
-			boss = $.Localize("legion_boss_wave");
+			boss = $.Localize("legion_boss_wave").toUpperCase();
 		}
 	}
 
