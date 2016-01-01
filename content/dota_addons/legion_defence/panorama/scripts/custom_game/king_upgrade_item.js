@@ -65,9 +65,9 @@ function ShowTooltip( panel )
 		"panelId" : panel.id,
 		"title" : title.toUpperCase(),
 		"desc" : desc,
-		"value-name" : value_name.toUpperCase(),
-		"value-value" : value,
-		"value-value-color" : "yellow",
+		"value-1-name" : value_name.toUpperCase(),
+		"value-1-value" : value,
+		"value-1-value-color" : "yellow",
 	};
 	GameEvents.SendEventClientSide("show_legion_tooltip", data );
 }

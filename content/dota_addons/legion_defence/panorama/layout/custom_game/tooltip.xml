@@ -18,9 +18,24 @@
 			<Label class="TooltipDesc" id="TooltipDesc" text="Upgrades the king's attack to deal more damage with every hit." hittest="false"/>
 			<Panel class="Spacer" hittest="false"/>
 
-			<Panel class="TooltipValue" id="TooltipValue" hittest="false">
-				<Label text="ATTACK INCREASE:" id="TooltipValueName" hittest="false"/>
-				<Label text="50" id="TooltipValueValue" hittest="false"/>
+			<Panel class="TooltipValue" id="TooltipValue1" hittest="false">
+				<Label text="VALUE ONE:" id="TooltipValue1Name" hittest="false"/>
+				<Label text="1" id="TooltipValue1Value" hittest="false"/>
+			</Panel>
+
+			<Panel class="TooltipValue" id="TooltipValue2" hittest="false">
+				<Label text="VALUE TWO:" id="TooltipValue2Name" hittest="false"/>
+				<Label text="2" id="TooltipValue2Value" hittest="false"/>
+			</Panel>
+
+			<Panel class="TooltipValue" id="TooltipValue3" hittest="false">
+				<Label text="VALUE THREE:" id="TooltipValue3Name" hittest="false"/>
+				<Label text="3" id="TooltipValue3Value" hittest="false"/>
+			</Panel>
+
+			<Panel class="TooltipValue" id="TooltipValue4" hittest="false">
+				<Label text="VALUE FOUR:" id="TooltipValue4Name" hittest="false"/>
+				<Label text="4" id="TooltipValue4Value" hittest="false"/>
 			</Panel>
 
 		</Panel>

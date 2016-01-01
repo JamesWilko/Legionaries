@@ -34,12 +34,12 @@ function ShowTooltip( panel )
 		"panelId" : panel.id,
 		"title" : title,
 		"desc" : desc,
-		"value-name" : "",
+		"value-1-name" : "",
 	};
 	if(boss)
 	{
-		data["value-value"] = boss;
-		data["value-value-color"] = "red";
+		data["value-1-value"] = boss;
+		data["value-1-value-color"] = "red";
 	}
 	GameEvents.SendEventClientSide("show_legion_tooltip", data );
 }

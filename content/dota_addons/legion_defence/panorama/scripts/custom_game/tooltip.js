@@ -2,6 +2,7 @@
 var m_Tooltip;
 var m_TooltipValueStyles = [];
 var m_TooltipOffset = [14, 12];
+var m_TooltipValues = 4;
 
 var m_OneFrame = 1.0 / 60.0;
 var m_ScreenSize = [];
@@ -13,33 +14,50 @@ function ShowTooltip( data )
 	m_Tooltip.FindChild("TooltipTitle").text = data["title"];
 	m_Tooltip.FindChild("TooltipDesc").text = data["desc"];
 
-	if(data["value-name"] || data["value-value"])
+	// Remove styles
+	for(var key in m_TooltipValueStyles)
 	{
-		var value = m_Tooltip.FindChild("TooltipValue");
-		var valueText = value.FindChild("TooltipValueName");
-		var valueValue = value.FindChild("TooltipValueValue");
-
-		value.visible = true;
-		valueText.text = data["value-name"];
-		valueValue.text = data["value-value"];
-
-		// Remove styles
-		for(var i = 0; i < m_TooltipValueStyles.length; ++i)
-		{
-			valueValue.RemoveClass(m_TooltipValueStyles[i]);
-		}
-
-		// Add new styles
-		if(data["value-value-color"])
-		{
-			var col = data["value-value-color"];
-			valueValue.AddClass( col );
-			m_TooltipValueStyles.push( col );
-		}
+		var childId = "TooltipValue" + key;
+		var childValueId = "TooltipValue" + key + "Value";
+		var value = m_Tooltip.FindChild(childId);
+		var valueValue = value.FindChild(childValueId);
+		valueValue.RemoveClass( m_TooltipValueStyles[key] );
 	}
-	else
+	m_TooltipValueStyles = [];
+
+	// Process values
+	for(var i = 1; i <= m_TooltipValues; ++i)
 	{
-		m_Tooltip.FindChild("TooltipValue").visible = false;
+		var idName = "value-" + i + "-name";
+		var idValue = "value-" + i + "-value";
+		var idColor = "value-" + i + "-value-color";
+
+		var childId = "TooltipValue" + i;
+		var childNameId = "TooltipValue" + i + "Name";
+		var childValueId = "TooltipValue" + i + "Value";
+
+		if(data[idName] || data[idValue])
+		{
+			var value = m_Tooltip.FindChild(childId);
+			var valueText = value.FindChild(childNameId);
+			var valueValue = value.FindChild(childValueId);
+
+			value.visible = true;
+			valueText.text = data[idName];
+			valueValue.text = data[idValue];
+
+			// Add new styles
+			if(data[idColor])
+			{
+				var col = data[idColor];
+				valueValue.AddClass( col );
+				m_TooltipValueStyles[i] = col;
+			}
+		}
+		else
+		{
+			m_Tooltip.FindChild(childId).visible = false;
+		}
 	}
 
 	m_Tooltip.visible = true;
