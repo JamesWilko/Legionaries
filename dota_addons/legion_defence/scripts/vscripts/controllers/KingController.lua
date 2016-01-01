@@ -3,6 +3,18 @@ if CKingController == nil then
 	CKingController = class({})
 end
 
+function CLegionDefence:SetupKingController()
+	self.king_controller = CKingController()
+	self.king_controller:Setup()
+end
+
+function CLegionDefence:GetKingController()
+	return self.king_controller
+end
+
+---------------------------------------
+-- King Controller
+---------------------------------------
 CKingController.KING_CLASSES = {
 	[1] = "npc_legion_king_radiant",
 	[2] = "npc_legion_king_radiant",
@@ -20,24 +32,28 @@ CKingController.UPGRADES = {
 		per_level = 500,
 		cost = 80,
 		currency = CURRENCY_GEMS,
+		icon = "item_vitality_booster",
 		func = function(controller, hPlayer, hKing) controller:UpgradeHealth(hPlayer, hKing) end
 	},
 	[CKingController.KEY_REGEN] = {
 		per_level = 2,
 		cost = 80,
 		currency = CURRENCY_GEMS,
+		icon = "item_ring_of_regen",
 		func = function(controller, hPlayer, hKing) controller:UpgradeRegen(hPlayer, hKing) end
 	},
 	[CKingController.KEY_ARMOUR] = {
 		per_level = 2,
 		cost = 80,
 		currency = CURRENCY_GEMS,
+		icon = "item_platemail",
 		func = function(controller, hPlayer, hKing) controller:UpgradeArmour(hPlayer, hKing) end
 	},
 	[CKingController.KEY_ATTACK] = {
 		per_level = 25,
 		cost = 80,
 		currency = CURRENCY_GEMS,
+		icon = "item_claymore",
 		func = function(controller, hPlayer, hKing) controller:UpgradeAttack(hPlayer, hKing) end
 	},
 	[CKingController.KEY_HEAL] = {
@@ -45,19 +61,11 @@ CKingController.UPGRADES = {
 		cost = { default = 0 },
 		display_cost = "x1",
 		currency = CURRENCY_GEMS,
+		icon = "item_cheese",
 		func = function(controller, hPlayer, hKing) controller:InstaHealKing(hPlayer, hKing) end
 	}
 }
 CKingController.MAXIMUM_HEALS_PER_PLAYER = 1
-
-function CLegionDefence:SetupKingController()
-	self.king_controller = CKingController()
-	self.king_controller:Setup()
-end
-
-function CLegionDefence:GetKingController()
-	return self.king_controller
-end
 
 function CKingController:Setup()
 
@@ -109,12 +117,11 @@ end
 ---------------------------------------
 --	King Item Upgrades
 ---------------------------------------
-function CKingController.HandleOnUpgradePurchased( iPlayerId, eventArgs )
+function CKingController.HandleOnUpgradePurchased( iPlayerId_Wrong, eventArgs )
 
 	local self = GameRules.LegionDefence:GetKingController()
+	local iPlayerId = eventArgs["PlayerID"]
 	local upgradeTable = CKingController.UPGRADES[eventArgs.sUpgradeId]
-
-	iPlayerId = iPlayerId - 1
 
 	-- Get upgrade price
 	local cost = upgradeTable.cost
