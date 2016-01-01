@@ -173,11 +173,7 @@ end
 ---------------------------------------
 -- Unit Costs
 ---------------------------------------
-function CUnitController:AddCostToUnit( hUnit, sCurrency, lCost, hParentUnit )
-
-	if self._wave_controller == nil then
-		self._wave_controller = GameRules.LegionDefence:GetWaveController()
-	end
+function CUnitController:TransferCostsToUnit( hUnit, hParentUnit )
 
 	hUnit._total_costs = hUnit._total_costs or {}
 
@@ -188,6 +184,16 @@ function CUnitController:AddCostToUnit( hUnit, sCurrency, lCost, hParentUnit )
 		end
 		hParentUnit._total_costs = nil
 	end
+
+end
+
+function CUnitController:AddCostToUnit( hUnit, sCurrency, lCost )
+
+	if self._wave_controller == nil then
+		self._wave_controller = GameRules.LegionDefence:GetWaveController()
+	end
+
+	hUnit._total_costs = hUnit._total_costs or {}
 
 	-- Add cost and current wave to unit
 	local cost = {

@@ -59,15 +59,24 @@ function modifier_upgrade_unit_think:OnIntervalThink()
 			hUnit:StartGesture( ACT_DOTA_VICTORY )
 
 			-- Get upgrade costs
-			local gold_cost = self:GetAbility():GetSpecialValueFor( "GoldCost" )
-			local food_cost = cUnitController:GetTotalCostOfUnit( self:GetCaster(), CURRENCY_FOOD )
+			local gold_cost = self:GetAbility():GetSpecialValueFor( "GoldCost" ) or 0
+			local gem_cost = self:GetAbility():GetSpecialValueFor( "GemsCost" ) or 0
+			local food_cost = self:GetAbility():GetSpecialValueFor( "FoodCost" ) or 0
 			
-			-- Transfer gold cost to new unit
-			cUnitController:AddCostToUnit( hUnit, CURRENCY_GOLD, gold_cost, self:GetCaster() )
+			-- Transfer costs to new unit
+			cUnitController:TransferCostsToUnit( hUnit, self:GetCaster() )
 
-			-- Transfer population cost to new unit
-			cUnitController:AddCostToUnit( hUnit, CURRENCY_FOOD, food_cost, self:GetCaster() )
-			
+			-- Add costs to unit
+			if gold_cost > 0 then
+				cUnitController:AddCostToUnit( hUnit, CURRENCY_GOLD, gold_cost, self:GetCaster() )
+			end
+			if gem_cost > 0 then
+				cUnitController:AddCostToUnit( hUnit, CURRENCY_GEMS, gem_cost, self:GetCaster() )
+			end
+			if food_cost > 0 then
+				cUnitController:AddCostToUnit( hUnit, CURRENCY_FOOD, food_cost, self:GetCaster() )
+			end
+
 			-- Remove and unregister old unit
 			cUnitController:UnregisterUnit( self:GetCaster() )
 			UTIL_Remove( self:GetCaster() )
