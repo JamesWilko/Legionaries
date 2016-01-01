@@ -33,8 +33,9 @@ function Precache( context )
 	PrecacheResource( "model", "models/items/dragon_knight/sword_davion.vmdl", context )
 	PrecacheResource( "model", "models/items/dragon_knight/shield_davion.vmdl", context )
 
-	-- King Units
-	PrecacheUnitByNameSync( "npc_dota_hero_omniknight", context )
+	PrecacheUnitByNameSync( "npc_dota_hero_omniknight", context ) 	-- Radiant King Unit
+	PrecacheUnitByNameSync( "npc_dota_hero_doom", context ) 		-- Dire King Unit
+	PrecacheUnitByNameSync( "npc_dota_hero_dazzle", context ) 		-- Miner Unit
 
 	PrecacheUnitByNameSync( "npc_dota_hero_clinkz", context )
 	PrecacheUnitByNameSync( "npc_dota_hero_dragon_knight", context )
@@ -44,6 +45,10 @@ function Precache( context )
 	PrecacheUnitByNameSync( "npc_dota_hero_wisp", context )
 
 	PrecacheUnitByNameSync( "npc_dota_furion_treant", context )
+
+	-- Miner particles
+	PrecacheResource( "particle", "particles/units/heroes/hero_chen/chen_teleport_flash.vpcf", context )
+	PrecacheResource( "particle", "particles/econ/items/puck/puck_alliance_set/puck_illusory_orb_launch_aproset.vpcf", context )
 
 end
 

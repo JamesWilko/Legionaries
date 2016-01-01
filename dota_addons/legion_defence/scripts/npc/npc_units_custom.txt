@@ -89,6 +89,69 @@
 	}
 
 	//-------------------------------------------------------------------------
+	// Miner Units
+	//-------------------------------------------------------------------------
+	"npc_legion_miner"
+	{
+		// General
+		//----------------------------------------------------------------
+		"BaseClass"             "npc_dota_creature"
+		"Model"                 "models/heroes/dazzle/dazzle.mdl"
+		"ModelScale"            "0.8"
+		"SoundSet"              "Hero_Dazzle"
+		"GameSoundsFile"        "scripts/game_sounds_heroes/game_sounds_dazzle.txt"
+
+		// Status
+		//----------------------------------------------------------------
+		"Level"                 "1"
+		"StatusHealth"          "100"
+		"StatusHealthRegen"     "0"
+		"StatusMana"            "0"
+		"StatusManaRegen"       "0"
+		"HasInventory"          "0"
+		"HealthBarOffset"       "-2000"
+
+		// Stats
+		//----------------------------------------------------------------
+		"ArmorPhysical"         "2"
+		"MagicalResistance"     "0"
+		"AttackCapabilities"    "DOTA_UNIT_CAP_NO_ATTACK"
+		"AttackDamageType"      "DAMAGE_TYPE_ArmorPhysical"
+		"AttackDamageMin"       "0"
+		"AttackDamageMax"       "0"
+		"AttackRate"            "1.0"
+		"AttackAnimationPoint"  "0.5"
+		"AttackAcquisitionRange" "800"
+		"AttackRange"           "70"
+		"CombatClassAttack"     "DOTA_COMBAT_CLASS_ATTACK_BASIC"
+		"CombatClassDefend"     "DOTA_COMBAT_CLASS_DEFEND_STRONG"
+		"MovementCapabilities"  "DOTA_UNIT_CAP_MOVE_NONE"
+		"MovementSpeed"         "270"
+		"MovementTurnRate"      "0.6"
+		"BountyGoldMin"         "0"
+		"BountyGoldMax"         "0"
+		"BoundsHullName"        "DOTA_HULL_SIZE_HERO"
+		"RingRadius"            "70"
+		"VisionDaytimeRange"    "1400"
+		"VisionNighttimeRange"  "800"
+		"TeamName"              "DOTA_TEAM_NEUTRALS"
+		"UnitRelationShipClass" "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+		"Creature"
+		{
+			"DisableClumpingBehavior"       "1"
+			"AttachWearables"
+			{
+					"Wearable1" { "ItemDef" "263" }
+					"Wearable2" { "ItemDef" "264" }
+					"Wearable3" { "ItemDef" "265" }
+					"Wearable4" { "ItemDef" "266" }
+					"Wearable5" { "ItemDef" "468" }
+			}
+		}
+	}
+
+	//-------------------------------------------------------------------------
 	// Fire Tower Units
 	//-------------------------------------------------------------------------
 	"npc_legion_fire_tier1_level1"

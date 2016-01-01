@@ -35,6 +35,14 @@ function CMapController:Setup()
 			class = "trigger_dota",
 			name = "legion_fallback_zone"
 		},
+		["miner_spawns"] = {
+			class = "info_target",
+			name = "legion_miner"
+		},
+		["miner_target"] = {
+			class = "info_target",
+			name = "legion_miner_target"
+		},
 	}
 
 	self._team_ids = {
@@ -47,6 +55,8 @@ function CMapController:Setup()
 	self:FindTargetZones()
 	self:FindKingSpawns()
 	self:FindFallbackZones()
+	self:FindMinerSpawnPoints()
+	self:FindMinerTargetPoints()
 
 end
 
@@ -128,6 +138,16 @@ function CMapController:_GetLaneEntity( tblData, laneId, iTeam )
 		end
 	end
 	return self:_GetTeamEntity( tblData, iTeam )
+end
+
+function CMapController:_GetLaneEntities( tblData, laneId, iTeam )
+	local tbl = {}
+	for k, v in ipairs( tblData ) do
+		if v.lane == laneId then
+			table.insert(tbl, v.entity)
+		end
+	end
+	return tbl
 end
 
 -------------------------
@@ -224,4 +244,36 @@ end
 
 function CMapController:GetFallbackZoneForLane( laneId, iTeam )
 	return self:_GetLaneEntity( self._fallback_zones, laneId, iTeam )
+end
+
+-------------------------
+-- Miner Spawn Points
+-------------------------
+function CMapController:FindMinerSpawnPoints()
+	self._miner_spawns = {}
+	self:_StoreGamemodeEntitiesOfClass( self._miner_spawns, self._map_entities.miner_spawns )
+end
+
+function CMapController:MinerSpawnPoints()
+	return self._miner_spawns
+end
+
+function CMapController:GetMinerSpawnPointsForLane( laneId, iTeam )
+	return self:_GetLaneEntities( self._miner_spawns, laneId, iTeam )
+end
+
+-------------------------
+-- Miner Target Points
+-------------------------
+function CMapController:FindMinerTargetPoints()
+	self._miner_targets = {}
+	self:_StoreGamemodeEntitiesOfClass( self._miner_targets, self._map_entities.miner_target )
+end
+
+function CMapController:MinerTargetPoints()
+	return self._miner_targets
+end
+
+function CMapController:GetMinerTargetPointForLane( laneId, iTeam )
+	return self:_GetLaneEntity( self._miner_targets, laneId, iTeam )
 end
