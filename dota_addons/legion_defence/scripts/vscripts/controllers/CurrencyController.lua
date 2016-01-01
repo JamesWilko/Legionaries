@@ -34,8 +34,8 @@ CCurrencyController.GEMS_DEFAULT_LIMIT = 200
 CCurrencyController.GEMS_DEFAULT_INCOME = 20
 
 CURRENCY_FOOD = "CurrencyFood"
-CCurrencyController.FOOD_DEFAULT_AMOUNT = 20
-CCurrencyController.FOOD_DEFAULT_LIMIT = 20
+CCurrencyController.FOOD_DEFAULT_AMOUNT = 0
+CCurrencyController.FOOD_DEFAULT_LIMIT = 0
 
 CCurrencyController.CURRENCY_DEFAULT_AMOUNT = 0
 CCurrencyController.CURRENCY_DEFAULT_LIMIT = -1
@@ -79,7 +79,7 @@ function CCurrencyController:Setup()
 	end
 
 	-- Setup events
-	ListenToGameEvent("dota_player_pick_hero", Dynamic_Wrap(CCurrencyController, "OnPlayerPickedHero"), self)
+	ListenToGameEvent("legion_player_assigned_lane", Dynamic_Wrap(CCurrencyController, "OnPlayerAssignedLane"), self)
 	ListenToGameEvent("legion_wave_complete", Dynamic_Wrap(CCurrencyController, "HandleOnWaveComplete"), self)
 
 end
@@ -305,7 +305,7 @@ end
 ---------------------------------------
 -- Currency Limits
 ---------------------------------------
-function CCurrencyController:ModifyCurrencyLimit( sCurrency, hPlayer, iNewLimit )
+function CCurrencyController:SetCurrencyLimit( sCurrency, hPlayer, iNewLimit )
 
 	if IsServer() then
 
@@ -324,7 +324,7 @@ function CCurrencyController:ModifyCurrencyLimit( sCurrency, hPlayer, iNewLimit 
 
 		-- Set currency limit
 		data.limit = iNewLimit
-
+		
 		-- Set net table
 		CustomNetTables:SetTableValue( nettable, tostring(player_id), data )
 
@@ -480,17 +480,13 @@ function CCurrencyController:HandleOnWaveComplete( event )
 	self:ProcessEndOfWaveIncome()
 end
 
-function CCurrencyController:OnPlayerPickedHero( event )
+function CCurrencyController:OnPlayerAssignedLane( data )
 
-	-- Setup player currencies once they've picked their hero
-	local hero = EntIndexToHScript( event.heroindex )
-	if hero then
-		local playerId = hero:GetOwner():GetPlayerID()
-		for currency, currencyData in pairs(self._currency_types) do
-			local nettable = self:GetCurrencyNetTable( currency )
-			local data = self:SetupNetTableDataForPlayer( currency, playerId )
-			CustomNetTables:SetTableValue( nettable, tostring(playerId), data )
-		end
+	local playerId = data["lPlayer"]
+	for currency, currencyData in pairs(self._currency_types) do
+		local nettable = self:GetCurrencyNetTable( currency )
+		local data = self:SetupNetTableDataForPlayer( currency, playerId )
+		CustomNetTables:SetTableValue( nettable, tostring(playerId), data )
 	end
 
 end

@@ -36,10 +36,12 @@ CUpgradeController.UPGRADES =
 			}
 		},
 		default = 1,
-		max_level = 10,
+		max_level = ((CFoodController.MAXIMUM_FOOD - CFoodController.DEFAULT_FOOD) / CFoodController.FOOD_PER_LEVEL) + 1,
 		display_image = "item_tango",
 		value = 5,
-		func = function( playerId, upgradeLevel ) end
+		func = function( playerId, upgradeLevel, levelsAdded )
+			GameRules.LegionDefence:GetFoodController():OnPurchasedFoodUpgrade( playerId, upgradeLevel, levelsAdded )
+		end
 	},
 	[CUpgradeController.UPGRADE_MINERS] =
 	{
@@ -53,7 +55,7 @@ CUpgradeController.UPGRADES =
 		max_level = 7,
 		display_image = "item_boots",
 		value = 1,
-		func = function( playerId, upgradeLevel ) end
+		func = function( playerId, upgradeLevel, levelsAdded ) end
 	},
 	[CUpgradeController.UPGRADE_MINER_SPEED] =
 	{
@@ -67,7 +69,7 @@ CUpgradeController.UPGRADES =
 		max_level = 20,
 		display_image = "item_mithril_hammer",
 		value = 0.25,
-		func = function( playerId, upgradeLevel ) end
+		func = function( playerId, upgradeLevel, levelsAdded ) end
 	}
 }
 
@@ -100,10 +102,12 @@ function CUpgradeController:SetUpgradeLevel( sUpgradeId, iPlayerId, iUpgradeLeve
 		-- Set upgrade level
 		self._upgrades[sUpgradeId] = self._upgrades[sUpgradeId] or {}
 		self._upgrades[sUpgradeId][iPlayerId] = self._upgrades[sUpgradeId][iPlayerId] or CUpgradeController.UPGRADES[sUpgradeId].default
+
+		local diff = iUpgradeLevel - self._upgrades[sUpgradeId][iPlayerId]
 		self._upgrades[sUpgradeId][iPlayerId] = iUpgradeLevel
 
 		-- Call update func
-		CUpgradeController.UPGRADES[sUpgradeId].func( iPlayerId, iUpgradeLevel )
+		CUpgradeController.UPGRADES[sUpgradeId].func( iPlayerId, iUpgradeLevel, diff )
 
 		-- Update nettable for upgrade
 		CustomNetTables:SetTableValue( CUpgradeController.NET_TABLE, sUpgradeId, self._upgrades[sUpgradeId] )
@@ -153,7 +157,7 @@ function CUpgradeController.HandleOnAttemptUpgradePurchase( iPlayerId_Wrong, eve
 		-- Check player can afford upgrade
 		local canAfford = true
 		for k, cost_data in pairs( upgrade.cost ) do
-			if not currency_controller:CanAfford( cost_data.currency, iPlayerId, cost_data.amount ) then
+			if not currency_controller:CanAfford( cost_data.currency, iPlayerId, cost_data.amount, true ) then
 				return false, "can_not_afford"
 			end
 		end
@@ -171,7 +175,7 @@ function CUpgradeController.HandleOnAttemptUpgradePurchase( iPlayerId_Wrong, eve
 		CustomNetTables:SetTableValue( CUpgradeController.NET_TABLE, upgradeId, self._upgrades[upgradeId] )
 
 		-- Run upgrade function
-		upgrade.func( iPlayerId, new_level )
+		upgrade.func( iPlayerId, new_level, 1 )
 
 	end
 
