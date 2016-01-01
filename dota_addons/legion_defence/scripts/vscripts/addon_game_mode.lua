@@ -11,6 +11,7 @@ require("controllers/UnitController")
 require("controllers/HeroController")
 require("controllers/KingController")
 require("controllers/LaneController")
+require("controllers/UpgradesController")
 require("BuildGrid")
 require("GameUtils")
 
@@ -74,6 +75,7 @@ function CLegionDefence:InitGameMode()
 	self:SetupUnitController()
 	self:SetupHeroController()
 	self:SetupKingController()
+	self:SetupUpgradeController()
 
 	ListenToGameEvent("dota_player_pick_hero", Dynamic_Wrap(CLegionDefence, "OnPlayerPickedHero"), self)
 
