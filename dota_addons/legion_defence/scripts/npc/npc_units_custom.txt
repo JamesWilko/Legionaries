@@ -173,11 +173,11 @@
 		"DisableClumpingBehavior"       "1"
 		"AttachWearables"
 		{
-			"Wearable0" { "ItemDef" "63" }
-			"Wearable1" { "ItemDef" "64" }
-			"Wearable2" { "ItemDef" "65" }
-			"Wearable3" { "ItemDef" "66" }
-			"Wearable4" { "ItemDef" "67" }
+			"Wearable0" { "ItemDef" "4125" }
+			"Wearable1" { "ItemDef" "4143" }
+			"Wearable2" { "ItemDef" "63" }
+			"Wearable3" { "ItemDef" "64" }
+			"Wearable4" { "ItemDef" "65" }
 			"Wearable5" { "ItemDef" "68" }
 			"Wearable6" { "ItemDef" "8647" }
 
@@ -190,7 +190,7 @@
 	//----------------------------------------------------------------
 	"BaseClass"             "npc_dota_creature"
 	"Model"                 "models/heroes/clinkz/clinkz.vmdl"
-	"ModelScale"            "0.80"
+	"ModelScale"            "0.60"
 	"SoundSet"              "Hero_Clinkz"
 	"GameSoundsFile"        "soundevents/game_sounds_heroes/game_sounds_clinkz.vsndevts"
 	"VoiceFile" 			"soundevents/voscripts/game_sounds_vo_clinkz.vsndevts"
@@ -281,7 +281,7 @@
 	//----------------------------------------------------------------
 	"BaseClass"             "npc_dota_creature"
 	"Model"                 "models/heroes/clinkz/clinkz.vmdl"
-	"ModelScale"            "0.90"
+	"ModelScale"            "0.75"
 	"SoundSet"              "Hero_Clinkz"
 	"GameSoundsFile"        "soundevents/game_sounds_heroes/game_sounds_clinkz.vsndevts"
 	"VoiceFile" 			"soundevents/voscripts/game_sounds_vo_clinkz.vsndevts"

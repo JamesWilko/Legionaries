@@ -246,7 +246,7 @@
 		"02"
 		{
 			"var_type"					"FIELD_INTEGER"
-			"PopulationCost"			"0"
+			"PopulationCost"			"1"
 		}
 		"03"
 		{
@@ -318,7 +318,7 @@
 		"02"
 		{
 			"var_type"					"FIELD_INTEGER"
-			"PopulationCost"			"2"
+			"PopulationCost"			"1"
 		}
 		"03"
 		{
@@ -354,7 +354,7 @@
 		"02"
 		{
 			"var_type"					"FIELD_INTEGER"
-			"PopulationCost"			"2"
+			"PopulationCost"			"0"
 		}
 		"03"
 		{

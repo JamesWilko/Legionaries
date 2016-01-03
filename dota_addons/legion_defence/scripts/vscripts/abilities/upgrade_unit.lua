@@ -4,9 +4,10 @@ if upgrade_unit == nil then
 end
 
 UPGRADE_FAIL_REASON_WAVE_RUNNING 		= 1
-UPGRADE_FAIL_REASON_CANT_AFFORD 		= 2
-UPGRADE_FAIL_REASON_ALREADY_UPGRADING 	= 3
-UPGRADE_FAIL_REASON_SOLD				= 4
+UPGRADE_FAIL_REASON_CANT_AFFORD_GOLD 	= 2
+UPGRADE_FAIL_REASON_CANT_AFFORD_FOOD 	= 3
+UPGRADE_FAIL_REASON_ALREADY_UPGRADING 	= 4
+UPGRADE_FAIL_REASON_SOLD				= 5
 
 LinkLuaModifier( "modifier_upgrade_unit_think", "abilities/modifier_upgrade_unit_think", LUA_MODIFIER_MOTION_NONE )
 
@@ -20,14 +21,19 @@ function upgrade_unit:CastFilterResult()
 
 	-- Can only build if can afford
 	self._gold_cost = self:GetSpecialValueFor( "GoldCost" )
+	self._population_cost = self:GetSpecialValueFor( "PopulationCost" )
 	if PlayerResource and GameRules.LegionDefence then
 
 		local data = GameRules.LegionDefence:GetUnitController():GetUnitData( self:GetCaster() )
-		local gold = PlayerResource:GetGold( data.player:GetPlayerID() )
 		self._owner_id = data.player:GetPlayerID()
 
 		if not GameRules.LegionDefence:GetCurrencyController():CanAfford( CURRENCY_GOLD, self._owner_id, self._gold_cost ) then
 			self._fail_reason = UPGRADE_FAIL_REASON_CANT_AFFORD
+			return UF_FAIL_CUSTOM
+		end
+
+		if not GameRules.LegionDefence:GetCurrencyController():CanAfford( CURRENCY_FOOD, self._owner_id, self._population_cost ) then
+			self._fail_reason = UPGRADE_FAIL_REASON_CANT_AFFORD_FOOD
 			return UF_FAIL_CUSTOM
 		end
 
@@ -56,6 +62,9 @@ function upgrade_unit:GetCustomCastError()
 	if self._fail_reason == UPGRADE_FAIL_REASON_CANT_AFFORD then
 		return "#legion_can_not_upgrade_cant_afford_gold"
 	end
+	if self._fail_reason == UPGRADE_FAIL_REASON_CANT_AFFORD then
+		return "#legion_can_not_upgrade_cant_afford_population"
+	end
 	if self._fail_reason == UPGRADE_FAIL_REASON_SOLD then
 		return "#legion_can_not_upgrade_being_sold"
 	end
@@ -74,8 +83,9 @@ function upgrade_unit:OnSpellStart()
 	self:GetCaster():StartGesture( ACT_DOTA_TELEPORT )
 	self:GetCaster()._upgrading = true
 
-	-- Spend gold
+	-- Spend costs
 	self:SpendGoldCost()
+	self:SpendFoodCost()
 
 	-- Start upgrade animation
 	local kv = {}
@@ -98,5 +108,14 @@ function upgrade_unit:SpendGoldCost()
 	end
 	if GameRules.LegionDefence and self._owner_id ~= nil then
 		GameRules.LegionDefence:GetCurrencyController():ModifyCurrency( CURRENCY_GOLD, self._owner_id, -self._gold_cost )
+	end
+end
+
+function upgrade_unit:SpendFoodCost()
+	if self._population_cost == nil then
+		self._population_cost = self:GetSpecialValueFor( "PopulationCost" )
+	end
+	if GameRules.LegionDefence and self._owner_id ~= nil then
+		GameRules.LegionDefence:GetCurrencyController():ModifyCurrency( CURRENCY_FOOD, self._owner_id, -self._population_cost )
 	end
 end
