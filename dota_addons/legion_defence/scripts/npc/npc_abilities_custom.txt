@@ -1,175 +1,528 @@
-// Dota Heroes File
+﻿// Dota Heroes File
 "DOTAAbilities"
 {
 	"Version"		"1"
 
-	//-------------------------------------------------------------------------
-	// Sell Units
-	//-------------------------------------------------------------------------
-	"sell_unit"
+"spawn_tower_fire_heat_knight"
+{
+	"BaseClass"						"ability_lua"
+	"AbilityTextureName"			"lina_dragon_slave"
+	"ScriptFile"					"abilities/spawning/spawn_tower_fire_heat_knight"
+
+	"AbilityCastRange"				"800"
+	"AbilityCastPoint"				"0.4"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+	"FightRecapLevel"				"1"
+	"MaxLevel"						"1"
+
+	"AbilityCooldown"				"0"
+	"AbilityDuration"				"0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
 	{
-		"BaseClass"						"ability_lua"
-		"AbilityTextureName"			"alchemist_goblins_greed"
-		"ScriptFile"					"abilities/selling/sell_unit"
-
-		"AbilityCastRange"				"100"
-		"AbilityCastPoint"				"0.4"
-
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-		"FightRecapLevel"				"1"
-		"MaxLevel"						"1"
-		
-		"AbilityCooldown"				"2.0"
-		"AbilityDuration"				"1.0"
-		"AbilityManaCost"				"0"
-
-		"AbilitySpecial"
+		"01"
 		{
+			"var_type"					"FIELD_INTEGER"
+			"GoldCost"					"50"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"PopulationCost"			"1"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"SpawnEffectAOE"			"60"
 		}
 	}
+}
+"spawn_tower_fire_flame_archer"
+{
+	"BaseClass"						"ability_lua"
+	"AbilityTextureName"			"lina_dragon_slave"
+	"ScriptFile"					"abilities/spawning/spawn_tower_fire_flame_archer"
 
-	"sell_unit_fire"
+	"AbilityCastRange"				"800"
+	"AbilityCastPoint"				"0.4"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+	"FightRecapLevel"				"1"
+	"MaxLevel"						"1"
+
+	"AbilityCooldown"				"0"
+	"AbilityDuration"				"0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
 	{
-		"BaseClass"						"ability_lua"
-		"AbilityTextureName"			"alchemist_goblins_greed"
-		"ScriptFile"					"abilities/selling/sell_unit_fire"
-
-		"AbilityCastRange"				"100"
-		"AbilityCastPoint"				"0.4"
-
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-		"FightRecapLevel"				"1"
-		"MaxLevel"						"1"
-		
-		"AbilityCooldown"				"2.0"
-		"AbilityDuration"				"1.0"
-		"AbilityManaCost"				"0"
-
-		"AbilitySpecial"
+		"01"
 		{
-			"02"
-			{
-				"var_type"					"FIELD_FLOAT"
-				"SellDelay"					"2"
-			}
+			"var_type"					"FIELD_INTEGER"
+			"GoldCost"					"75"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"PopulationCost"			"1"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"SpawnEffectAOE"			"50"
 		}
 	}
+}
+"spawn_tower_fire_vanguard"
+{
+	"BaseClass"						"ability_lua"
+	"AbilityTextureName"			"lina_dragon_slave"
+	"ScriptFile"					"abilities/spawning/spawn_tower_fire_vanguard"
 
-	//-------------------------------------------------------------------------
-	// Upgrade Units
-	//-------------------------------------------------------------------------
-	"upgrade_unit"
+	"AbilityCastRange"				"800"
+	"AbilityCastPoint"				"0.4"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+	"FightRecapLevel"				"1"
+	"MaxLevel"						"1"
+
+	"AbilityCooldown"				"0"
+	"AbilityDuration"				"0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
 	{
-		"BaseClass"						"ability_lua"
-		"AbilityTextureName"			"wisp_relocate"
-		"ScriptFile"					"abilities/upgrades/upgrade_unit"
-
-		"AbilityCastRange"				"100"
-		"AbilityCastPoint"				"0.4"
-
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-		"FightRecapLevel"				"1"
-		"MaxLevel"						"1"
-		
-		"AbilityCooldown"				"2.0"
-		"AbilityDuration"				"1.0"
-		"AbilityManaCost"				"0"
-
-		"AbilitySpecial"
+		"01"
 		{
-			"01"
-			{
-				"var_type"					"FIELD_INTEGER"
-				"GoldCost"					"50"
-			}
-			"02"
-			{
-				"var_type"					"FIELD_FLOAT"
-				"UpgradeDelay"				"2"
-			}
+			"var_type"					"FIELD_INTEGER"
+			"GoldCost"					"100"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"PopulationCost"			"2"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"SpawnEffectAOE"			"70"
 		}
 	}
+}
+"spawn_tower_fire_firestarter"
+{
+	"BaseClass"						"ability_lua"
+	"AbilityTextureName"			"lina_dragon_slave"
+	"ScriptFile"					"abilities/spawning/spawn_tower_fire_firestarter"
 
-	//-------------------------------------------------------------------------
-	// Spawn Fire Tower Units
-	//-------------------------------------------------------------------------
-	"spawn_fire_tower_tier_one"
+	"AbilityCastRange"				"800"
+	"AbilityCastPoint"				"0.4"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+	"FightRecapLevel"				"1"
+	"MaxLevel"						"1"
+
+	"AbilityCooldown"				"0"
+	"AbilityDuration"				"0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
 	{
-		"BaseClass"						"ability_lua"
-		"AbilityTextureName"			"lina_dragon_slave"
-		"ScriptFile"					"abilities/spawn_fire_tower_tier_one"
-
-		"AbilityCastRange"				"800"
-		"AbilityCastPoint"				"0.4"
-
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
-		"FightRecapLevel"				"1"
-		"MaxLevel"						"1"
-
-		"AbilityCooldown"				"1.0"
-		"AbilityDuration"				"1.0"
-		"AbilityManaCost"				"0"
-
-		"AbilitySpecial"
+		"01"
 		{
-			"01"
-			{
-				"var_type"					"FIELD_INTEGER"
-				"GoldCost"					"50"
-			}
-			"02"
-			{
-				"var_type"					"FIELD_INTEGER"
-				"PopulationCost"			"2"
-			}
-			"03"
-			{
-				"var_type"					"FIELD_INTEGER"
-				"SpawnEffectAOE"			"60"
-			}
-			"04"
-			{
-				"var_type"					"FIELD_FLOAT"
-				"SpawnDelay"				"1"
-			}
+			"var_type"					"FIELD_INTEGER"
+			"GoldCost"					"150"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"PopulationCost"			"2"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"SpawnEffectAOE"			"80"
 		}
 	}
+}
+"spawn_tower_fire_flame_drake"
+{
+	"BaseClass"						"ability_lua"
+	"AbilityTextureName"			"lina_dragon_slave"
+	"ScriptFile"					"abilities/spawning/spawn_tower_fire_flame_drake"
 
-	"spawn_fire_tower_tier_two"
+	"AbilityCastRange"				"800"
+	"AbilityCastPoint"				"0.4"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+	"FightRecapLevel"				"1"
+	"MaxLevel"						"1"
+
+	"AbilityCooldown"				"0"
+	"AbilityDuration"				"0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
 	{
-		"BaseClass"						"ability_lua"
-		"AbilityTextureName"			"lina_light_strike_array"
-		"ScriptFile"					"abilities/spawn_fire_tower_tier_two"
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"GoldCost"					"200"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"PopulationCost"			"2"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"SpawnEffectAOE"			"90"
+		}
+	}
+}
+"spawn_tower_fire_demon_summoner"
+{
+	"BaseClass"						"ability_lua"
+	"AbilityTextureName"			"lina_dragon_slave"
+	"ScriptFile"					"abilities/spawning/spawn_tower_fire_demon_summoner"
+
+	"AbilityCastRange"				"800"
+	"AbilityCastPoint"				"0.4"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+	"FightRecapLevel"				"1"
+	"MaxLevel"						"1"
+
+	"AbilityCooldown"				"0"
+	"AbilityDuration"				"0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"GoldCost"					"300"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"PopulationCost"			"2"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"SpawnEffectAOE"			"100"
+		}
+	}
+}
+"upgrade_unit_fire_heat_knight_upg"
+{
+	"BaseClass"						"ability_lua"
+	"AbilityTextureName"			"wisp_relocate"
+	"ScriptFile"					"abilities/upgrading/upgrade_unit_fire_heat_knight_upg"
+
+	"AbilityCastRange"				"100"
+	"AbilityCastPoint"				"0.4"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+	"FightRecapLevel"				"1"
+	"MaxLevel"						"1"
 	
-		"AbilityCastRange"				"800"
-		"AbilityCastPoint"				"0.4"
+	"AbilityCooldown"				"2.0"
+	"AbilityDuration"				"1.0"
+	"AbilityManaCost"				"0"
 
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
-		"FightRecapLevel"				"1"
-		"MaxLevel"						"1"
-
-		"AbilityCooldown"				"1.0"
-		"AbilityDuration"				"1.0"
-		"AbilityManaCost"				"0"
-
-		"AbilitySpecial"
+	"AbilitySpecial"
+	{
+		"01"
 		{
-			"01"
-			{
-				"var_type"					"FIELD_INTEGER"
-				"GoldCost"					"100"
-			}
-			"02"
-			{
-				"var_type"					"FIELD_INTEGER"
-				"SpawnEffectAOE"			"80"
-			}
-			"03"
-			{
-				"var_type"					"FIELD_FLOAT"
-				"SpawnDelay"				"1"
-			}
+			"var_type"					"FIELD_INTEGER"
+			"GoldCost"					"50"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"PopulationCost"			"0"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_FLOAT"
+			"UpgradeDelay"				"1"
 		}
 	}
+}
+"upgrade_unit_fire_flame_archer_upg"
+{
+	"BaseClass"						"ability_lua"
+	"AbilityTextureName"			"wisp_relocate"
+	"ScriptFile"					"abilities/upgrading/upgrade_unit_fire_flame_archer_upg"
+
+	"AbilityCastRange"				"100"
+	"AbilityCastPoint"				"0.4"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+	"FightRecapLevel"				"1"
+	"MaxLevel"						"1"
+	
+	"AbilityCooldown"				"2.0"
+	"AbilityDuration"				"1.0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"GoldCost"					"50"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"PopulationCost"			"1"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_FLOAT"
+			"UpgradeDelay"				"1"
+		}
+	}
+}
+"upgrade_unit_fire_vanguard_upg"
+{
+	"BaseClass"						"ability_lua"
+	"AbilityTextureName"			"wisp_relocate"
+	"ScriptFile"					"abilities/upgrading/upgrade_unit_fire_vanguard_upg"
+
+	"AbilityCastRange"				"100"
+	"AbilityCastPoint"				"0.4"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+	"FightRecapLevel"				"1"
+	"MaxLevel"						"1"
+	
+	"AbilityCooldown"				"2.0"
+	"AbilityDuration"				"1.0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"GoldCost"					"50"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"PopulationCost"			"2"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_FLOAT"
+			"UpgradeDelay"				"1"
+		}
+	}
+}
+"upgrade_unit_fire_firestarter_upg_melee"
+{
+	"BaseClass"						"ability_lua"
+	"AbilityTextureName"			"wisp_relocate"
+	"ScriptFile"					"abilities/upgrading/upgrade_unit_fire_firestarter_upg_melee"
+
+	"AbilityCastRange"				"100"
+	"AbilityCastPoint"				"0.4"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+	"FightRecapLevel"				"1"
+	"MaxLevel"						"1"
+	
+	"AbilityCooldown"				"2.0"
+	"AbilityDuration"				"1.0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"GoldCost"					"75"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"PopulationCost"			"2"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_FLOAT"
+			"UpgradeDelay"				"1"
+		}
+	}
+}
+"upgrade_unit_fire_firestarter_upg_ranged"
+{
+	"BaseClass"						"ability_lua"
+	"AbilityTextureName"			"wisp_relocate"
+	"ScriptFile"					"abilities/upgrading/upgrade_unit_fire_firestarter_upg_ranged"
+
+	"AbilityCastRange"				"100"
+	"AbilityCastPoint"				"0.4"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+	"FightRecapLevel"				"1"
+	"MaxLevel"						"1"
+	
+	"AbilityCooldown"				"2.0"
+	"AbilityDuration"				"1.0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"GoldCost"					"100"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"PopulationCost"			"1"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_FLOAT"
+			"UpgradeDelay"				"1"
+		}
+	}
+}
+"upgrade_unit_fire_flame_drake_upg"
+{
+	"BaseClass"						"ability_lua"
+	"AbilityTextureName"			"wisp_relocate"
+	"ScriptFile"					"abilities/upgrading/upgrade_unit_fire_flame_drake_upg"
+
+	"AbilityCastRange"				"100"
+	"AbilityCastPoint"				"0.4"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+	"FightRecapLevel"				"1"
+	"MaxLevel"						"1"
+	
+	"AbilityCooldown"				"2.0"
+	"AbilityDuration"				"1.0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"GoldCost"					"150"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"PopulationCost"			"1"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_FLOAT"
+			"UpgradeDelay"				"1"
+		}
+	}
+}
+"upgrade_unit_fire_demon_summoner_upg"
+{
+	"BaseClass"						"ability_lua"
+	"AbilityTextureName"			"wisp_relocate"
+	"ScriptFile"					"abilities/upgrading/upgrade_unit_fire_demon_summoner_upg"
+
+	"AbilityCastRange"				"100"
+	"AbilityCastPoint"				"0.4"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+	"FightRecapLevel"				"1"
+	"MaxLevel"						"1"
+	
+	"AbilityCooldown"				"2.0"
+	"AbilityDuration"				"1.0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"GoldCost"					"200"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"PopulationCost"			"1"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_FLOAT"
+			"UpgradeDelay"				"1"
+		}
+	}
+}
+"sell_unit"
+{
+	"BaseClass"						"ability_lua"
+	"AbilityTextureName"			"alchemist_goblins_greed"
+	"ScriptFile"					"abilities/selling/sell_unit"
+
+	"AbilityCastRange"				"100"
+	"AbilityCastPoint"				"0.4"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+	"FightRecapLevel"				"1"
+	"MaxLevel"						"1"
+	
+	"AbilityCooldown"				"2.0"
+	"AbilityDuration"				"1.0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_FLOAT"
+			"SellDelay"					"2"
+		}
+	}
+}
+"sell_unit_fire"
+{
+	"BaseClass"						"ability_lua"
+	"AbilityTextureName"			"alchemist_goblins_greed"
+	"ScriptFile"					"abilities/selling/sell_unit_fire"
+
+	"AbilityCastRange"				"100"
+	"AbilityCastPoint"				"0.4"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+	"FightRecapLevel"				"1"
+	"MaxLevel"						"1"
+	
+	"AbilityCooldown"				"2.0"
+	"AbilityDuration"				"1.0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_FLOAT"
+			"SellDelay"					"2"
+		}
+	}
+}
+
 
 }

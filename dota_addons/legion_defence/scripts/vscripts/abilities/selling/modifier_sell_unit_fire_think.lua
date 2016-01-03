@@ -10,7 +10,7 @@ end
 function modifier_sell_unit_fire_think:OnCreated( kv )
 
 	self._delay = self:GetAbility():GetSpecialValueFor( "SellDelay" )
-
+	
 	if IsServer() then
 
 		self:StartIntervalThink( self._delay )

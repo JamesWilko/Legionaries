@@ -1,10 +1,11 @@
-//
+﻿//
 // <key>	<value>
 // Hero		currently on/off, will be # of instances (-1 = infinite)
 //
 
 "CustomHeroList"
 {
-	"npc_dota_hero_ember_spirit"		"-1"
-	"npc_dota_hero_zuus"				"-1"
+	"npc_dota_hero_ember_spirit"	"-1"
+	"npc_dota_hero_zuus"	"-1"
+
 }
