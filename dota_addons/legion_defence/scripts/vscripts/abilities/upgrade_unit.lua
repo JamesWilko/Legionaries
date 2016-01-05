@@ -59,10 +59,10 @@ function upgrade_unit:GetCustomCastError()
 	if self._fail_reason == UPGRADE_FAIL_REASON_WAVE_RUNNING then
 		return "#legion_can_not_upgrade_during_round"
 	end
-	if self._fail_reason == UPGRADE_FAIL_REASON_CANT_AFFORD then
+	if self._fail_reason == UPGRADE_FAIL_REASON_CANT_AFFORD_GOLD then
 		return "#legion_can_not_upgrade_cant_afford_gold"
 	end
-	if self._fail_reason == UPGRADE_FAIL_REASON_CANT_AFFORD then
+	if self._fail_reason == UPGRADE_FAIL_REASON_CANT_AFFORD_FOOD then
 		return "#legion_can_not_upgrade_cant_afford_population"
 	end
 	if self._fail_reason == UPGRADE_FAIL_REASON_SOLD then
