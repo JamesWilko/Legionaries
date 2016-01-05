@@ -5,11 +5,12 @@ end
 
 -- Modifiers are in npc_items_custom.txt
 CWaveController.ARMOUR_TIERS = {
-	["item_name"] = "item_leaked_unit_armour_bonuses",
 	[1] = {
+		item_name = "item_leaked_unit_armour_bonus_1",
 		modifier = "modifier_armour_bonus_leaked_unit_1"
 	},
 	[2] = {
+		item_name = "item_leaked_unit_armour_bonus_2",
 		modifier = "modifier_armour_bonus_leaked_unit_2"
 	}
 }
@@ -451,12 +452,16 @@ end
 ----------------------------------
 -- Unit Functions
 ----------------------------------
-function CWaveController:GetArmourModifierItem()
+function CWaveController:GetArmourModifierItem( item_name )
+
+	self.__armour_items = self.__armour_items or {}
+
 	-- Cache the armour item so we don't continuously destroy and recreate it for no reason
-	if not self.__hArmourItem then
-		self.__hArmourItem = CreateItem(CWaveController.ARMOUR_TIERS["item_name"], nil, nil)
+	if not self.__armour_items[item_name] then
+		self.__armour_items[item_name] = CreateItem(item_name, nil, nil)
 	end
-	return self.__hArmourItem
+	return self.__armour_items[item_name]
+
 end
 
 function CWaveController:IsUnitAWaveUnit( hUnit )
@@ -495,13 +500,19 @@ function CWaveController:AttemptIncreaseArmourOnUnit( hUnit, iArmourTier )
 			hUnit:SetMaximumGoldBounty( math.floor(hUnit:GetMaximumGoldBounty() * bountyMultiplier) )
 		end
 
+		-- Get item for this armour buff
+		local buff_data = CWaveController.ARMOUR_TIERS[iArmourTier]
+		if buff_data.item == nil then
+			buff_data.item = self:GetArmourModifierItem( buff_data.item_name )
+		end
+
 		-- Check unit doesn't already have this armour buff
 		local modifier = CWaveController.ARMOUR_TIERS[iArmourTier].modifier
 		if not hUnit:FindModifierByName(modifier) then
 
 			-- Apply modifier from armour item to the leaked unit
-			if self:GetArmourModifierItem() then
-				self:GetArmourModifierItem():ApplyDataDrivenModifier(hUnit, hUnit, modifier, nil)
+			if buff_data.item then
+				buff_data.item:ApplyDataDrivenModifier(hUnit, hUnit, modifier, nil)
 			end
 
 		end

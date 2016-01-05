@@ -4,7 +4,7 @@
 	//-------------------------------------------------------------------------
 	// Unit Armour Bonuses
 	//-------------------------------------------------------------------------
-	"item_leaked_unit_armour_bonuses"
+	"item_leaked_unit_armour_bonus_1"
 	{
 		"ID"							"2102"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
@@ -22,6 +22,18 @@
 					"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"	"2"
 				}
 			}
+		}
+	}
+
+	"item_leaked_unit_armour_bonus_2"
+	{
+		"ID"							"2103"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_solar_crest"
+ 
+		"Modifiers"
+		{
 			"modifier_armour_bonus_leaked_unit_2"
 			{
 				"Passive"				"1"
