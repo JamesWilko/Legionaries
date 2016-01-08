@@ -13,8 +13,8 @@
 	"Ability2"	"spawn_tower_fire_flame_archer"
 	"Ability3"	"spawn_tower_fire_vanguard"
 	"Ability4"	"spawn_tower_fire_firestarter"
-	"Ability5"	"spawn_tower_fire_flame_drake"
-	"Ability6"	"spawn_tower_fire_demon_summoner"
+	"Ability5"	"spawn_tower_fire_flamebound"
+	"Ability6"	"spawn_tower_fire_pyromancer"
 
 	"VisionNighttimeRange"		"1800"
 }

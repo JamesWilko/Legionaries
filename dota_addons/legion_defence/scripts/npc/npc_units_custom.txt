@@ -3,6 +3,86 @@
 {
 	"Version"	"1"
 
+// Dummy unit created by BMD
+"npc_dummy_unit"
+{
+	// General
+	//----------------------------------------------------------------
+	"BaseClass" "npc_dota_base_additive" // Class of entity of link to
+	"Model" "models/development/invisiblebox.vmdl" // Model
+	"SoundSet" "Creep_Good_Range" // Name of sound set
+	"Level" "0"
+	"UnitLabel" "healing_ward"
+	// Abilities
+	//----------------------------------------------------------------
+	"Ability1" "" // Ability 1
+	"Ability2" "" // Ability 2
+	"Ability3" "" // Ability 3
+	"Ability4" "" // Ability 4
+	"Ability5" "" // Ability 5
+	"Ability6" "" // Ability 6
+	"Ability7" "" // Ability 7
+	"Ability8" "" // Ability 8
+	// Armor
+	//----------------------------------------------------------------
+	"ArmorPhysical" "0" // Physical protection
+	"MagicalResistance" "0" // Magical protection
+	// Attack
+	//----------------------------------------------------------------
+	"AttackCapabilities" "DOTA_UNIT_CAP_NO_ATTACK" // Type of attack - melee, ranged, etc.
+	"AttackDamageMin" "0" // Damage range min
+	"AttackDamageMax" "0" // Damage range max
+	"AttackDamageType" "DAMAGE_TYPE_ArmorPhysical"
+	"AttackRate" "1" // Speed of attack
+	"AttackAnimationPoint" "0.5" // Normalized time in animation cycle to attack
+	"AttackAcquisitionRange" "800" // Range within a target can be acquired
+	"AttackRange" "500" // Range within a target can be attacked
+	"ProjectileModel" "" // Particle system model for projectile
+	"ProjectileSpeed" "900" // Speed of projectile
+	// Attributes
+	//----------------------------------------------------------------
+	"AttributePrimary" "DOTA_ATTRIBUTE_STRENGTH"
+	"AttributeBaseStrength" "0" // Base strength
+	"AttributeStrengthGain" "0" // Strength bonus per level
+	"AttributeBaseIntelligence" "0" // Base intelligence
+	"AttributeIntelligenceGain" "0" // Intelligence bonus per level
+	"AttributeBaseAgility" "0" // Base agility
+	"AttributeAgilityGain" "0" // Agility bonus per level
+	// Bounty
+	//----------------------------------------------------------------
+	"BountyXP" "0" // Experience earn
+	"BountyGoldMin" "0" // Gold earned min
+	"BountyGoldMax" "0" // Gold earned max
+	// Bounds
+	//----------------------------------------------------------------
+	"BoundsHullName" "DOTA_HULL_SIZE_SMALL" // Hull type used for navigation/locomotion
+	// Movement
+	//----------------------------------------------------------------
+	"MovementCapabilities" "DOTA_UNIT_CAP_MOVE_GROUND" // Type of locomotion - ground, air
+	"MovementSpeed" "450" // Speed
+	"MovementTurnRate" "10" // Turning rate
+	"FollowRange" "250" // Distance to keep when following
+	// Status
+	//----------------------------------------------------------------
+	"StatusHealth" "1" // Base health
+	"StatusHealthRegen" "0" // Health regeneration rate
+	"StatusMana" "0" // Base mana
+	"StatusManaRegen" "0" // Mana regeneration rate
+	// Team
+	//----------------------------------------------------------------
+	"TeamName" "DOTA_TEAM_GOODGUYS" // Team name
+	"CombatClassAttack" "DOTA_COMBAT_CLASS_ATTACK_PIERCE"
+	"CombatClassDefend" "DOTA_COMBAT_CLASS_DEFEND_SOFT"
+	"UnitRelationshipClass" "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_WARD"
+	// Vision
+	//----------------------------------------------------------------
+	"VisionDaytimeRange" "0" // Range of vision during day light
+	"VisionNighttimeRange" "0" // Range of vision at night time
+	// Bots
+	//----------------------------------------------------------------
+	"AttackDesire" "1.5" // How much bots want to attack them vs other non-hero things
+}
+
 "npc_legion_fire_heat_knight"
 {
 	// General
@@ -14,6 +94,7 @@
 	"GameSoundsFile"        "soundevents/game_sounds_heroes/game_sounds_dragon_knight.vsndevts"
 	"VoiceFile" 			"soundevents/voscripts/game_sounds_vo_dragon_knight.vsndevts"
 	"particle_folder"		"particles/units/heroes/hero_dragon_knight"
+	"vscripts"				""
 
 	// Upgrades
 	//----------------------------------------------------------------
@@ -24,7 +105,7 @@
 	// Status
 	//----------------------------------------------------------------
 	"Level"                 "5"
-	"StatusHealth"          "500"
+	"StatusHealth"          "125"
 	"StatusHealthRegen"     "0.5"
 	"StatusMana"            "0"
 	"StatusManaRegen"       "0"
@@ -32,21 +113,21 @@
 
 	// Armor
 	//----------------------------------------------------------------
-	"ArmorPhysical"         "5"
+	"ArmorPhysical"         "2"
 	"MagicalResistance"     "2"
 
 	// Attack
 	//----------------------------------------------------------------
 	"AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
 	"AttackDamageType"      "DOTA_COMBAT_CLASS_ATTACK_BASIC"
-	"AttackDamageMin"       "50"
-	"AttackDamageMax"       "60"
-	"AttackRate"            "1"
+	"AttackDamageMin"       "8"
+	"AttackDamageMax"       "12"
+	"AttackRate"            "1.0"
 	"AttackAnimationPoint"  "0.5"
 	"AttackAcquisitionRange" "1200"
 	"AttackRange"           "90"
 	"CombatClassAttack"     "DOTA_COMBAT_CLASS_ATTACK_BASIC"
-	"CombatClassDefend"     "DOTA_COMBAT_CLASS_DEFEND_BASIC"
+	"CombatClassDefend"     "DOTA_COMBAT_CLASS_DEFEND_STRONG"
 	"ProjectileModel"		""
 	"ProjectileSpeed"		"0"
 
@@ -105,6 +186,7 @@
 	"GameSoundsFile"        "soundevents/game_sounds_heroes/game_sounds_dragon_knight.vsndevts"
 	"VoiceFile" 			"soundevents/voscripts/game_sounds_vo_dragon_knight.vsndevts"
 	"particle_folder"		"particles/units/heroes/hero_dragon_knight"
+	"vscripts"				""
 
 	// Upgrades
 	//----------------------------------------------------------------
@@ -114,7 +196,7 @@
 	// Status
 	//----------------------------------------------------------------
 	"Level"                 "10"
-	"StatusHealth"          "800"
+	"StatusHealth"          "550"
 	"StatusHealthRegen"     "0.5"
 	"StatusMana"            "0"
 	"StatusManaRegen"       "0"
@@ -122,21 +204,21 @@
 
 	// Armor
 	//----------------------------------------------------------------
-	"ArmorPhysical"         "7"
+	"ArmorPhysical"         "3"
 	"MagicalResistance"     "2"
 
 	// Attack
 	//----------------------------------------------------------------
 	"AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
 	"AttackDamageType"      "DOTA_COMBAT_CLASS_ATTACK_BASIC"
-	"AttackDamageMin"       "80"
-	"AttackDamageMax"       "100"
-	"AttackRate"            "1"
+	"AttackDamageMin"       "50"
+	"AttackDamageMax"       "54"
+	"AttackRate"            "1.0"
 	"AttackAnimationPoint"  "0.5"
 	"AttackAcquisitionRange" "1200"
 	"AttackRange"           "90"
 	"CombatClassAttack"     "DOTA_COMBAT_CLASS_ATTACK_BASIC"
-	"CombatClassDefend"     "DOTA_COMBAT_CLASS_DEFEND_BASIC"
+	"CombatClassDefend"     "DOTA_COMBAT_CLASS_DEFEND_STRONG"
 	"ProjectileModel"		""
 	"ProjectileSpeed"		"0"
 
@@ -195,6 +277,7 @@
 	"GameSoundsFile"        "soundevents/game_sounds_heroes/game_sounds_clinkz.vsndevts"
 	"VoiceFile" 			"soundevents/voscripts/game_sounds_vo_clinkz.vsndevts"
 	"particle_folder"		"particles/units/heroes/hero_clinkz"
+	"vscripts"				""
 
 	// Upgrades
 	//----------------------------------------------------------------
@@ -205,7 +288,7 @@
 	// Status
 	//----------------------------------------------------------------
 	"Level"                 "5"
-	"StatusHealth"          "300"
+	"StatusHealth"          "150"
 	"StatusHealthRegen"     "0.5"
 	"StatusMana"            "0"
 	"StatusManaRegen"       "0"
@@ -213,21 +296,21 @@
 
 	// Armor
 	//----------------------------------------------------------------
-	"ArmorPhysical"         "4"
-	"MagicalResistance"     "3"
+	"ArmorPhysical"         "2"
+	"MagicalResistance"     "2"
 
 	// Attack
 	//----------------------------------------------------------------
 	"AttackCapabilities"    "DOTA_UNIT_CAP_RANGED_ATTACK"
-	"AttackDamageType"      "DOTA_COMBAT_CLASS_ATTACK_BASIC"
-	"AttackDamageMin"       "40"
-	"AttackDamageMax"       "50"
-	"AttackRate"            "1"
+	"AttackDamageType"      "DOTA_COMBAT_CLASS_ATTACK_PIERCE"
+	"AttackDamageMin"       "12"
+	"AttackDamageMax"       "15"
+	"AttackRate"            "0.7"
 	"AttackAnimationPoint"  "0.7"
 	"AttackAcquisitionRange" "1200"
-	"AttackRange"           "400"
-	"CombatClassAttack"     "DOTA_COMBAT_CLASS_ATTACK_BASIC"
-	"CombatClassDefend"     "DOTA_COMBAT_CLASS_DEFEND_BASIC"
+	"AttackRange"           "480"
+	"CombatClassAttack"     "DOTA_COMBAT_CLASS_ATTACK_PIERCE"
+	"CombatClassDefend"     "DOTA_COMBAT_CLASS_DEFEND_SOFT"
 	"ProjectileModel"		"particles/units/heroes/hero_clinkz/clinkz_base_attack.vpcf"
 	"ProjectileSpeed"		"900"
 
@@ -264,8 +347,8 @@
 		"DisableClumpingBehavior"       "1"
 		"AttachWearables"
 		{
-			"Wearable0" { "ItemDef" "56" }
-			"Wearable1" { "ItemDef" "57" }
+			"Wearable0" { "ItemDef" "4618" }
+			"Wearable1" { "ItemDef" "56" }
 			"Wearable2" { "ItemDef" "58" }
 			"Wearable3" { "ItemDef" "59" }
 			"Wearable4" { "ItemDef" "60" }
@@ -286,16 +369,18 @@
 	"GameSoundsFile"        "soundevents/game_sounds_heroes/game_sounds_clinkz.vsndevts"
 	"VoiceFile" 			"soundevents/voscripts/game_sounds_vo_clinkz.vsndevts"
 	"particle_folder"		"particles/units/heroes/hero_clinkz"
+	"vscripts"				""
 
 	// Upgrades
 	//----------------------------------------------------------------
-	"Ability1"	"sell_unit_fire"
+	"Ability1"	"ability_fire_flame_archer_splitshot"
+	"Ability2"	"sell_unit_fire"
 
 
 	// Status
 	//----------------------------------------------------------------
 	"Level"                 "10"
-	"StatusHealth"          "500"
+	"StatusHealth"          "650"
 	"StatusHealthRegen"     "0.5"
 	"StatusMana"            "0"
 	"StatusManaRegen"       "0"
@@ -303,21 +388,21 @@
 
 	// Armor
 	//----------------------------------------------------------------
-	"ArmorPhysical"         "6"
-	"MagicalResistance"     "4"
+	"ArmorPhysical"         "3"
+	"MagicalResistance"     "3"
 
 	// Attack
 	//----------------------------------------------------------------
 	"AttackCapabilities"    "DOTA_UNIT_CAP_RANGED_ATTACK"
-	"AttackDamageType"      "DOTA_COMBAT_CLASS_ATTACK_BASIC"
-	"AttackDamageMin"       "60"
-	"AttackDamageMax"       "80"
-	"AttackRate"            "1"
+	"AttackDamageType"      "DOTA_COMBAT_CLASS_ATTACK_PIERCE"
+	"AttackDamageMin"       "14"
+	"AttackDamageMax"       "16"
+	"AttackRate"            "0.6"
 	"AttackAnimationPoint"  "0.7"
 	"AttackAcquisitionRange" "1200"
 	"AttackRange"           "500"
-	"CombatClassAttack"     "DOTA_COMBAT_CLASS_ATTACK_BASIC"
-	"CombatClassDefend"     "DOTA_COMBAT_CLASS_DEFEND_BASIC"
+	"CombatClassAttack"     "DOTA_COMBAT_CLASS_ATTACK_PIERCE"
+	"CombatClassDefend"     "DOTA_COMBAT_CLASS_DEFEND_SOFT"
 	"ProjectileModel"		"particles/units/heroes/hero_clinkz/clinkz_base_attack.vpcf"
 	"ProjectileSpeed"		"1000"
 
@@ -354,12 +439,12 @@
 		"DisableClumpingBehavior"       "1"
 		"AttachWearables"
 		{
-			"Wearable0" { "ItemDef" "56" }
-			"Wearable1" { "ItemDef" "57" }
-			"Wearable2" { "ItemDef" "58" }
-			"Wearable3" { "ItemDef" "59" }
-			"Wearable4" { "ItemDef" "60" }
-			"Wearable5" { "ItemDef" "61" }
+			"Wearable0" { "ItemDef" "4618" }
+			"Wearable1" { "ItemDef" "5153" }
+			"Wearable2" { "ItemDef" "5155" }
+			"Wearable3" { "ItemDef" "56" }
+			"Wearable4" { "ItemDef" "59" }
+			"Wearable5" { "ItemDef" "60" }
 			"Wearable6" { "ItemDef" "523" }
 
 		}
@@ -376,6 +461,7 @@
 	"GameSoundsFile"        "soundevents/game_sounds_heroes/game_sounds_sven.vsndevts"
 	"VoiceFile" 			"soundevents/voscripts/game_sounds_vo_sven.vsndevts"
 	"particle_folder"		"particles/units/heroes/hero_sven"
+	"vscripts"				""
 
 	// Upgrades
 	//----------------------------------------------------------------
@@ -386,7 +472,7 @@
 	// Status
 	//----------------------------------------------------------------
 	"Level"                 "5"
-	"StatusHealth"          "750"
+	"StatusHealth"          "380"
 	"StatusHealthRegen"     "1"
 	"StatusMana"            "0"
 	"StatusManaRegen"       "0"
@@ -394,21 +480,21 @@
 
 	// Armor
 	//----------------------------------------------------------------
-	"ArmorPhysical"         "8"
+	"ArmorPhysical"         "5"
 	"MagicalResistance"     "2"
 
 	// Attack
 	//----------------------------------------------------------------
 	"AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
 	"AttackDamageType"      "DOTA_COMBAT_CLASS_ATTACK_BASIC"
-	"AttackDamageMin"       "70"
-	"AttackDamageMax"       "75"
-	"AttackRate"            "1"
+	"AttackDamageMin"       "55"
+	"AttackDamageMax"       "60"
+	"AttackRate"            "1.2"
 	"AttackAnimationPoint"  "0.4"
 	"AttackAcquisitionRange" "1200"
 	"AttackRange"           "90"
 	"CombatClassAttack"     "DOTA_COMBAT_CLASS_ATTACK_BASIC"
-	"CombatClassDefend"     "DOTA_COMBAT_CLASS_DEFEND_BASIC"
+	"CombatClassDefend"     "DOTA_COMBAT_CLASS_DEFEND_STRONG"
 	"ProjectileModel"		""
 	"ProjectileSpeed"		"0"
 
@@ -467,16 +553,18 @@
 	"GameSoundsFile"        "soundevents/game_sounds_heroes/game_sounds_sven.vsndevts"
 	"VoiceFile" 			"soundevents/voscripts/game_sounds_vo_sven.vsndevts"
 	"particle_folder"		"particles/units/heroes/hero_sven"
+	"vscripts"				""
 
 	// Upgrades
 	//----------------------------------------------------------------
-	"Ability1"	"sell_unit_fire"
+	"Ability1"	"ability_fire_vanguard_stacking_damage"
+	"Ability2"	"sell_unit_fire"
 
 
 	// Status
 	//----------------------------------------------------------------
 	"Level"                 "10"
-	"StatusHealth"          "1100"
+	"StatusHealth"          "1200"
 	"StatusHealthRegen"     "1"
 	"StatusMana"            "0"
 	"StatusManaRegen"       "0"
@@ -484,21 +572,21 @@
 
 	// Armor
 	//----------------------------------------------------------------
-	"ArmorPhysical"         "10"
-	"MagicalResistance"     "4"
+	"ArmorPhysical"         "7"
+	"MagicalResistance"     "2"
 
 	// Attack
 	//----------------------------------------------------------------
 	"AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
 	"AttackDamageType"      "DOTA_COMBAT_CLASS_ATTACK_BASIC"
-	"AttackDamageMin"       "95"
-	"AttackDamageMax"       "105"
-	"AttackRate"            "1"
+	"AttackDamageMin"       "60"
+	"AttackDamageMax"       "66"
+	"AttackRate"            "0.7"
 	"AttackAnimationPoint"  "0.4"
 	"AttackAcquisitionRange" "1200"
 	"AttackRange"           "90"
 	"CombatClassAttack"     "DOTA_COMBAT_CLASS_ATTACK_BASIC"
-	"CombatClassDefend"     "DOTA_COMBAT_CLASS_DEFEND_BASIC"
+	"CombatClassDefend"     "DOTA_COMBAT_CLASS_DEFEND_HERO"
 	"ProjectileModel"		""
 	"ProjectileSpeed"		"0"
 
@@ -552,45 +640,47 @@
 	//----------------------------------------------------------------
 	"BaseClass"             "npc_dota_creature"
 	"Model"                 "models/heroes/ember_spirit/ember_spirit.vmdl"
-	"ModelScale"            "0.80"
+	"ModelScale"            "0.60"
 	"SoundSet"              "Hero_EmberSpirit"
 	"GameSoundsFile"        "soundevents/game_sounds_heroes/game_sounds_ember_spirit.vsndevts"
 	"VoiceFile" 			"soundevents/voscripts/game_sounds_vo_ember_spirit.vsndevts"
 	"particle_folder"		"particles/units/heroes/hero_ember_spirit"
+	"vscripts"				"ai/healer.lua"
 
 	// Upgrades
 	//----------------------------------------------------------------
-	"Ability1"	"upgrade_unit_fire_firestarter_upg_melee"
-	"Ability2"	"upgrade_unit_fire_firestarter_upg_ranged"
-	"Ability3"	"sell_unit_fire"
+	"Ability1"	"ability_fire_firestarter_heal"
+	"Ability2"	"upgrade_unit_fire_firestarter_upg_heal"
+	"Ability3"	"upgrade_unit_fire_firestarter_upg_damage"
+	"Ability4"	"sell_unit_fire"
 
 
 	// Status
 	//----------------------------------------------------------------
 	"Level"                 "5"
-	"StatusHealth"          "600"
+	"StatusHealth"          "450"
 	"StatusHealthRegen"     "1"
-	"StatusMana"            "10"
+	"StatusMana"            "50"
 	"StatusManaRegen"       "2"
 	"HasInventory"          "0"
 
 	// Armor
 	//----------------------------------------------------------------
-	"ArmorPhysical"         "4"
-	"MagicalResistance"     "4"
+	"ArmorPhysical"         "2"
+	"MagicalResistance"     "3"
 
 	// Attack
 	//----------------------------------------------------------------
-	"AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
-	"AttackDamageType"      "DOTA_COMBAT_CLASS_ATTACK_BASIC"
-	"AttackDamageMin"       "60"
-	"AttackDamageMax"       "80"
-	"AttackRate"            "0.7"
+	"AttackCapabilities"    "DOTA_UNIT_CAP_RANGED_ATTACK"
+	"AttackDamageType"      "DOTA_COMBAT_CLASS_ATTACK_HERO"
+	"AttackDamageMin"       "54"
+	"AttackDamageMax"       "62"
+	"AttackRate"            "1.0"
 	"AttackAnimationPoint"  "0.4"
 	"AttackAcquisitionRange" "1200"
-	"AttackRange"           "90"
-	"CombatClassAttack"     "DOTA_COMBAT_CLASS_ATTACK_BASIC"
-	"CombatClassDefend"     "DOTA_COMBAT_CLASS_DEFEND_BASIC"
+	"AttackRange"           "500"
+	"CombatClassAttack"     "DOTA_COMBAT_CLASS_ATTACK_HERO"
+	"CombatClassDefend"     "DOTA_COMBAT_CLASS_DEFEND_SOFT"
 	"ProjectileModel"		""
 	"ProjectileSpeed"		"0"
 
@@ -637,49 +727,142 @@
 		}
 	}
 }
-"npc_legion_fire_firestarter_upg_melee"
+"npc_legion_fire_firestarter_upg_heal"
 {
 	// General
 	//----------------------------------------------------------------
 	"BaseClass"             "npc_dota_creature"
 	"Model"                 "models/heroes/ember_spirit/ember_spirit.vmdl"
-	"ModelScale"            "0.90"
+	"ModelScale"            "0.85"
 	"SoundSet"              "Hero_EmberSpirit"
 	"GameSoundsFile"        "soundevents/game_sounds_heroes/game_sounds_ember_spirit.vsndevts"
 	"VoiceFile" 			"soundevents/voscripts/game_sounds_vo_ember_spirit.vsndevts"
 	"particle_folder"		"particles/units/heroes/hero_ember_spirit"
+	"vscripts"				"ai/healer.lua"
 
 	// Upgrades
 	//----------------------------------------------------------------
-	"Ability1"	"sell_unit_fire"
+	"Ability1"	"ability_fire_firestarter_mass_heal"
+	"Ability2"	"sell_unit_fire"
 
 
 	// Status
 	//----------------------------------------------------------------
 	"Level"                 "10"
-	"StatusHealth"          "600"
+	"StatusHealth"          "850"
 	"StatusHealthRegen"     "1"
-	"StatusMana"            "10"
-	"StatusManaRegen"       "2"
+	"StatusMana"            "100"
+	"StatusManaRegen"       "4"
 	"HasInventory"          "0"
 
 	// Armor
 	//----------------------------------------------------------------
-	"ArmorPhysical"         "6"
-	"MagicalResistance"     "0"
+	"ArmorPhysical"         "2"
+	"MagicalResistance"     "3"
 
 	// Attack
 	//----------------------------------------------------------------
-	"AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
-	"AttackDamageType"      "DOTA_COMBAT_CLASS_ATTACK_BASIC"
-	"AttackDamageMin"       "60"
-	"AttackDamageMax"       "80"
-	"AttackRate"            "0.7"
+	"AttackCapabilities"    "DOTA_UNIT_CAP_RANGED_ATTACK"
+	"AttackDamageType"      "DOTA_COMBAT_CLASS_ATTACK_HERO"
+	"AttackDamageMin"       "120"
+	"AttackDamageMax"       "134"
+	"AttackRate"            "1.0"
 	"AttackAnimationPoint"  "0.4"
 	"AttackAcquisitionRange" "1200"
-	"AttackRange"           "90"
-	"CombatClassAttack"     "DOTA_COMBAT_CLASS_ATTACK_BASIC"
-	"CombatClassDefend"     "DOTA_COMBAT_CLASS_DEFEND_BASIC"
+	"AttackRange"           "500"
+	"CombatClassAttack"     "DOTA_COMBAT_CLASS_ATTACK_HERO"
+	"CombatClassDefend"     "DOTA_COMBAT_CLASS_DEFEND_SOFT"
+	"ProjectileModel"		""
+	"ProjectileSpeed"		"900"
+
+	// Movement
+	//----------------------------------------------------------------
+	"MovementCapabilities"  "DOTA_UNIT_CAP_MOVE_GROUND"
+	"MovementSpeed"         "300"
+	"MovementTurnRate"      "0.7"
+
+	// Bounty
+	//----------------------------------------------------------------
+	"BountyGoldMin"         "25"
+	"BountyGoldMax"         "25"
+
+	// Bounds
+	//----------------------------------------------------------------
+	"BoundsHullName"        "DOTA_HULL_SIZE_HERO"
+	"RingRadius"            "70"
+
+	// Vision
+	//----------------------------------------------------------------
+	"VisionDaytimeRange"    "1400"
+	"VisionNighttimeRange"  "800"
+
+	// Team
+	//----------------------------------------------------------------
+	"TeamName"              "DOTA_TEAM_NEUTRALS"
+	"UnitRelationShipClass" "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+	// Creature Data
+	//----------------------------------------------------------------
+	"Creature"
+	{
+		"DisableClumpingBehavior"       "1"
+		"AttachWearables"
+		{
+			"Wearable0" { "ItemDef" "7470" }
+			"Wearable1" { "ItemDef" "7472" }
+			"Wearable2" { "ItemDef" "5878" }
+			"Wearable3" { "ItemDef" "469" }
+			"Wearable4" { "ItemDef" "471" }
+			"Wearable5" { "ItemDef" "474" }
+
+		}
+	}
+}
+"npc_legion_fire_firestarter_upg_damage"
+{
+	// General
+	//----------------------------------------------------------------
+	"BaseClass"             "npc_dota_creature"
+	"Model"                 "models/heroes/ember_spirit/ember_spirit.vmdl"
+	"ModelScale"            "0.80"
+	"SoundSet"              "Hero_EmberSpirit"
+	"GameSoundsFile"        "soundevents/game_sounds_heroes/game_sounds_ember_spirit.vsndevts"
+	"VoiceFile" 			"soundevents/voscripts/game_sounds_vo_ember_spirit.vsndevts"
+	"particle_folder"		"particles/units/heroes/hero_ember_spirit"
+	"vscripts"				""
+
+	// Upgrades
+	//----------------------------------------------------------------
+	"Ability1"	"ability_fire_firestarter_immolate"
+	"Ability2"	"sell_unit_fire"
+
+
+	// Status
+	//----------------------------------------------------------------
+	"Level"                 "10"
+	"StatusHealth"          "1000"
+	"StatusHealthRegen"     "2"
+	"StatusMana"            "0"
+	"StatusManaRegen"       "0"
+	"HasInventory"          "0"
+
+	// Armor
+	//----------------------------------------------------------------
+	"ArmorPhysical"         "4"
+	"MagicalResistance"     "4"
+
+	// Attack
+	//----------------------------------------------------------------
+	"AttackCapabilities"    "DOTA_UNIT_CAP_RANGED_ATTACK"
+	"AttackDamageType"      "DOTA_COMBAT_CLASS_ATTACK_SIEGE"
+	"AttackDamageMin"       "150"
+	"AttackDamageMax"       "160"
+	"AttackRate"            "0.8"
+	"AttackAnimationPoint"  "0.4"
+	"AttackAcquisitionRange" "1200"
+	"AttackRange"           "500"
+	"CombatClassAttack"     "DOTA_COMBAT_CLASS_ATTACK_SIEGE"
+	"CombatClassDefend"     "DOTA_COMBAT_CLASS_DEFEND_STRONG"
 	"ProjectileModel"		""
 	"ProjectileSpeed"		"0"
 
@@ -716,128 +899,40 @@
 		"DisableClumpingBehavior"       "1"
 		"AttachWearables"
 		{
-			"Wearable0" { "ItemDef" "462" }
-			"Wearable1" { "ItemDef" "469" }
-			"Wearable2" { "ItemDef" "471" }
-			"Wearable3" { "ItemDef" "472" }
-			"Wearable4" { "ItemDef" "473" }
-			"Wearable5" { "ItemDef" "474" }
+			"Wearable0" { "ItemDef" "6013" }
+			"Wearable1" { "ItemDef" "6018" }
+			"Wearable2" { "ItemDef" "6015" }
+			"Wearable3" { "ItemDef" "6014" }
+			"Wearable4" { "ItemDef" "472" }
+			"Wearable5" { "ItemDef" "473" }
 
 		}
 	}
 }
-"npc_legion_fire_firestarter_upg_ranged"
+"npc_legion_fire_flamebound"
 {
 	// General
 	//----------------------------------------------------------------
 	"BaseClass"             "npc_dota_creature"
-	"Model"                 "models/heroes/ember_spirit/ember_spirit.vmdl"
-	"ModelScale"            "1.00"
-	"SoundSet"              "Hero_EmberSpirit"
-	"GameSoundsFile"        "soundevents/game_sounds_heroes/game_sounds_ember_spirit.vsndevts"
-	"VoiceFile" 			"soundevents/voscripts/game_sounds_vo_ember_spirit.vsndevts"
-	"particle_folder"		"particles/units/heroes/hero_ember_spirit"
+	"Model"                 "models/heroes/lion/lion.vmdl"
+	"ModelScale"            "0.80"
+	"SoundSet"              "Hero_Lion"
+	"GameSoundsFile"        "soundevents/game_sounds_heroes/game_sounds_lion.vsndevts"
+	"VoiceFile" 			"soundevents/voscripts/game_sounds_vo_lion.vsndevts"
+	"particle_folder"		"particles/units/heroes/hero_lion"
+	"vscripts"				""
 
 	// Upgrades
 	//----------------------------------------------------------------
-	"Ability1"	"sell_unit_fire"
-
-
-	// Status
-	//----------------------------------------------------------------
-	"Level"                 "10"
-	"StatusHealth"          "600"
-	"StatusHealthRegen"     "1"
-	"StatusMana"            "10"
-	"StatusManaRegen"       "2"
-	"HasInventory"          "0"
-
-	// Armor
-	//----------------------------------------------------------------
-	"ArmorPhysical"         "5"
-	"MagicalResistance"     "5"
-
-	// Attack
-	//----------------------------------------------------------------
-	"AttackCapabilities"    "DOTA_UNIT_CAP_RANGED_ATTACK"
-	"AttackDamageType"      "DOTA_COMBAT_CLASS_ATTACK_BASIC"
-	"AttackDamageMin"       "60"
-	"AttackDamageMax"       "80"
-	"AttackRate"            "0.7"
-	"AttackAnimationPoint"  "0.4"
-	"AttackAcquisitionRange" "1200"
-	"AttackRange"           "450"
-	"CombatClassAttack"     "DOTA_COMBAT_CLASS_ATTACK_BASIC"
-	"CombatClassDefend"     "DOTA_COMBAT_CLASS_DEFEND_BASIC"
-	"ProjectileModel"		""
-	"ProjectileSpeed"		"900"
-
-	// Movement
-	//----------------------------------------------------------------
-	"MovementCapabilities"  "DOTA_UNIT_CAP_MOVE_GROUND"
-	"MovementSpeed"         "330"
-	"MovementTurnRate"      "0.7"
-
-	// Bounty
-	//----------------------------------------------------------------
-	"BountyGoldMin"         "25"
-	"BountyGoldMax"         "25"
-
-	// Bounds
-	//----------------------------------------------------------------
-	"BoundsHullName"        "DOTA_HULL_SIZE_HERO"
-	"RingRadius"            "70"
-
-	// Vision
-	//----------------------------------------------------------------
-	"VisionDaytimeRange"    "1400"
-	"VisionNighttimeRange"  "800"
-
-	// Team
-	//----------------------------------------------------------------
-	"TeamName"              "DOTA_TEAM_NEUTRALS"
-	"UnitRelationShipClass" "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
-
-	// Creature Data
-	//----------------------------------------------------------------
-	"Creature"
-	{
-		"DisableClumpingBehavior"       "1"
-		"AttachWearables"
-		{
-			"Wearable0" { "ItemDef" "462" }
-			"Wearable1" { "ItemDef" "469" }
-			"Wearable2" { "ItemDef" "471" }
-			"Wearable3" { "ItemDef" "472" }
-			"Wearable4" { "ItemDef" "473" }
-			"Wearable5" { "ItemDef" "474" }
-
-		}
-	}
-}
-"npc_legion_fire_flame_drake"
-{
-	// General
-	//----------------------------------------------------------------
-	"BaseClass"             "npc_dota_creature"
-	"Model"                 "models/heroes/twin_headed_dragon/twin_headed_dragon.vmdl"
-	"ModelScale"            "1.00"
-	"SoundSet"              "Hero_Jakiro"
-	"GameSoundsFile"        "soundevents/game_sounds_heroes/game_sounds_jakiro.vsndevts"
-	"VoiceFile" 			"soundevents/voscripts/game_sounds_vo_jakiro.vsndevts"
-	"particle_folder"		"particles/units/heroes/hero_jakiro"
-
-	// Upgrades
-	//----------------------------------------------------------------
-	"Ability1"	"upgrade_unit_fire_flame_drake_upg"
+	"Ability1"	"upgrade_unit_fire_flamebound_upg"
 	"Ability2"	"sell_unit_fire"
 
 
 	// Status
 	//----------------------------------------------------------------
 	"Level"                 "5"
-	"StatusHealth"          "1000"
-	"StatusHealthRegen"     "4"
+	"StatusHealth"          "880"
+	"StatusHealthRegen"     "2"
 	"StatusMana"            "20"
 	"StatusManaRegen"       "2"
 	"HasInventory"          "0"
@@ -845,20 +940,20 @@
 	// Armor
 	//----------------------------------------------------------------
 	"ArmorPhysical"         "4"
-	"MagicalResistance"     "6"
+	"MagicalResistance"     "2"
 
 	// Attack
 	//----------------------------------------------------------------
-	"AttackCapabilities"    "DOTA_UNIT_CAP_RANGED_ATTACK"
+	"AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
 	"AttackDamageType"      "DOTA_COMBAT_CLASS_ATTACK_BASIC"
-	"AttackDamageMin"       "100"
-	"AttackDamageMax"       "120"
-	"AttackRate"            "0.8"
-	"AttackAnimationPoint"  "0.4"
+	"AttackDamageMin"       "72"
+	"AttackDamageMax"       "80"
+	"AttackRate"            "0.9"
+	"AttackAnimationPoint"  "0.43"
 	"AttackAcquisitionRange" "1200"
 	"AttackRange"           "400"
 	"CombatClassAttack"     "DOTA_COMBAT_CLASS_ATTACK_BASIC"
-	"CombatClassDefend"     "DOTA_COMBAT_CLASS_DEFEND_BASIC"
+	"CombatClassDefend"     "DOTA_COMBAT_CLASS_DEFEND_STRONG"
 	"ProjectileModel"		"particles/units/heroes/hero_jakiro/jakiro_base_attack.vpcf"
 	"ProjectileSpeed"		"1000"
 
@@ -895,53 +990,60 @@
 		"DisableClumpingBehavior"       "1"
 		"AttachWearables"
 		{
+			"Wearable0" { "ItemDef" "5462" }
+			"Wearable1" { "ItemDef" "5459" }
+			"Wearable2" { "ItemDef" "366" }
+			"Wearable3" { "ItemDef" "368" }
+			"Wearable4" { "ItemDef" "572" }
 
 		}
 	}
 }
-"npc_legion_fire_flame_drake_upg"
+"npc_legion_fire_flamebound_upg"
 {
 	// General
 	//----------------------------------------------------------------
 	"BaseClass"             "npc_dota_creature"
-	"Model"                 "models/heroes/twin_headed_dragon/twin_headed_dragon.vmdl"
-	"ModelScale"            "1.10"
-	"SoundSet"              "Hero_Jakiro"
-	"GameSoundsFile"        "soundevents/game_sounds_heroes/game_sounds_jakiro.vsndevts"
-	"VoiceFile" 			"soundevents/voscripts/game_sounds_vo_jakiro.vsndevts"
-	"particle_folder"		"particles/units/heroes/hero_jakiro"
+	"Model"                 "models/heroes/lion/lion.vmdl"
+	"ModelScale"            "1.00"
+	"SoundSet"              "Hero_Lion"
+	"GameSoundsFile"        "soundevents/game_sounds_heroes/game_sounds_lion.vsndevts"
+	"VoiceFile" 			"soundevents/voscripts/game_sounds_vo_lion.vsndevts"
+	"particle_folder"		"particles/units/heroes/hero_lion"
+	"vscripts"				"ai/stunner.lua"
 
 	// Upgrades
 	//----------------------------------------------------------------
-	"Ability1"	"sell_unit_fire"
+	"Ability1"	"ability_fire_flamebound_stun"
+	"Ability2"	"sell_unit_fire"
 
 
 	// Status
 	//----------------------------------------------------------------
 	"Level"                 "10"
-	"StatusHealth"          "1400"
-	"StatusHealthRegen"     "6"
+	"StatusHealth"          "1750"
+	"StatusHealthRegen"     "3"
 	"StatusMana"            "50"
 	"StatusManaRegen"       "8"
 	"HasInventory"          "0"
 
 	// Armor
 	//----------------------------------------------------------------
-	"ArmorPhysical"         "6"
-	"MagicalResistance"     "8"
+	"ArmorPhysical"         "5"
+	"MagicalResistance"     "3"
 
 	// Attack
 	//----------------------------------------------------------------
-	"AttackCapabilities"    "DOTA_UNIT_CAP_RANGED_ATTACK"
+	"AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
 	"AttackDamageType"      "DOTA_COMBAT_CLASS_ATTACK_BASIC"
-	"AttackDamageMin"       "140"
-	"AttackDamageMax"       "160"
-	"AttackRate"            "0.8"
-	"AttackAnimationPoint"  "0.4"
+	"AttackDamageMin"       "182"
+	"AttackDamageMax"       "190"
+	"AttackRate"            "1.0"
+	"AttackAnimationPoint"  "0.43"
 	"AttackAcquisitionRange" "1200"
 	"AttackRange"           "500"
 	"CombatClassAttack"     "DOTA_COMBAT_CLASS_ATTACK_BASIC"
-	"CombatClassDefend"     "DOTA_COMBAT_CLASS_DEFEND_BASIC"
+	"CombatClassDefend"     "DOTA_COMBAT_CLASS_DEFEND_STRONG"
 	"ProjectileModel"		"particles/units/heroes/hero_jakiro/jakiro_base_attack.vpcf"
 	"ProjectileSpeed"		"1000"
 
@@ -978,35 +1080,41 @@
 		"DisableClumpingBehavior"       "1"
 		"AttachWearables"
 		{
+			"Wearable0" { "ItemDef" "5462" }
+			"Wearable1" { "ItemDef" "5459" }
+			"Wearable2" { "ItemDef" "5460" }
+			"Wearable3" { "ItemDef" "5461" }
+			"Wearable4" { "ItemDef" "572" }
 
 		}
 	}
 }
-"npc_legion_fire_demon_summoner"
+"npc_legion_fire_pyromancer"
 {
 	// General
 	//----------------------------------------------------------------
 	"BaseClass"             "npc_dota_creature"
 	"Model"                 "models/heroes/warlock/warlock.vmdl"
-	"ModelScale"            "1.00"
+	"ModelScale"            "0.70"
 	"SoundSet"              "Hero_Warlock"
 	"GameSoundsFile"        "soundevents/game_sounds_heroes/game_sounds_warlock.vsndevts"
 	"VoiceFile" 			"soundevents/voscripts/game_sounds_vo_warlock.vsndevts"
 	"particle_folder"		"particles/units/heroes/hero_warlock"
+	"vscripts"				""
 
 	// Upgrades
 	//----------------------------------------------------------------
-	"Ability1"	"upgrade_unit_fire_demon_summoner_upg"
+	"Ability1"	"upgrade_unit_fire_pyromancer_upg"
 	"Ability2"	"sell_unit_fire"
 
 
 	// Status
 	//----------------------------------------------------------------
 	"Level"                 "5"
-	"StatusHealth"          "1200"
+	"StatusHealth"          "1500"
 	"StatusHealthRegen"     "2"
-	"StatusMana"            "100"
-	"StatusManaRegen"       "2"
+	"StatusMana"            "0"
+	"StatusManaRegen"       "0"
 	"HasInventory"          "0"
 
 	// Armor
@@ -1016,18 +1124,18 @@
 
 	// Attack
 	//----------------------------------------------------------------
-	"AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
-	"AttackDamageType"      "DOTA_COMBAT_CLASS_ATTACK_BASIC"
-	"AttackDamageMin"       "50"
-	"AttackDamageMax"       "60"
-	"AttackRate"            "0.9"
+	"AttackCapabilities"    "DOTA_UNIT_CAP_RANGED_ATTACK"
+	"AttackDamageType"      "DOTA_COMBAT_CLASS_ATTACK_HERO"
+	"AttackDamageMin"       "120"
+	"AttackDamageMax"       "128"
+	"AttackRate"            "0.8"
 	"AttackAnimationPoint"  "0.3"
 	"AttackAcquisitionRange" "1200"
-	"AttackRange"           "90"
-	"CombatClassAttack"     "DOTA_COMBAT_CLASS_ATTACK_BASIC"
-	"CombatClassDefend"     "DOTA_COMBAT_CLASS_DEFEND_BASIC"
+	"AttackRange"           "500"
+	"CombatClassAttack"     "DOTA_COMBAT_CLASS_ATTACK_HERO"
+	"CombatClassDefend"     "DOTA_COMBAT_CLASS_DEFEND_HERO"
 	"ProjectileModel"		""
-	"ProjectileSpeed"		"0"
+	"ProjectileSpeed"		"900"
 
 	// Movement
 	//----------------------------------------------------------------
@@ -1062,9 +1170,9 @@
 		"DisableClumpingBehavior"       "1"
 		"AttachWearables"
 		{
-			"Wearable0" { "ItemDef" "182" }
-			"Wearable1" { "ItemDef" "239" }
-			"Wearable2" { "ItemDef" "240" }
+			"Wearable0" { "ItemDef" "4475" }
+			"Wearable1" { "ItemDef" "182" }
+			"Wearable2" { "ItemDef" "239" }
 			"Wearable3" { "ItemDef" "241" }
 			"Wearable4" { "ItemDef" "242" }
 			"Wearable5" { "ItemDef" "243" }
@@ -1074,30 +1182,32 @@
 		}
 	}
 }
-"npc_legion_fire_demon_summoner_upg"
+"npc_legion_fire_pyromancer_upg"
 {
 	// General
 	//----------------------------------------------------------------
 	"BaseClass"             "npc_dota_creature"
 	"Model"                 "models/heroes/warlock/warlock.vmdl"
-	"ModelScale"            "1.20"
+	"ModelScale"            "0.90"
 	"SoundSet"              "Hero_Warlock"
 	"GameSoundsFile"        "soundevents/game_sounds_heroes/game_sounds_warlock.vsndevts"
 	"VoiceFile" 			"soundevents/voscripts/game_sounds_vo_warlock.vsndevts"
 	"particle_folder"		"particles/units/heroes/hero_warlock"
+	"vscripts"				""
 
 	// Upgrades
 	//----------------------------------------------------------------
-	"Ability1"	"sell_unit_fire"
+	"Ability1"	"ability_fire_pyromancer_bounce_attack"
+	"Ability2"	"sell_unit_fire"
 
 
 	// Status
 	//----------------------------------------------------------------
 	"Level"                 "10"
-	"StatusHealth"          "1800"
+	"StatusHealth"          "2750"
 	"StatusHealthRegen"     "5"
-	"StatusMana"            "100"
-	"StatusManaRegen"       "4"
+	"StatusMana"            "0"
+	"StatusManaRegen"       "0"
 	"HasInventory"          "0"
 
 	// Armor
@@ -1107,18 +1217,18 @@
 
 	// Attack
 	//----------------------------------------------------------------
-	"AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
-	"AttackDamageType"      "DOTA_COMBAT_CLASS_ATTACK_BASIC"
-	"AttackDamageMin"       "90"
-	"AttackDamageMax"       "100"
-	"AttackRate"            "0.9"
+	"AttackCapabilities"    "DOTA_UNIT_CAP_RANGED_ATTACK"
+	"AttackDamageType"      "DOTA_COMBAT_CLASS_ATTACK_HERO"
+	"AttackDamageMin"       "300"
+	"AttackDamageMax"       "320"
+	"AttackRate"            "1.3"
 	"AttackAnimationPoint"  "0.3"
 	"AttackAcquisitionRange" "1200"
-	"AttackRange"           "90"
-	"CombatClassAttack"     "DOTA_COMBAT_CLASS_ATTACK_BASIC"
-	"CombatClassDefend"     "DOTA_COMBAT_CLASS_DEFEND_BASIC"
+	"AttackRange"           "500"
+	"CombatClassAttack"     "DOTA_COMBAT_CLASS_ATTACK_HERO"
+	"CombatClassDefend"     "DOTA_COMBAT_CLASS_DEFEND_HERO"
 	"ProjectileModel"		""
-	"ProjectileSpeed"		"0"
+	"ProjectileSpeed"		"900"
 
 	// Movement
 	//----------------------------------------------------------------
@@ -1153,9 +1263,9 @@
 		"DisableClumpingBehavior"       "1"
 		"AttachWearables"
 		{
-			"Wearable0" { "ItemDef" "182" }
-			"Wearable1" { "ItemDef" "239" }
-			"Wearable2" { "ItemDef" "240" }
+			"Wearable0" { "ItemDef" "4475" }
+			"Wearable1" { "ItemDef" "4468" }
+			"Wearable2" { "ItemDef" "182" }
 			"Wearable3" { "ItemDef" "241" }
 			"Wearable4" { "ItemDef" "242" }
 			"Wearable5" { "ItemDef" "243" }
