@@ -34,18 +34,19 @@ local CurrencyParticles = {
 	}
 }
 
-function PlayCurrencyLostParticles( sCurrency, lPrice, eUnit )
+function PlayCurrencyLostParticles( sCurrency, lPrice, eUnit, bSupressSound )
 
 	local data = CurrencyParticles[sCurrency] and CurrencyParticles[sCurrency].lost
 	if data then
 
-		eUnit:EmitSound( lPrice < data.amountLarge and data.sound or data.soundLarge )
+		if not bSupressSound then
+			eUnit:EmitSound( lPrice < data.amountLarge and data.sound or data.soundLarge )
+		end
 
 		local particle = ParticleManager:CreateParticle(data.particle, PATTACH_POINT_FOLLOW, eUnit)
 		ParticleManager:SetParticleControl( particle, 1, eUnit:GetCenter() )
 		ParticleManager:SetParticleControl( particle, 2, Vector(data.numParticles(lPrice), 0, 0) )
 		ParticleManager:SetParticleControl( particle, 3, Vector(0.2, 0.2, 0.2) )
-
 		ParticleManager:SetParticleControlEnt( particle, 4, eUnit, PATTACH_POINT_FOLLOW, "attach_hitloc", eUnit:GetCenter(), true )
 
 		ParticleManager:ReleaseParticleIndex( particle )
@@ -54,18 +55,21 @@ function PlayCurrencyLostParticles( sCurrency, lPrice, eUnit )
 
 end
 
-function PlayCurrencyGainedParticles( sCurrency, lPrice, eUnit )
+function PlayCurrencyGainedParticles( sCurrency, lPrice, eUnit, vSpawnPosition, bSupressSound )
 
 	local data = CurrencyParticles[sCurrency] and CurrencyParticles[sCurrency].gained
 	if data then
 
-		eUnit:EmitSound( lPrice < data.amountLarge and data.sound or data.soundLarge )
+		vSpawnPosition = vSpawnPosition or (eUnit:GetCenter() + Vector(0, 0, 200))
+
+		if not bSupressSound then
+			eUnit:EmitSound( lPrice < data.amountLarge and data.sound or data.soundLarge )
+		end
 
 		local particle = ParticleManager:CreateParticle(data.particle, PATTACH_POINT_FOLLOW, eUnit)
-		ParticleManager:SetParticleControl( particle, 1, eUnit:GetCenter() )
+		ParticleManager:SetParticleControl( particle, 1, vSpawnPosition )
 		ParticleManager:SetParticleControl( particle, 2, Vector(data.numParticles(lPrice), 0, 0) )
 		ParticleManager:SetParticleControl( particle, 3, Vector(0.2, 0.2, 0.2) )
-		ParticleManager:SetParticleControl( particle, 4, eUnit:GetCenter() + Vector(0, 0, 100) )
 
 		ParticleManager:SetParticleControlEnt( particle, 4, eUnit, PATTACH_POINT_FOLLOW, "attach_hitloc", eUnit:GetCenter(), true )
 
@@ -115,5 +119,18 @@ function GetUnitUniqueAbilities( hUnit )
 	end
 
 	return abilities
+
+end
+
+function ShowGoldPopup( target, amount, lifetime, color )
+
+	local particle_path = "particles/msg_fx/msg_gold.vpcf"
+	local particle = ParticleManager:CreateParticle(particle_path, PATTACH_ABSORIGIN_FOLLOW, target)
+	local digits = number ~= nil and #tostring(number) or 0
+
+	ParticleManager:SetParticleControl(particle, 1, Vector(0, tonumber(number), 0))
+	ParticleManager:SetParticleControl(particle, 2, Vector(lifetime or 1, digits, 0))
+	ParticleManager:SetParticleControl(particle, 3, color or Vector(255, 200, 33))
+	ParticleManager:ReleaseParticleIndex(particle)
 
 end

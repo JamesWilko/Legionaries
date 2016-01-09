@@ -82,7 +82,11 @@ function sell_unit:ReturnSpawnCostToPlayer()
 
 		-- Return gold to player
 		local gold_amount = GameRules.LegionDefence:GetUnitController():GetCurrentSellCostOfUnit( self:GetCaster(), CURRENCY_GOLD )
-		GameRules.LegionDefence:GetCurrencyController():ModifyCurrency( CURRENCY_GOLD, self._owner_id, gold_amount )
+		GameRules.LegionDefence:GetCurrencyController():ModifyCurrency( CURRENCY_GOLD, self._owner_id, gold_amount, true )
+
+		-- Play gold particles from unit to player
+		local ownerUnit = self:GetCaster():GetOwner():GetAssignedHero()
+		PlayCurrencyGainedParticles( CURRENCY_GOLD, gold_amount, ownerUnit, self:GetCaster():GetCenter() )
 
 		-- Return food cost to player
 		local food_amount = GameRules.LegionDefence:GetUnitController():GetTotalCostOfUnit( self:GetCaster(), CURRENCY_FOOD )
