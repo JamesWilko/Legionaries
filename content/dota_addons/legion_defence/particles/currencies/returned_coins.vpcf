@@ -88,8 +88,8 @@
 		},
 		{
 			_class = "C_INIT_RandomLifeTime"
-			m_fLifetimeMin = 2.000000
-			m_fLifetimeMax = 2.000000
+			m_fLifetimeMin = 5.000000
+			m_fLifetimeMax = 5.000000
 		},
 		{
 			_class = "C_INIT_RandomRotation"
@@ -104,11 +104,9 @@
 		},
 		{
 			_class = "C_INIT_CreateWithinSphere"
-			m_fSpeedMax = 80.000000
-			m_fSpeedMin = 60.000000
+			m_fSpeedMax = 400.000000
+			m_fSpeedMin = 200.000000
 			m_nControlPointNumber = 1
-			m_fRadiusMax = 200.000000
-			m_fRadiusMin = 200.000000
 			m_vecDistanceBias =
 			[
 				1.000000,

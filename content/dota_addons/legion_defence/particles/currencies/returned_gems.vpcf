@@ -70,6 +70,22 @@
 			m_RateMax = 5.000000
 			m_flBias = 0.200000
 		},
+		{
+			_class = "C_OP_RampCPLinearRandom"
+			m_nOutControlPointNumber = 3
+			m_vecRateMin =
+			[
+				-0.015000,
+				-0.015000,
+				-0.015000,
+			]
+			m_vecRateMax =
+			[
+				-0.025000,
+				-0.025000,
+				-0.025000,
+			]
+		},
 	]
 	m_Initializers =
 	[
@@ -89,11 +105,12 @@
 				255,
 				255,
 			]
+			m_nTintCP = 3
 		},
 		{
 			_class = "C_INIT_RandomLifeTime"
-			m_fLifetimeMin = 2.000000
-			m_fLifetimeMax = 2.000000
+			m_fLifetimeMin = 5.000000
+			m_fLifetimeMax = 5.000000
 		},
 		{
 			_class = "C_INIT_RandomRotation"
@@ -108,11 +125,9 @@
 		},
 		{
 			_class = "C_INIT_CreateWithinSphere"
-			m_fSpeedMax = 80.000000
-			m_fSpeedMin = 60.000000
+			m_fSpeedMax = 400.000000
+			m_fSpeedMin = 200.000000
 			m_nControlPointNumber = 1
-			m_fRadiusMax = 200.000000
-			m_fRadiusMin = 200.000000
 			m_vecDistanceBias =
 			[
 				1.000000,
