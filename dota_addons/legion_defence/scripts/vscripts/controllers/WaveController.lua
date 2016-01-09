@@ -59,6 +59,7 @@ function CWaveController:Setup()
 	self._before_wave_time = 3
 	self._end_of_wave_time = 3
 	self._think_time = 1
+	self._think_time_mid_wave = 0.2
 
 	self:UpdateWavesData()
 
@@ -71,8 +72,13 @@ function CWaveController:Setup()
 
 end
 
+function CWaveController:ThinkTime()
+	return self:IsWaveRunning() and self._think_time_mid_wave or self._think_time
+end
+
 function CWaveController:OnThink()
 
+	self._lane_controller = self._lane_controller or GameRules.LegionDefence:GetLaneController()
 	self._map_controller = self._map_controller or GameRules.LegionDefence:GetMapController()
 	self._spawned_units = self._spawned_units or {}
 
@@ -80,7 +86,7 @@ function CWaveController:OnThink()
 
 	-- Countdown to end of wave
 	if self:IsWaveRunning() and self._wave_complete ~= nil then
-		self._wave_complete = self._wave_complete - self._think_time
+		self._wave_complete = self._wave_complete - self:ThinkTime()
 		if self._wave_complete <= 0 then
 			self:WaveCompleted()
 			self._wave_complete = nil
@@ -98,7 +104,7 @@ function CWaveController:OnThink()
 	if self:IsWaveRunning() and self:CurrentWaveHasSpawnsRemaining() and (self._wave_start_time + self._before_wave_time) < time then
 
 		local unit_to_spawn = self:GetAndPopNextSpawnInWave()
-		for k, spawn in pairs( self._map_controller:SpawnZones() ) do
+		for k, spawn in pairs( self._lane_controller:GetSpawnZonesForOccupiedLanes() ) do
 
 			local ent = spawn.entity
 			local vPosition = RandomVectorInTrigger( ent )
@@ -113,8 +119,12 @@ function CWaveController:OnThink()
 					-- TODO: Make units face spawn zone regardless of spawn position
 					hUnit:SetAngles( 0, -90, 0 )
 
-					self._spawned_units[spawn.lane] = self._spawned_units[spawn.lane] or {}
-					table.insert( self._spawned_units[spawn.lane], { unit = hUnit, target = vTarget } )
+					local unit_data = {
+						unit = hUnit,
+						lane = spawn.lane,
+						target = vTarget
+					}
+					table.insert( self._spawned_units, unit_data )
 
 				end
 
@@ -125,18 +135,19 @@ function CWaveController:OnThink()
 	end
 
 	-- Move spawned units to the target zone
-	for i, lane in pairs( self._spawned_units ) do
-		for k, v in pairs( lane ) do
-			if v and IsValidEntity(v.unit) then
-				v.unit:MoveToPositionAggressive( v.target )
-			else
-				self._spawned_units[i][k] = nil
+	for i, unit_data in pairs( self._spawned_units ) do
+		local unit = unit_data.unit
+		if unit and IsValidEntity(unit) then
+			if not unit:IsAttacking() then
+				unit:MoveToPositionAggressive( unit_data.target )
 			end
+		else
+			self._spawned_units[i] = nil
 		end
 	end
 
 	-- Think again
-	return self._think_time
+	return self:ThinkTime()
 	
 end
 
@@ -177,7 +188,7 @@ function CWaveController:UpdateWavesData()
 
 	end
 
-	wave_data["next_wave"] = self:GetCurrentWave() + 1
+	wave_data["next_wave"] = self:GetCurrentWave()
 	wave_data["set_size"] = set_size
 	wave_data["start_of_set"] = start_of_set
 	wave_data["end_of_set"] = end_of_set
@@ -287,27 +298,28 @@ end
 
 function CWaveController:OnUnitKilled( event )
 
-	local unit = EntIndexToHScript(event.entindex_killed)
-	for laneId, lane in pairs( self._spawned_units ) do
-		for k, v in pairs( lane ) do
-			if IsValidEntity(v.unit) and v.unit == unit then
-				
-				-- Remaining units in this lane
-				local remainInLane = self:GetRemainingUnitsInLane(laneId)
-				if remainInLane <= 0 then
-					local playerId = GameRules.LegionDefence:GetLaneController():GetPlayerForLane( laneId )
-					if playerId ~= nil then
-						GameRules.LegionDefence:GetUnitController():OnLaneCleared( laneId, playerId )
-					end
-				end
+	local killedUnit = EntIndexToHScript(event.entindex_killed)
 
-				-- Remaining units in wave
-				local remainInWave = self:GetRemainingUnitsInCurrentWave()
-				if remainInWave <= 0 then
-					self:WavePreCompleted()
+	for i, unit_data in pairs( self._spawned_units ) do
+		if unit_data.unit and IsValidEntity(unit_data.unit) and unit_data.unit:GetEntityIndex() == killedUnit:GetEntityIndex() then
+			
+			-- Remaining units in this lane
+			local laneId = unit_data.lane
+			local remainInLane = self:GetRemainingUnitsInLane(laneId)
+			print(string.format("Remaining units in lane %i: %i", laneId, remainInLane))
+			if remainInLane <= 0 then
+				local playerId = GameRules.LegionDefence:GetLaneController():GetPlayerForLane( laneId )
+				if playerId ~= nil then
+					GameRules.LegionDefence:GetUnitController():OnLaneCleared( laneId, playerId )
 				end
-
 			end
+
+			-- Remaining units in wave
+			local remainInWave = self:GetRemainingUnitsInCurrentWave()
+			if remainInWave <= 0 then
+				self:WavePreCompleted()
+			end
+
 		end
 	end
 
@@ -327,11 +339,9 @@ function CWaveController:GetRemainingUnitsInCurrentWave()
 	end
 
 	-- Count units on field
-	for i, lane in pairs( self._spawned_units ) do
-		for k, v in pairs( lane ) do
-			if IsValidEntity(v.unit) and v.unit:IsAlive() then
-				remaining = remaining + 1
-			end
+	for i, unit_data in pairs( self._spawned_units ) do
+		if IsValidEntity(unit_data.unit) and unit_data.unit:IsAlive() then
+			remaining = remaining + 1
 		end
 	end
 
@@ -353,11 +363,9 @@ function CWaveController:GetRemainingUnitsInLane( laneId )
 	end
 
 	-- Count units on field
-	if self._spawned_units and self._spawned_units[laneId] then
-		for k, v in pairs( self._spawned_units[laneId] ) do
-			if IsValidEntity(v.unit) and v.unit:IsAlive() then
-				remaining = remaining + 1
-			end
+	for i, unit_data in pairs( self._spawned_units ) do
+		if unit_data.lane == laneId and IsValidEntity(unit_data.unit) and unit_data.unit:IsAlive() then
+			remaining = remaining + 1
 		end
 	end
 
@@ -398,11 +406,9 @@ end
 
 function CWaveController:GetUnitLane( hUnit )
 
-	for laneId, lane in pairs( self._spawned_units ) do
-		for k, v in pairs( lane ) do
-			if IsValidEntity(v.unit) and v.unit == hUnit then
-				return laneId
-			end
+	for i, unit_data in pairs( self._spawned_units ) do
+		if IsValidEntity(unit_data.unit) and unit_data.unit == hUnit then
+			return unit_data.lane
 		end
 	end
 
@@ -465,17 +471,12 @@ function CWaveController:GetArmourModifierItem( item_name )
 end
 
 function CWaveController:IsUnitAWaveUnit( hUnit )
-
-	for i, lane in pairs( self._spawned_units ) do
-		for k, v in pairs( lane ) do
-			if v.unit == hUnit then
-				return true
-			end
+	for i, unit_data in pairs( self._spawned_units ) do
+		if IsValidEntity(unit_data.unit) and unit_data.unit == hUnit then
+			return true
 		end
 	end
-
 	return false
-
 end
 
 function CWaveController:AttemptIncreaseArmourOnUnit( hUnit, iArmourTier )
