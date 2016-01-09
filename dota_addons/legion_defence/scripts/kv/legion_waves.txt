@@ -2,72 +2,62 @@
 {
 	"1"
 	{
-		"npc_human_footman"	"10"
-		"image"				"file://{images}/items/courier.png"
+		"npc_legion_enemy_donkey"		"10"
+		"image"							"file://{images}/items/courier.png"
 	}
 
 	"2"
 	{
-		"npc_human_footman"	"10"
-		"image"				"file://{images}/heroes/npc_dota_hero_dragon_knight.png"
+		"npc_legion_enemy_murloc"		"10"
+		"image"							"file://{images}/heroes/npc_dota_hero_dragon_knight.png"
 	}
 
 	"3"
 	{
-		"npc_human_footman"	"10"
-		"image"				"file://{images}/heroes/npc_dota_hero_dragon_knight.png"
+		"npc_legion_enemy_scorpion"		"10"
+		"image"							"file://{images}/heroes/npc_dota_hero_dragon_knight.png"
 	}
 
 	"4"
 	{
-		"npc_human_footman"	"10"
-		"image"				"file://{images}/heroes/npc_dota_hero_dragon_knight.png"
+		"npc_legion_enemy_quillbeast"	"10"
+		"image"							"file://{images}/heroes/npc_dota_hero_dragon_knight.png"
 	}
 
 	"5"
 	{
-		"npc_human_footman"	"10"
-		"image"				"file://{images}/heroes/npc_dota_hero_dragon_knight.png"
+		"npc_legion_enemy_hawk"			"10"
+		"image"							"file://{images}/heroes/npc_dota_hero_dragon_knight.png"
 	}
 
 	"6"
 	{
-		"npc_human_footman"	"10"
-		"image"				"file://{images}/heroes/npc_dota_hero_dragon_knight.png"
+		"npc_legion_enemy_golem"		"10"
+		"image"							"file://{images}/heroes/npc_dota_hero_dragon_knight.png"
 	}
 
 	"7"
 	{
-		"npc_human_footman"	"10"
-		"image"				"file://{images}/heroes/npc_dota_hero_dragon_knight.png"
+		"npc_legion_enemy_satyr"		"10"
+		"image"							"file://{images}/heroes/npc_dota_hero_dragon_knight.png"
 	}
 
 	"8"
 	{
-		"npc_human_footman"	"10"
-		"image"				"file://{images}/heroes/npc_dota_hero_dragon_knight.png"
+		"npc_legion_enemy_acolyte"		"10"
+		"image"							"file://{images}/heroes/npc_dota_hero_dragon_knight.png"
 	}
 
 	"9"
 	{
-		"npc_human_footman"	"10"
-		"image"				"file://{images}/heroes/npc_dota_hero_dragon_knight.png"
+		"npc_legion_enemy_zombie"		"10"
+		"image"							"file://{images}/heroes/npc_dota_hero_dragon_knight.png"
 	}
 
 	"10"
 	{
-		"npc_human_footman"	"10"
-		"boss"				"true"
-		"image"				"file://{images}/heroes/npc_dota_hero_pudge.png"
-	}
-
-	"11"
-	{
-		"npc_human_footman"	"10"
-	}
-
-	"12"
-	{
-		"npc_human_footman"	"10"
+		"npc_legion_enemy_boss_one"		"10"
+		"boss"							"true"
+		"image"							"file://{images}/heroes/npc_dota_hero_pudge.png"
 	}
 }

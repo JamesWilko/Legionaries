@@ -9,8 +9,14 @@ GameUI.SetMouseCallback( function( eventName, arg )
 	var LEGION_UNIT_NAME = "npc_legion_";
 	var LEGION_CAN_CONTROL_TOWERS = false;
 
-	if ( GameUI.GetClickBehaviors() !== CLICK_BEHAVIORS.DOTA_CLICK_BEHAVIOR_NONE )
-		return CONTINUE_PROCESSING_EVENT;
+	var clickBehaviour = GameUI.GetClickBehaviors();
+	
+	if( clickBehaviour !== CLICK_BEHAVIORS.DOTA_CLICK_BEHAVIOR_NONE &&
+		clickBehaviour !== CLICK_BEHAVIORS.DOTA_CLICK_BEHAVIOR_CAST &&
+		clickBehaviour !== CLICK_BEHAVIORS.DOTA_CLICK_BEHAVIOR_DRAG )
+	{
+		return CONSUME_EVENT;
+	}
 
 	// If player can't control tower units
 	if ( !LEGION_CAN_CONTROL_TOWERS )
