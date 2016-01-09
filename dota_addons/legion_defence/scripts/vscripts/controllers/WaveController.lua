@@ -114,6 +114,7 @@ function CWaveController:OnThink()
 				local hUnit = CreateUnitByName( unit_to_spawn, vPosition, true, nil, nil, self:GetEnemyTeam(spawn.team) )
 				local entTargetZone = self._map_controller:GetTargetZoneForTeam( spawn.team )
 				local vTarget = RandomVectorInTrigger( entTargetZone )
+				local hKing = GameRules.LegionDefence:GetKingController():GetKingForTeam(spawn.team)
 
 				if hUnit ~= nil then
 
@@ -123,7 +124,8 @@ function CWaveController:OnThink()
 					local unit_data = {
 						unit = hUnit,
 						lane = spawn.lane,
-						target = vTarget
+						target_pos = vTarget,
+						target_king = hKing
 					}
 					table.insert( self._spawned_units, unit_data )
 
@@ -140,7 +142,7 @@ function CWaveController:OnThink()
 		local unit = unit_data.unit
 		if unit and IsValidEntity(unit) then
 			if not unit:IsAttacking() then
-				unit:MoveToPositionAggressive( unit_data.target )
+				unit:MoveToTargetToAttack( unit_data.target_king )
 			end
 		else
 			self._spawned_units[i] = nil
