@@ -28,7 +28,7 @@ function upgrade_unit:CastFilterResult()
 		self._owner_id = data.player:GetPlayerID()
 
 		if not GameRules.LegionDefence:GetCurrencyController():CanAfford( CURRENCY_GOLD, self._owner_id, self._gold_cost ) then
-			self._fail_reason = UPGRADE_FAIL_REASON_CANT_AFFORD
+			self._fail_reason = UPGRADE_FAIL_REASON_CANT_AFFORD_GOLD
 			return UF_FAIL_CUSTOM
 		end
 
@@ -71,6 +71,7 @@ function upgrade_unit:GetCustomCastError()
 	if self._fail_reason == UPGRADE_FAIL_REASON_ALREADY_UPGRADING then
 		return "#legion_can_not_upgrade_already_upgrading"
 	end
+	return "#can_not_upgrade_everything_is_broke"
 end
 
 function upgrade_unit:OnSpellStart()
