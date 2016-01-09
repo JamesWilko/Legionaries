@@ -92,7 +92,7 @@ function CUnitController:RegisterUnit( ePlayer, lTeam, eUnit )
 	}
 	table.insert( self._player_units[lPlayer], unit_data )
 
-	print(string.format("Regsitered unit: %s", unit_id))
+	print(string.format("Registered unit: %s", unit_id))
 
 	return unit_id
 
