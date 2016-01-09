@@ -21,7 +21,7 @@ function RebuildWavesList()
 		var nextWave = nettable["next_wave"];
 		var waveSetSize = nettable["set_size"];
 		var waveSetStart = nettable["start_of_set"];
-		for ( var i = waveSetStart; i < waveSetStart + waveSetSize; ++i )
+		for ( var i = 0; i < waveSetSize; ++i )
 		{
 			var WavePanel = m_WaveIcons[i];
 			if(!WavePanel)
@@ -31,13 +31,14 @@ function RebuildWavesList()
 				m_WaveIcons.push(WavePanel);
 			}
 			
-			if(nettable[i.toString()] && nettable[i.toString()]["wave"]) 
+			var wave = (waveSetStart + i).toString();
+			if(nettable[wave] && nettable[wave]["wave"]) 
 			{
-				var boss = nettable[i.toString()]["wave"]["boss"];
+				var boss = nettable[wave]["wave"]["boss"];
 				var isBoss = boss != undefined && boss == "true";
 				WavePanel.SetHasClass( "BossWave", isBoss );
 
-				var image = nettable[i.toString()]["wave"]["image"];
+				var image = nettable[wave]["wave"]["image"];
 				if(image)
 				{
 					WavePanel.FindChild("HeroImage").SetImage( image );
