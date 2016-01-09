@@ -1,7 +1,40 @@
 
+var m_AttackTypes = [];
+m_AttackTypes["DOTA_UNIT_CAP_MELEE_ATTACK"] = "legion_attack_type_melee";
+m_AttackTypes["DOTA_UNIT_CAP_RANGED_ATTACK"] = "legion_attack_type_ranged";
+
+var m_AttackTypesColours = [];
+m_AttackTypesColours["DOTA_UNIT_CAP_MELEE_ATTACK"] = "crimson";
+m_AttackTypesColours["DOTA_UNIT_CAP_RANGED_ATTACK"] = "turquoise";
+
+var m_DamageTypes = [];
+m_DamageTypes["DOTA_COMBAT_CLASS_ATTACK_BASIC"] = "legion_attack_type_basic";
+m_DamageTypes["DOTA_COMBAT_CLASS_ATTACK_PIERCE"] = "legion_attack_type_pierce";
+m_DamageTypes["DOTA_COMBAT_CLASS_ATTACK_SIEGE"] = "legion_attack_type_siege";
+m_DamageTypes["DOTA_COMBAT_CLASS_ATTACK_HERO"] = "legion_attack_type_hero";
+
+var m_DamageTypesColours = [];
+m_DamageTypesColours["DOTA_COMBAT_CLASS_ATTACK_BASIC"] = "greenyellow";
+m_DamageTypesColours["DOTA_COMBAT_CLASS_ATTACK_PIERCE"] = "gold";
+m_DamageTypesColours["DOTA_COMBAT_CLASS_ATTACK_SIEGE"] = "orangered";
+m_DamageTypesColours["DOTA_COMBAT_CLASS_ATTACK_HERO"] = "fuchsia";
+
+var m_DefenceTypes = [];
+m_DefenceTypes["DOTA_COMBAT_CLASS_DEFEND_SOFT"] = "legion_defence_type_soft";
+m_DefenceTypes["DOTA_COMBAT_CLASS_DEFEND_STRONG"] = "legion_defence_type_strong";
+m_DefenceTypes["DOTA_COMBAT_CLASS_DEFEND_STRUCTURE"] = "legion_defence_type_structure";
+m_DefenceTypes["DOTA_COMBAT_CLASS_DEFEND_HERO"] = "legion_defence_type_hero";
+
+var m_DefenceTypesColours = [];
+m_DefenceTypesColours["DOTA_COMBAT_CLASS_DEFEND_SOFT"] = "limegreen";
+m_DefenceTypesColours["DOTA_COMBAT_CLASS_DEFEND_STRONG"] = "darkorange";
+m_DefenceTypesColours["DOTA_COMBAT_CLASS_DEFEND_STRUCTURE"] = "tomato";
+m_DefenceTypesColours["DOTA_COMBAT_CLASS_DEFEND_HERO"] = "orchid";
+
 function ShowTooltip( panel )
 {
-	var waveId = panel.id.toString();
+	var waveId = panel.wave.toString();
+	var waveData;
 	var title = "";
 	var desc = "";
 	var boss;
@@ -15,7 +48,7 @@ function ShowTooltip( panel )
 		{
 			if(key.indexOf("npc_") == 0)
 			{
-				title = $.Localize(key) + " (x" + waveData[key] + ")";
+				title = ($.Localize(key)).toUpperCase() + " (x" + waveData[key] + ")";
 				desc = $.Localize(key + "_Description");
 				break;
 			}
@@ -35,12 +68,33 @@ function ShowTooltip( panel )
 		"title" : title,
 		"desc" : desc,
 		"value-1-name" : "",
+		"value-2-name" : "",
+		"value-3-name" : "",
+		"value-4-name" : "",
 	};
+
+	if(waveData)
+	{
+		var attackType = waveData["attack_capability"];
+		var damageType = waveData["damage_type"];
+		var defenceType = waveData["defence_type"];
+
+		data["value-1-value"] = $.Localize(m_AttackTypes[attackType]);
+		data["value-1-value-color"] = m_AttackTypesColours[attackType];
+
+		data["value-2-value"] = $.Localize(m_DamageTypes[damageType]);
+		data["value-2-value-color"] = m_DamageTypesColours[damageType];
+
+		data["value-3-value"] = $.Localize(m_DefenceTypes[defenceType]);
+		data["value-3-value-color"] = m_DefenceTypesColours[defenceType];
+	}
+
 	if(boss)
 	{
-		data["value-1-value"] = boss;
-		data["value-1-value-color"] = "red";
+		data["value-4-value"] = boss;
+		data["value-4-value-color"] = "red";
 	}
+
 	GameEvents.SendEventClientSide("show_legion_tooltip", data );
 }
 

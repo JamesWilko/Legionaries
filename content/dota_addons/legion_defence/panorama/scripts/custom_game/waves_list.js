@@ -32,6 +32,7 @@ function RebuildWavesList()
 			}
 			
 			var wave = (waveSetStart + i).toString();
+			WavePanel.wave = wave;
 			if(nettable[wave] && nettable[wave]["wave"]) 
 			{
 				var boss = nettable[wave]["wave"]["boss"];

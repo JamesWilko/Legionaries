@@ -61,6 +61,7 @@ function CWaveController:Setup()
 	self._think_time = 1
 	self._think_time_mid_wave = 0.2
 
+	self:BuildWaveListData()
 	self:UpdateWavesData()
 
 	-- Think entity for this controller
@@ -166,6 +167,34 @@ end
 function CWaveController:SetNextWaveTime( time )
 	self._next_wave_time = time
 	CustomNetTables:SetTableValue( CWaveController.WAVE_INFO_TABLE, "next_wave_time", { time = time } )
+end
+
+function CWaveController:BuildWaveListData()
+
+	local kv_units = LoadKeyValues("scripts/npc/npc_units_custom.txt")
+
+	-- Run through all waves
+	for i, wave_data in pairs( self._waves_list ) do
+		for k, v in pairs( wave_data ) do
+
+			-- Find our spawned enemies
+			local unit_data = kv_units[k]
+			if string.find(k, "npc_legion_") and unit_data then
+
+				-- Get data from kv file and add extra unit data
+				local attack_capability = unit_data["AttackCapabilities"]
+				local damage_type = unit_data["CombatClassAttack"]
+				local defence_type = unit_data["CombatClassDefend"]
+
+				wave_data.attack_capability = attack_capability
+				wave_data.damage_type = damage_type
+				wave_data.defence_type = defence_type
+
+			end
+
+		end
+	end
+
 end
 
 function CWaveController:UpdateWavesData()
@@ -299,6 +328,7 @@ end
 function CWaveController:OnUnitKilled( event )
 
 	local killedUnit = EntIndexToHScript(event.entindex_killed)
+	local attackerUnit = EntIndexToHScript(event.entindex_attacker)
 
 	for i, unit_data in pairs( self._spawned_units ) do
 		if unit_data.unit and IsValidEntity(unit_data.unit) and unit_data.unit:GetEntityIndex() == killedUnit:GetEntityIndex() then
@@ -318,6 +348,25 @@ function CWaveController:OnUnitKilled( event )
 			local remainInWave = self:GetRemainingUnitsInCurrentWave()
 			if remainInWave <= 0 then
 				self:WavePreCompleted()
+			end
+
+			-- Give bounty
+			if attackerUnit then
+
+				local hasOwnerPlayer = attackerUnit:GetOwner() and true or false
+				local ownerUnit = attackerUnit:GetOwner() and attackerUnit:GetOwner():GetAssignedHero() or attackerUnit
+				local bounty = killedUnit:GetGoldBounty()
+				local bounty_currency = CURRENCY_GOLD
+
+				-- Give bounty gold
+				if hasOwnerPlayer then
+					GameRules.LegionDefence:GetCurrencyController():ModifyCurrency( bounty_currency, ownerUnit, bounty, true )
+				end
+
+				-- Show particles
+				ShowGoldPopup( killedUnit, bounty )
+				PlayCurrencyGainedParticles( bounty_currency, bounty, ownerUnit, killedUnit:GetCenter(), true )
+
 			end
 
 		end
