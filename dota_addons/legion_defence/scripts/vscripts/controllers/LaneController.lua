@@ -86,3 +86,21 @@ function CLaneController:OnPlayerPickedHero( event )
 	end
 
 end
+
+function CLaneController:GetSpawnZonesForOccupiedLanes()
+
+	-- Get map controller
+	self._map_controller = self._map_controller or GameRules.LegionDefence:GetMapController()
+
+	-- Find all spawn zones that have a player playing in their lane
+	local spawns = {}
+
+	for k, spawn in pairs(self._map_controller:SpawnZones()) do
+		if self:GetPlayerForLane(spawn.lane) then
+			table.insert( spawns, spawn )
+		end
+	end
+
+	return spawns
+
+end

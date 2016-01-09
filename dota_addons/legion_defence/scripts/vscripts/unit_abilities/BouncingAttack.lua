@@ -82,7 +82,7 @@ function BounceAttackStart( keys )
 	if dummy_ability.projectileTo == nil then
 
 		-- If we didnt find a new target then kill the dummy and end the function
-		killDummy(dummy, dummy)
+		KillDummy(dummy, dummy)
 
 	else
 
