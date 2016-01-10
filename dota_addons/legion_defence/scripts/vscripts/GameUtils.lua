@@ -34,6 +34,15 @@ local CurrencyParticles = {
 	}
 }
 
+local CurrencyPopups = {
+	[CURRENCY_GOLD] = {
+		color = Vector(255, 200, 33)
+	},
+	[CURRENCY_GEMS] = {
+		color = Vector(0, 192, 240)
+	}
+}
+
 function PlayCurrencyLostParticles( sCurrency, lPrice, eUnit, bSupressSound )
 
 	local data = CurrencyParticles[sCurrency] and CurrencyParticles[sCurrency].lost
@@ -122,15 +131,23 @@ function GetUnitUniqueAbilities( hUnit )
 
 end
 
-function ShowGoldPopup( target, amount, lifetime, color )
+function ShowCurrencyPopup( target, currency, amount, lifetime, color )
 
-	local particle_path = "particles/msg_fx/msg_gold.vpcf"
-	local particle = ParticleManager:CreateParticle(particle_path, PATTACH_ABSORIGIN_FOLLOW, target)
-	local digits = number ~= nil and #tostring(number) or 0
+	if CurrencyPopups[currency] then
 
-	ParticleManager:SetParticleControl(particle, 1, Vector(0, tonumber(number), 0))
-	ParticleManager:SetParticleControl(particle, 2, Vector(lifetime or 1, digits, 0))
-	ParticleManager:SetParticleControl(particle, 3, color or Vector(255, 200, 33))
-	ParticleManager:ReleaseParticleIndex(particle)
+		local particle_path = "particles/msg_fx/msg_gold.vpcf"
+		local particle = ParticleManager:CreateParticle(particle_path, PATTACH_ABSORIGIN_FOLLOW, target)
+		local digits = amount ~= nil and #tostring(amount) or 0
+		digits = amount > 0 and digits + 1 or digits
+		local symbol = amount > 0 and 0 or 1
+		local color = CurrencyPopups[currency] and CurrencyPopups[currency].color or Vector(255, 0, 0)
+		lifetime = lifetime or 1
+
+		ParticleManager:SetParticleControl(particle, 1, Vector(symbol, math.abs(tonumber(amount)), 0))
+		ParticleManager:SetParticleControl(particle, 2, Vector(lifetime, digits, 0))
+		ParticleManager:SetParticleControl(particle, 3, color)
+		ParticleManager:ReleaseParticleIndex(particle)
+
+	end
 
 end

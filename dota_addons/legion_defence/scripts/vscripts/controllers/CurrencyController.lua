@@ -238,11 +238,13 @@ function CCurrencyController:ModifyCurrency( sCurrency, hPlayer, iAmount, bSupre
 
 			local player = PlayerResource:GetPlayer( player_id )
 			if player then
+				local player_hero = player:GetAssignedHero()
 				if iAmount < 0 then
-					PlayCurrencyLostParticles( sCurrency, -iAmount, player:GetAssignedHero() )
+					PlayCurrencyLostParticles( sCurrency, -iAmount, player_hero )
 				elseif iAmount > 0 then
-					PlayCurrencyGainedParticles( sCurrency, iAmount, player:GetAssignedHero() )
+					PlayCurrencyGainedParticles( sCurrency, iAmount, player_hero )
 				end
+				ShowCurrencyPopup( player_hero, sCurrency, iAmount, 1 )
 			end
 
 		end

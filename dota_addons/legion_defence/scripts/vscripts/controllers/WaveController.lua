@@ -368,7 +368,7 @@ function CWaveController:OnUnitKilled( event )
 				end
 
 				-- Show particles
-				ShowGoldPopup( killedUnit, bounty )
+				ShowCurrencyPopup( killedUnit, bounty_currency, bounty )
 				PlayCurrencyGainedParticles( bounty_currency, bounty, ownerUnit, killedUnit:GetCenter(), true )
 
 			end
