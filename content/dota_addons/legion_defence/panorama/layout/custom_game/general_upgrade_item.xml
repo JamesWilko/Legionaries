@@ -15,8 +15,14 @@
 		<Button class="UpgradeButton" id="UpgradeButton"
 			onmouseover="ShowTooltip( $.GetContextPanel() )"
 			onmouseout="HideTooltip( $.GetContextPanel() )"
-			onactivate="PurchaseUpgrade( $.GetContextPanel() )">
+			onactivate="PurchaseUpgrade( $.GetContextPanel() )"
+			oncontextmenu="CancelUpgrade( $.GetContextPanel() )">
 			<DOTAItemImage hittest="false" class="UpgradeImage" id="Image" itemname="item_tango" />
+			<Panel class="Cooldown" id="CooldownPanel">
+				<Panel class="CooldownOverlay" />
+				<Panel class="CooldownOverlayProgress" id="CooldownOverlay" />
+				<Label class="CooldownQueue" id="CooldownQueue" text="" />
+			</Panel>
 		</Button>
 	</Panel>
 

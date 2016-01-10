@@ -1,7 +1,7 @@
 
 var m_Upgrades = [];
 
-function OnUpgradesUpdated()
+function CreateUpgrades()
 {
 	var upgradesData = CustomNetTables.GetTableValue( "Upgrades", "upgrades" );
 	if(upgradesData)
@@ -41,6 +41,6 @@ function OnUpgradesUpdated()
 
 (function()
 {
-	CustomNetTables.SubscribeNetTableListener( "Upgrades", OnUpgradesUpdated );
-	OnUpgradesUpdated();
+	//CustomNetTables.SubscribeNetTableListener( "Upgrades", OnUpgradesUpdated );
+	CreateUpgrades();
 })();
