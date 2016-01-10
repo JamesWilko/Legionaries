@@ -102,7 +102,9 @@ function CWaveController:OnThink()
 	end
 
 	-- Spawn a unit at every spawn point every think
-	if self:IsWaveRunning() and self:CurrentWaveHasSpawnsRemaining() and (self._wave_start_time + self._before_wave_time) < time then
+	local waveIsReady = self:IsWaveRunning() and self:CurrentWaveHasSpawnsRemaining() and (self._wave_start_time + self._before_wave_time) < time
+	local gameIsReady = not GameRules:IsGamePaused()
+	if waveIsReady and gameIsReady then
 
 		local unit_to_spawn = self:GetAndPopNextSpawnInWave()
 		for k, spawn in pairs( self._lane_controller:GetSpawnZonesForOccupiedLanes() ) do
