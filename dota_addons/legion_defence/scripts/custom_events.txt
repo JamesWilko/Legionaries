@@ -47,6 +47,11 @@
 		"sUpgradeId"		"string"
 	}
 
+	"legion_cancel_upgrade"
+	{
+		"sUpgradeId"		"string"
+	}
+
 	//---------------------------------
 	// Server Only
 	//---------------------------------
