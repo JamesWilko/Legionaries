@@ -6,7 +6,7 @@
 "spawn_tower_fire_heat_knight"
 {
 	"BaseClass"						"ability_lua"
-	"AbilityTextureName"			"lina_dragon_slave"
+	"AbilityTextureName"			"dragon_knight_dragon_blood"
 	"ScriptFile"					"abilities/spawning/spawn_tower_fire_heat_knight"
 
 	"AbilityCastRange"				"800"
@@ -38,11 +38,26 @@
 			"SpawnEffectAOE"			"60"
 		}
 	}
+
+	"precache"
+	{
+		"model"				"models/heroes/dragon_knight/dragon_knight.vmdl"
+		"model_folder"		"models/heroes/dragon_knight/"
+		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_dragon_knight.vsndevts"
+		"particle_folder"	"particles/units/heroes/hero_dragon_knight/"
+	}
 }
+
+
+
+
+
+
+
 "spawn_tower_fire_flame_archer"
 {
 	"BaseClass"						"ability_lua"
-	"AbilityTextureName"			"lina_dragon_slave"
+	"AbilityTextureName"			"clinkz_death_pact"
 	"ScriptFile"					"abilities/spawning/spawn_tower_fire_flame_archer"
 
 	"AbilityCastRange"				"800"
@@ -74,11 +89,25 @@
 			"SpawnEffectAOE"			"50"
 		}
 	}
+
+	"precache"
+	{
+		"model"				"models/heroes/clinkz/clinkz.vmdl"
+		"model_folder"		"models/heroes/clinkz/"
+		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_clinkz.vsndevts"
+		"particle"			"particles/units/heroes/hero_clinkz/clinkz_base_attack.vpcf"
+		"particle_folder"	"particles/units/heroes/hero_clinkz/"
+	}
 }
+
+
+
+
+
 "spawn_tower_fire_vanguard"
 {
 	"BaseClass"						"ability_lua"
-	"AbilityTextureName"			"lina_dragon_slave"
+	"AbilityTextureName"			"sven_gods_strength"
 	"ScriptFile"					"abilities/spawning/spawn_tower_fire_vanguard"
 
 	"AbilityCastRange"				"800"
@@ -110,11 +139,26 @@
 			"SpawnEffectAOE"			"70"
 		}
 	}
+
+	"precache"
+	{
+		"model"				"models/heroes/sven/sven.vmdl"
+		"model_folder"		"models/heroes/sven/"
+		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_sven.vsndevts"
+		"particle_folder"	"particles/units/heroes/hero_sven/"
+	}
 }
+
+
+
+
+
+
+
 "spawn_tower_fire_firestarter"
 {
 	"BaseClass"						"ability_lua"
-	"AbilityTextureName"			"lina_dragon_slave"
+	"AbilityTextureName"			"lina_fiery_soul"
 	"ScriptFile"					"abilities/spawning/spawn_tower_fire_firestarter"
 
 	"AbilityCastRange"				"800"
@@ -146,11 +190,23 @@
 			"SpawnEffectAOE"			"80"
 		}
 	}
+
+	"precache"
+	{
+		"model"				"models/heroes/lina/lina.vmdl"
+		"model_folder"		"models/heroes/lina/"
+		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_lina.vsndevts"
+		"particle"			"particles/units/heroes/hero_lina/lina_base_attack.vpcf"
+		"particle_folder"	"particles/units/heroes/hero_lina/"
+	}
 }
+
+
+
 "spawn_tower_fire_flamebound"
 {
 	"BaseClass"						"ability_lua"
-	"AbilityTextureName"			"lina_dragon_slave"
+	"AbilityTextureName"			"ember_spirit_fire_remnant"
 	"ScriptFile"					"abilities/spawning/spawn_tower_fire_flamebound"
 
 	"AbilityCastRange"				"800"
@@ -182,11 +238,26 @@
 			"SpawnEffectAOE"			"90"
 		}
 	}
+
+	"precache"
+	{
+		"model"				"models/heroes/ember_spirit/ember_spirit.vmdl"
+		"model_folder"		"models/heroes/ember_spirit/"
+		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_ember_spirit.vsndevts"
+		"particle_folder"	"particles/units/heroes/hero_ember_spirit/"
+	}
 }
+
+
+
+
+
+
+
 "spawn_tower_fire_pyromancer"
 {
 	"BaseClass"						"ability_lua"
-	"AbilityTextureName"			"lina_dragon_slave"
+	"AbilityTextureName"			"ember_spirit_searing_chains"
 	"ScriptFile"					"abilities/spawning/spawn_tower_fire_pyromancer"
 
 	"AbilityCastRange"				"800"
@@ -218,7 +289,1293 @@
 			"SpawnEffectAOE"			"100"
 		}
 	}
+
+	"precache"
+	{
+		"model"				"models/heroes/warlock/warlock.vmdl"
+		"model_folder"		"models/heroes/warlock/"
+		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_warlock.vsndevts"
+		"particle"			"particles/units/heroes/hero_warlock/warlock_base_attack.vpcf"
+		"particle_folder"	"particles/units/heroes/hero_warlock/"
+	}
 }
+
+
+
+
+
+"spawn_tower_merc_footman"
+{
+	"BaseClass"						"ability_lua"
+	"AbilityTextureName"			"lina_dragon_slave"
+	"ScriptFile"					"abilities/spawning/spawn_tower_merc_footman"
+
+	"AbilityCastRange"				"800"
+	"AbilityCastPoint"				"0.5"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+	"FightRecapLevel"				"1"
+	"MaxLevel"						"1"
+
+	"AbilityCooldown"				"0"
+	"AbilityDuration"				"0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"GoldCost"					"0"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"PopulationCost"			"0"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"SpawnEffectAOE"			"0"
+		}
+	}
+
+	"precache"
+	{
+		"model"				"models/heroes/dragon_knight/dragon_knight.vmdl"
+		"model_folder"		"models/heroes/dragon_knight/"
+		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_dragon_knight.vsndevts"
+		"particle_folder"	"particles/units/heroes/hero_dragon_knight/"
+	}
+}
+
+
+
+
+
+
+
+
+
+"spawn_tower_merc_bowman"
+{
+	"BaseClass"						"ability_lua"
+	"AbilityTextureName"			"lina_dragon_slave"
+	"ScriptFile"					"abilities/spawning/spawn_tower_merc_bowman"
+
+	"AbilityCastRange"				"800"
+	"AbilityCastPoint"				"0.5"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+	"FightRecapLevel"				"1"
+	"MaxLevel"						"1"
+
+	"AbilityCooldown"				"0"
+	"AbilityDuration"				"0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"GoldCost"					"0"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"PopulationCost"			"0"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"SpawnEffectAOE"			"0"
+		}
+	}
+
+	"precache"
+	{
+		"model"				"models/heroes/dragon_knight/dragon_knight.vmdl"
+		"model_folder"		"models/heroes/dragon_knight/"
+		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_dragon_knight.vsndevts"
+		"particle_folder"	"particles/units/heroes/hero_dragon_knight/"
+	}
+}
+
+
+
+
+
+
+
+
+
+"spawn_tower_merc_ghoul"
+{
+	"BaseClass"						"ability_lua"
+	"AbilityTextureName"			"lina_dragon_slave"
+	"ScriptFile"					"abilities/spawning/spawn_tower_merc_ghoul"
+
+	"AbilityCastRange"				"800"
+	"AbilityCastPoint"				"0.5"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+	"FightRecapLevel"				"1"
+	"MaxLevel"						"1"
+
+	"AbilityCooldown"				"0"
+	"AbilityDuration"				"0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"GoldCost"					"0"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"PopulationCost"			"0"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"SpawnEffectAOE"			"0"
+		}
+	}
+
+	"precache"
+	{
+		"model"				"models/heroes/dragon_knight/dragon_knight.vmdl"
+		"model_folder"		"models/heroes/dragon_knight/"
+		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_dragon_knight.vsndevts"
+		"particle_folder"	"particles/units/heroes/hero_dragon_knight/"
+	}
+}
+
+
+
+
+
+
+
+
+
+"spawn_tower_merc_warrior"
+{
+	"BaseClass"						"ability_lua"
+	"AbilityTextureName"			"lina_dragon_slave"
+	"ScriptFile"					"abilities/spawning/spawn_tower_merc_warrior"
+
+	"AbilityCastRange"				"800"
+	"AbilityCastPoint"				"0.5"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+	"FightRecapLevel"				"1"
+	"MaxLevel"						"1"
+
+	"AbilityCooldown"				"0"
+	"AbilityDuration"				"0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"GoldCost"					"0"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"PopulationCost"			"0"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"SpawnEffectAOE"			"0"
+		}
+	}
+
+	"precache"
+	{
+		"model"				"models/heroes/dragon_knight/dragon_knight.vmdl"
+		"model_folder"		"models/heroes/dragon_knight/"
+		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_dragon_knight.vsndevts"
+		"particle_folder"	"particles/units/heroes/hero_dragon_knight/"
+	}
+}
+
+
+
+
+
+
+
+
+
+"spawn_tower_merc_whelp"
+{
+	"BaseClass"						"ability_lua"
+	"AbilityTextureName"			"lina_dragon_slave"
+	"ScriptFile"					"abilities/spawning/spawn_tower_merc_whelp"
+
+	"AbilityCastRange"				"800"
+	"AbilityCastPoint"				"0.5"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+	"FightRecapLevel"				"1"
+	"MaxLevel"						"1"
+
+	"AbilityCooldown"				"0"
+	"AbilityDuration"				"0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"GoldCost"					"0"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"PopulationCost"			"0"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"SpawnEffectAOE"			"0"
+		}
+	}
+
+	"precache"
+	{
+		"model"				"models/heroes/dragon_knight/dragon_knight.vmdl"
+		"model_folder"		"models/heroes/dragon_knight/"
+		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_dragon_knight.vsndevts"
+		"particle_folder"	"particles/units/heroes/hero_dragon_knight/"
+	}
+}
+
+
+
+
+
+
+
+
+
+"spawn_tower_merc_hermit"
+{
+	"BaseClass"						"ability_lua"
+	"AbilityTextureName"			"lina_dragon_slave"
+	"ScriptFile"					"abilities/spawning/spawn_tower_merc_hermit"
+
+	"AbilityCastRange"				"800"
+	"AbilityCastPoint"				"0.5"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+	"FightRecapLevel"				"1"
+	"MaxLevel"						"1"
+
+	"AbilityCooldown"				"0"
+	"AbilityDuration"				"0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"GoldCost"					"0"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"PopulationCost"			"0"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"SpawnEffectAOE"			"0"
+		}
+	}
+
+	"precache"
+	{
+		"model"				"models/heroes/dragon_knight/dragon_knight.vmdl"
+		"model_folder"		"models/heroes/dragon_knight/"
+		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_dragon_knight.vsndevts"
+		"particle_folder"	"particles/units/heroes/hero_dragon_knight/"
+	}
+}
+
+
+
+
+
+
+
+
+
+"spawn_tower_merc_dino"
+{
+	"BaseClass"						"ability_lua"
+	"AbilityTextureName"			"lina_dragon_slave"
+	"ScriptFile"					"abilities/spawning/spawn_tower_merc_dino"
+
+	"AbilityCastRange"				"800"
+	"AbilityCastPoint"				"0.5"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+	"FightRecapLevel"				"1"
+	"MaxLevel"						"1"
+
+	"AbilityCooldown"				"0"
+	"AbilityDuration"				"0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"GoldCost"					"0"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"PopulationCost"			"0"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"SpawnEffectAOE"			"0"
+		}
+	}
+
+	"precache"
+	{
+		"model"				"models/heroes/dragon_knight/dragon_knight.vmdl"
+		"model_folder"		"models/heroes/dragon_knight/"
+		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_dragon_knight.vsndevts"
+		"particle_folder"	"particles/units/heroes/hero_dragon_knight/"
+	}
+}
+
+
+
+
+
+
+
+
+
+"spawn_tower_merc_commander"
+{
+	"BaseClass"						"ability_lua"
+	"AbilityTextureName"			"lina_dragon_slave"
+	"ScriptFile"					"abilities/spawning/spawn_tower_merc_commander"
+
+	"AbilityCastRange"				"800"
+	"AbilityCastPoint"				"0.5"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+	"FightRecapLevel"				"1"
+	"MaxLevel"						"1"
+
+	"AbilityCooldown"				"0"
+	"AbilityDuration"				"0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"GoldCost"					"0"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"PopulationCost"			"0"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"SpawnEffectAOE"			"0"
+		}
+	}
+
+	"precache"
+	{
+		"model"				"models/heroes/dragon_knight/dragon_knight.vmdl"
+		"model_folder"		"models/heroes/dragon_knight/"
+		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_dragon_knight.vsndevts"
+		"particle_folder"	"particles/units/heroes/hero_dragon_knight/"
+	}
+}
+
+
+
+
+
+
+
+
+
+"spawn_tower_merc_furbolg"
+{
+	"BaseClass"						"ability_lua"
+	"AbilityTextureName"			"lina_dragon_slave"
+	"ScriptFile"					"abilities/spawning/spawn_tower_merc_furbolg"
+
+	"AbilityCastRange"				"800"
+	"AbilityCastPoint"				"0.5"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+	"FightRecapLevel"				"1"
+	"MaxLevel"						"1"
+
+	"AbilityCooldown"				"0"
+	"AbilityDuration"				"0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"GoldCost"					"0"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"PopulationCost"			"0"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"SpawnEffectAOE"			"0"
+		}
+	}
+
+	"precache"
+	{
+		"model"				"models/heroes/dragon_knight/dragon_knight.vmdl"
+		"model_folder"		"models/heroes/dragon_knight/"
+		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_dragon_knight.vsndevts"
+		"particle_folder"	"particles/units/heroes/hero_dragon_knight/"
+	}
+}
+
+
+
+
+
+
+
+
+
+"spawn_tower_merc_wyvern"
+{
+	"BaseClass"						"ability_lua"
+	"AbilityTextureName"			"lina_dragon_slave"
+	"ScriptFile"					"abilities/spawning/spawn_tower_merc_wyvern"
+
+	"AbilityCastRange"				"800"
+	"AbilityCastPoint"				"0.5"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+	"FightRecapLevel"				"1"
+	"MaxLevel"						"1"
+
+	"AbilityCooldown"				"0"
+	"AbilityDuration"				"0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"GoldCost"					"0"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"PopulationCost"			"0"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"SpawnEffectAOE"			"0"
+		}
+	}
+
+	"precache"
+	{
+		"model"				"models/heroes/dragon_knight/dragon_knight.vmdl"
+		"model_folder"		"models/heroes/dragon_knight/"
+		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_dragon_knight.vsndevts"
+		"particle_folder"	"particles/units/heroes/hero_dragon_knight/"
+	}
+}
+
+
+
+
+
+
+
+
+
+"spawn_tower_merc_chariot"
+{
+	"BaseClass"						"ability_lua"
+	"AbilityTextureName"			"lina_dragon_slave"
+	"ScriptFile"					"abilities/spawning/spawn_tower_merc_chariot"
+
+	"AbilityCastRange"				"800"
+	"AbilityCastPoint"				"0.5"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+	"FightRecapLevel"				"1"
+	"MaxLevel"						"1"
+
+	"AbilityCooldown"				"0"
+	"AbilityDuration"				"0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"GoldCost"					"0"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"PopulationCost"			"0"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"SpawnEffectAOE"			"0"
+		}
+	}
+
+	"precache"
+	{
+		"model"				"models/heroes/dragon_knight/dragon_knight.vmdl"
+		"model_folder"		"models/heroes/dragon_knight/"
+		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_dragon_knight.vsndevts"
+		"particle_folder"	"particles/units/heroes/hero_dragon_knight/"
+	}
+}
+
+
+
+
+
+
+
+
+
+"spawn_tower_merc_orc"
+{
+	"BaseClass"						"ability_lua"
+	"AbilityTextureName"			"lina_dragon_slave"
+	"ScriptFile"					"abilities/spawning/spawn_tower_merc_orc"
+
+	"AbilityCastRange"				"800"
+	"AbilityCastPoint"				"0.5"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+	"FightRecapLevel"				"1"
+	"MaxLevel"						"1"
+
+	"AbilityCooldown"				"0"
+	"AbilityDuration"				"0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"GoldCost"					"0"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"PopulationCost"			"0"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"SpawnEffectAOE"			"0"
+		}
+	}
+
+	"precache"
+	{
+		"model"				"models/heroes/dragon_knight/dragon_knight.vmdl"
+		"model_folder"		"models/heroes/dragon_knight/"
+		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_dragon_knight.vsndevts"
+		"particle_folder"	"particles/units/heroes/hero_dragon_knight/"
+	}
+}
+
+
+
+
+
+
+
+
+
+"spawn_tower_merc_frost_wolf"
+{
+	"BaseClass"						"ability_lua"
+	"AbilityTextureName"			"lina_dragon_slave"
+	"ScriptFile"					"abilities/spawning/spawn_tower_merc_frost_wolf"
+
+	"AbilityCastRange"				"800"
+	"AbilityCastPoint"				"0.5"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+	"FightRecapLevel"				"1"
+	"MaxLevel"						"1"
+
+	"AbilityCooldown"				"0"
+	"AbilityDuration"				"0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"GoldCost"					"0"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"PopulationCost"			"0"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"SpawnEffectAOE"			"0"
+		}
+	}
+
+	"precache"
+	{
+		"model"				"models/heroes/dragon_knight/dragon_knight.vmdl"
+		"model_folder"		"models/heroes/dragon_knight/"
+		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_dragon_knight.vsndevts"
+		"particle_folder"	"particles/units/heroes/hero_dragon_knight/"
+	}
+}
+
+
+
+
+
+
+
+
+
+"spawn_tower_merc_ice_troll"
+{
+	"BaseClass"						"ability_lua"
+	"AbilityTextureName"			"lina_dragon_slave"
+	"ScriptFile"					"abilities/spawning/spawn_tower_merc_ice_troll"
+
+	"AbilityCastRange"				"800"
+	"AbilityCastPoint"				"0.5"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+	"FightRecapLevel"				"1"
+	"MaxLevel"						"1"
+
+	"AbilityCooldown"				"0"
+	"AbilityDuration"				"0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"GoldCost"					"0"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"PopulationCost"			"0"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"SpawnEffectAOE"			"0"
+		}
+	}
+
+	"precache"
+	{
+		"model"				"models/heroes/dragon_knight/dragon_knight.vmdl"
+		"model_folder"		"models/heroes/dragon_knight/"
+		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_dragon_knight.vsndevts"
+		"particle_folder"	"particles/units/heroes/hero_dragon_knight/"
+	}
+}
+
+
+
+
+
+
+
+
+
+"spawn_tower_merc_warlock"
+{
+	"BaseClass"						"ability_lua"
+	"AbilityTextureName"			"lina_dragon_slave"
+	"ScriptFile"					"abilities/spawning/spawn_tower_merc_warlock"
+
+	"AbilityCastRange"				"800"
+	"AbilityCastPoint"				"0.5"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+	"FightRecapLevel"				"1"
+	"MaxLevel"						"1"
+
+	"AbilityCooldown"				"0"
+	"AbilityDuration"				"0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"GoldCost"					"0"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"PopulationCost"			"0"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"SpawnEffectAOE"			"0"
+		}
+	}
+
+	"precache"
+	{
+		"model"				"models/heroes/dragon_knight/dragon_knight.vmdl"
+		"model_folder"		"models/heroes/dragon_knight/"
+		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_dragon_knight.vsndevts"
+		"particle_folder"	"particles/units/heroes/hero_dragon_knight/"
+	}
+}
+
+
+
+
+
+
+
+
+
+"spawn_tower_merc_pandaren"
+{
+	"BaseClass"						"ability_lua"
+	"AbilityTextureName"			"lina_dragon_slave"
+	"ScriptFile"					"abilities/spawning/spawn_tower_merc_pandaren"
+
+	"AbilityCastRange"				"800"
+	"AbilityCastPoint"				"0.5"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+	"FightRecapLevel"				"1"
+	"MaxLevel"						"1"
+
+	"AbilityCooldown"				"0"
+	"AbilityDuration"				"0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"GoldCost"					"0"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"PopulationCost"			"0"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"SpawnEffectAOE"			"0"
+		}
+	}
+
+	"precache"
+	{
+		"model"				"models/heroes/dragon_knight/dragon_knight.vmdl"
+		"model_folder"		"models/heroes/dragon_knight/"
+		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_dragon_knight.vsndevts"
+		"particle_folder"	"particles/units/heroes/hero_dragon_knight/"
+	}
+}
+
+
+
+
+
+
+
+
+
+"spawn_tower_merc_ballista"
+{
+	"BaseClass"						"ability_lua"
+	"AbilityTextureName"			"lina_dragon_slave"
+	"ScriptFile"					"abilities/spawning/spawn_tower_merc_ballista"
+
+	"AbilityCastRange"				"800"
+	"AbilityCastPoint"				"0.5"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+	"FightRecapLevel"				"1"
+	"MaxLevel"						"1"
+
+	"AbilityCooldown"				"0"
+	"AbilityDuration"				"0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"GoldCost"					"0"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"PopulationCost"			"0"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"SpawnEffectAOE"			"0"
+		}
+	}
+
+	"precache"
+	{
+		"model"				"models/heroes/dragon_knight/dragon_knight.vmdl"
+		"model_folder"		"models/heroes/dragon_knight/"
+		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_dragon_knight.vsndevts"
+		"particle_folder"	"particles/units/heroes/hero_dragon_knight/"
+	}
+}
+
+
+
+
+
+
+
+
+
+"spawn_tower_merc_shaman"
+{
+	"BaseClass"						"ability_lua"
+	"AbilityTextureName"			"lina_dragon_slave"
+	"ScriptFile"					"abilities/spawning/spawn_tower_merc_shaman"
+
+	"AbilityCastRange"				"800"
+	"AbilityCastPoint"				"0.5"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+	"FightRecapLevel"				"1"
+	"MaxLevel"						"1"
+
+	"AbilityCooldown"				"0"
+	"AbilityDuration"				"0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"GoldCost"					"0"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"PopulationCost"			"0"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"SpawnEffectAOE"			"0"
+		}
+	}
+
+	"precache"
+	{
+		"model"				"models/heroes/dragon_knight/dragon_knight.vmdl"
+		"model_folder"		"models/heroes/dragon_knight/"
+		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_dragon_knight.vsndevts"
+		"particle_folder"	"particles/units/heroes/hero_dragon_knight/"
+	}
+}
+
+
+
+
+
+
+
+
+
+"spawn_tower_merc_pudge"
+{
+	"BaseClass"						"ability_lua"
+	"AbilityTextureName"			"lina_dragon_slave"
+	"ScriptFile"					"abilities/spawning/spawn_tower_merc_pudge"
+
+	"AbilityCastRange"				"800"
+	"AbilityCastPoint"				"0.5"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+	"FightRecapLevel"				"1"
+	"MaxLevel"						"1"
+
+	"AbilityCooldown"				"0"
+	"AbilityDuration"				"0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"GoldCost"					"0"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"PopulationCost"			"0"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"SpawnEffectAOE"			"0"
+		}
+	}
+
+	"precache"
+	{
+		"model"				"models/heroes/dragon_knight/dragon_knight.vmdl"
+		"model_folder"		"models/heroes/dragon_knight/"
+		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_dragon_knight.vsndevts"
+		"particle_folder"	"particles/units/heroes/hero_dragon_knight/"
+	}
+}
+
+
+
+
+
+
+
+
+
+"spawn_tower_merc_gargolye"
+{
+	"BaseClass"						"ability_lua"
+	"AbilityTextureName"			"lina_dragon_slave"
+	"ScriptFile"					"abilities/spawning/spawn_tower_merc_gargolye"
+
+	"AbilityCastRange"				"800"
+	"AbilityCastPoint"				"0.5"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+	"FightRecapLevel"				"1"
+	"MaxLevel"						"1"
+
+	"AbilityCooldown"				"0"
+	"AbilityDuration"				"0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"GoldCost"					"0"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"PopulationCost"			"0"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"SpawnEffectAOE"			"0"
+		}
+	}
+
+	"precache"
+	{
+		"model"				"models/heroes/dragon_knight/dragon_knight.vmdl"
+		"model_folder"		"models/heroes/dragon_knight/"
+		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_dragon_knight.vsndevts"
+		"particle_folder"	"particles/units/heroes/hero_dragon_knight/"
+	}
+}
+
+
+
+
+
+
+
+
+
+"spawn_tower_merc_behemoth"
+{
+	"BaseClass"						"ability_lua"
+	"AbilityTextureName"			"lina_dragon_slave"
+	"ScriptFile"					"abilities/spawning/spawn_tower_merc_behemoth"
+
+	"AbilityCastRange"				"800"
+	"AbilityCastPoint"				"0.5"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+	"FightRecapLevel"				"1"
+	"MaxLevel"						"1"
+
+	"AbilityCooldown"				"0"
+	"AbilityDuration"				"0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"GoldCost"					"0"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"PopulationCost"			"0"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"SpawnEffectAOE"			"0"
+		}
+	}
+
+	"precache"
+	{
+		"model"				"models/heroes/dragon_knight/dragon_knight.vmdl"
+		"model_folder"		"models/heroes/dragon_knight/"
+		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_dragon_knight.vsndevts"
+		"particle_folder"	"particles/units/heroes/hero_dragon_knight/"
+	}
+}
+
+
+
+
+
+
+
+
+
+"spawn_tower_merc_kraken"
+{
+	"BaseClass"						"ability_lua"
+	"AbilityTextureName"			"lina_dragon_slave"
+	"ScriptFile"					"abilities/spawning/spawn_tower_merc_kraken"
+
+	"AbilityCastRange"				"800"
+	"AbilityCastPoint"				"0.5"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+	"FightRecapLevel"				"1"
+	"MaxLevel"						"1"
+
+	"AbilityCooldown"				"0"
+	"AbilityDuration"				"0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"GoldCost"					"0"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"PopulationCost"			"0"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"SpawnEffectAOE"			"0"
+		}
+	}
+
+	"precache"
+	{
+		"model"				"models/heroes/dragon_knight/dragon_knight.vmdl"
+		"model_folder"		"models/heroes/dragon_knight/"
+		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_dragon_knight.vsndevts"
+		"particle_folder"	"particles/units/heroes/hero_dragon_knight/"
+	}
+}
+
+
+
+
+
+
+
+
+
+"spawn_tower_merc_infernal"
+{
+	"BaseClass"						"ability_lua"
+	"AbilityTextureName"			"lina_dragon_slave"
+	"ScriptFile"					"abilities/spawning/spawn_tower_merc_infernal"
+
+	"AbilityCastRange"				"800"
+	"AbilityCastPoint"				"0.5"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+	"FightRecapLevel"				"1"
+	"MaxLevel"						"1"
+
+	"AbilityCooldown"				"0"
+	"AbilityDuration"				"0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"GoldCost"					"0"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"PopulationCost"			"0"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"SpawnEffectAOE"			"0"
+		}
+	}
+
+	"precache"
+	{
+		"model"				"models/heroes/dragon_knight/dragon_knight.vmdl"
+		"model_folder"		"models/heroes/dragon_knight/"
+		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_dragon_knight.vsndevts"
+		"particle_folder"	"particles/units/heroes/hero_dragon_knight/"
+	}
+}
+
+
+
+
+
+
+
+
+
+"spawn_tower_merc_demon"
+{
+	"BaseClass"						"ability_lua"
+	"AbilityTextureName"			"lina_dragon_slave"
+	"ScriptFile"					"abilities/spawning/spawn_tower_merc_demon"
+
+	"AbilityCastRange"				"800"
+	"AbilityCastPoint"				"0.5"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+	"FightRecapLevel"				"1"
+	"MaxLevel"						"1"
+
+	"AbilityCooldown"				"0"
+	"AbilityDuration"				"0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"GoldCost"					"0"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"PopulationCost"			"0"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"SpawnEffectAOE"			"0"
+		}
+	}
+
+	"precache"
+	{
+		"model"				"models/heroes/dragon_knight/dragon_knight.vmdl"
+		"model_folder"		"models/heroes/dragon_knight/"
+		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_dragon_knight.vsndevts"
+		"particle_folder"	"particles/units/heroes/hero_dragon_knight/"
+	}
+}
+
+
+
+
+
+
+
+
+
 "upgrade_unit_fire_heat_knight_upg"
 {
 	"BaseClass"						"ability_lua"
@@ -254,7 +1611,19 @@
 			"UpgradeDelay"				"1"
 		}
 	}
+
+	"precache"
+	{
+		"model"				"models/heroes/dragon_knight/dragon_knight.vmdl"
+		"model_folder"		"models/heroes/dragon_knight/"
+		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_dragon_knight.vsndevts"
+		"particle_folder"	"particles/units/heroes/hero_dragon_knight/"
+	}
 }
+
+
+
+
 "upgrade_unit_fire_flame_archer_upg"
 {
 	"BaseClass"						"ability_lua"
@@ -290,7 +1659,17 @@
 			"UpgradeDelay"				"1"
 		}
 	}
+
+	"precache"
+	{
+		"model"				"models/heroes/clinkz/clinkz.vmdl"
+		"model_folder"		"models/heroes/clinkz/"
+		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_clinkz.vsndevts"
+		"particle"			"particles/units/heroes/hero_clinkz/clinkz_base_attack.vpcf"
+		"particle_folder"	"particles/units/heroes/hero_clinkz/"
+	}
 }
+
 "upgrade_unit_fire_vanguard_upg"
 {
 	"BaseClass"						"ability_lua"
@@ -326,7 +1705,18 @@
 			"UpgradeDelay"				"1"
 		}
 	}
+
+	"precache"
+	{
+		"model"				"models/heroes/sven/sven.vmdl"
+		"model_folder"		"models/heroes/sven/"
+		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_sven.vsndevts"
+		"particle_folder"	"particles/units/heroes/hero_sven/"
+	}
 }
+
+
+
 "upgrade_unit_fire_firestarter_upg_heal"
 {
 	"BaseClass"						"ability_lua"
@@ -361,6 +1751,15 @@
 			"var_type"					"FIELD_FLOAT"
 			"UpgradeDelay"				"1"
 		}
+	}
+
+	"precache"
+	{
+		"model"				"models/heroes/lina/lina.vmdl"
+		"model_folder"		"models/heroes/lina/"
+		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_lina.vsndevts"
+		"particle"			"particles/units/heroes/hero_lina/lina_base_attack.vpcf"
+		"particle_folder"	"particles/units/heroes/hero_lina/"
 	}
 }
 "upgrade_unit_fire_firestarter_upg_damage"
@@ -398,7 +1797,17 @@
 			"UpgradeDelay"				"1"
 		}
 	}
+
+	"precache"
+	{
+		"model"				"models/heroes/lina/lina.vmdl"
+		"model_folder"		"models/heroes/lina/"
+		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_lina.vsndevts"
+		"particle"			"particles/units/heroes/hero_lina/lina_base_attack.vpcf"
+		"particle_folder"	"particles/units/heroes/hero_lina/"
+	}
 }
+
 "upgrade_unit_fire_flamebound_upg"
 {
 	"BaseClass"						"ability_lua"
@@ -434,7 +1843,16 @@
 			"UpgradeDelay"				"1"
 		}
 	}
+
+	"precache"
+	{
+		"model"				"models/heroes/ember_spirit/ember_spirit.vmdl"
+		"model_folder"		"models/heroes/ember_spirit/"
+		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_ember_spirit.vsndevts"
+		"particle_folder"	"particles/units/heroes/hero_ember_spirit/"
+	}
 }
+
 "upgrade_unit_fire_pyromancer_upg"
 {
 	"BaseClass"						"ability_lua"
@@ -470,7 +1888,17 @@
 			"UpgradeDelay"				"1"
 		}
 	}
+
+	"precache"
+	{
+		"model"				"models/heroes/warlock/warlock.vmdl"
+		"model_folder"		"models/heroes/warlock/"
+		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_warlock.vsndevts"
+		"particle"			"particles/units/heroes/hero_warlock/warlock_base_attack.vpcf"
+		"particle_folder"	"particles/units/heroes/hero_warlock/"
+	}
 }
+
 "ability_fire_flame_archer_splitshot"
 {
 	"BaseClass"						"ability_datadriven"
@@ -480,7 +1908,7 @@
 	"AbilityUnitTargetFlag"			"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
 	"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
 	"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
-	"AbilityTextureName"			"medusa_split_shot"
+	"AbilityTextureName"			"clinkz_strafe"
 	"AbilityCastPoint"				"0.7"
 
 	"precache"
@@ -554,13 +1982,15 @@
 		}
 	}
 }
+
+
 "ability_fire_vanguard_stacking_damage"
 {
 	"BaseClass"					"ability_datadriven"
 	"AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 	"AbilityUnitDamageType"		"DAMAGE_TYPE_PHYSICAL"
 	"SpellImmunityType"			"SPELL_IMMUNITY_ENEMIES_YES"
-	"AbilityTextureName"		"ursa_fury_swipes"
+	"AbilityTextureName"		"dragon_knight_dragon_blood"
 
 	"AbilitySpecial"
 	{
@@ -626,6 +2056,10 @@
 		}
 	}
 }
+
+
+
+
 "ability_fire_firestarter_heal"
 {
 	"BaseClass"						"ability_datadriven"
@@ -638,7 +2072,7 @@
 	"AbilityTextureName"			"omniknight_purification"
 
 	"AbilityCastRange"				"600"
-	"AbilityCastPoint"				"0.4"
+	"AbilityCastPoint"				"0.75"
 	"AbilityCooldown"				"10"
 	"AbilityManaCost"				"25"
 
@@ -700,6 +2134,9 @@
 	}
 }
 
+
+
+
 "ability_fire_firestarter_mass_heal"
 {
 	"BaseClass"						"ability_datadriven"
@@ -709,10 +2146,10 @@
 	"AbilityUnitTargetFlags"		"DOTA_UNIT_TARGET_FLAG_NOT_MAGIC_IMMUNE_ALLIES"
 	"SpellImmunityType"				"SPELL_IMMUNITY_ALLIES_NO"
 	"FightRecapLevel"				"1"
-	"AbilityTextureName"			"omniknight_purification"
+	"AbilityTextureName"			"chen_penitence"
 
 	"AbilityCastRange"				"600"
-	"AbilityCastPoint"				"0.4"
+	"AbilityCastPoint"				"0.75"
 	"AbilityCooldown"				"10"
 	"AbilityManaCost"				"50"
 
@@ -801,7 +2238,7 @@
 	"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
 	"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 	"FightRecapLevel"				"1"
-	"AbilityTextureName"			"doom_bringer_scorched_earth"
+	"AbilityTextureName"			"ursa_earthshock"
 
 	"precache"
 	{
@@ -874,6 +2311,8 @@
 	}
 }
 
+
+
 "ability_fire_flamebound_stun"
 {
 	"BaseClass"						"ability_datadriven"
@@ -883,10 +2322,10 @@
 	"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"	
 	"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 	"FightRecapLevel"				"1"
-	"AbilityTextureName"			"sven_storm_bolt"
+	"AbilityTextureName"			"lion_finger_of_death"
 
-	"AbilityCastRange"				"500"
-	"AbilityCastPoint"				"0.43"
+	"AbilityCastRange"				"90"
+	"AbilityCastPoint"				"0.4"
 	"AbilityCooldown"				"8"
 	"AbilityManaCost"				"20"
 
@@ -908,7 +2347,7 @@
 		"02"
 		{
 			"var_type"				"FIELD_INTEGER"
-			"speed"					"1000"
+			"speed"					"0"
 		}
 	}
 
@@ -959,6 +2398,108 @@
 		}
 	}
 }
+
+
+"ability_fire_pyromancer_bounce_attack"
+{
+	"BaseClass"						"ability_datadriven"
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+	"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
+	"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+	"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_BUILDING"
+	"AbilityTextureName"			"ember_spirit_searing_chains"
+
+	"precache"
+	{
+		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_warlock.vsndevts"
+		"particle"			"particles/units/heroes/hero_warlock/warlock_base_attack.vpcf"
+	}
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"								"FIELD_INTEGER"
+			"range"									"400"
+		}
+		"02"
+		{
+			"var_type"								"FIELD_INTEGER"
+			"bounces"								"2"
+		}
+		"03"
+		{
+			"var_type"								"FIELD_INTEGER"
+			"damage_reduction_percent"				"0.2"
+		}
+		"04"
+		{
+			"var_type"								"FIELD_INTEGER"
+			"damage_reduction_percent_friendly"		"20"
+		}
+	}
+
+	"Modifiers"
+	{
+		"modifier_bounce_attack"
+		{
+			"Passive" 					"1"
+			"IsHidden"					"1"
+
+			"OnAttackLanded"
+			{
+				"RunScript"
+				{
+					"ScriptFile"		"unit_abilities/BouncingAttack.lua"
+					"Function"			"BounceAttackStart"
+				}
+			}
+		}
+	}
+}
+
+"ability_fire_pyromancer_bounce_attack_bounce"
+{
+	"BaseClass"						"ability_datadriven"
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+
+	"OnProjectileHitUnit"
+	{
+		"DeleteOnHit"	"1"
+
+		"FireSound"
+		{
+			"EffectName"	"Hero_Warlock.ProjectileImpact"
+			"Target" 		"TARGET"
+		}
+		
+		"RunScript"
+		{
+			"ScriptFile"	"unit_abilities/BouncingAttack.lua"
+			"Function"		"BounceAttackPerformBounce"
+		}
+
+	}
+
+	"Modifiers"
+	{
+		"modifier_bouncing_attack_dummy_unit"
+		{
+			"States"
+			{
+				"MODIFIER_STATE_INVULNERABLE"					"MODIFIER_STATE_VALUE_ENABLED"
+				"MODIFIER_STATE_NO_HEALTH_BAR"					"MODIFIER_STATE_VALUE_ENABLED"
+				"MODIFIER_STATE_NO_UNIT_COLLISION"				"MODIFIER_STATE_VALUE_ENABLED"
+				"MODIFIER_STATE_NOT_ON_MINIMAP"					"MODIFIER_STATE_VALUE_ENABLED"
+				"MODIFIER_STATE_UNSELECTABLE"					"MODIFIER_STATE_VALUE_ENABLED"
+				"MODIFIER_STATE_FLYING"							"MODIFIER_STATE_VALUE_ENABLED"
+			}
+		}
+	}
+}
+
 
 
 "sell_unit"
