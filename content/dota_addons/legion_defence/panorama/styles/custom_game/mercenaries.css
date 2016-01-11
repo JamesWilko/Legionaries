@@ -1,0 +1,122 @@
+
+.MercenariesPanel
+{
+	horizontal-align: left;
+	border: 1px solid black;
+	background-color: gradient( linear, 0% 80%, 0% 5%, from( #111b23 ), to( #24333f ) );
+	padding: 8px 12px 8px 8px;
+	height: 820px;
+	margin-top: 64px;
+	/*margin-right: 32px;*/
+}
+
+.MercsList
+{
+	margin-right: 8px;
+	flow-children: down;
+	overflow: squish scroll;
+}
+
+.ScrollBarBackground
+{
+	margin-top: 4px;
+	horizontal-align: right;
+	width: 8px;
+	height: 100%;
+	background-color: #FFFFFF11;
+}
+
+.ScrollBarThumb
+{
+	width: 8px;
+	height: 100%;
+	background-color: #FFFFFF55;
+}
+
+.UpgradePanel
+{
+	margin-left: 8px;
+	margin-right: 8px;
+	margin-top: 4px;
+	margin-bottom: 4px;
+	width: 80px;
+	height: 60px;
+	background-color: #000000;
+	border: 1px solid black;
+	saturation: 0.9;
+}
+
+.UpgradePanel:hover
+{
+	background-color: #4c0000;
+	border: 1px solid white;
+	saturation: 1.0;
+}
+
+.UpgradeButton
+{
+	vertical-align: center;
+	horizontal-align: center;
+	text-align: center;
+}
+
+.UpgradeCost
+{
+	margin-left: -4px;
+	padding-left: 2px;
+	vertical-align: bottom;
+	horizontal-align: right;
+	min-width: 42px;
+	min-height: 20px;
+	background-color: #000000e0;
+}
+
+.UpgradeCostText
+{
+	color: aqua;
+	text-shadow: 1px 1px 2px 2 #000000;
+	font-size: 16px;
+	font-weight: bold;
+	vertical-align: center;
+	text-align: center;
+	margin-left: 18px;
+}
+
+.UpgradeCostIcon
+{
+	vertical-align: center;
+	text-align: left;
+}
+
+.UpgradeCostNoIcon
+{
+	margin-left: -4px;
+	padding-left: 2px;
+	vertical-align: bottom;
+	horizontal-align: right;
+	min-width: 20px;
+	min-height: 20px;
+	background-color: #000000e0;
+}
+
+.UpgradeCostTextNoIcon
+{
+	color: aqua;
+	text-shadow: 1px 1px 2px 2 #000000;
+	font-size: 16px;
+	font-weight: bold;
+	vertical-align: center;
+	text-align: left;
+	margin-left: 4px;
+}
+
+.SoldOut
+{
+	opacity: 0.1;
+}
+
+.hidden
+{
+	visibility: collapse;
+	opacity: 0;
+}
