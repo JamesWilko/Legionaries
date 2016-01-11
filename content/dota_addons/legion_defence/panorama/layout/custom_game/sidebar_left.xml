@@ -10,7 +10,7 @@
 	</scripts>
 
 	<Panel class="Parent" hittest="false">
-		<Panel class="Sidebar Left CenterVertical" hittest="false">
+		<Panel class="Sidebar Left CenterVertical NoBorders" hittest="false">
 			<Panel id="ChildList" class="ChildList FlowDown" hittest="false" />
 		</Panel>
 	</Panel>

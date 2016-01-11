@@ -12,7 +12,7 @@
 
 	<Panel class="Parent" hittest="false">
 		<Panel class="InventoryBar Bottom Right" hittest="false">
-			<Panel id="ChildList" class="ChildList FlowRight Top" hittest="false" />
+			<Panel id="ChildList" class="ChildList FlowRight Top NoBorders" hittest="false" />
 		</Panel>
 	</Panel>
 

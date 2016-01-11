@@ -4,7 +4,7 @@
 	horizontal-align: left;
 	vertical-align: center;
 	border: 1px solid black;
-	background-color: #272823;
+	background-color: gradient( linear, 0% 80%, 0% 5%, from( #111b23 ), to( #24333f ) );
 	padding: 8px;
 }
 
