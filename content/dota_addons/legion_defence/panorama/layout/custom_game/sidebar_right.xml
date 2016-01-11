@@ -1,0 +1,18 @@
+<root>
+
+	<styles>
+		<!-- <include src="file://{resources}/styles/dotastyles.css" /> -->
+		<include src="file://{resources}/styles/custom_game/sidebar.css" />
+	</styles>
+
+	<scripts>
+		<include src="file://{resources}/scripts/custom_game/sidebar_right.js" />
+	</scripts>
+
+	<Panel class="Parent" hittest="false">
+		<Panel class="MercenariesPanel Right NoBorders" hittest="false">
+			<Panel id="ChildList" class="ChildList FlowDown" hittest="false" />
+		</Panel>
+	</Panel>
+
+</root>
