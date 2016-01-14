@@ -10,12 +10,10 @@
 	</scripts>
 
 	<Panel class="UpgradePanel">
-		<!-- <Button class="UpgradeButton"
-						onmouseover="ShowTooltip( $.GetContextPanel() )"
-						onmouseout="HideTooltip( $.GetContextPanel() )"
-						onactivate="PurchaseUpgrade( $.GetContextPanel() )"
-						> -->
-		<Button class="UpgradeButton" onmouseover="ShowTooltip( $.GetContextPanel() )" onmouseout="HideTooltip( $.GetContextPanel() )">
+		<Button class="UpgradeButton"
+			onmouseover="ShowTooltip( $.GetContextPanel() )"
+			onmouseout="HideTooltip( $.GetContextPanel() )"
+			onactivate="PurchaseMercenary( $.GetContextPanel() )">
 				<DOTAItemImage hittest="false" class="UpgradeImage" id="UpgradeImage" itemname="item_claymore" />
 		</Button>
 		<Panel class="UpgradeCost" hittest="false">

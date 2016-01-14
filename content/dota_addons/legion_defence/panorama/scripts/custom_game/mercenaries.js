@@ -31,7 +31,7 @@ function OnMercenaryUnitDataChanged()
 		}
 
 		// Create unit spawn buttons
-		for(var i = 1; i < length; ++i)
+		for(var i = 1; i <= length; ++i)
 		{
 			var merc = $.CreatePanel( "Panel", $("#MercsList"), i.toString() );
 			merc.BLoadLayout( "file://{resources}/layout/custom_game/mercenary_item.xml", true, false );

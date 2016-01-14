@@ -60,6 +60,23 @@ function ShowTooltip( data )
 		}
 	}
 
+	// Show cooldown
+	var cooldown = m_Tooltip.FindChild("CooldownParent");
+	if(cooldown)
+	{
+		var cooldownAmount = data["cooldown"];
+		if(cooldownAmount)
+		{
+			cooldown.visible = true;
+			var cooldownText = cooldown.FindChild("CooldownText");
+			cooldownText.text = cooldownAmount;
+		}
+		else
+		{
+			cooldown.visible = false;
+		}
+	}
+
 	m_Tooltip.visible = true;
 }
 

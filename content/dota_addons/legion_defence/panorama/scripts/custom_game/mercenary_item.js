@@ -76,6 +76,8 @@ function ShowTooltip( panel )
 			"value-1-name" : "",
 			"value-2-name" : "",
 			"value-3-name" : "",
+			"value-4-name" : $.Localize("legion_income_tooltip").toUpperCase(),
+			"cooldown" : mercData["cooldown"],
 		};
 
 		if(mercData)
@@ -83,6 +85,7 @@ function ShowTooltip( panel )
 			var attackType = mercData["attack_capability"];
 			var damageType = mercData["damage_type"];
 			var defenceType = mercData["defence_type"];
+			var income = mercData["income"];
 
 			data["value-1-value"] = $.Localize(m_AttackTypes[attackType]);
 			data["value-1-value-color"] = m_AttackTypesColours[attackType];
@@ -92,6 +95,9 @@ function ShowTooltip( panel )
 
 			data["value-3-value"] = $.Localize(m_DefenceTypes[defenceType]);
 			data["value-3-value-color"] = m_DefenceTypesColours[defenceType];
+
+			data["value-4-value"] = " " + income + " " + $.Localize("legion_currency_gold");
+			data["value-4-value-color"] = "gold";
 		}
 
 		GameEvents.SendEventClientSide("show_legion_tooltip", data );
@@ -103,9 +109,14 @@ function HideTooltip( panel )
 	GameEvents.SendEventClientSide("hide_legion_tooltip", {} );
 }
 
-function PurchaseUpgrade( panel )
+function PurchaseMercenary( panel )
 {
-	GameEvents.SendCustomGameEventToServer( "legion_purchase_king_upgrade", { "sUpgradeId" : panel.id } );
+	var mercIndex = panel.id;
+	var mercData = GetMercenariesData()[mercIndex];
+	if(mercData && GetMercenariesData()[mercIndex]["id"])
+	{
+		GameEvents.SendCustomGameEventToServer( "legion_purchase_mercenary", { "sMercenaryId" : GetMercenariesData()[mercIndex]["id"] } );
+	}
 }
 
 function OnMercenariesDataChanges()

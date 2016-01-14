@@ -38,6 +38,11 @@
 				<Label text="4" id="TooltipValue4Value" hittest="false"/>
 			</Panel>
 
+			<Panel class="Cooldown" id="CooldownParent">
+				<Image id="CooldownImage" class="CooldownImage" src="file://{images}/hud/cooldown.png" hittest="false" />
+				<Label id="CooldownText" class="CooldownText" text="20"/>
+			</Panel>
+
 		</Panel>
 
 	</Panel>

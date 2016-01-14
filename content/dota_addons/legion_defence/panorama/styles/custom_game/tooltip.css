@@ -12,7 +12,7 @@
 	border: 1px solid black;
 	border-radius: 4px;
 	box-shadow: black 0px 0px 5px 0px;
-	background-color: #272823;
+	background-color: gradient( linear, 0% 80%, 0% 5%, from( #111b23 ), to( #24333f ) );
 	padding: 8px;
 	min-width: 300px;
 	max-width: 300px;
@@ -71,4 +71,22 @@
 	wash-color: #2d2d2d;
 
 	z-index: 1;
+}
+
+.Cooldown
+{
+	flow-children: right;
+}
+
+.CooldownImage
+{
+	width: 20px;
+	height: 20px;
+}
+
+.CooldownText
+{
+	color: orange;
+	font-family: Radiance,FZLanTingHei-R-GBK,TH Sarabun New,Gulim,MingLiU;
+	margin-left: 8px;
 }

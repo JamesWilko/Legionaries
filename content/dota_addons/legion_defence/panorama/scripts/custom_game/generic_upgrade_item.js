@@ -32,7 +32,8 @@ function ShowTooltip( panel )
 	var data = {
 		"panelId" : panel.id,
 		"title" : title.toUpperCase(),
-		"desc" : desc
+		"desc" : desc,
+		"cooldown" : upgradeData["time"]
 	};
 
 	if(!max_level)
