@@ -29,11 +29,6 @@ CWaveController.LEAKED_WAVE_BOUNTY_MULTIPLIERS = {
 	[11] = 0.25,
 }
 
-CWaveController.ENEMY_TEAMS = {
-	[DOTA_TEAM_GOODGUYS] = DOTA_TEAM_BADGUYS,
-	[DOTA_TEAM_BADGUYS] = DOTA_TEAM_GOODGUYS
-}
-
 CWaveController.WAVE_INFO_TABLE = "UpcomingWaveData"
 CWaveController.NUM_WAVES_IN_SET = 10
 
@@ -102,40 +97,45 @@ function CWaveController:OnThink()
 	end
 
 	-- Spawn a unit at every spawn point every think
-	local waveIsReady = self:IsWaveRunning() and self:CurrentWaveHasSpawnsRemaining() and (self._wave_start_time + self._before_wave_time) < time
+	local waveIsReady = self:IsWaveRunning() and (self._wave_start_time + self._before_wave_time) < time
+	local unitsRemaining = self:CurrentWaveHasSpawnsRemaining()
 	local gameIsReady = not GameRules:IsGamePaused()
 	if waveIsReady and gameIsReady then
 
-		local unit_to_spawn = self:GetAndPopNextSpawnInWave()
-		for k, spawn in pairs( self._lane_controller:GetSpawnZonesForOccupiedLanes() ) do
+		-- Spawn wave units
+		if unitsRemaining then
 
-			local ent = spawn.entity
-			local vPosition = RandomVectorInTrigger( ent )
-			if unit_to_spawn then
+			local waveUnitToSpawn = self:GetAndPopNextSpawnInWave()
+			for k, spawn in pairs( self._lane_controller:GetSpawnZonesForOccupiedLanes() ) do
 
-				local hUnit = CreateUnitByName( unit_to_spawn, vPosition, true, nil, nil, self:GetEnemyTeam(spawn.team) )
-				local entTargetZone = self._map_controller:GetTargetZoneForTeam( spawn.team )
-				local vTarget = RandomVectorInTrigger( entTargetZone )
-				local hKing = GameRules.LegionDefence:GetKingController():GetKingForTeam(spawn.team)
+				local ent = spawn.entity
 
-				if hUnit ~= nil then
+				-- Spawn wave unit
+				if waveUnitToSpawn then
 
-					-- TODO: Make units face spawn zone regardless of spawn position
-					hUnit:SetAngles( 0, -90, 0 )
+					local vPosition = RandomVectorInTrigger( ent )
+					local hUnit = CreateUnitByName( waveUnitToSpawn, vPosition, true, nil, nil, GetEnemyTeam(spawn.team) )
+					local entTargetZone = self._map_controller:GetTargetZoneForTeam( spawn.team ).entity
+					local vTarget = RandomVectorInTrigger( entTargetZone )
+					local hKing = GameRules.LegionDefence:GetKingController():GetKingForTeam(spawn.team)
 
-					local unit_data = {
-						unit = hUnit,
-						lane = spawn.lane,
-						target_pos = vTarget,
-						target_king = hKing
-					}
-					table.insert( self._spawned_units, unit_data )
+					if hUnit ~= nil then
+
+						-- TODO: Make units face spawn zone regardless of spawn position
+						hUnit:SetAngles( 0, -90, 0 )
+
+						self:AddSpawnedUnit( hUnit, spawn.lane, vTarget, hKing )
+
+					end
 
 				end
 
 			end
 
 		end
+
+		-- Allow other controllers to spawn units
+		FireGameEvent( "legion_perform_wave_spawn", {} )
 
 	end
 
@@ -156,8 +156,14 @@ function CWaveController:OnThink()
 	
 end
 
-function CWaveController:GetEnemyTeam( iTeam )
-	return CWaveController.ENEMY_TEAMS[iTeam]
+function CWaveController:AddSpawnedUnit( hUnit, laneId, vTargetPosition, hTargetKing )
+	local unit_data = {
+		unit = hUnit,
+		lane = laneId,
+		target_pos = vTargetPosition,
+		target_king = hTargetKing
+	}
+	table.insert( self._spawned_units, unit_data )
 end
 
 function CWaveController:GetCurrentWave()

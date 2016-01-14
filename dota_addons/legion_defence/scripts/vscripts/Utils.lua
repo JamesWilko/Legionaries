@@ -1,4 +1,9 @@
 
+local ENEMY_TEAMS = {
+	[DOTA_TEAM_GOODGUYS] = DOTA_TEAM_BADGUYS,
+	[DOTA_TEAM_BADGUYS] = DOTA_TEAM_GOODGUYS
+}
+
 function BroadcastCenterMessage( sMessage, fDuration )
 	local centerMessage = {
 		message = sMessage,
@@ -114,4 +119,8 @@ function RandomVectorInTrigger( entTrigger )
 		return vPosition
 	end
 	return Vector(0, 0, 0)
+end
+
+function GetEnemyTeam( iTeam )
+	return ENEMY_TEAMS[iTeam]
 end
