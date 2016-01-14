@@ -118,8 +118,8 @@ function CMineController:SpawnMiners( iPlayerId, laneId, teamId )
 	for i = numMiners, self.mines[iPlayerId].miners do
 
 		local spawns = mapController:GetMinerSpawnPointsForLane( laneId )
-		local spawn_point = spawns[i]
-		local target_point = mapController:GetMinerTargetPointForLane( laneId )
+		local spawn_point = spawns[i].entity
+		local target_point = mapController:GetMinerTargetPointForLane( laneId ).entity
 
 		if spawn_point then
 

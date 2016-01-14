@@ -43,6 +43,14 @@ function CMapController:Setup()
 			class = "info_target",
 			name = "legion_miner_target"
 		},
+		["merc_spawns"] = {
+			class = "trigger_dota",
+			name = "legion_merc_spawn_zone"
+		},
+		["arena_zones"] = {
+			class = "trigger_dota",
+			name = "legion_arena_zone"
+		}
 	}
 
 	self._team_ids = {
@@ -57,6 +65,8 @@ function CMapController:Setup()
 	self:FindFallbackZones()
 	self:FindMinerSpawnPoints()
 	self:FindMinerTargetPoints()
+	self:FindMercSpawnZones()
+	self:FindArenaZones()
 
 end
 
@@ -125,7 +135,7 @@ end
 function CMapController:_GetTeamEntity( tblData, iTeam )
 	for k, v in ipairs( tblData ) do
 		if v.team == iTeam then
-			return v.entity
+			return v
 		end
 	end
 	return nil
@@ -134,7 +144,7 @@ end
 function CMapController:_GetLaneEntity( tblData, laneId, iTeam )
 	for k, v in ipairs( tblData ) do
 		if v.lane == laneId then
-			return v.entity
+			return v
 		end
 	end
 	return self:_GetTeamEntity( tblData, iTeam )
@@ -144,7 +154,7 @@ function CMapController:_GetLaneEntities( tblData, laneId, iTeam )
 	local tbl = {}
 	for k, v in ipairs( tblData ) do
 		if v.lane == laneId then
-			table.insert(tbl, v.entity)
+			table.insert(tbl, v)
 		end
 	end
 	return tbl
@@ -276,4 +286,44 @@ end
 
 function CMapController:GetMinerTargetPointForLane( laneId, iTeam )
 	return self:_GetLaneEntity( self._miner_targets, laneId, iTeam )
+end
+
+-------------------------
+-- Merc Spawn Zones
+-------------------------
+function CMapController:FindMercSpawnZones()
+	self._merc_spawn_zones = {}
+	self:_StoreGamemodeEntitiesOfClass( self._merc_spawn_zones, self._map_entities.merc_spawns )
+end
+
+function CMapController:MercSpawnZones()
+	return self._merc_spawn_zones
+end
+
+function CMapController:GetMercSpawnZoneForTeam( iTeam )
+	return self:_GetTeamEntity( self._merc_spawn_zones, iTeam )
+end
+
+function CMapController:GetMercSpawnZoneForLane( laneId, iTeam )
+	return self:_GetLaneEntity( self._merc_spawn_zones, laneId, iTeam )
+end
+
+-------------------------
+-- Arena Spawn Zones
+-------------------------
+function CMapController:FindArenaZones()
+	self._arena_zones = {}
+	self:_StoreGamemodeEntitiesOfClass( self._arena_zones, self._map_entities.arena_zones )
+end
+
+function CMapController:ArenaZones()
+	return self._arena_zones
+end
+
+function CMapController:GetArenaZoneForTeam( iTeam )
+	return self:_GetTeamEntity( self._arena_zones, iTeam )
+end
+
+function CMapController:GetArenaZoneForLane( laneId, iTeam )
+	return self:_GetLaneEntity( self._arena_zones, laneId, iTeam )
 end
