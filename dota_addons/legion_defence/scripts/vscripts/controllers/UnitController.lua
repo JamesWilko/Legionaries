@@ -105,7 +105,7 @@ function CUnitController:UnregisterUnit( unit )
 
 			if v.unit == unit then
 				print(string.format("Unregistered unit: %s", v.id))
-				self._player_units[i][k] = nil
+				table.remove( self._player_units[i], k )
 				return true
 			end
 
@@ -249,6 +249,8 @@ function CUnitController:HandleOnWaveStart( event )
 
 	if IsServer() then
 
+		self._wave_in_progress = true
+
 		-- Unfreeze all units and allow them to move around the play field
 		for i, player in pairs( self._player_units ) do
 			for k, v in pairs( player ) do
@@ -268,6 +270,8 @@ function CUnitController:HandleOnWaveComplete( event )
 
 	if IsServer() then
 
+		self._wave_in_progress = false
+
 		-- Freeze all units again and respawn dead units
 		for i, player in pairs( self._player_units ) do
 
@@ -286,7 +290,7 @@ function CUnitController:HandleOnWaveComplete( event )
 				else
 
 					-- Unit is dead, so spawn a new unit and update references
-					local hUnit = self:SpawnUnit( v.player, v.team, v.class, v.position )
+					local hUnit = self:SpawnUnit( v.player, v.team, v.class, v.position, false )
 					if hUnit then
 
 						hUnit._total_costs = v.cost_data
@@ -333,7 +337,7 @@ end
 function CUnitController:OnLaneCleared( laneId, iPlayerId )
 
 	local hPlayer = PlayerResource:GetPlayer( iPlayerId )
-	local fallbackZone = GameRules.LegionDefence:GetMapController():GetFallbackZoneForTeam( hPlayer:GetTeam() )
+	local fallbackZone = GameRules.LegionDefence:GetMapController():GetFallbackZoneForTeam( hPlayer:GetTeam() ).entity
 
 	-- Give all units teleport delays and positions
 	for k, v in pairs( self:GetAllUnitsForPlayer(iPlayerId) or {} ) do
@@ -356,43 +360,46 @@ end
 function CUnitController:LaneClearedTeleportUnits()
 
 	local canStopTimer = true
+	if self._wave_in_progress then
 
-	-- Iterate througha all units and check if they need teleporting
-	for i, player in pairs( self._player_units ) do
-		for k, v in pairs( player ) do
-			if IsValidEntity(v.unit) and v.unit:IsAlive() and v.teleport_delay ~= nil then
+		-- Iterate througha all units and check if they need teleporting
+		for i, player in pairs( self._player_units ) do
+			for k, v in pairs( player ) do
+				if IsValidEntity(v.unit) and v.unit:IsAlive() and v.teleport_delay ~= nil then
 
-				if v.teleport_delay <= 0 then
+					if v.teleport_delay <= 0 then
 
-					local nFXIndex = nil
+						local nFXIndex = nil
 
-					-- Show particles at unit position
-					nFXIndex = ParticleManager:CreateParticle( "particles/units/heroes/hero_wisp/wisp_relocate_teleport_c.vpcf", PATTACH_WORLDORIGIN, v.unit )
-					ParticleManager:SetParticleControl( nFXIndex, 0, v.unit:GetOrigin() )
-					ParticleManager:ReleaseParticleIndex( nFXIndex )
+						-- Show particles at unit position
+						nFXIndex = ParticleManager:CreateParticle( "particles/units/heroes/hero_wisp/wisp_relocate_teleport_c.vpcf", PATTACH_WORLDORIGIN, v.unit )
+						ParticleManager:SetParticleControl( nFXIndex, 0, v.unit:GetOrigin() )
+						ParticleManager:ReleaseParticleIndex( nFXIndex )
 
-					-- Show particles at destination
-					nFXIndex = ParticleManager:CreateParticle( "particles/units/heroes/hero_wisp/wisp_relocate_teleport.vpcf", PATTACH_WORLDORIGIN, v.unit )
-					ParticleManager:SetParticleControl( nFXIndex, 0, v.teleport_pos )
-					ParticleManager:SetParticleControl( nFXIndex, 1, RandomVector(360) )
-					ParticleManager:ReleaseParticleIndex( nFXIndex )
+						-- Show particles at destination
+						nFXIndex = ParticleManager:CreateParticle( "particles/units/heroes/hero_wisp/wisp_relocate_teleport.vpcf", PATTACH_WORLDORIGIN, v.unit )
+						ParticleManager:SetParticleControl( nFXIndex, 0, v.teleport_pos )
+						ParticleManager:SetParticleControl( nFXIndex, 1, RandomVector(360) )
+						ParticleManager:ReleaseParticleIndex( nFXIndex )
 
-					-- Play sounds
-					EmitSoundOnLocationWithCaster( v.unit:GetOrigin(), "Hero_Wisp.Tether.Target", v.unit )
-					EmitSoundOnLocationWithCaster( v.teleport_pos, "Hero_Wisp.Tether.Target", v.unit )
+						-- Play sounds
+						EmitSoundOnLocationWithCaster( v.unit:GetOrigin(), "Hero_Wisp.Tether.Target", v.unit )
+						EmitSoundOnLocationWithCaster( v.teleport_pos, "Hero_Wisp.Tether.Target", v.unit )
 
-					-- Teleport unit
-					v.unit:SetOrigin( v.teleport_pos )
-					v.teleport_delay = nil
-					v.teleport_pos = nil
+						-- Teleport unit
+						v.unit:SetOrigin( v.teleport_pos )
+						v.teleport_delay = nil
+						v.teleport_pos = nil
 
-				else
-					v.teleport_delay = v.teleport_delay - CUnitController.CLEARED_WAVE_TELEPORT_DELAY
-					canStopTimer = false
+					else
+						v.teleport_delay = v.teleport_delay - CUnitController.CLEARED_WAVE_TELEPORT_DELAY
+						canStopTimer = false
+					end
+
 				end
-
 			end
 		end
+
 	end
 
 	-- Refresh timer if units still need to be teleported
