@@ -1,0 +1,122 @@
+"LegionWaves" 
+{
+	"npc_legion_merc_footman"
+	{
+		"image"		"file://{images}/custom_game/mercs/merc_skeleton.psd"
+	}
+
+	"npc_legion_merc_bowman"
+	{
+		"image"		"file://{images}/custom_game/mercs/merc_troll_beserker.psd"
+	}
+
+	"npc_legion_merc_ghoul"
+	{
+		"image"		"file://{images}/custom_game/mercs/merc_ghoul.psd"
+	}
+
+	"npc_legion_merc_warrior"
+	{
+		"image"		"file://{images}/custom_game/mercs/merc_centaur.psd"
+	}
+
+	"npc_legion_merc_whelp"
+	{
+		"image"		"file://{images}/custom_game/mercs/merc_dino_small.psd"
+	}
+
+	"npc_legion_merc_hermit"
+	{
+		"image"		"file://{images}/custom_game/mercs/merc_dark_troll.psd"
+	}
+
+	"npc_legion_merc_dino"
+	{
+		"image"		"file://{images}/custom_game/mercs/merc_dino.psd"
+	}
+
+	"npc_legion_merc_commander"
+	{
+		"image"		"file://{images}/custom_game/mercs/merc_troll_priest.psd"
+	}
+
+	"npc_legion_merc_furbolg"
+	{
+		"image"		"file://{images}/custom_game/mercs/merc_furbolg_yellow.psd"
+	}
+
+	"npc_legion_merc_wyvern"
+	{
+		"image"		"file://{images}/custom_game/mercs/merc_drake.psd"
+	}
+
+	"npc_legion_merc_chariot"
+	{
+		"image"		"file://{images}/custom_game/mercs/merc_siege.psd"
+	}
+
+	"npc_legion_merc_orc"
+	{
+		"image"		"file://{images}/custom_game/mercs/merc_furbolg_red.psd"
+	}
+
+	"npc_legion_merc_frost_wolf"
+	{
+		"image"		"file://{images}/custom_game/mercs/merc_wolf.psd"
+	}
+
+	"npc_legion_merc_ice_troll"
+	{
+		"image"		"file://{images}/custom_game/mercs/merc_ogre.psd"
+	}
+
+	"npc_legion_merc_warlock"
+	{
+		"image"		"file://{images}/custom_game/mercs/merc_dragon.psd"
+	}
+
+	"npc_legion_merc_pandaren"
+	{
+		"image"		"file://{images}/custom_game/mercs/merc_golem.psd"
+	}
+
+	"npc_legion_merc_ballista"
+	{
+		"image"		"file://{images}/custom_game/mercs/merc_siege_mega.psd"
+	}
+
+	"npc_legion_merc_shaman"
+	{
+		"image"		"file://{images}/custom_game/mercs/merc_satyr.psd"
+	}
+
+	"npc_legion_merc_pudge"
+	{
+		"image"		"file://{images}/custom_game/mercs/merc_centaur_chief.psd"
+	}
+
+	"npc_legion_merc_gargolye"
+	{
+		"image"		"file://{images}/custom_game/mercs/merc_gargoyle.psd"
+	}
+
+	"npc_legion_merc_behemoth"
+	{
+		"image"		"file://{images}/custom_game/mercs/merc_rock_golem.psd"
+	}
+
+	"npc_legion_merc_kraken"
+	{
+		"image"		"file://{images}/custom_game/mercs/merc_ghost.psd"
+	}
+
+	"npc_legion_merc_infernal"
+	{
+		"image"		"file://{images}/custom_game/mercs/merc_fire_golem.psd"
+	}
+
+	"npc_legion_merc_demon"
+	{
+		"image"		"file://{images}/custom_game/mercs/merc_roshan.psd"
+	}
+}
