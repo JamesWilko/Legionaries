@@ -21,16 +21,10 @@ function UpdateButton( upgrade )
 	}
 
 	var costPerLevel = realCostPerLevel;
+	var upgradeCurrency = GetKingUpgradesData()[upgrade]["currency"];
 	if(GetKingUpgradesData()[upgrade]["display_cost"])
 	{
 		costPerLevel = GetKingUpgradesData()[upgrade]["display_cost"];
-	}
-	var upgradeCurrency = GetKingUpgradesData()[upgrade]["currency"];
-
-	var upgradePanel = $.GetContextPanel();
-	if(upgradePanel)
-	{
-		upgradePanel.SetHasClass( "hidden", realCostPerLevel < 0 );
 	}
 
 	var upgradeText = $("#CostText");
@@ -49,7 +43,7 @@ function UpdateButton( upgrade )
 	if(upgradeImage)
 	{
 		upgradeImage.itemname = GetKingUpgradesData()[upgrade]["icon"];
-		upgradeImage.SetHasClass( "SoldOut", realCostPerLevel < 0 );
+		upgradeImage.SetHasClass( "SoldOut", realCostPerLevel < 0 || IsUpgradeAtMaxLevel(upgrade) );
 	}
 }
 
@@ -69,6 +63,14 @@ function ShowTooltip( panel )
 		"value-1-value" : value,
 		"value-1-value-color" : "yellow",
 	};
+
+	if(IsUpgradeAtMaxLevel(upgrade))
+	{
+		data["value-1-name"] = "";
+		data["value-1-value"] = $.Localize("#legion_upgrade_max_level");
+		data["value-1-value-color"] = "red";
+	}
+
 	GameEvents.SendEventClientSide("show_legion_tooltip", data );
 }
 
@@ -90,6 +92,20 @@ function OnKingUpgradeDataChanged()
 function GetKingUpgradesData()
 {
 	return CustomNetTables.GetTableValue( "KingUpgradeData", "data" );
+}
+
+function GetUpgradeLevel( sUpgradeId )
+{
+	var upgrades = CustomNetTables.GetTableValue( "KingUpgradeData", "levels" );
+	var localPlayerTeam = Entities.GetTeamNumber(Players.GetPlayerHeroEntityIndex(Players.GetLocalPlayer()));
+	return upgrades[localPlayerTeam][sUpgradeId];
+}
+
+function IsUpgradeAtMaxLevel( sUpgradeId )
+{
+	var maxLevel = GetKingUpgradesData()[sUpgradeId]["max_level"];
+	var currentLevel = GetUpgradeLevel(sUpgradeId);
+	return currentLevel == maxLevel;
 }
 
 (function()

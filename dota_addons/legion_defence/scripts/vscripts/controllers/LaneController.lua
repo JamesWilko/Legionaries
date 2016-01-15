@@ -58,6 +58,18 @@ function CLaneController:GetPlayerForLane( laneId )
 
 end
 
+function CLaneController:GetOccupiedLanesForTeam( iTeamId )
+
+	local lanes = {}
+	for id, lane in pairs(self.lanes) do
+		if lane.team == iTeamId and lane.player ~= nil then
+			table.insert( lanes, id )
+		end
+	end
+	return lanes
+
+end
+
 function CLaneController:OnPlayerPickedHero( event )
 
 	local hero = EntIndexToHScript( event.heroindex )

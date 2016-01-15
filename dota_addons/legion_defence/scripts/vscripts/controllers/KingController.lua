@@ -31,6 +31,7 @@ CKingController.UPGRADES = {
 	[CKingController.KEY_HEALTH] = {
 		per_level = 500,
 		cost = 80,
+		max_level = 50,
 		currency = CURRENCY_GEMS,
 		icon = "item_vitality_booster",
 		func = function(controller, hPlayer, hKing) controller:UpgradeHealth(hPlayer, hKing) end
@@ -38,13 +39,15 @@ CKingController.UPGRADES = {
 	[CKingController.KEY_REGEN] = {
 		per_level = 2,
 		cost = 80,
+		max_level = 50,
 		currency = CURRENCY_GEMS,
 		icon = "item_ring_of_regen",
 		func = function(controller, hPlayer, hKing) controller:UpgradeRegen(hPlayer, hKing) end
 	},
 	[CKingController.KEY_ARMOUR] = {
-		per_level = 2,
+		per_level = 1,
 		cost = 80,
+		max_level = 25,
 		currency = CURRENCY_GEMS,
 		icon = "item_platemail",
 		func = function(controller, hPlayer, hKing) controller:UpgradeArmour(hPlayer, hKing) end
@@ -52,6 +55,7 @@ CKingController.UPGRADES = {
 	[CKingController.KEY_ATTACK] = {
 		per_level = 25,
 		cost = 80,
+		max_level = 25,
 		currency = CURRENCY_GEMS,
 		icon = "item_claymore",
 		func = function(controller, hPlayer, hKing) controller:UpgradeAttack(hPlayer, hKing) end
@@ -59,6 +63,7 @@ CKingController.UPGRADES = {
 	[CKingController.KEY_HEAL] = {
 		per_level = 100,
 		cost = { default = 0 },
+		max_level = 2,
 		display_cost = "x1",
 		currency = CURRENCY_GEMS,
 		icon = "item_cheese",
@@ -70,6 +75,7 @@ CKingController.MAXIMUM_HEALS_PER_PLAYER = 1
 function CKingController:Setup()
 
 	self._kings = {}
+	self._team_upgrades = {}
 	self._used_heals = {}
 
 	-- Spawn kings
@@ -88,6 +94,19 @@ function CKingController:Setup()
 	-- Send upgrade information to the players
 	CustomNetTables:SetTableValue( CKingController.NET_TABLE, "data", CKingController.UPGRADES )
 
+	-- Setup default upgrade levels
+	self._team_upgrades[DOTA_TEAM_GOODGUYS] = {}
+	self._team_upgrades[DOTA_TEAM_BADGUYS] = {}
+
+	for k, v in pairs( CKingController.UPGRADES ) do
+		if v.max_level ~= nil then
+			self._team_upgrades[DOTA_TEAM_GOODGUYS][k] = 1
+			self._team_upgrades[DOTA_TEAM_BADGUYS][k] = 1
+		end
+	end
+
+	CustomNetTables:SetTableValue( CKingController.NET_TABLE, "levels", self._team_upgrades )
+
 	-- Setup events
 	ListenToGameEvent("entity_killed", Dynamic_Wrap(CKingController, "HandleOnEntityKilled"), self)
 	CustomGameEventManager:RegisterListener( "legion_purchase_king_upgrade", Dynamic_Wrap(CKingController, "HandleOnUpgradePurchased") )
@@ -96,6 +115,24 @@ end
 
 function CKingController:GetKingForTeam( iTeam )
 	return self._kings[iTeam]
+end
+
+function CKingController:GetUpgradeLevel( sUpgradeId, iTeam )
+	self._team_upgrades = self._team_upgrades or {}
+	self._team_upgrades[iTeam] = self._team_upgrades[iTeam] or {}
+	self._team_upgrades[iTeam][sUpgradeId] = self._team_upgrades[iTeam][sUpgradeId] or 1
+	return self._team_upgrades[iTeam][sUpgradeId]
+end
+
+function CKingController:IsUpgradeAtMaxLevel( sUpgradeId, iTeam )
+	local currentLevel = self:GetUpgradeLevel(sUpgradeId, iTeam)
+	return (CKingController.UPGRADES[sUpgradeId].max_level or 1) == currentLevel
+end
+
+function CKingController:IncreaseUpgradeLevel( sUpgradeId, iTeam )
+	local currentLevel = self:GetUpgradeLevel(sUpgradeId, iTeam)
+	self._team_upgrades[iTeam][sUpgradeId] = currentLevel + 1
+	CustomNetTables:SetTableValue( CKingController.NET_TABLE, "levels", self._team_upgrades )
 end
 
 function CKingController:HandleOnEntityKilled( event )
@@ -123,6 +160,9 @@ function CKingController.HandleOnUpgradePurchased( iPlayerId_Wrong, eventArgs )
 	local iPlayerId = eventArgs["PlayerID"]
 	local upgradeTable = CKingController.UPGRADES[eventArgs.sUpgradeId]
 
+	local hPlayer = PlayerResource:GetPlayer( iPlayerId )
+	local iPlayerTeam = hPlayer:GetTeamNumber()
+
 	-- Get upgrade price
 	local cost = upgradeTable.cost
 	if type(cost) == "table" then
@@ -131,10 +171,15 @@ function CKingController.HandleOnUpgradePurchased( iPlayerId_Wrong, eventArgs )
 			cost = upgradeTable.cost["default"]
 		end
 	end
-
+	
 	-- Don't allow purchasing if cost is negative
 	if cost < 0 then
 		return false, "unavailable"
+	end
+
+	-- Check if upgrade is at maximum level
+	if self:IsUpgradeAtMaxLevel( eventArgs.sUpgradeId, iPlayerTeam ) then
+		return false, "max_level"
 	end
 
 	-- Check if can afford upgrade
@@ -143,15 +188,17 @@ function CKingController.HandleOnUpgradePurchased( iPlayerId_Wrong, eventArgs )
 		return false, "could_not_afford"
 	end
 
-	-- Deduct purchase
-	currency_controller:ModifyCurrency( upgradeTable.currency, iPlayerId, -cost )
-
 	-- Find purchasers king
-	local hPlayer = PlayerResource:GetPlayer( iPlayerId )
 	local hKing = self:GetKingForTeam( hPlayer:GetTeamNumber() )
 	if not hKing then
 		return false, "no_king_unit"
 	end
+
+	-- Deduct purchase
+	currency_controller:ModifyCurrency( upgradeTable.currency, iPlayerId, -cost )
+
+	-- Increase upgrade level for team
+	self:IncreaseUpgradeLevel( eventArgs.sUpgradeId, iPlayerTeam )
 
 	-- Run upgrade function
 	if upgradeTable.func then
