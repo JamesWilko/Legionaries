@@ -342,12 +342,15 @@
 
 	"precache"
 	{
-		"model"				"models/heroes/dragon_knight/dragon_knight.vmdl"
-		"model_folder"		"models/heroes/dragon_knight/"
-		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_dragon_knight.vsndevts"
-		"particle_folder"	"particles/units/heroes/hero_dragon_knight/"
+		"model"				"models/creeps/neutral_creeps/n_creep_troll_skeleton/n_creep_skeleton_melee.vmdl"
+		"model_folder"		"models/creeps/neutral_creeps/n_creep_troll_skeleton/"
 	}
 }
+
+
+
+
+
 
 
 
@@ -395,12 +398,15 @@
 
 	"precache"
 	{
-		"model"				"models/heroes/dragon_knight/dragon_knight.vmdl"
-		"model_folder"		"models/heroes/dragon_knight/"
-		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_dragon_knight.vsndevts"
-		"particle_folder"	"particles/units/heroes/hero_dragon_knight/"
+		"model"				"models/creeps/neutral_creeps/n_creep_forest_trolls/n_creep_forest_troll_berserker.vmdl"
+		"model_folder"		"models/creeps/neutral_creeps/n_creep_forest_trolls/"
 	}
 }
+
+
+
+
+
 
 
 
@@ -448,12 +454,15 @@
 
 	"precache"
 	{
-		"model"				"models/heroes/dragon_knight/dragon_knight.vmdl"
-		"model_folder"		"models/heroes/dragon_knight/"
-		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_dragon_knight.vsndevts"
-		"particle_folder"	"particles/units/heroes/hero_dragon_knight/"
+		"model"				"models/creeps/neutral_creeps/n_creep_ghost_b/n_creep_ghost_b.vmdl"
+		"model_folder"		"models/creeps/neutral_creeps/n_creep_ghost_b/"
 	}
 }
+
+
+
+
+
 
 
 
@@ -501,12 +510,15 @@
 
 	"precache"
 	{
-		"model"				"models/heroes/dragon_knight/dragon_knight.vmdl"
-		"model_folder"		"models/heroes/dragon_knight/"
-		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_dragon_knight.vsndevts"
-		"particle_folder"	"particles/units/heroes/hero_dragon_knight/"
+		"model"				"models/creeps/neutral_creeps/n_creep_centaur_med/n_creep_centaur_med.vmdl"
+		"model_folder"		"models/creeps/neutral_creeps/n_creep_centaur_med/"
 	}
 }
+
+
+
+
+
 
 
 
@@ -554,12 +566,15 @@
 
 	"precache"
 	{
-		"model"				"models/heroes/dragon_knight/dragon_knight.vmdl"
-		"model_folder"		"models/heroes/dragon_knight/"
-		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_dragon_knight.vsndevts"
-		"particle_folder"	"particles/units/heroes/hero_dragon_knight/"
+		"model"				"models/creeps/neutral_creeps/n_creep_thunder_lizard/n_creep_thunder_lizard_small.vmdl"
+		"model_folder"		"models/creeps/neutral_creeps/n_creep_thunder_lizard/"
 	}
 }
+
+
+
+
+
 
 
 
@@ -607,12 +622,15 @@
 
 	"precache"
 	{
-		"model"				"models/heroes/dragon_knight/dragon_knight.vmdl"
-		"model_folder"		"models/heroes/dragon_knight/"
-		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_dragon_knight.vsndevts"
-		"particle_folder"	"particles/units/heroes/hero_dragon_knight/"
+		"model"				"models/creeps/neutral_creeps/n_creep_troll_dark_a/n_creep_troll_dark_a.vmdl"
+		"model_folder"		"models/creeps/neutral_creeps/n_creep_troll_dark_a/"
 	}
 }
+
+
+
+
+
 
 
 
@@ -660,12 +678,15 @@
 
 	"precache"
 	{
-		"model"				"models/heroes/dragon_knight/dragon_knight.vmdl"
-		"model_folder"		"models/heroes/dragon_knight/"
-		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_dragon_knight.vsndevts"
-		"particle_folder"	"particles/units/heroes/hero_dragon_knight/"
+		"model"				"models/creeps/neutral_creeps/n_creep_thunder_lizard/n_creep_thunder_lizard_big.vmdl"
+		"model_folder"		"models/creeps/neutral_creeps/n_creep_thunder_lizard/"
 	}
 }
+
+
+
+
+
 
 
 
@@ -713,12 +734,15 @@
 
 	"precache"
 	{
-		"model"				"models/heroes/dragon_knight/dragon_knight.vmdl"
-		"model_folder"		"models/heroes/dragon_knight/"
-		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_dragon_knight.vsndevts"
-		"particle_folder"	"particles/units/heroes/hero_dragon_knight/"
+		"model"				"models/creeps/neutral_creeps/n_creep_troll_dark_b/n_creep_troll_dark_b.vmdl"
+		"model_folder"		"models/creeps/neutral_creeps/n_creep_troll_dark_b/"
 	}
 }
+
+
+
+
+
 
 
 
@@ -766,12 +790,15 @@
 
 	"precache"
 	{
-		"model"				"models/heroes/dragon_knight/dragon_knight.vmdl"
-		"model_folder"		"models/heroes/dragon_knight/"
-		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_dragon_knight.vsndevts"
-		"particle_folder"	"particles/units/heroes/hero_dragon_knight/"
+		"model"				"models/creeps/neutral_creeps/n_creep_beast/n_creep_beast.vmdl"
+		"model_folder"		"models/creeps/neutral_creeps/n_creep_beast/"
 	}
 }
+
+
+
+
+
 
 
 
@@ -819,12 +846,15 @@
 
 	"precache"
 	{
-		"model"				"models/heroes/dragon_knight/dragon_knight.vmdl"
-		"model_folder"		"models/heroes/dragon_knight/"
-		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_dragon_knight.vsndevts"
-		"particle_folder"	"particles/units/heroes/hero_dragon_knight/"
+		"model"				"models/creeps/neutral_creeps/n_creep_black_drake/n_creep_black_drake.vmdl"
+		"model_folder"		"models/creeps/neutral_creeps/n_creep_black_drake/"
 	}
 }
+
+
+
+
+
 
 
 
@@ -872,12 +902,15 @@
 
 	"precache"
 	{
-		"model"				"models/heroes/dragon_knight/dragon_knight.vmdl"
-		"model_folder"		"models/heroes/dragon_knight/"
-		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_dragon_knight.vsndevts"
-		"particle_folder"	"particles/units/heroes/hero_dragon_knight/"
+		"model"				"models/creeps/lane_creeps/creep_good_siege/creep_good_siege.vmdl"
+		"model_folder"		"models/creeps/lane_creeps/creep_good_siege/"
 	}
 }
+
+
+
+
+
 
 
 
@@ -925,12 +958,15 @@
 
 	"precache"
 	{
-		"model"				"models/heroes/dragon_knight/dragon_knight.vmdl"
-		"model_folder"		"models/heroes/dragon_knight/"
-		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_dragon_knight.vsndevts"
-		"particle_folder"	"particles/units/heroes/hero_dragon_knight/"
+		"model"				"models/creeps/neutral_creeps/n_creep_furbolg/n_creep_furbolg_disrupter.vmdl"
+		"model_folder"		"models/creeps/neutral_creeps/n_creep_furbolg/"
 	}
 }
+
+
+
+
+
 
 
 
@@ -978,12 +1014,15 @@
 
 	"precache"
 	{
-		"model"				"models/heroes/dragon_knight/dragon_knight.vmdl"
-		"model_folder"		"models/heroes/dragon_knight/"
-		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_dragon_knight.vsndevts"
-		"particle_folder"	"particles/units/heroes/hero_dragon_knight/"
+		"model"				"models/creeps/neutral_creeps/n_creep_worg_large/n_creep_worg_large.vmdl"
+		"model_folder"		"models/creeps/neutral_creeps/n_creep_worg_large/"
 	}
 }
+
+
+
+
+
 
 
 
@@ -1031,12 +1070,15 @@
 
 	"precache"
 	{
-		"model"				"models/heroes/dragon_knight/dragon_knight.vmdl"
-		"model_folder"		"models/heroes/dragon_knight/"
-		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_dragon_knight.vsndevts"
-		"particle_folder"	"particles/units/heroes/hero_dragon_knight/"
+		"model"				"models/creeps/neutral_creeps/n_creep_ogre_lrg/n_creep_ogre_lrg.vmdl"
+		"model_folder"		"models/creeps/neutral_creeps/n_creep_ogre_lrg/"
 	}
 }
+
+
+
+
+
 
 
 
@@ -1084,12 +1126,15 @@
 
 	"precache"
 	{
-		"model"				"models/heroes/dragon_knight/dragon_knight.vmdl"
-		"model_folder"		"models/heroes/dragon_knight/"
-		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_dragon_knight.vsndevts"
-		"particle_folder"	"particles/units/heroes/hero_dragon_knight/"
+		"model"				"models/creeps/neutral_creeps/n_creep_black_dragon/n_creep_black_dragon.vmdl"
+		"model_folder"		"models/creeps/neutral_creeps/n_creep_black_dragon/"
 	}
 }
+
+
+
+
+
 
 
 
@@ -1137,12 +1182,15 @@
 
 	"precache"
 	{
-		"model"				"models/heroes/dragon_knight/dragon_knight.vmdl"
-		"model_folder"		"models/heroes/dragon_knight/"
-		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_dragon_knight.vsndevts"
-		"particle_folder"	"particles/units/heroes/hero_dragon_knight/"
+		"model"				"models/creeps/neutral_creeps/n_creep_golem_b/n_creep_golem_b.vmdl"
+		"model_folder"		"models/creeps/neutral_creeps/n_creep_golem_b/"
 	}
 }
+
+
+
+
+
 
 
 
@@ -1190,12 +1238,15 @@
 
 	"precache"
 	{
-		"model"				"models/heroes/dragon_knight/dragon_knight.vmdl"
-		"model_folder"		"models/heroes/dragon_knight/"
-		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_dragon_knight.vsndevts"
-		"particle_folder"	"particles/units/heroes/hero_dragon_knight/"
+		"model"				"models/creeps/lane_creeps/creep_good_siege/creep_good_siege.vmdl"
+		"model_folder"		"models/creeps/lane_creeps/creep_good_siege/"
 	}
 }
+
+
+
+
+
 
 
 
@@ -1243,12 +1294,15 @@
 
 	"precache"
 	{
-		"model"				"models/heroes/dragon_knight/dragon_knight.vmdl"
-		"model_folder"		"models/heroes/dragon_knight/"
-		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_dragon_knight.vsndevts"
-		"particle_folder"	"particles/units/heroes/hero_dragon_knight/"
+		"model"				"models/creeps/neutral_creeps/n_creep_satyr_b/n_creep_satyr_b.vmdl"
+		"model_folder"		"models/creeps/neutral_creeps/n_creep_satyr_b/"
 	}
 }
+
+
+
+
+
 
 
 
@@ -1296,12 +1350,15 @@
 
 	"precache"
 	{
-		"model"				"models/heroes/dragon_knight/dragon_knight.vmdl"
-		"model_folder"		"models/heroes/dragon_knight/"
-		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_dragon_knight.vsndevts"
-		"particle_folder"	"particles/units/heroes/hero_dragon_knight/"
+		"model"				"models/creeps/neutral_creeps/n_creep_centaur_lrg/n_creep_centaur_lrg.vmdl"
+		"model_folder"		"models/creeps/neutral_creeps/n_creep_centaur_lrg/"
 	}
 }
+
+
+
+
+
 
 
 
@@ -1349,12 +1406,15 @@
 
 	"precache"
 	{
-		"model"				"models/heroes/dragon_knight/dragon_knight.vmdl"
-		"model_folder"		"models/heroes/dragon_knight/"
-		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_dragon_knight.vsndevts"
-		"particle_folder"	"particles/units/heroes/hero_dragon_knight/"
+		"model"				"models/creeps/neutral_creeps/n_creep_gargoyle/n_creep_gargoyle.vmdl"
+		"model_folder"		"models/creeps/neutral_creeps/n_creep_gargoyle/"
 	}
 }
+
+
+
+
+
 
 
 
@@ -1402,12 +1462,15 @@
 
 	"precache"
 	{
-		"model"				"models/heroes/dragon_knight/dragon_knight.vmdl"
-		"model_folder"		"models/heroes/dragon_knight/"
-		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_dragon_knight.vsndevts"
-		"particle_folder"	"particles/units/heroes/hero_dragon_knight/"
+		"model"				"models/creeps/neutral_creeps/n_creep_golem_a/neutral_creep_golem_a.vmdl"
+		"model_folder"		"models/creeps/neutral_creeps/n_creep_golem_a/"
 	}
 }
+
+
+
+
+
 
 
 
@@ -1455,12 +1518,15 @@
 
 	"precache"
 	{
-		"model"				"models/heroes/dragon_knight/dragon_knight.vmdl"
-		"model_folder"		"models/heroes/dragon_knight/"
-		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_dragon_knight.vsndevts"
-		"particle_folder"	"particles/units/heroes/hero_dragon_knight/"
+		"model"				"models/creeps/neutral_creeps/n_creep_ghost_a/n_creep_ghost_a.vmdl"
+		"model_folder"		"models/creeps/neutral_creeps/n_creep_ghost_a/"
 	}
 }
+
+
+
+
+
 
 
 
@@ -1508,12 +1574,14 @@
 
 	"precache"
 	{
-		"model"				"models/heroes/dragon_knight/dragon_knight.vmdl"
-		"model_folder"		"models/heroes/dragon_knight/"
-		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_dragon_knight.vsndevts"
-		"particle_folder"	"particles/units/heroes/hero_dragon_knight/"
+		"model"				"models/heroes/warlock/warlock_demon.vmdl"
+		"model_folder"		"models/heroes/warlock/"
 	}
 }
+
+
+
+
 
 
 
@@ -1561,12 +1629,15 @@
 
 	"precache"
 	{
-		"model"				"models/heroes/dragon_knight/dragon_knight.vmdl"
-		"model_folder"		"models/heroes/dragon_knight/"
-		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_dragon_knight.vsndevts"
-		"particle_folder"	"particles/units/heroes/hero_dragon_knight/"
+		"model"				"models/creeps/roshan/roshan.vmdl"
+		"model_folder"		"models/creeps/roshan/"
 	}
 }
+
+
+
+
+
 
 
 
