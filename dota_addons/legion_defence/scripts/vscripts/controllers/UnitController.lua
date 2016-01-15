@@ -387,7 +387,7 @@ function CUnitController:LaneClearedTeleportUnits()
 						EmitSoundOnLocationWithCaster( v.teleport_pos, "Hero_Wisp.Tether.Target", v.unit )
 
 						-- Teleport unit
-						v.unit:SetOrigin( v.teleport_pos )
+						FindClearSpaceForUnit( v.unit, v.teleport_pos, true )
 						v.teleport_delay = nil
 						v.teleport_pos = nil
 
