@@ -110,9 +110,9 @@ function CWaveController:OnThink()
 
 				local ent = spawn.entity
 
-				-- Spawn wave unit
 				if waveUnitToSpawn then
-
+					
+					-- Spawn wave unit
 					local vPosition = RandomVectorInTrigger( ent )
 					local hUnit = CreateUnitByName( waveUnitToSpawn, vPosition, true, nil, nil, GetEnemyTeam(spawn.team) )
 					local entTargetZone = self._map_controller:GetTargetZoneForTeam( spawn.team ).entity
@@ -125,6 +125,7 @@ function CWaveController:OnThink()
 						hUnit:SetAngles( 0, -90, 0 )
 
 						self:AddSpawnedUnit( hUnit, spawn.lane, vTarget, hKing )
+						self:PlaySpawnParticle( hUnit )
 
 					end
 
@@ -144,7 +145,11 @@ function CWaveController:OnThink()
 		local unit = unit_data.unit
 		if unit and IsValidEntity(unit) then
 			if not unit:IsAttacking() then
-				unit:MoveToTargetToAttack( unit_data.target_king )
+				if unit:FindModifierByName( CWaveController.ARMOUR_TIERS[2].modifier ) then
+					unit:MoveToTargetToAttack( unit_data.target_king )
+				else
+					unit:MoveToPositionAggressive( unit_data.target_king:GetOrigin() )
+				end
 			end
 		else
 			self._spawned_units[i] = nil
@@ -157,13 +162,23 @@ function CWaveController:OnThink()
 end
 
 function CWaveController:AddSpawnedUnit( hUnit, laneId, vTargetPosition, hTargetKing )
-	local unit_data = {
-		unit = hUnit,
-		lane = laneId,
-		target_pos = vTargetPosition,
-		target_king = hTargetKing
-	}
-	table.insert( self._spawned_units, unit_data )
+	if hUnit then
+		local unit_data = {
+			unit = hUnit,
+			lane = laneId,
+			target_pos = vTargetPosition,
+			target_king = hTargetKing
+		}
+		table.insert( self._spawned_units, unit_data )
+	else
+		error("Can not add a nil spawned unit to the wave data")
+	end
+end
+
+function CWaveController:PlaySpawnParticle( hUnit )
+	local nFXIndex = ParticleManager:CreateParticle( "particles/units/heroes/hero_wisp/wisp_relocate_teleport_c.vpcf", PATTACH_WORLDORIGIN, hUnit )
+	ParticleManager:SetParticleControl( nFXIndex, 0, hUnit:GetCenter() )
+	ParticleManager:ReleaseParticleIndex( nFXIndex )
 end
 
 function CWaveController:GetCurrentWave()
@@ -556,6 +571,11 @@ function CWaveController:AttemptIncreaseArmourOnUnit( hUnit, iArmourTier )
 		if canReduceBounty then
 			local leakedWaves = self:GetNumberOfWavesLeakedFromUnit(hUnit) or 1
 			local bountyMultiplier = CWaveController.LEAKED_WAVE_BOUNTY_MULTIPLIERS[leakedWaves]
+			if bountyMultiplier == nil then
+				print("Bounty multiplier was nil!")
+				print(string.format("Leaked waves: %i", leakedWaves))
+				bountyMultiplier = 1.0
+			end
 			hUnit:SetMinimumGoldBounty( math.floor(hUnit:GetMinimumGoldBounty() * bountyMultiplier) )
 			hUnit:SetMaximumGoldBounty( math.floor(hUnit:GetMaximumGoldBounty() * bountyMultiplier) )
 		end
