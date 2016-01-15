@@ -14,8 +14,12 @@
 			onmouseover="ShowTooltip( $.GetContextPanel() )"
 			onmouseout="HideTooltip( $.GetContextPanel() )"
 			onactivate="PurchaseMercenary( $.GetContextPanel() )">
-				<DOTAItemImage hittest="false" class="UpgradeImage" id="UpgradeImage" itemname="item_claymore" />
+				<Image class="UpgradeImage" id="UpgradeImage" src="file://{images}/custom_game/mercs/merc_satyr.psd" />
 		</Button>
+		<Panel class="Cooldown" id="Cooldown" hittest="false">
+			<Panel class="CooldownOverlay" id="CooldownOverlay" hittest="false"/>
+			<Label class="CooldownTimer" id="CooldownTimer" hittest="false"/>
+		</Panel>
 		<Panel class="UpgradeCost" hittest="false">
 			<Image class="UpgradeCostIcon" id="CostImage" src="file://{images}/custom_game/icons/icon_gems_small.png" hittest="false" />
 			<Label class="UpgradeCostText" id="CostText" text="??" hittest="false" />

@@ -50,20 +50,48 @@ function UpdateButton( mercIndex )
 		costCurrency.src = m_CurrencyIcons["CurrencyGems"];
 	}
 
-	/*
 	var mercImage = $("#UpgradeImage");
 	if(mercImage)
 	{
-		mercImage.itemname = GetMercenariesData()[mercIndex]["icon"];
+		mercImage.SetImage( GetMercenariesData()[mercIndex]["icon"] );
 	}
-	*/
+}
+
+function UpdateButtonCooldown()
+{
+	var localPlayerId = Players.GetLocalPlayer();
+	var mercData = GetMercenariesData()[$.GetContextPanel().id];
+	var inCooldown = false;
+
+	if(mercData)
+	{
+		var mercId = mercData["id"];
+		var cooldownData = GetCooldownsData();
+		if(cooldownData && cooldownData[mercId] && cooldownData[mercId][localPlayerId])
+		{
+			var currentTime = Game.GetDOTATime(false, false);
+			var start = cooldownData[mercId][localPlayerId];
+			var duration = mercData["cooldown"];
+
+			inCooldown = currentTime - start < duration;
+			if(inCooldown)
+			{
+				var percent = (currentTime - start) / duration;
+				$("#CooldownOverlay").style.width = ((1 - percent) * 100) + "%";
+			}
+		}
+	}
+
+	$("#Cooldown").visible = inCooldown;
+
+	$.Schedule( 0.033, UpdateButtonCooldown );
 }
 
 function ShowTooltip( panel )
 {
 	var mercIndex = panel.id;
 	var mercData = GetMercenariesData()[mercIndex];
-	if(mercData && GetMercenariesData()[mercIndex]["id"])
+	if(mercData && mercData["id"])
 	{
 		var mercId = mercData["id"];
 		var title = $.Localize("#" + mercId);
@@ -119,7 +147,7 @@ function PurchaseMercenary( panel )
 	}
 }
 
-function OnMercenariesDataChanges()
+function OnMercenariesDataChanged()
 {
 	UpdateButton( $.GetContextPanel().id );
 }
@@ -129,8 +157,14 @@ function GetMercenariesData()
 	return CustomNetTables.GetTableValue( "MercenariesData", "units" );
 }
 
+function GetCooldownsData()
+{
+	return CustomNetTables.GetTableValue( "MercenariesCooldowns", "cooldowns" );
+}
+
 (function()
 {
-	CustomNetTables.SubscribeNetTableListener( "MercenariesData", OnMercenariesDataChanges );
+	CustomNetTables.SubscribeNetTableListener( "MercenariesData", OnMercenariesDataChanged );
 	UpdateButton( $.GetContextPanel().id );
+	UpdateButtonCooldown();
 })();
