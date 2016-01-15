@@ -401,7 +401,7 @@ end
 ---------------------------------------
 -- Incomes
 ---------------------------------------
-function CCurrencyController:SetCurrencyIncome( sCurrency, hPlayer, iNewIncome )
+function CCurrencyController:SetCurrencyIncome( sCurrency, hPlayer, iNewIncome, bRelative )
 
 	if IsServer() then
 
@@ -419,7 +419,11 @@ function CCurrencyController:SetCurrencyIncome( sCurrency, hPlayer, iNewIncome )
 		end
 
 		-- Set currency income
-		data.income = iNewIncome
+		if not bRelative then
+			data.income = iNewIncome
+		else
+			data.income = data.income + iNewIncome
+		end
 		
 		-- Set net table
 		CustomNetTables:SetTableValue( nettable, tostring(player_id), data )
