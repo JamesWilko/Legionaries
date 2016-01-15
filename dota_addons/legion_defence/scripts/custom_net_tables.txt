@@ -15,6 +15,7 @@
 		"UpcomingWaveData",
 		"KingUpgradeData",
 		"Upgrades",
-		"MercenariesData"
+		"MercenariesData",
+		"MercenariesCooldowns"
 	]
 }

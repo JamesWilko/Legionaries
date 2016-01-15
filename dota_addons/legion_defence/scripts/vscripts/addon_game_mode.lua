@@ -129,6 +129,9 @@ function CLegionDefence:OnPlayerPickedHero( event )
 		-- Give items
 		-- hero:AddItemByName("item_necronomicon")
 
+		-- Set far distance to huge value so that we don't clip the screen with a zoomed out camera
+		SendToConsole("r_farz 5000")
+
 	end
 
 end

@@ -36,6 +36,13 @@ function ShowTooltip( panel )
 		"cooldown" : upgradeData["time"]
 	};
 
+	var altDescKey = panel.id + "_Note0";
+	var altDesc = $.Localize(altDescKey);
+	if(altDesc != altDescKey)
+	{
+		data["alt-desc"] = altDesc;
+	}
+
 	if(!max_level)
 	{
 		// Add value info

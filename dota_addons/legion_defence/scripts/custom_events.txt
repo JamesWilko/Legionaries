@@ -52,6 +52,10 @@
 		"sUpgradeId"		"string"
 	}
 
+	"legion_purchase_mercenary"
+	{
+		"sMercenaryId"		"string"
+	}
 	//---------------------------------
 	// Server Only
 	//---------------------------------
@@ -66,6 +70,10 @@
 	{
 		"lPlayer"			"long"
 		"lLane"				"short"
+	}
+
+	"legion_perform_wave_spawn"
+	{
 	}
 
 	//---------------------------------

@@ -1,6 +1,23 @@
+
 "use strict";
 
+var m_MinDistance = 1134;
+var m_MaxDistance = 2500;
+var m_CurrentDistance = m_MinDistance;
+
 GameUI.SetMouseCallback( function( eventName, arg )
+{
+	if(eventName == "wheeled")
+	{
+		return ProcessWheelEvent(eventName, arg);
+	}
+	else
+	{
+		return ProcessClickEvent(eventName, arg);
+	}
+} );
+
+function ProcessClickEvent( eventName, arg )
 {
 	var nMouseButton = arg
 	var CONSUME_EVENT = true;
@@ -38,4 +55,12 @@ GameUI.SetMouseCallback( function( eventName, arg )
 		}
 	}
 	return CONTINUE_PROCESSING_EVENT;
-} );
+}
+
+function ProcessWheelEvent( eventName, arg )
+{
+	m_CurrentDistance += -arg * ((m_MaxDistance - m_MinDistance) / 20.0);
+	if(m_CurrentDistance < m_MinDistance){ m_CurrentDistance = m_MinDistance; }
+	if(m_CurrentDistance > m_MaxDistance){ m_CurrentDistance = m_MaxDistance; }
+	GameUI.SetCameraDistance(m_CurrentDistance);
+}
