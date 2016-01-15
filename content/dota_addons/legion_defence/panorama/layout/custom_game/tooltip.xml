@@ -16,6 +16,7 @@
 
 			<Label class="TooltipTitle" id="TooltipTitle" text="Upgrade Attack" hittest="false"/>
 			<Label class="TooltipDesc" id="TooltipDesc" text="Upgrades the king's attack to deal more damage with every hit." hittest="false"/>
+			<Label class="TooltipDesc lawngreen" id="TooltipAltDesc" text="A bunch of alternative text stuff" hittest="false"/>
 			<Panel class="Spacer" hittest="false"/>
 
 			<Panel class="TooltipValue" id="TooltipValue1" hittest="false">

@@ -9,10 +9,27 @@ var m_ScreenSize = [];
 var m_PanoramaHeight = 1080.0;
 var m_PanoramaScaling;
 
+var m_SavedTooltipData;
+var m_AltDown;
+
 function ShowTooltip( data )
 {
+	m_SavedTooltipData = data;
+
 	m_Tooltip.FindChild("TooltipTitle").text = data["title"];
 	m_Tooltip.FindChild("TooltipDesc").text = data["desc"];
+
+	var tooltipAltDesc = m_Tooltip.FindChild("TooltipAltDesc");
+	var altDesc = data["alt-desc"];
+	if(altDesc && GameUI.IsAltDown())
+	{
+		tooltipAltDesc.visible = true;
+		tooltipAltDesc.text = altDesc;
+	}
+	else
+	{
+		tooltipAltDesc.visible = false;
+	}
 
 	// Remove styles
 	for(var key in m_TooltipValueStyles)
@@ -111,6 +128,31 @@ function UpdateTooltipPosition()
 	$.Schedule(m_OneFrame, UpdateTooltipPosition);
 }
 
+function UpdateTooltipAltText()
+{
+	if(m_Tooltip && m_SavedTooltipData)
+	{
+		var altDown = GameUI.IsAltDown();
+		if(m_AltDown != altDown)
+		{
+			var tooltipAltDesc = m_Tooltip.FindChild("TooltipAltDesc");
+			var altDesc = m_SavedTooltipData["alt-desc"];
+			if(altDown && altDesc)
+			{
+				tooltipAltDesc.visible = true;
+				tooltipAltDesc.text = altDesc;
+			}
+			else
+			{
+				tooltipAltDesc.visible = false;
+			}
+
+			m_AltDown = altDown;
+		}
+	}
+	$.Schedule(m_OneFrame, UpdateTooltipAltText);
+}
+
 function SetupTooltip()
 {
 	// Calculate screen scaling to set positions correctly
@@ -118,6 +160,7 @@ function SetupTooltip()
 	m_ScreenSize[1] = m_Tooltip.GetParent().actuallayoutheight;
 	m_PanoramaScaling = m_ScreenSize[1] / m_PanoramaHeight;
 
+	UpdateTooltipAltText();
 	UpdateTooltipPosition();
 }
 
