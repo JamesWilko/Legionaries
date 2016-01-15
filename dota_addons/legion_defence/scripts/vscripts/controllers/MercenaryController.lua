@@ -16,8 +16,10 @@ end
 -- Mercenary Controller
 ---------------------------------------
 CMercenaryController.NET_TABLE = "MercenariesData"
+CMercenaryController.COOLDOWNS_NET_TABLE = "MercenariesCooldowns"
 CMercenaryController.PURCHASE_CURRENCY = CURRENCY_GEMS
-CMercenaryController.THINK_TIME = 1
+CMercenaryController.INCOME_CURRENCY = CURRENCY_GOLD
+CMercenaryController.THINK_TIME = 0.2
 
 -- How many times should the wave controller tick before we start spawning mercenaries in a wave
 CMercenaryController.SPAWN_DELAY = 5
@@ -45,6 +47,7 @@ end
 function CMercenaryController:BuildMercenariesList()
 
 	-- Find all mercenary units
+	local merc_icons = LoadKeyValues("scripts/kv/legion_mercenaries.txt")
 	local kv_units = LoadKeyValues("scripts/npc/npc_units_custom.txt")
 	for k, unit_data in pairs( kv_units ) do
 
@@ -59,6 +62,7 @@ function CMercenaryController:BuildMercenariesList()
 				attack_capability = unit_data["AttackCapabilities"],
 				damage_type = unit_data["CombatClassAttack"],
 				defence_type = unit_data["CombatClassDefend"],
+				icon = merc_icons[k].image,
 			}
 			table.insert( self._mercenaries, data )
 
@@ -118,7 +122,7 @@ end
 function CMercenaryController:VerifyAvailabilityData( iPlayerId, mercId )
 	self._availability = self._availability or {}
 	self._availability[mercId] = self._availability[mercId] or {}
-	self._availability[mercId][iPlayerId] = self._availability[mercId][iPlayerId] or { amount = 1, limit = 1, cooldown = 0 }
+	self._availability[mercId][iPlayerId] = self._availability[mercId][iPlayerId] or { amount = 1, limit = 1, cooldown = -1 }
 end
 
 function CMercenaryController:HasMercenaryAvailable( iPlayerId, mercId )
@@ -135,6 +139,10 @@ function CMercenaryController:ConsumeMercenary( iPlayerId, mercId )
 
 	self:VerifyAvailabilityData( iPlayerId, mercId )
 
+	self._cooldowns = self._cooldowns or {}
+	self._cooldowns[mercId] = self._cooldowns[mercId] or {}
+	self._cooldowns[mercId][iPlayerId] = self._cooldowns[mercId][iPlayerId] or -1
+
 	local merc_data = self._availability[mercId][iPlayerId]
 
 	-- Reduce amount
@@ -145,7 +153,14 @@ function CMercenaryController:ConsumeMercenary( iPlayerId, mercId )
 
 		-- Put on cooldown
 		if merc_data.cooldown < 0 then
+
 			merc_data.cooldown = cooldown_time
+			merc_data.cooldown_start = GameRules:GetDOTATime(false, false)
+
+			-- Update nettable
+			self._cooldowns[mercId][iPlayerId] = GameRules:GetDOTATime(false, false)
+			CustomNetTables:SetTableValue( CMercenaryController.COOLDOWNS_NET_TABLE, "cooldowns", self._cooldowns )
+
 		end
 
 	else
@@ -368,7 +383,7 @@ function CMercenaryController.HandleOnMercenaryPurchased( iPlayerId_Wrong, event
 		currency_controller:ModifyCurrency( CMercenaryController.PURCHASE_CURRENCY, iPlayerId, -mercData.cost )
 
 		-- Give unit income to player
-		currency_controller:SetCurrencyIncome( CMercenaryController.PURCHASE_CURRENCY, iPlayerId, mercData.income, true )
+		currency_controller:SetCurrencyIncome( CMercenaryController.INCOME_CURRENCY, iPlayerId, mercData.income, true )
 
 	end
 
@@ -412,8 +427,9 @@ function CMercenaryController:HandleOnPerformWaveSpawn()
 			local vTarget = RandomVectorInTrigger( entTargetZone )
 			local hKing = GameRules.LegionDefence:GetKingController():GetKingForTeam( spawnZone.team )
 
-			unit:SetOrigin( vPosition )
-			self._wave_controller:AddSpawnedUnit( hUnit, k, vTarget, hKing )
+			FindClearSpaceForUnit( unit, vPosition, true )
+			self._wave_controller:AddSpawnedUnit( unit, k, vTarget, hKing )
+			self._wave_controller:PlaySpawnParticle( unit )
 
 		end
 
