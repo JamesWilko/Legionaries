@@ -43,13 +43,18 @@ local CurrencyPopups = {
 	}
 }
 
-function PlayCurrencyLostParticles( sCurrency, lPrice, eUnit, bSupressSound )
+function SafeGetPlayerID( hPlayer )
+	return type(hPlayer) == "number" and hPlayer or hPlayer:GetPlayerID()
+end
+
+function PlayCurrencyLostParticles( sCurrency, lPrice, eUnit, hPlayer, bSupressSound )
 
 	local data = CurrencyParticles[sCurrency] and CurrencyParticles[sCurrency].lost
 	if data then
 
-		if not bSupressSound then
-			eUnit:EmitSound( lPrice < data.amountLarge and data.sound or data.soundLarge )
+		if not bSupressSound and hPlayer then
+			local player_id = SafeGetPlayerID( hPlayer )
+			EmitSoundOnClient( lPrice < data.amountLarge and data.sound or data.soundLarge, PlayerResource:GetPlayer(player_id) )
 		end
 
 		local particle = ParticleManager:CreateParticle(data.particle, PATTACH_POINT_FOLLOW, eUnit)
@@ -64,15 +69,16 @@ function PlayCurrencyLostParticles( sCurrency, lPrice, eUnit, bSupressSound )
 
 end
 
-function PlayCurrencyGainedParticles( sCurrency, lPrice, eUnit, vSpawnPosition, bSupressSound )
+function PlayCurrencyGainedParticles( sCurrency, lPrice, eUnit, hPlayer, vSpawnPosition, bSupressSound )
 
 	local data = CurrencyParticles[sCurrency] and CurrencyParticles[sCurrency].gained
 	if data then
 
 		vSpawnPosition = vSpawnPosition or (eUnit:GetCenter() + Vector(0, 0, 200))
 
-		if not bSupressSound then
-			eUnit:EmitSound( lPrice < data.amountLarge and data.sound or data.soundLarge )
+		if not bSupressSound and hPlayer then
+			local player_id = SafeGetPlayerID( hPlayer )
+			EmitSoundOnClient( lPrice < data.amountLarge and data.sound or data.soundLarge, PlayerResource:GetPlayer(player_id) )
 		end
 
 		local particle = ParticleManager:CreateParticle(data.particle, PATTACH_POINT_FOLLOW, eUnit)
