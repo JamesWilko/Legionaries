@@ -6,6 +6,9 @@ end
 function CLegionDefence:SetupCurrencyController()
 	self.currency_controller = CCurrencyController()
 	self.currency_controller:Setup()
+	if GameRules:GetGameModeEntity()._developer then
+		self.currency_controller:SetupDebug()
+	end
 end
 
 function CLegionDefence:GetCurrencyController()
@@ -81,6 +84,27 @@ function CCurrencyController:Setup()
 	-- Setup events
 	ListenToGameEvent("legion_player_assigned_lane", Dynamic_Wrap(CCurrencyController, "OnPlayerAssignedLane"), self)
 	ListenToGameEvent("legion_wave_complete", Dynamic_Wrap(CCurrencyController, "HandleOnWaveComplete"), self)
+
+end
+
+function CCurrencyController:SetupDebug()
+
+	Convars:RegisterCommand( "legion_give_gold", function(name, parameter)
+		local cmdPlayer = Convars:GetCommandClient()
+		local amount = tonumber(parameter)
+		if cmdPlayer and amount then 
+			return self:ModifyCurrency( CURRENCY_GOLD, cmdPlayer, amount, false ) 
+		end
+	end, "Gives player the specified amount of Gold", FCVAR_CHEAT )
+
+	Convars:RegisterCommand( "legion_give_gems", function(name, parameter)
+		local cmdPlayer = Convars:GetCommandClient()
+		local amount = tonumber(parameter)
+		if cmdPlayer and amount then 
+			return self:ModifyCurrency( CURRENCY_GEMS, cmdPlayer, amount, false ) 
+		end
+	end, "Gives player the specified amount of Gems", FCVAR_CHEAT )
+
 
 end
 
@@ -240,9 +264,9 @@ function CCurrencyController:ModifyCurrency( sCurrency, hPlayer, iAmount, bSupre
 			if player then
 				local player_hero = player:GetAssignedHero()
 				if iAmount < 0 then
-					PlayCurrencyLostParticles( sCurrency, -iAmount, player_hero )
+					PlayCurrencyLostParticles( sCurrency, -iAmount, player_hero, player )
 				elseif iAmount > 0 then
-					PlayCurrencyGainedParticles( sCurrency, iAmount, player_hero )
+					PlayCurrencyGainedParticles( sCurrency, iAmount, player_hero, player )
 				end
 				ShowCurrencyPopup( player_hero, sCurrency, iAmount, 1 )
 			end
