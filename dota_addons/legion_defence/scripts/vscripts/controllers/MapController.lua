@@ -31,6 +31,14 @@ function CMapController:Setup()
 			class = "info_target",
 			name = "legion_king_spawn"
 		},
+		["armour_point_small"] = {
+			class = "info_target",
+			name = "legion_armour_point_1"
+		},
+		["armour_point_large"] = {
+			class = "info_target",
+			name = "legion_armour_point_2"
+		},
 		["fallback_zone"] = {
 			class = "trigger_dota",
 			name = "legion_fallback_zone"
@@ -62,6 +70,7 @@ function CMapController:Setup()
 	self:FindBuildZones()
 	self:FindTargetZones()
 	self:FindKingSpawns()
+	self:FindArmourPoints()
 	self:FindFallbackZones()
 	self:FindMinerSpawnPoints()
 	self:FindMinerTargetPoints()
@@ -234,6 +243,24 @@ end
 
 function CMapController:GetSpawnForKing( iTeam )
 	return self:_GetTeamEntity( self._king_spawns, iTeam )
+end
+
+-------------------------
+-- Armour Buff Points
+-------------------------
+function CMapController:FindArmourPoints()
+	self._armour_points_small = {}
+	self._armour_points_large = {}
+	self:_StoreGamemodeEntitiesOfClass( self._armour_points_small, self._map_entities.armour_point_small )
+	self:_StoreGamemodeEntitiesOfClass( self._armour_points_large, self._map_entities.armour_point_large )
+end
+
+function CMapController:SmallArmourPoints()
+	return self._armour_points_small
+end
+
+function CMapController:LargeArmourPoints()
+	return self._armour_points_large
 end
 
 -------------------------

@@ -7,11 +7,13 @@ end
 CWaveController.ARMOUR_TIERS = {
 	[1] = {
 		item_name = "item_leaked_unit_armour_bonus_1",
-		modifier = "modifier_armour_bonus_leaked_unit_1"
+		modifier = "modifier_armour_bonus_leaked_unit_1",
+		particle = "particles/units/armour_buff_tier_1.vpcf"
 	},
 	[2] = {
 		item_name = "item_leaked_unit_armour_bonus_2",
-		modifier = "modifier_armour_bonus_leaked_unit_2"
+		modifier = "modifier_armour_bonus_leaked_unit_2",
+		particle = "particles/units/armour_buff_tier_2.vpcf"
 	}
 }
 
@@ -35,6 +37,9 @@ CWaveController.NUM_WAVES_IN_SET = 10
 function CLegionDefence:SetupWaveController()
 	self.wave_controller = CWaveController()
 	self.wave_controller:Setup()
+	if GameRules:GetGameModeEntity()._developer then
+		self.wave_controller:SetupDebug()
+	end
 end
 
 function CLegionDefence:GetWaveController()
@@ -49,12 +54,14 @@ function CWaveController:Setup()
 	self._current_wave = 0
 	self._wave_in_progress = false
 
-	self:SetNextWaveTime( 15 )
-	self._time_between_waves = 60
+	self:SetNextWaveTime( 60 )
+	self._time_between_waves = 40
 	self._before_wave_time = 3
 	self._end_of_wave_time = 3
 	self._think_time = 1
 	self._think_time_mid_wave = 0.2
+	self._antistuck_think_time = 4
+	self._leak_point_think_time = 0.5
 
 	self:BuildWaveListData()
 	self:UpdateWavesData()
@@ -62,9 +69,32 @@ function CWaveController:Setup()
 	-- Think entity for this controller
 	self._think_ent = IsValidEntity(self._think_ent) and self._think_ent or Entities:CreateByClassname("info_target")
 	self._think_ent:SetThink("OnThink", self, "WaveControllerThink", self._think_time)
+	self._think_ent:SetThink("OnAntiStuckThink", self, "WaveControllerAntiStickThink", self._antistuck_think_time)
+	self._think_ent:SetThink("OnLeakPointsThink", self, "WaveControllerLeakPointThink", self._leak_point_think_time)
 
 	-- Events
 	ListenToGameEvent("entity_killed", Dynamic_Wrap(CWaveController, "OnUnitKilled"), self)
+
+end
+
+function CWaveController:SetupDebug()
+
+	Convars:RegisterCommand( "legion_set_wave", function(name, parameter)
+		local cmdPlayer = Convars:GetCommandClient()
+		local new_wave = tonumber(parameter)
+		if cmdPlayer and new_wave then 
+			self:SetWave( new_wave - 1 )
+			self:UpdateWavesData()
+		end
+	end, "Go directly to the specified wave", FCVAR_CHEAT )
+
+	Convars:RegisterCommand( "legion_end_wave", function(name, parameter)
+		local cmdPlayer = Convars:GetCommandClient()
+		if cmdPlayer and self:IsWaveRunning() then 
+			self:DebugCompleteWave()
+		end
+	end, "Instantly complete the current wave", FCVAR_CHEAT )
+
 
 end
 
@@ -116,15 +146,14 @@ function CWaveController:OnThink()
 					local vPosition = RandomVectorInTrigger( ent )
 					local hUnit = CreateUnitByName( waveUnitToSpawn, vPosition, true, nil, nil, GetEnemyTeam(spawn.team) )
 					local entTargetZone = self._map_controller:GetTargetZoneForTeam( spawn.team ).entity
-					local vTarget = RandomVectorInTrigger( entTargetZone )
 					local hKing = GameRules.LegionDefence:GetKingController():GetKingForTeam(spawn.team)
 
-					if hUnit ~= nil then
+					if hUnit then
 
 						-- TODO: Make units face spawn zone regardless of spawn position
 						hUnit:SetAngles( 0, -90, 0 )
 
-						self:AddSpawnedUnit( hUnit, spawn.lane, vTarget, hKing )
+						self:AddSpawnedUnit( hUnit, spawn.lane, entTargetZone, hKing )
 						self:PlaySpawnParticle( hUnit )
 
 					end
@@ -144,12 +173,33 @@ function CWaveController:OnThink()
 	for i, unit_data in pairs( self._spawned_units ) do
 		local unit = unit_data.unit
 		if unit and IsValidEntity(unit) then
-			if not unit:IsAttacking() then
-				if unit:FindModifierByName( CWaveController.ARMOUR_TIERS[2].modifier ) then
-					unit:MoveToTargetToAttack( unit_data.target_king )
+			if not unit:IsAttacking() and unit_data.target_king and IsValidEntity(unit_data.target_king) and unit_data.target_king:IsAlive() then
+
+				-- Units won't attack king if using attack move, so when we're within a reasonable distance,
+				-- exclusively attempt to attack the king unit
+				local dist = CalcDistanceBetweenEntityOBB( unit, unit_data.target_king )
+				if dist < 1000 then
+
+					local data = {
+						UnitIndex = unit:entindex(), 
+						OrderType = DOTA_UNIT_ORDER_ATTACK_TARGET,
+						TargetIndex = unit_data.target_king:entindex(),
+						Queue = 0
+					}
+					ExecuteOrderFromTable(data)
+
 				else
-					unit:MoveToPositionAggressive( unit_data.target_king:GetOrigin() )
+
+					local data = {
+						UnitIndex = unit:entindex(), 
+						OrderType = DOTA_UNIT_ORDER_ATTACK_MOVE,
+						Position = unit_data.target_king:GetCenter(),
+						Queue = 0
+					}
+					ExecuteOrderFromTable(data)
+
 				end
+
 			end
 		else
 			self._spawned_units[i] = nil
@@ -161,12 +211,41 @@ function CWaveController:OnThink()
 	
 end
 
-function CWaveController:AddSpawnedUnit( hUnit, laneId, vTargetPosition, hTargetKing )
-	if hUnit then
+function CWaveController:OnAntiStuckThink()
+
+	-- Only run antistick when we've spawned everything
+	local waveIsReady = self:IsWaveRunning()
+	local unitsRemaining = self:CurrentWaveHasSpawnsRemaining()
+	local gameIsReady = not GameRules:IsGamePaused()
+	if waveIsReady and gameIsReady and not unitsRemaining then
+
+		self._map_controller = self._map_controller or GameRules.LegionDefence:GetMapController()
+
+		for i, unit_data in pairs( self._spawned_units ) do
+			local unit = unit_data.unit
+			if unit and IsValidEntity(unit) and unit:IsAlive() then
+
+				local spawn_zone = self._map_controller:GetSpawnZoneForLane(unit_data.lane).entity
+				if spawn_zone and IsPositionInTrigger( spawn_zone, unit:GetCenter() ) then
+					local vPosition = RandomVectorInTrigger( spawn_zone )
+					FindClearSpaceForUnit( unit, vPosition, true )
+				end
+
+			end
+		end
+
+	end
+
+	return self._antistuck_think_time
+
+end
+
+function CWaveController:AddSpawnedUnit( hUnit, laneId, hTargetZone, hTargetKing )
+	if hUnit and not hUnit:IsNull() then
 		local unit_data = {
 			unit = hUnit,
 			lane = laneId,
-			target_pos = vTargetPosition,
+			target_zone = hTargetZone,
 			target_king = hTargetKing
 		}
 		table.insert( self._spawned_units, unit_data )
@@ -176,9 +255,11 @@ function CWaveController:AddSpawnedUnit( hUnit, laneId, vTargetPosition, hTarget
 end
 
 function CWaveController:PlaySpawnParticle( hUnit )
-	local nFXIndex = ParticleManager:CreateParticle( "particles/units/heroes/hero_wisp/wisp_relocate_teleport_c.vpcf", PATTACH_WORLDORIGIN, hUnit )
-	ParticleManager:SetParticleControl( nFXIndex, 0, hUnit:GetCenter() )
-	ParticleManager:ReleaseParticleIndex( nFXIndex )
+	if hUnit then
+		local nFXIndex = ParticleManager:CreateParticle( "particles/units/heroes/hero_wisp/wisp_relocate_teleport_c.vpcf", PATTACH_WORLDORIGIN, hUnit )
+		ParticleManager:SetParticleControl( nFXIndex, 0, hUnit:GetCenter() )
+		ParticleManager:ReleaseParticleIndex( nFXIndex )
+	end
 end
 
 function CWaveController:GetCurrentWave()
@@ -378,7 +459,8 @@ function CWaveController:OnUnitKilled( event )
 			-- Give bounty
 			if attackerUnit then
 
-				local hasOwnerPlayer = attackerUnit:GetOwner() and true or false
+				local owner = attackerUnit:GetOwner()
+				local hasOwnerPlayer = owner and true or false
 				local ownerUnit = attackerUnit:GetOwner() and attackerUnit:GetOwner():GetAssignedHero() or attackerUnit
 				local bounty = killedUnit:GetGoldBounty()
 				local bounty_currency = CURRENCY_GOLD
@@ -390,7 +472,7 @@ function CWaveController:OnUnitKilled( event )
 
 				-- Show particles
 				ShowCurrencyPopup( killedUnit, bounty_currency, bounty )
-				PlayCurrencyGainedParticles( bounty_currency, bounty, ownerUnit, killedUnit:GetCenter(), true )
+				PlayCurrencyGainedParticles( bounty_currency, bounty, ownerUnit, owner, killedUnit:GetCenter(), true )
 
 			end
 
@@ -490,6 +572,20 @@ function CWaveController:GetUnitLane( hUnit )
 
 end
 
+function CWaveController:DebugCompleteWave()
+
+	for i, unit_data in pairs( self._spawned_units ) do
+		if unit_data.unit and IsValidEntity(unit_data.unit) then
+			UTIL_Remove( unit_data.unit )
+		end
+	end
+
+	self._spawned_units = {}
+
+	self:WavePreCompleted()
+
+end
+
 ----------------------------------
 -- Leaked Waves
 ----------------------------------
@@ -530,8 +626,47 @@ function CWaveController:GetNumberOfWavesLeakedFromUnit( hUnit )
 end
 
 ----------------------------------
--- Unit Functions
+-- Leaked Units
 ----------------------------------
+function CWaveController:OnLeakPointsThink()
+
+	self._map_controller = self._map_controller or GameRules.LegionDefence:GetMapController()
+
+	self:ProcessArmourPoints( self._map_controller:SmallArmourPoints(), 1 )
+	self:ProcessArmourPoints( self._map_controller:LargeArmourPoints(), 2 )
+
+	return self._leak_point_think_time
+
+end
+
+function CWaveController:ProcessArmourPoints( tArmourPoints, iArmourTier )
+
+	local RADIUS = 256
+
+	if tArmourPoints then
+
+		for k, v in pairs( tArmourPoints ) do
+
+			local units = FindUnitsInRadius(DOTA_TEAM_NEUTRALS,
+											v.entity:GetOrigin(),
+											nil,
+											RADIUS,
+											DOTA_UNIT_TARGET_TEAM_BOTH,
+											DOTA_UNIT_TARGET_ALL,
+											DOTA_UNIT_TARGET_FLAG_NONE,
+											FIND_ANY_ORDER,
+											false)
+
+			for i, unit in pairs( units ) do
+				self:AttemptIncreaseArmourOnUnit( unit, iArmourTier )
+			end
+
+		end
+
+	end
+
+end
+
 function CWaveController:GetArmourModifierItem( item_name )
 
 	self.__armour_items = self.__armour_items or {}
@@ -545,7 +680,7 @@ function CWaveController:GetArmourModifierItem( item_name )
 end
 
 function CWaveController:IsUnitAWaveUnit( hUnit )
-	for i, unit_data in pairs( self._spawned_units ) do
+	for i, unit_data in pairs( self._spawned_units or {} ) do
 		if IsValidEntity(unit_data.unit) and unit_data.unit == hUnit then
 			return true
 		end
@@ -587,12 +722,18 @@ function CWaveController:AttemptIncreaseArmourOnUnit( hUnit, iArmourTier )
 		end
 
 		-- Check unit doesn't already have this armour buff
-		local modifier = CWaveController.ARMOUR_TIERS[iArmourTier].modifier
-		if not hUnit:FindModifierByName(modifier) then
+		if not hUnit:FindModifierByName(buff_data.modifier) then
 
 			-- Apply modifier from armour item to the leaked unit
 			if buff_data.item then
-				buff_data.item:ApplyDataDrivenModifier(hUnit, hUnit, modifier, nil)
+				buff_data.item:ApplyDataDrivenModifier(hUnit, hUnit, buff_data.modifier, nil)
+			end
+
+			-- Show particles on unit
+			if buff_data.particle then
+				local nFXIndex = ParticleManager:CreateParticle( buff_data.particle, PATTACH_POINT_FOLLOW, hUnit )
+				ParticleManager:SetParticleControlEnt( nFXIndex, 0, hUnit, PATTACH_POINT_FOLLOW, "attach_hitloc", hUnit:GetCenter(), true )
+				ParticleManager:ReleaseParticleIndex( nFXIndex )
 			end
 
 		end

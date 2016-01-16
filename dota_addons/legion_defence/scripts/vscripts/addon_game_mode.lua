@@ -51,6 +51,11 @@ function Precache( context )
 	PrecacheResource( "particle", "particles/units/heroes/hero_chen/chen_teleport_flash.vpcf", context )
 	PrecacheResource( "particle", "particles/econ/items/puck/puck_alliance_set/puck_illusory_orb_launch_aproset.vpcf", context )
 
+	-- Currency, armour, crystal particles
+	PrecacheResource( "particle_folder", "particles/units/", context )
+	PrecacheResource( "particle_folder", "particles/currencies/", context )
+	PrecacheResource( "particle_folder", "particles/crystal/", context )
+
 end
 
 -- Create the game mode when we activate
@@ -65,6 +70,7 @@ function CLegionDefence:InitGameMode()
 
 	print("CLegionDefence:InitGameMode()")
 	self._GameMode = GameRules:GetGameModeEntity()
+	self._GameMode._developer = true
 
 	self._GameMode:SetThink( "OnThink", self, "GlobalThink", 2 )
 
@@ -128,9 +134,6 @@ function CLegionDefence:OnPlayerPickedHero( event )
 
 		-- Give items
 		-- hero:AddItemByName("item_necronomicon")
-
-		-- Set far distance to huge value so that we don't clip the screen with a zoomed out camera
-		SendToConsole("r_farz 5000")
 
 	end
 
