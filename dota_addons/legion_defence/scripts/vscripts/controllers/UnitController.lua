@@ -156,7 +156,7 @@ function CUnitController:SpawnUnit( ePlayer, lTeam, sUnitClass, vPosition, bRegi
 		hUnit:SetOwner( ePlayer )
 		hUnit:SetControllableByPlayer( ePlayer:GetPlayerID(), true )
 		hUnit:SetAngles( 0, 90, 0 )
-		hUnit:SetMoveCapability( GameRules.LegionDefence:GetWaveController():IsWaveRunning() and DOTA_UNIT_CAP_MOVE_NONE or DOTA_UNIT_CAP_MOVE_GROUND )
+		hUnit:SetMoveCapability( GameRules.LegionDefence:GetWaveController():IsWaveRunning() and DOTA_UNIT_CAP_MOVE_GROUND or DOTA_UNIT_CAP_MOVE_NONE  )
 
 		if bRegisterUnit then
 			self:RegisterUnit( ePlayer, lTeam, hUnit )
@@ -242,26 +242,28 @@ function CUnitController:GetCurrentSellCostOfUnit( hUnit, sCurrency )
 
 end
 
+function CUnitController:SetUnitsFrozen( bFrozen )
+
+	for i, player in pairs( self._player_units ) do
+		for k, v in pairs( player ) do
+
+			if IsValidEntity(v.unit) and v.unit:IsAlive() then
+				v.unit:SetMoveCapability( bFrozen and DOTA_UNIT_CAP_MOVE_NONE or DOTA_UNIT_CAP_MOVE_GROUND )
+			end
+
+		end
+	end
+
+end
+
 ---------------------------------------
 -- Wave Control Handles
 ---------------------------------------
 function CUnitController:HandleOnWaveStart( event )
 
 	if IsServer() then
-
 		self._wave_in_progress = true
-
-		-- Unfreeze all units and allow them to move around the play field
-		for i, player in pairs( self._player_units ) do
-			for k, v in pairs( player ) do
-
-				if IsValidEntity(v.unit) and v.unit:IsAlive() then
-					v.unit:SetMoveCapability( DOTA_UNIT_CAP_MOVE_GROUND )
-				end
-
-			end
-		end
-
+		self:SetUnitsFrozen( false )
 	end
 
 end
@@ -353,7 +355,7 @@ function CUnitController:OnLaneCleared( laneId, iPlayerId )
 	end
 
 	-- Start teleporting units after a delay
-	self._think_ent:SetThink("LaneClearedTeleportUnits", self, "WaveControllerThink", CUnitController.CLEARED_WAVE_TELEPORT_INITIAL_DELAY)
+	self._think_ent:SetThink("LaneClearedTeleportUnits", self, "UnitControllerTeleportThink", CUnitController.CLEARED_WAVE_TELEPORT_INITIAL_DELAY)
 
 end
 
