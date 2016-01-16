@@ -16,8 +16,9 @@ end
 -- King Controller
 ---------------------------------------
 CKingController.KING_CLASSES = {
-	[1] = "npc_legion_king_radiant",
-	[2] = "npc_legion_king_radiant",
+	[1] = "npc_legion_fire_heat_knight_upg",
+	[DOTA_TEAM_GOODGUYS] = "npc_legion_king_radiant",
+	[DOTA_TEAM_BADGUYS] = "npc_legion_king_dire",
 }
 
 CKingController.NET_TABLE = "KingUpgradeData"
@@ -111,6 +112,10 @@ function CKingController:Setup()
 	ListenToGameEvent("entity_killed", Dynamic_Wrap(CKingController, "HandleOnEntityKilled"), self)
 	CustomGameEventManager:RegisterListener( "legion_purchase_king_upgrade", Dynamic_Wrap(CKingController, "HandleOnUpgradePurchased") )
 
+end
+
+function CKingController:GetKings()
+	return self._kings
 end
 
 function CKingController:GetKingForTeam( iTeam )
