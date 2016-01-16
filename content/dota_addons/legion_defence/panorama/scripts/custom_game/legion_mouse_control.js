@@ -2,7 +2,7 @@
 "use strict";
 
 var m_MinDistance = 1134;
-var m_MaxDistance = 2500;
+var m_MaxDistance = 1650;
 var m_CurrentDistance = m_MinDistance;
 
 GameUI.SetMouseCallback( function( eventName, arg )

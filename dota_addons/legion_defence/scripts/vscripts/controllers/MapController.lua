@@ -45,7 +45,7 @@ function CMapController:Setup()
 		},
 		["miner_spawns"] = {
 			class = "info_target",
-			name = "legion_miner"
+			name = "legion_miner_spawn"
 		},
 		["miner_target"] = {
 			class = "info_target",

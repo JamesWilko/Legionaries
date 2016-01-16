@@ -121,6 +121,18 @@ function RandomVectorInTrigger( entTrigger )
 	return Vector(0, 0, 0)
 end
 
+function IsPositionInTrigger( entTrigger, vPosition )
+	if entTrigger and entTrigger.GetBounds and entTrigger.GetCenter then
+		local Mins = entTrigger:GetCenter() + entTrigger:GetBounds().Mins
+		local Maxs = entTrigger:GetCenter() + entTrigger:GetBounds().Maxs
+		local x = Mins.x <= vPosition.x and vPosition.x <= Maxs.x
+		local y = Mins.y <= vPosition.y and vPosition.y <= Maxs.y
+		local z = Mins.z <= vPosition.z and vPosition.z <= Maxs.z
+		return x and y
+	end
+	return false
+end
+
 function GetEnemyTeam( iTeam )
 	return ENEMY_TEAMS[iTeam]
 end
