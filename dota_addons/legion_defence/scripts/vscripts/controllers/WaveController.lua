@@ -465,13 +465,17 @@ function CWaveController:OnUnitKilled( event )
 				local bounty = killedUnit:GetGoldBounty()
 				local bounty_currency = CURRENCY_GOLD
 
-				-- Give bounty gold
 				if hasOwnerPlayer then
+					
+					-- Give bounty gold
 					GameRules.LegionDefence:GetCurrencyController():ModifyCurrency( bounty_currency, ownerUnit, bounty, true )
+
+					-- Show currency popup to owner
+					ShowCurrencyPopup( owner, killedUnit, bounty_currency, bounty )
+
 				end
 
 				-- Show particles
-				ShowCurrencyPopup( killedUnit, bounty_currency, bounty )
 				PlayCurrencyGainedParticles( bounty_currency, bounty, ownerUnit, owner, killedUnit:GetCenter(), true )
 
 			end

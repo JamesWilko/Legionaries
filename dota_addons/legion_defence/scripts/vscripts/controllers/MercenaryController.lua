@@ -22,7 +22,7 @@ CMercenaryController.INCOME_CURRENCY = CURRENCY_GOLD
 CMercenaryController.THINK_TIME = 0.2
 
 -- How many times should the wave controller tick before we start spawning mercenaries in a wave
-CMercenaryController.SPAWN_DELAY = 5
+CMercenaryController.SPAWN_DELAY = 15
 
 function CMercenaryController:Setup()
 
@@ -41,6 +41,7 @@ function CMercenaryController:Setup()
 	ListenToGameEvent("legion_perform_wave_spawn", Dynamic_Wrap(CMercenaryController, "HandleOnPerformWaveSpawn"), self)
 	ListenToGameEvent("legion_wave_complete", Dynamic_Wrap(CMercenaryController, "HandleOnWaveCompleted"), self)
 	CustomGameEventManager:RegisterListener( "legion_purchase_mercenary", Dynamic_Wrap(CMercenaryController, "HandleOnMercenaryPurchased") )
+	ListenToGameEvent("currency_soft_limit", Dynamic_Wrap(CMercenaryController, "HandleOnCurrencySoftLimited"), self)
 
 end
 
@@ -352,40 +353,53 @@ function CMercenaryController.HandleOnMercenaryPurchased( iPlayerId_Wrong, event
 			return false, "could_not_afford"
 		end
 
-		-- Spawn mercenary in spawn zone for team
-		local mapController = GameRules.LegionDefence:GetMapController()
-		local hPlayer = PlayerResource:GetPlayer( iPlayerId )
-		local teamId = hPlayer:GetTeamNumber()
-		local mercSpawnZone = mapController:GetMercSpawnZoneForTeam( teamId ).entity
-		local spawnPos = RandomVectorInTrigger( mercSpawnZone )
-		local hUnit = CreateUnitByName( sMercId, spawnPos, true, nil, nil, teamId )
+		-- Spawn mercenary
+		self:PerformMercenaryPurchase( iPlayerId, sMercId, mercData, false )
 
-		-- Spawn effect
-		local nFXIndex = ParticleManager:CreateParticle( "particles/units/heroes/hero_wisp/wisp_relocate_teleport.vpcf", PATTACH_WORLDORIGIN, hUnit )
-		ParticleManager:SetParticleControl( nFXIndex, 0, hUnit:GetCenter() )
-		ParticleManager:SetParticleControl( nFXIndex, 1, RandomVector(360) )
-		ParticleManager:ReleaseParticleIndex( nFXIndex )
+	end
 
-		-- Add mercenary to waiting list for team
-		local spawn_data = {
-			id = sMercId,
-			player_id = iPlayerId,
-			team = teamId,
-			unit = hUnit,
-			value = mercData.cost
-		}
-		table.insert( self._spawned, spawn_data )
+end
+
+function CMercenaryController:PerformMercenaryPurchase( iPlayerId, sMercId, tMercData, bFreeSpawn )
+
+	local currency_controller = GameRules.LegionDefence:GetCurrencyController()
+
+	-- Spawn mercenary in spawn zone for team
+	local mapController = GameRules.LegionDefence:GetMapController()
+	local hPlayer = PlayerResource:GetPlayer( iPlayerId )
+	local teamId = hPlayer:GetTeamNumber()
+	local mercSpawnZone = mapController:GetMercSpawnZoneForTeam( teamId ).entity
+	local spawnPos = RandomVectorInTrigger( mercSpawnZone )
+	local hUnit = CreateUnitByName( sMercId, spawnPos, true, nil, nil, teamId )
+
+	-- Spawn effect
+	local nFXIndex = ParticleManager:CreateParticle( "particles/units/heroes/hero_wisp/wisp_relocate_teleport.vpcf", PATTACH_WORLDORIGIN, hUnit )
+	ParticleManager:SetParticleControl( nFXIndex, 0, hUnit:GetCenter() )
+	ParticleManager:SetParticleControl( nFXIndex, 1, RandomVector(360) )
+	ParticleManager:ReleaseParticleIndex( nFXIndex )
+
+	-- Add mercenary to waiting list for team
+	local spawn_data = {
+		id = sMercId,
+		player_id = iPlayerId,
+		team = teamId,
+		unit = hUnit,
+		value = tMercData.cost
+	}
+	table.insert( self._spawned, spawn_data )
+
+	if not bFreeSpawn then
 
 		-- Consume mercenary
 		self:ConsumeMercenary( iPlayerId, sMercId )
 
 		-- Consume unit cost
-		currency_controller:ModifyCurrency( CMercenaryController.PURCHASE_CURRENCY, iPlayerId, -mercData.cost )
-
-		-- Give unit income to player
-		currency_controller:SetCurrencyIncome( CMercenaryController.INCOME_CURRENCY, iPlayerId, mercData.income, true )
+		currency_controller:ModifyCurrency( CMercenaryController.PURCHASE_CURRENCY, iPlayerId, -tMercData.cost )
 
 	end
+
+	-- Give unit income to player
+	currency_controller:SetCurrencyIncome( CMercenaryController.INCOME_CURRENCY, iPlayerId, tMercData.income, true )
 
 end
 
@@ -434,9 +448,7 @@ function CMercenaryController:HandleOnPerformWaveSpawn()
 		end
 
 		-- Remove unit from queue
-		if v.units[1] then
-			table.remove(v.units, 1)
-		end
+		table.remove(v.units, 1)
 
 	end
 
@@ -460,5 +472,55 @@ function CMercenaryController:HandleOnWaveCompleted()
 
 	-- Clear lane spawns
 	self._lane_spawns = nil
+
+end
+
+---------------------------------------
+-- Soft Limited Gems
+---------------------------------------
+function CMercenaryController:HandleOnCurrencySoftLimited( event )
+
+	local iPlayerId = event["lPlayer"]
+	local amount = event["lAmount"]
+	local spentAllCurrency = false
+
+	-- Spend all excess currency on units
+	print("Soft limiting currency: " .. tostring(amount))
+	while (not spentAllCurrency) do
+
+		local unit = self:GetHighestPurchasableUnit(amount)
+		if unit then
+
+			print(string.format("Spending excess on %s: -%i (%i)", unit.id, unit.cost, amount - unit.cost))
+
+			-- Spawn unit
+			self:PerformMercenaryPurchase( iPlayerId, unit.id, unit, true )
+
+			-- Remove unit cost
+			amount = amount - unit.cost
+
+		else
+			spentAllCurrency = true
+		end
+
+	end
+
+	-- Return any currency not spent
+	print("Returning unspent currency to player: " .. tostring(amount))
+	local currency_controller = GameRules.LegionDefence:GetCurrencyController()
+	currency_controller:ModifyCurrency( CMercenaryController.PURCHASE_CURRENCY, iPlayerId, amount )
+
+end
+
+function CMercenaryController:GetHighestPurchasableUnit( iAmount )
+
+	for i = #self._mercenaries, 1, -1 do
+		local data = self._mercenaries[i]
+		if data.cost <= iAmount then
+			return data
+		end
+	end
+
+	return nil
 
 end
