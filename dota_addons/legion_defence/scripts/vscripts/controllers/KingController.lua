@@ -28,6 +28,8 @@ CKingController.KEY_ARMOUR = "armour"
 CKingController.KEY_ATTACK = "attack"
 CKingController.KEY_HEAL = "heal"
 
+CKingController.BOUNTY_TAX_PERCENT = 0.2
+
 CKingController.UPGRADES = {
 	[CKingController.KEY_HEALTH] = {
 		per_level = 500,
@@ -78,6 +80,7 @@ function CKingController:Setup()
 	self._kings = {}
 	self._team_upgrades = {}
 	self._used_heals = {}
+	self._king_bounties = {}
 
 	-- Spawn kings
 	local spawns = GameRules.LegionDefence:GetMapController():KingSpawns()
@@ -112,6 +115,9 @@ function CKingController:Setup()
 	ListenToGameEvent("entity_killed", Dynamic_Wrap(CKingController, "HandleOnEntityKilled"), self)
 	CustomGameEventManager:RegisterListener( "legion_purchase_king_upgrade", Dynamic_Wrap(CKingController, "HandleOnUpgradePurchased") )
 
+	ListenToGameEvent("legion_wave_start", Dynamic_Wrap(CKingController, "HandleOnWaveStart"), self)
+	ListenToGameEvent("legion_wave_complete", Dynamic_Wrap(CKingController, "HandleOnWaveComplete"), self)
+
 end
 
 function CKingController:GetKings()
@@ -120,6 +126,27 @@ end
 
 function CKingController:GetKingForTeam( iTeam )
 	return self._kings[iTeam]
+end
+
+function CKingController:GetTeamForKing( hUnit )
+	if hUnit ~= nil then
+		local kingIndex = type(hUnit) == "table" and hUnit:entindex() or hUnit
+		for team, king in pairs( self._kings ) do
+			if king:entindex() == kingIndex then
+				return team
+			end
+		end
+	end
+	return nil
+end
+
+function CKingController:IsUnitAKing( hUnit )
+	for team, king in pairs( self._kings ) do
+		if king:entindex() == hUnit:entindex() then
+			return king
+		end
+	end
+	return nil
 end
 
 function CKingController:GetUpgradeLevel( sUpgradeId, iTeam )
@@ -143,6 +170,9 @@ end
 function CKingController:HandleOnEntityKilled( event )
 
 	local unit = EntIndexToHScript( event.entindex_killed )
+	self._wave_controller = self._wave_controller or GameRules.LegionDefence:GetWaveController()
+
+	-- Check if unit was a king
 	if unit and self._kings then
 		for team, king in pairs( self._kings ) do
 			if unit == king then
@@ -152,6 +182,57 @@ function CKingController:HandleOnEntityKilled( event )
 
 			end
 		end
+	end
+
+	-- Check if unit was killed by a King
+	if unit and self._wave_controller:IsUnitAWaveUnit(unit) then
+		local killer = EntIndexToHScript( event.entindex_attacker )
+		if self:IsUnitAKing(killer) then
+
+			-- Unit killed by King, king collects unit bounty
+			local bounty = unit:GetGoldBounty()
+			self._king_bounties[event.entindex_attacker] = (self._king_bounties[event.entindex_attacker] or 0) + bounty
+
+		end
+	end
+
+end
+
+function CKingController:HandleOnWaveStart( event )
+
+	-- Reset King bounties
+	self._king_bounties = {}
+
+end
+
+function CKingController:HandleOnWaveComplete( event )
+
+	self._lane_controller = self._lane_controller or GameRules.LegionDefence:GetLaneController()
+	self._currency_controller = self._currency_controller or GameRules.LegionDefence:GetCurrencyController()
+
+	-- Divide bounties earned by the King between all players
+	for k, v in pairs( self._king_bounties ) do
+
+		local team = self:GetTeamForKing(k)
+		if team ~= nil then
+
+			local lanes = self._lane_controller:GetOccupiedLanesForTeam(team)
+			local total_bounty = (1 - CKingController.BOUNTY_TAX_PERCENT) * v
+			local bounty_per_player = math.floor( total_bounty / #lanes )
+
+			print(string.format("Team %i King Bounty: %i (w/o Tax: %i), Per Player: %i", team, total_bounty, v, bounty_per_player))
+
+			for i, lane in pairs(lanes) do
+
+				local player = self._lane_controller:GetPlayerForLane(lane)
+				if player then
+					self._currency_controller:ModifyCurrency( CURRENCY_GOLD, player, bounty_per_player )
+				end
+
+			end
+
+		end
+
 	end
 
 end
