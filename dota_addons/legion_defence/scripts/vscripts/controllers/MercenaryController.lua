@@ -174,8 +174,14 @@ function CMercenaryController:ConsumeMercenary( iPlayerId, mercId )
 end
 
 function CMercenaryController:BuildWavesMercenaryLaneSpawns()
+
+	-- Divide mercenaries into lanes
 	self:DivideMercenariesIntoLanes( DOTA_TEAM_GOODGUYS )
 	self:DivideMercenariesIntoLanes( DOTA_TEAM_BADGUYS )
+
+	-- Clear spawns list
+	self._spawned = {}
+
 end
 
 function CMercenaryController:DivideMercenariesIntoLanes( iTeamId, bDebug )
@@ -430,25 +436,33 @@ function CMercenaryController:HandleOnPerformWaveSpawn()
 	-- Spawn mercenary unit
 	for k, v in pairs( self._lane_spawns ) do
 
-		local spawnZone = self._map_controller:GetSpawnZoneForLane( k )
-		local unit = v.units[1] and v.units[1].unit
-
 		-- Moved unit to spawn zone
-		if unit and spawnZone then
+		local unit = v.units[1] and v.units[1].unit
+		if unit then
 
-			local vPosition = RandomVectorInTrigger( spawnZone.entity )
-			local entTargetZone = self._map_controller:GetTargetZoneForTeam( spawnZone.team ).entity
-			local vTarget = RandomVectorInTrigger( entTargetZone )
-			local hKing = GameRules.LegionDefence:GetKingController():GetKingForTeam( spawnZone.team )
+			local spawnZone = self._map_controller:GetSpawnZoneForLane( k )
+			if spawnZone then
 
-			FindClearSpaceForUnit( unit, vPosition, true )
-			self._wave_controller:AddSpawnedUnit( unit, k, vTarget, hKing )
-			self._wave_controller:PlaySpawnParticle( unit )
+				local vPosition = RandomVectorInTrigger( spawnZone.entity )
+				local entTargetZone = self._map_controller:GetTargetZoneForTeam( spawnZone.team ).entity
+				local vTarget = RandomVectorInTrigger( entTargetZone )
+				local hKing = GameRules.LegionDefence:GetKingController():GetKingForTeam( spawnZone.team )
+
+				FindClearSpaceForUnit( unit, vPosition, true )
+				self._wave_controller:AddSpawnedUnit( unit, k, vTarget, hKing )
+				self._wave_controller:PlaySpawnParticle( unit )
+
+			end
+
+			-- Remove unit from queue
+			v.units[1].unit = nil
+			table.remove(v.units, 1)
 
 		end
 
-		-- Remove unit from queue
-		table.remove(v.units, 1)
+		if #v.units == 0 then
+			v.units = {}
+		end
 
 	end
 
