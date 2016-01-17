@@ -36,6 +36,8 @@ CKingController.UPGRADES = {
 		cost = 80,
 		max_level = 50,
 		currency = CURRENCY_GEMS,
+		income = 3,
+		income_currency = CURRENCY_GOLD,
 		icon = "item_vitality_booster",
 		func = function(controller, hPlayer, hKing) controller:UpgradeHealth(hPlayer, hKing) end
 	},
@@ -44,6 +46,8 @@ CKingController.UPGRADES = {
 		cost = 80,
 		max_level = 50,
 		currency = CURRENCY_GEMS,
+		income = 3,
+		income_currency = CURRENCY_GOLD,
 		icon = "item_ring_of_regen",
 		func = function(controller, hPlayer, hKing) controller:UpgradeRegen(hPlayer, hKing) end
 	},
@@ -52,6 +56,8 @@ CKingController.UPGRADES = {
 		cost = 80,
 		max_level = 25,
 		currency = CURRENCY_GEMS,
+		income = 3,
+		income_currency = CURRENCY_GOLD,
 		icon = "item_platemail",
 		func = function(controller, hPlayer, hKing) controller:UpgradeArmour(hPlayer, hKing) end
 	},
@@ -60,6 +66,8 @@ CKingController.UPGRADES = {
 		cost = 80,
 		max_level = 25,
 		currency = CURRENCY_GEMS,
+		income = 3,
+		income_currency = CURRENCY_GOLD,
 		icon = "item_claymore",
 		func = function(controller, hPlayer, hKing) controller:UpgradeAttack(hPlayer, hKing) end
 	},
@@ -69,6 +77,8 @@ CKingController.UPGRADES = {
 		max_level = 2,
 		display_cost = "x1",
 		currency = CURRENCY_GEMS,
+		income = 3,
+		income_currency = CURRENCY_GOLD,
 		icon = "item_cheese",
 		func = function(controller, hPlayer, hKing) controller:InstaHealKing(hPlayer, hKing) end
 	}
@@ -282,6 +292,9 @@ function CKingController.HandleOnUpgradePurchased( iPlayerId_Wrong, eventArgs )
 
 	-- Deduct purchase
 	currency_controller:ModifyCurrency( upgradeTable.currency, iPlayerId, -cost )
+
+	-- Add income
+	currency_controller:SetCurrencyIncome( upgradeTable.income_currency, iPlayerId, upgradeTable.income, true )
 
 	-- Increase upgrade level for team
 	self:IncreaseUpgradeLevel( eventArgs.sUpgradeId, iPlayerTeam )

@@ -54,6 +54,7 @@ function ShowTooltip( panel )
 	var desc = $.Localize("#king_upgrade_" + upgrade + "_Description");
 	var value_name = $.Localize("#king_upgrade_" + upgrade + "_Value");
 	var value = GetKingUpgradesData()[upgrade]["per_level"];
+	var income = GetKingUpgradesData()[upgrade]["income"];
 
 	var data = {
 		"panelId" : panel.id,
@@ -62,13 +63,16 @@ function ShowTooltip( panel )
 		"value-1-name" : value_name.toUpperCase(),
 		"value-1-value" : value,
 		"value-1-value-color" : "yellow",
+		"value-2-name" : $.Localize("legion_income_tooltip").toUpperCase(),
+		"value-2-value" : " " + income + " " + $.Localize("legion_currency_gold"),
+		"value-2-value-color" : "gold",
 	};
 
 	if(IsUpgradeAtMaxLevel(upgrade))
 	{
-		data["value-1-name"] = "";
-		data["value-1-value"] = $.Localize("#legion_upgrade_max_level");
-		data["value-1-value-color"] = "red";
+		data["value-3-name"] = "";
+		data["value-3-value"] = $.Localize("#legion_upgrade_max_level");
+		data["value-3-value-color"] = "red";
 	}
 
 	GameEvents.SendEventClientSide("show_legion_tooltip", data );
