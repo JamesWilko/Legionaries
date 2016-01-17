@@ -15,6 +15,7 @@ require("controllers/MineController")
 require("controllers/FoodController")
 require("controllers/UpgradesController")
 require("controllers/MercenaryController")
+require("controllers/StatsController")
 require("BuildGrid")
 require("GameUtils")
 
@@ -93,6 +94,7 @@ function CLegionDefence:InitGameMode()
 	self:SetupFoodController()
 	self:SetupUpgradeController()
 	self:SetupMercenaryController()
+	self:SetupStatsController()
 
 	ListenToGameEvent("dota_player_pick_hero", Dynamic_Wrap(CLegionDefence, "OnPlayerPickedHero"), self)
 

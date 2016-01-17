@@ -58,6 +58,18 @@ function CLaneController:GetPlayerForLane( laneId )
 
 end
 
+function CLaneController:GetAllOccupiedLanes()
+
+	local lanes = {}
+	for id, lane in pairs(self.lanes) do
+		if lane.player ~= nil then
+			table.insert( lanes, lane )
+		end
+	end
+	return lanes
+
+end
+
 function CLaneController:GetOccupiedLanesForTeam( iTeamId )
 
 	local lanes = {}

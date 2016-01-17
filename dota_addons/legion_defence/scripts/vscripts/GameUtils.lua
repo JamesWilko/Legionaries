@@ -137,12 +137,12 @@ function GetUnitUniqueAbilities( hUnit )
 
 end
 
-function ShowCurrencyPopup( target, currency, amount, lifetime, color )
+function ShowCurrencyPopup( player, target, currency, amount, lifetime, color )
 
 	if CurrencyPopups[currency] then
 
 		local particle_path = "particles/msg_fx/msg_gold.vpcf"
-		local particle = ParticleManager:CreateParticle(particle_path, PATTACH_ABSORIGIN_FOLLOW, target)
+		local particle = ParticleManager:CreateParticleForPlayer(particle_path, PATTACH_ABSORIGIN_FOLLOW, target, player)
 		local digits = amount ~= nil and #tostring(amount) or 0
 		digits = amount > 0 and digits + 1 or digits
 		local symbol = amount > 0 and 0 or 1

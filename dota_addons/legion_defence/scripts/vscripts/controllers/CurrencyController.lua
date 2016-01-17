@@ -268,7 +268,7 @@ function CCurrencyController:ModifyCurrency( sCurrency, hPlayer, iAmount, bSupre
 				elseif iAmount > 0 then
 					PlayCurrencyGainedParticles( sCurrency, iAmount, player_hero, player )
 				end
-				ShowCurrencyPopup( player_hero, sCurrency, iAmount, 1 )
+				ShowCurrencyPopup( player, player_hero, sCurrency, iAmount, 1 )
 			end
 
 		end
