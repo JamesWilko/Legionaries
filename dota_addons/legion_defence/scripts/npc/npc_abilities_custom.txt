@@ -734,8 +734,8 @@
 
 	"precache"
 	{
-		"model"				"models/creeps/neutral_creeps/n_creep_troll_dark_b/n_creep_troll_dark_b.vmdl"
-		"model_folder"		"models/creeps/neutral_creeps/n_creep_troll_dark_b/"
+		"model"				"models/creeps/neutral_creeps/n_creep_forest_trolls/n_creep_forest_troll_high_priest.vmdl"
+		"model_folder"		"models/creeps/neutral_creeps/n_creep_forest_trolls/"
 	}
 }
 
@@ -1768,7 +1768,7 @@
 		"02"
 		{
 			"var_type"					"FIELD_INTEGER"
-			"PopulationCost"			"0"
+			"PopulationCost"			"1"
 		}
 		"03"
 		{
@@ -1992,7 +1992,7 @@
 		"01"
 		{	
 			"var_type"				"FIELD_INTEGER"
-			"shots"					"2"
+			"shots"					"4"
 		}
 		"02"
 		{
@@ -2007,12 +2007,12 @@
 		"04"
 		{
 			"var_type"				"FIELD_FLOAT"
-			"damage_percentage"		"0.5"
+			"damage_percentage"		"0.80"
 		}
 		"05"
 		{
 			"var_type"				"FIELD_FLOAT"
-			"DamagePercentFriendly"	"50"
+			"DamagePercentFriendly"	"80"
 		}
 	}
 
@@ -2078,7 +2078,7 @@
 		"03"
 		{
 			"var_type"				"FIELD_INTEGER"
-			"duration"				"{Ability.StackDuration}"
+			"duration"				"5"
 		}
 	}
 
