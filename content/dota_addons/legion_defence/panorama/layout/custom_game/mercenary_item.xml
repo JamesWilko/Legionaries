@@ -24,6 +24,36 @@
 			<Image class="UpgradeCostIcon" id="CostImage" src="file://{images}/custom_game/icons/icon_gems_small.png" hittest="false" />
 			<Label class="UpgradeCostText" id="CostText" text="??" hittest="false" />
 		</Panel>
+
+		<!-- Uncomment the section below to force the game to regenerate all of our mercenary pictures -->
+		<!--
+		<Image class="UpgradeImage" id="UpgradeImage" src="file://{images}/custom_game/mercs/merc_centaur.psd" />
+		<Image class="UpgradeImage" id="UpgradeImage" src="file://{images}/custom_game/mercs/merc_centaur_chief.psd" />
+		<Image class="UpgradeImage" id="UpgradeImage" src="file://{images}/custom_game/mercs/merc_dark_troll.psd" />
+		<Image class="UpgradeImage" id="UpgradeImage" src="file://{images}/custom_game/mercs/merc_dino.psd" />
+		<Image class="UpgradeImage" id="UpgradeImage" src="file://{images}/custom_game/mercs/merc_dino_small.psd" />
+		<Image class="UpgradeImage" id="UpgradeImage" src="file://{images}/custom_game/mercs/merc_dragon.psd" />
+		<Image class="UpgradeImage" id="UpgradeImage" src="file://{images}/custom_game/mercs/merc_dragon.psd" />
+		<Image class="UpgradeImage" id="UpgradeImage" src="file://{images}/custom_game/mercs/merc_drake.psd" />
+		<Image class="UpgradeImage" id="UpgradeImage" src="file://{images}/custom_game/mercs/merc_fire_golem.psd" />
+		<Image class="UpgradeImage" id="UpgradeImage" src="file://{images}/custom_game/mercs/merc_furbolg_red.psd" />
+		<Image class="UpgradeImage" id="UpgradeImage" src="file://{images}/custom_game/mercs/merc_furbolg_yellow.psd" />
+		<Image class="UpgradeImage" id="UpgradeImage" src="file://{images}/custom_game/mercs/merc_gargoyle.psd" />
+		<Image class="UpgradeImage" id="UpgradeImage" src="file://{images}/custom_game/mercs/merc_ghost.psd" />
+		<Image class="UpgradeImage" id="UpgradeImage" src="file://{images}/custom_game/mercs/merc_ghoul.psd" />
+		<Image class="UpgradeImage" id="UpgradeImage" src="file://{images}/custom_game/mercs/merc_golem.psd" />
+		<Image class="UpgradeImage" id="UpgradeImage" src="file://{images}/custom_game/mercs/merc_ogre.psd" />
+		<Image class="UpgradeImage" id="UpgradeImage" src="file://{images}/custom_game/mercs/merc_rock_golem.psd" />
+		<Image class="UpgradeImage" id="UpgradeImage" src="file://{images}/custom_game/mercs/merc_roshan.psd" />
+		<Image class="UpgradeImage" id="UpgradeImage" src="file://{images}/custom_game/mercs/merc_satyr.psd" />
+		<Image class="UpgradeImage" id="UpgradeImage" src="file://{images}/custom_game/mercs/merc_siege.psd" />
+		<Image class="UpgradeImage" id="UpgradeImage" src="file://{images}/custom_game/mercs/merc_siege_mega.psd" />
+		<Image class="UpgradeImage" id="UpgradeImage" src="file://{images}/custom_game/mercs/merc_skeleton.psd" />
+		<Image class="UpgradeImage" id="UpgradeImage" src="file://{images}/custom_game/mercs/merc_troll_beserker.psd" />
+		<Image class="UpgradeImage" id="UpgradeImage" src="file://{images}/custom_game/mercs/merc_troll_priest.psd" />
+		<Image class="UpgradeImage" id="UpgradeImage" src="file://{images}/custom_game/mercs/merc_wolf.psd" />
+		-->
+
 	</Panel>
 
 </root>

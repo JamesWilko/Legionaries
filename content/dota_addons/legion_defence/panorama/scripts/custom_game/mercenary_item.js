@@ -130,6 +130,7 @@ function ShowTooltip( panel )
 
 		GameEvents.SendEventClientSide("show_legion_tooltip", data );
 	}
+
 }
 
 function HideTooltip( panel )
