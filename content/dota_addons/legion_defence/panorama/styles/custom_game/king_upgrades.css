@@ -19,17 +19,23 @@
 	margin-right: 8px;
 	margin-top: 4px;
 	margin-bottom: 4px;
-	width: 80px;
-	height: 60px;
+	width: 86px;
+	height: 65px;
 	background-color: #000000;
-	border: 1px solid black;
+	border-top: 3px solid #737573;
+	border-left: 3px solid #585a58;
+	border-right: 3px solid #404040;
+	border-bottom: 3px solid #2c2a2c;
 	saturation: 0.9;
 }
 
 .UpgradePanel:hover
 {
 	background-color: #4c0000;
-	border: 1px solid white;
+	border-top: 3px solid #bdbebd;
+	border-left: 3px solid #b1b1b1;
+	border-right: 3px solid #a5a4a3;
+	border-bottom: 3px solid #a0a0a0;
 	saturation: 1.0;
 }
 

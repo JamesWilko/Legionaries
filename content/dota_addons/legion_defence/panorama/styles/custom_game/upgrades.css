@@ -26,17 +26,23 @@
 
 .UpgradeButton
 {
-	width: 80px;
-	height: 60px;
+	width: 86px;
+	height: 65px;
 	saturation: 0.9;
-	border: 1px solid black;
+	border-top: 3px solid #737573;
+	border-left: 3px solid #585a58;
+	border-right: 3px solid #404040;
+	border-bottom: 3px solid #2c2a2c;
 	horizontal-align: center;
 }
 
 .UpgradeButton:hover
 {
 	saturation: 1.0;
-	border: 1px solid white;
+	border-top: 3px solid #bdbebd;
+	border-left: 3px solid #b1b1b1;
+	border-right: 3px solid #a5a4a3;
+	border-bottom: 3px solid #a0a0a0;
 }
 
 .UpgradeText
