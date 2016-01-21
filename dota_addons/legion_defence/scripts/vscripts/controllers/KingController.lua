@@ -42,9 +42,9 @@ CKingController.UPGRADES = {
 		func = function(controller, hPlayer, hKing) controller:UpgradeHealth(hPlayer, hKing) end
 	},
 	[CKingController.KEY_REGEN] = {
-		per_level = 2,
+		per_level = 4,
 		cost = 80,
-		max_level = 50,
+		max_level = 30,
 		currency = CURRENCY_GEMS,
 		income = 3,
 		income_currency = CURRENCY_GOLD,
@@ -83,6 +83,29 @@ CKingController.UPGRADES = {
 		func = function(controller, hPlayer, hKing) controller:InstaHealKing(hPlayer, hKing) end
 	}
 }
+CKingController.ABILITY_UPGRADES = {
+	[1] = {
+		level = 5,
+		ability_name = "ability_merc_behemoth_armour_aura",
+	},
+	[2] = {
+		level = 10,
+		ability_name = "ability_merc_kraken_poison_attack",
+	},
+	[3] = {
+		level = 15,
+		ability_name = "ability_merc_infernal_bash",
+	},
+	[4] = {
+		level = 20,
+		ability_name = "ability_merc_infernal_immolation",
+	},
+	[5] = {
+		level = 25,
+		ability_name = "ability_merc_demon_speed_aura",
+	}
+}
+
 CKingController.MAXIMUM_HEALS_PER_PLAYER = 1
 
 function CKingController:Setup()
@@ -327,10 +350,37 @@ function CKingController:UpgradeArmour( hPlayer, hKing )
 end
 
 function CKingController:UpgradeAttack( hPlayer, hKing )
+
 	local increaseAmount = CKingController.UPGRADES[CKingController.KEY_ATTACK].per_level
 	hKing:SetBaseDamageMax( hKing:GetBaseDamageMax() + increaseAmount )
 	hKing:SetBaseDamageMin( hKing:GetBaseDamageMin() + increaseAmount )
 	self:SpawnUpgradeParticles(hKing)
+
+	-- Check if King should receive new abilities
+	local attack_level = self:GetUpgradeLevel( CKingController.KEY_ATTACK, hPlayer:GetTeamNumber() )
+	local MAX_ABILITIES = 6
+
+	for k, v in pairs( CKingController.ABILITY_UPGRADES ) do
+		if v.level <= attack_level then
+
+			local has_ability_already = false
+			local i = 0
+			while i < MAX_ABILITIES do
+				local ability = hKing:GetAbilityByIndex(i)
+				if ability and string.find(ability:GetName(), v.ability_name) ~= nil then
+					has_ability_already = true
+					break
+				end
+				i = i + 1
+			end
+
+			if not has_ability_already then
+				hKing:AddAbility(v.ability_name)
+			end
+
+		end
+	end
+
 end
 
 function CKingController:SpawnUpgradeParticles( hKing )

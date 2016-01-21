@@ -98,8 +98,8 @@ end
 -- ie. No upgrade or sell ability
 function GetUnitUniqueAbilities( hUnit )
 
-	-- 4 abilities as 2 may always be upgrade or sell, units should have a max of 6 including upgrade and sell
-	local MAX_ABILITIES = 4
+	-- 6 abilities, however 2 may always be upgrade or sell
+	local MAX_ABILITIES = 6
 	local ABILITY_SELL = "sell_unit"
 	local ABILITY_UPGRADE = "upgrade_unit"
 
