@@ -1,0 +1,27 @@
+
+.Parent
+{
+	width: 100%;
+	height: 100%;
+}
+
+.Textbox
+{
+	horizontal-align: left;
+	vertical-align: bottom;
+	margin-bottom: 30%;
+	width: 30%;
+	height: 200px;
+	/*border: 1px solid black;*/
+	/*background-color: gradient( linear, 0% 80%, 0% 5%, from( #111b23 ), to( #24333f ) );*/
+	padding: 7px 16px 8px 16px;
+	overflow: squish scroll;
+
+}
+
+.TextboxText
+{
+	color: white;
+	font-size: 16px;
+	text-shadow: 0px 0px 5px 3 #000000;
+}
