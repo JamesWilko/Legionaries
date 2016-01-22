@@ -9,11 +9,18 @@
 		<include src="file://{resources}/scripts/custom_game/mercenaries.js" />
 	</scripts>
 
-	<Panel class="MercenariesPanel">
-		<Panel class="MercsList" id="MercsList" />
-		<Panel class="ScrollBarBackground" id="ScrollBarBackground">
-			<Panel class="ScrollBarThumb" id="ScrollBar" />
+	<Panel>
+
+		<Panel class="MercenariesPanel">
+
+			<Panel class="MercsList" id="MercsList" />
+
+			<Panel class="ScrollBarBackground" id="ScrollBarBackground">
+				<Panel class="ScrollBarThumb" id="ScrollBar" />
+			</Panel>
+
 		</Panel>
+
 	</Panel>
 
 </root>

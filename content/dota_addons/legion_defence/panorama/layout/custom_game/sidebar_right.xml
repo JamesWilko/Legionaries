@@ -3,6 +3,7 @@
 	<styles>
 		<!-- <include src="file://{resources}/styles/dotastyles.css" /> -->
 		<include src="file://{resources}/styles/custom_game/sidebar.css" />
+		<include src="file://{resources}/styles/custom_game/borders.css" />
 	</styles>
 
 	<scripts>
@@ -10,9 +11,28 @@
 	</scripts>
 
 	<Panel class="Parent" hittest="false">
-		<Panel class="MercenariesPanel Right NoBorders" hittest="false">
-			<Panel id="ChildList" class="ChildList FlowDown" hittest="false" />
+
+		<Panel class="Sidebar Right CenterVertical NoBorders" hittest="false">
+			<Panel class="Right FlowDown NoBorders" hittest="false">
+
+				<Panel class="LargeVerticalSpacer" hittest="false"/>
+				<Panel class="LargeVerticalSpacer" hittest="false"/>
+
+				<Panel class="Background CornerTopLeft CornerBottomLeft NoBorder" hittest="false">
+
+					<Panel class="BorderTop"/>
+					<Panel class="BorderBottom"/>
+					<Panel class="BorderLeft"/>
+					<Panel class="BorderTopLeft"/>
+					<Panel class="BorderBottomLeft"/>
+
+					<Panel id="ChildList" class="ChildList FlowDown" hittest="false" />
+
+				</Panel>
+
+			</Panel>
 		</Panel>
+
 	</Panel>
 
 </root>

@@ -60,15 +60,23 @@
 	flow-children: right;
 }
 
+.HorizontalSpacer
+{
+	margin-left: 8px;
+}
+
 .VerticalSpacer
 {
 	margin-top: 8px;
+}
+
+.LargeVerticalSpacer
+{
+	margin-top: 32px;
 }
 
 .InventoryBar
 {
 	height: 164px;
 	width: 29.5%;
-	background-color: gradient( linear, 0% 80%, 0% 5%, from( #111b23 ), to( #24333f ) );
-	padding: 8px;
 }

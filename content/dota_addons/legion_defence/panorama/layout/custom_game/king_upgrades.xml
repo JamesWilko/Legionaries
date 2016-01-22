@@ -3,14 +3,23 @@
 	<styles>
 		<!-- <include src="file://{resources}/styles/dotastyles.css" /> -->
 		<include src="file://{resources}/styles/custom_game/king_upgrades.css" />
+		<include src="file://{resources}/styles/custom_game/borders.css" />
 	</styles>
 
 	<scripts>
 		<include src="file://{resources}/scripts/custom_game/king_upgrades.js" />
 	</scripts>
 
-	<Panel class="KingUpgradesPanel" hittest="false">
+	<Panel class="KingUpgradesPanel Background CornerTopRight CornerBottomRight" hittest="false">
+
+		<Panel class="BorderTop"/>
+		<Panel class="BorderBottom"/>
+		<Panel class="BorderRight"/>
+		<Panel class="BorderTopRight"/>
+		<Panel class="BorderBottomRight"/>
+
 		<Panel class="UpgradesList" id="UpgradesList" />
+
 	</Panel>
 
 </root>

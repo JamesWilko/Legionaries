@@ -4,6 +4,7 @@
 		<!-- <include src="file://{resources}/styles/dotastyles.css" /> -->
 		<include src="file://{resources}/styles/custom_game/sidebar.css" />
 		<include src="file://{resources}/styles/custom_game/colours.css" />
+		<include src="file://{resources}/styles/custom_game/borders.css" />
 	</styles>
 
 	<scripts>
@@ -11,9 +12,19 @@
 	</scripts>
 
 	<Panel class="Parent" hittest="false">
-		<Panel class="InventoryBar Bottom Right" hittest="false">
-			<Panel id="ChildList" class="ChildList FlowRight Top NoBorders" hittest="false" />
+
+		<Panel class="InventoryBar Background Bottom Right NoBorders CornerTopLeft" hittest="false">
+
+			<Panel class="BorderTop"/>
+			<Panel class="BorderLeft"/>
+			<Panel class="BorderTopLeft"/>
+
+			<Panel id="ChildList" class="ChildList FlowRight Top NoBorders VerticalSpacer HorizontalSpacer" hittest="false">
+				<Panel class="HorizontalSpacer"/>
+			</Panel>
+
 		</Panel>
+
 	</Panel>
 
 </root>
