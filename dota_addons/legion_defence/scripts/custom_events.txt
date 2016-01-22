@@ -30,11 +30,18 @@
 	"legion_wave_complete"
 	{
 		"nWaveNumber"		"short"
-		"sEnemyName"		"string"
-		"nTotalEnemies"		"long"
-		"nEnemiesKilled"	"long"
-		"nEnemiesLeaked"	"long"
-		"lFastestPlayer"	"long"
+	}
+
+	"legion_lane_complete"
+	{
+		"lPlayer"			"long"
+		"lLane"				"long"
+	}
+
+	"legion_lane_leaked"
+	{
+		"lPlayer"			"long"
+		"lLane"				"long"
 	}
 
 	"legion_purchase_king_upgrade"
@@ -56,6 +63,17 @@
 	{
 		"sMercenaryId"		"string"
 	}
+
+	"legion_custom_chat"
+	{
+		"sMessage"			"string"
+		"iTeam"				"byte"
+		"bPlayerOnly"		"bool"
+		"lPlayer"			"long"
+		"argNumber"			"long"
+		"argString"			"string"
+	}
+
 	//---------------------------------
 	// Server Only
 	//---------------------------------

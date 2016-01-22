@@ -253,8 +253,11 @@ function CKingController:HandleOnWaveComplete( event )
 			local total_bounty = (1 - CKingController.BOUNTY_TAX_PERCENT) * v
 			local bounty_per_player = math.floor( total_bounty / #lanes )
 
+			-- Send messages to team players
 			print(string.format("Team %i King Bounty: %i (w/o Tax: %i), Per Player: %i", team, total_bounty, v, bounty_per_player))
+			SendCustomChatMessage( "legion_king_bounty_for_team", { team = team, arg_number = bounty_per_player } )
 
+			-- Give bounties to all players on the team
 			for i, lane in pairs(lanes) do
 
 				local player = self._lane_controller:GetPlayerForLane(lane)

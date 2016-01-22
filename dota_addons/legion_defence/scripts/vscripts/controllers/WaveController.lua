@@ -95,7 +95,6 @@ function CWaveController:SetupDebug()
 		end
 	end, "Instantly complete the current wave", FCVAR_CHEAT )
 
-
 end
 
 function CWaveController:ThinkTime()
@@ -446,7 +445,13 @@ function CWaveController:OnUnitKilled( event )
 			if remainInLane <= 0 then
 				local playerId = GameRules.LegionDefence:GetLaneController():GetPlayerForLane( laneId )
 				if playerId ~= nil then
-					GameRules.LegionDefence:GetUnitController():OnLaneCleared( laneId, playerId )
+
+					local data = {
+						["lPlayer"] = playerId,
+						["lLane"] = laneId,
+					}
+					FireGameEvent( "legion_lane_complete", data )
+
 				end
 			end
 
@@ -545,11 +550,6 @@ function CWaveController:WaveCompleted()
 	-- Send wave data to all players
 	local data = {
 		["nWaveNumber"] = self._current_wave,
-		["sEnemyName"] = nil,
-		["nTotalEnemies"] = self:GetNumberOfSpawnsInWave(),
-		["nEnemiesKilled"] = nil,
-		["nEnemiesLeaked"] = nil,
-		["lFastestPlayer"] = nil,
 	}
 	FireGameEvent( "legion_wave_complete", data )
 
@@ -598,8 +598,12 @@ function CWaveController:RecordWaveAsLeakedByPlayer( iPlayerId, iWave )
 	if iPlayerId ~= nil then
 		iWave = iWave or self:GetCurrentWave()
 		self._leaks_list[iPlayerId] = self._leaks_list[iPlayerId] or {}
-		self._leaks_list[iPlayerId][iWave] = true
+		if not self._leaks_list[iPlayerId][iWave] then
+			self._leaks_list[iPlayerId][iWave] = true
+			return true
+		end
 	end
+	return false
 
 end
 
@@ -609,7 +613,18 @@ function CWaveController:RecordWaveAsLeakedFromUnit( hUnit, iWave )
 	local laneId = self:GetUnitLane( hUnit )
 	local playerId = GameRules.LegionDefence:GetLaneController():GetPlayerForLane( laneId )
 	if playerId ~= nil then
-		self:RecordWaveAsLeakedByPlayer( playerId, iWave )
+
+		local recorded = self:RecordWaveAsLeakedByPlayer( playerId, iWave )
+		if recorded then
+			
+			local data = {
+				["lPlayer"] = playerId,
+				["lLane"] = laneId,
+			}
+			FireGameEvent( "legion_lane_leaked", data )
+
+		end
+
 	end
 
 end
@@ -627,6 +642,15 @@ function CWaveController:GetNumberOfWavesLeakedFromUnit( hUnit )
 	if playerId ~= nil then
 		return self:GetNumberOfWavesLeakedByPlayer( playerId )
 	end
+end
+
+function CWaveController:DidPlayerLeakWave( iPlayerId, iWave )
+	if iPlayerId ~= nil then
+		iWave = iWave or self:GetCurrentWave()
+		self._leaks_list[iPlayerId] = self._leaks_list[iPlayerId] or {}
+		return self._leaks_list[iPlayerId][iWave]
+	end
+	return false
 end
 
 ----------------------------------
