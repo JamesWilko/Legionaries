@@ -18,6 +18,7 @@ require("controllers/MercenaryController")
 require("controllers/StatsController")
 require("BuildGrid")
 require("GameUtils")
+require("ChatUtils")
 
 function Precache( context )
 	--[[

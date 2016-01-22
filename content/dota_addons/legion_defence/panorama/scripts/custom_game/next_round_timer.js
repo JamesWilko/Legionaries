@@ -25,7 +25,7 @@ function UpdateTimer()
 		}
 	}
 
-	$.Schedule(1, function(){
+	$.Schedule(0.5, function(){
 		UpdateTimer();
 	});
 }
@@ -33,7 +33,7 @@ function UpdateTimer()
 (function()
 {
 	UpdateTimer();
-	$.Schedule(1, function(){
+	$.Schedule(0.5, function(){
 		UpdateTimer();
 	});
 })();

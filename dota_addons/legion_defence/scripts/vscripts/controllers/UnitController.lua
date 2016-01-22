@@ -38,6 +38,7 @@ function CUnitController:Setup()
 
 	ListenToGameEvent("legion_wave_start", Dynamic_Wrap(CUnitController, "HandleOnWaveStart"), self)
 	ListenToGameEvent("legion_wave_complete", Dynamic_Wrap(CUnitController, "HandleOnWaveComplete"), self)
+	ListenToGameEvent("legion_lane_complete", Dynamic_Wrap(CUnitController, "HandleOnLaneComplete"), self)
 	ListenToGameEvent("entity_killed", Dynamic_Wrap(CUnitController, "HandleOnEntityKilled"), self)
 
 end
@@ -336,6 +337,12 @@ end
 ---------------------------------------
 -- Lane Wave Clear Handles
 ---------------------------------------
+function CUnitController:HandleOnLaneComplete( event )
+	local lane = event["lLane"]
+	local player = event["lPlayer"]
+	self:OnLaneCleared(lane, player)
+end
+
 function CUnitController:OnLaneCleared( laneId, iPlayerId )
 
 	local hPlayer = PlayerResource:GetPlayer( iPlayerId )
