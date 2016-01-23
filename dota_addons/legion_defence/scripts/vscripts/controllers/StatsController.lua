@@ -55,7 +55,7 @@ function CStatsController:HandleOnWaveComplete()
 
 		if player == self._first_cleared_player then
 			GameRules.LegionDefence:GetCurrencyController():ModifyCurrency( CStatsController.FIRST_CLEAR_BONUS_CURRENCY, player, CStatsController.FIRST_CLEAR_BONUS )
-			SendCustomChatMessage( "legion_first_clear_income", { arg_number = CStatsController.BASIC_INCOME } )
+			SendCustomChatMessage( "legion_first_clear_income", { arg_number = CStatsController.FIRST_CLEAR_BONUS } )
 		end
 
 	end
