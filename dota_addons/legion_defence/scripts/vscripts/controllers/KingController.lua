@@ -334,22 +334,37 @@ function CKingController.HandleOnUpgradePurchased( iPlayerId_Wrong, eventArgs )
 end
 
 function CKingController:UpgradeHealth( hPlayer, hKing )
+
 	local increaseAmount = CKingController.UPGRADES[CKingController.KEY_HEALTH].per_level
 	hKing:SetMaxHealth( hKing:GetMaxHealth() + increaseAmount )
 	self:SpawnUpgradeParticles(hKing)
+
+	local current_level = self:GetUpgradeLevel( CKingController.KEY_HEALTH, self:GetTeamForKing(hKing) )
+	SendCustomChatMessage( "legion_player_upgraded_king_health", { player = hPlayer:GetPlayerID(), team = hPlayer:GetTeamNumber(), arg_number = current_level } )
+
 end
 
 function CKingController:UpgradeRegen( hPlayer, hKing )
+
 	local increaseAmount = CKingController.UPGRADES[CKingController.KEY_REGEN].per_level
 	hKing:SetBaseHealthRegen( hKing:GetBaseHealthRegen() + increaseAmount )
 	hKing:SetBaseManaRegen( hKing:GetManaRegen() + increaseAmount )
 	self:SpawnUpgradeParticles(hKing)
+
+	local current_level = self:GetUpgradeLevel( CKingController.KEY_REGEN, self:GetTeamForKing(hKing) )
+	SendCustomChatMessage( "legion_player_upgraded_king_regen", { player = hPlayer:GetPlayerID(), team = hPlayer:GetTeamNumber(), arg_number = current_level } )
+
 end
 
 function CKingController:UpgradeArmour( hPlayer, hKing )
+
 	local increaseAmount = CKingController.UPGRADES[CKingController.KEY_ARMOUR].per_level
 	hKing:SetPhysicalArmorBaseValue( hKing:GetPhysicalArmorBaseValue() + increaseAmount )
 	self:SpawnUpgradeParticles(hKing)
+
+	local current_level = self:GetUpgradeLevel( CKingController.KEY_ARMOUR, self:GetTeamForKing(hKing) )
+	SendCustomChatMessage( "legion_player_upgraded_king_armour", { player = hPlayer:GetPlayerID(), team = hPlayer:GetTeamNumber(), arg_number = current_level } )
+
 end
 
 function CKingController:UpgradeAttack( hPlayer, hKing )
@@ -358,6 +373,9 @@ function CKingController:UpgradeAttack( hPlayer, hKing )
 	hKing:SetBaseDamageMax( hKing:GetBaseDamageMax() + increaseAmount )
 	hKing:SetBaseDamageMin( hKing:GetBaseDamageMin() + increaseAmount )
 	self:SpawnUpgradeParticles(hKing)
+
+	local current_level = self:GetUpgradeLevel( CKingController.KEY_ATTACK, self:GetTeamForKing(hKing) )
+	SendCustomChatMessage( "legion_player_upgraded_king_attack", { player = hPlayer:GetPlayerID(), team = hPlayer:GetTeamNumber(), arg_number = current_level } )
 
 	-- Check if King should receive new abilities
 	local attack_level = self:GetUpgradeLevel( CKingController.KEY_ATTACK, hPlayer:GetTeamNumber() )
@@ -454,5 +472,8 @@ function CKingController:PerformHeal( hPlayer, hKing )
 	ParticleManager:SetParticleControl( nFXIndex, 0, hKing:GetOrigin() )
 	ParticleManager:SetParticleControl( nFXIndex, 1, Vector( 450, 1, 1 ) )
 	ParticleManager:ReleaseParticleIndex( nFXIndex )
+
+	-- Show chat message
+	SendCustomChatMessage( "legion_player_upgraded_king_heal", { player = hPlayer:GetPlayerID() } )
 
 end
