@@ -398,7 +398,8 @@ end
 function CWaveController:_TeleportAllUnitsToArena( time )
 
 	-- TODO: Spawn handicap units if a team is missing players
-	-- TOOD: Spawn spawned mercenary units for each team
+
+	local mercenary_controller = GameRules.LegionDefence:GetMercenaryController()
 
 	-- Teleport all units on teams into the arena spawns
 	for k, arena_spawn in pairs( self._map_controller:ArenaZones() ) do
@@ -411,32 +412,17 @@ function CWaveController:_TeleportAllUnitsToArena( time )
 			local player_id = self._lane_controller:GetPlayerForLane( lane )
 			local units = self._unit_controller:GetAllUnitsForPlayer( player_id ) or {}
 
+			-- Spawn all units in arena
 			for x, unit_data in pairs( units ) do
-
-				-- Show particles at unit position
-				nFXIndex = ParticleManager:CreateParticle( "particles/units/heroes/hero_wisp/wisp_relocate_teleport_c.vpcf", PATTACH_WORLDORIGIN, unit_data.unit )
-				ParticleManager:SetParticleControl( nFXIndex, 0, unit_data.unit:GetOrigin() )
-				ParticleManager:ReleaseParticleIndex( nFXIndex )
-
-				-- Teleport unit to destination
-				local teleport_pos = RandomVectorInTrigger(arena_spawn.entity)
-				FindClearSpaceForUnit( unit_data.unit, teleport_pos, true )
-
-				-- Show particles at destination
-				nFXIndex = ParticleManager:CreateParticle( "particles/units/heroes/hero_wisp/wisp_relocate_teleport.vpcf", PATTACH_WORLDORIGIN, unit_data.unit )
-				ParticleManager:SetParticleControl( nFXIndex, 0, teleport_pos )
-				ParticleManager:SetParticleControl( nFXIndex, 1, RandomVector(360) )
-				ParticleManager:ReleaseParticleIndex( nFXIndex )
-
-				-- Add unit to arena units
-				local data = {
-					unit = unit_data.unit,
-					team = unit_data.unit:GetOwner():GetTeamNumber()
-				}
-				table.insert( self._arena_units, data )
-
+				self:_SpawnUnitInArena( unit_data.unit, arena_spawn )
 			end
 
+		end
+
+		-- Spawn mercenary units with the team spawns
+		local merc_units = mercenary_controller:GetMercenariesSpawnedByTeam( arena_spawn.team )
+		for k, v in pairs( merc_units ) do
+			self:_SpawnUnitInArena( v.unit, arena_spawn )
 		end
 
 		-- No units on this team, spawn the backup unit instead
@@ -460,9 +446,38 @@ function CWaveController:_TeleportAllUnitsToArena( time )
 
 	end
 
+	-- Clear mercenaries
+	mercenary_controller:ClearSpawnedMercenariesUnits()
+
 	-- Advance arena state
 	self:_SetArenaCountdownTime( CWaveController.PRE_FIGHT_COUNTDOWN )
 	self:_AdvanceArenaState()
+
+end
+
+function CWaveController:_SpawnUnitInArena( hUnit, tSpawnZone )
+
+	-- Show particles at unit position
+	nFXIndex = ParticleManager:CreateParticle( "particles/units/heroes/hero_wisp/wisp_relocate_teleport_c.vpcf", PATTACH_WORLDORIGIN, hUnit )
+	ParticleManager:SetParticleControl( nFXIndex, 0, hUnit:GetOrigin() )
+	ParticleManager:ReleaseParticleIndex( nFXIndex )
+
+	-- Teleport unit to destination
+	local teleport_pos = RandomVectorInTrigger( tSpawnZone.entity )
+	FindClearSpaceForUnit( hUnit, teleport_pos, true )
+
+	-- Show particles at destination
+	nFXIndex = ParticleManager:CreateParticle( "particles/units/heroes/hero_wisp/wisp_relocate_teleport.vpcf", PATTACH_WORLDORIGIN, hUnit )
+	ParticleManager:SetParticleControl( nFXIndex, 0, teleport_pos )
+	ParticleManager:SetParticleControl( nFXIndex, 1, RandomVector(360) )
+	ParticleManager:ReleaseParticleIndex( nFXIndex )
+
+	-- Add unit to arena units
+	local data = {
+		unit = hUnit,
+		team = hUnit:GetOwner() and hUnit:GetOwner():GetTeamNumber() or tSpawnZone.team
+	}
+	table.insert( self._arena_units, data )
 
 end
 
@@ -508,42 +523,55 @@ function CWaveController:_ArenaFight( time )
 
 		end
 
-		-- End arena once one team has won
-		local winning_team = {}
+		-- Find all teams with no more units
+		local winning_team
+		local losing_teams = {}
 		for k, v in pairs( team_counts ) do
 			if v == 0 then
-				table.insert( winning_team, k )
+				table.insert( losing_teams, k )
 			end
 		end
 
-		if #winning_team > 0 then
-
-			if #winning_team == 1 then
-
-				-- Declare winning team
-				print(string.format("Arena winner, team %i!", winning_team[1]))
-				if winning_team[1] == DOTA_TEAM_GOODGUYS then
-					SendCustomChatMessage( "legion_arena_winner_dire", { arg_number = CWaveController.ARENA_WIN_AMOUNT, arg_string = "#legion_team_badguys" } )
+		-- Check if there is a single team that still has units
+		if #losing_teams > 0 then
+			for k, v in pairs( team_counts ) do
+				if v > 0 then
+					if winning_team == nil then
+						winning_team = k
+					else
+						winning_team = nil
+					end
 				end
-				if winning_team[1] == DOTA_TEAM_BADGUYS then
-					SendCustomChatMessage( "legion_arena_winner_radiant", { arg_number = CWaveController.ARENA_WIN_AMOUNT, arg_string = "#legion_team_goodguys" } )
-				end
+			end
+		end
 
-			else
+		-- Show winning team
+		if winning_team ~= nil then
 
-				-- Declare draw
-				print("Arena draw!")
-				SendCustomChatMessage( "legion_arena_winner_draw" )
+			-- Declare winning team
+			print(string.format("Arena winner, team %i!", winning_team))
+			if winning_team == DOTA_TEAM_GOODGUYS then
+				SendCustomChatMessage( "legion_arena_winner_radiant", { arg_number = CWaveController.ARENA_WIN_AMOUNT, arg_string = "#legion_team_goodguys" } )
+			end
+			if winning_team == DOTA_TEAM_BADGUYS then
+				SendCustomChatMessage( "legion_arena_winner_dire", { arg_number = CWaveController.ARENA_WIN_AMOUNT, arg_string = "#legion_team_badguys" } )
+			end
 
+			-- Give income to winning teams plaeyrs
+			local currency_controller = GameRules.LegionDefence:GetCurrencyController()
+			local team_lanes = self._lane_controller:GetOccupiedLanesForTeam( winning_team )
+			for i, lane in pairs( team_lanes ) do
+				local player_id = self._lane_controller:GetPlayerForLane( lane )
+				currency_controller:ModifyCurrency( CWaveController.ARENA_WIN_CURRENCY, player_id, CWaveController.ARENA_WIN_AMOUNT )
 			end
 
 			self:_AdvanceArenaState()
 
 		end
 
-		-- Handle no units in the wave
-		if #team_counts == 0 then
-			print("Arena draw, no units in arena!")
+		-- All teams have lost all their units, or there are no units in the arena
+		if #losing_teams == #team_counts or #team_counts == 0 then
+			print("Arena draw!")
 			SendCustomChatMessage( "legion_arena_winner_draw" )
 			self:_AdvanceArenaState()
 		end
