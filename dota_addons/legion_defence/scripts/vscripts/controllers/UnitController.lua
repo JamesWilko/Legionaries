@@ -77,7 +77,7 @@ end
 ---------------------------------------
 -- Registering Units for Players
 ---------------------------------------
-function CUnitController:RegisterUnit( ePlayer, lTeam, eUnit )
+function CUnitController:RegisterUnit( ePlayer, lTeam, iLane, eUnit )
 
 	local lPlayer = ePlayer:GetPlayerID()
 	self._player_units[lPlayer] = self._player_units[lPlayer] or {}
@@ -89,6 +89,7 @@ function CUnitController:RegisterUnit( ePlayer, lTeam, eUnit )
 		position = eUnit:GetOrigin(),
 		class = eUnit:GetUnitName(),
 		player = ePlayer,
+		lane = iLane,
 		team = lTeam,
 	}
 	table.insert( self._player_units[lPlayer], unit_data )
@@ -145,7 +146,7 @@ end
 ---------------------------------------
 -- Spawning Units
 ---------------------------------------
-function CUnitController:SpawnUnit( ePlayer, lTeam, sUnitClass, vPosition, bRegisterUnit )
+function CUnitController:SpawnUnit( ePlayer, lTeam, sUnitClass, iLane, vPosition, bRegisterUnit )
 
 	if bRegisterUnit == nil then
 		bRegisterUnit = true
@@ -160,7 +161,7 @@ function CUnitController:SpawnUnit( ePlayer, lTeam, sUnitClass, vPosition, bRegi
 		hUnit:SetMoveCapability( GameRules.LegionDefence:GetWaveController():IsWaveRunning() and DOTA_UNIT_CAP_MOVE_GROUND or DOTA_UNIT_CAP_MOVE_NONE  )
 
 		if bRegisterUnit then
-			self:RegisterUnit( ePlayer, lTeam, hUnit )
+			self:RegisterUnit( ePlayer, lTeam, iLane, hUnit )
 		end
 
 		return hUnit
@@ -168,6 +169,13 @@ function CUnitController:SpawnUnit( ePlayer, lTeam, sUnitClass, vPosition, bRegi
 	end
 
 	return nil
+
+end
+
+function CUnitController:TransferUnit( hUnit, hParentUnit )
+
+	-- Transfer costs
+	self:TransferCostsToUnit( hUnit, hParentUnit )
 
 end
 
@@ -293,7 +301,7 @@ function CUnitController:HandleOnWaveComplete( event )
 				else
 
 					-- Unit is dead, so spawn a new unit and update references
-					local hUnit = self:SpawnUnit( v.player, v.team, v.class, v.position, false )
+					local hUnit = self:SpawnUnit( v.player, v.team, v.class, v.lane, v.position, false )
 					if hUnit then
 
 						hUnit._total_costs = v.cost_data

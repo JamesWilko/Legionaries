@@ -58,7 +58,11 @@ function CMapController:Setup()
 		["arena_zones"] = {
 			class = "trigger_dota",
 			name = "legion_arena_zone"
-		}
+		},
+		["arena_centre"] = {
+			class = "info_target",
+			name = "legion_arena_centre"
+		},
 	}
 
 	self._team_ids = {
@@ -76,6 +80,7 @@ function CMapController:Setup()
 	self:FindMinerTargetPoints()
 	self:FindMercSpawnZones()
 	self:FindArenaZones()
+	self:FindArenaCentre()
 
 end
 
@@ -353,4 +358,16 @@ end
 
 function CMapController:GetArenaZoneForLane( laneId, iTeam )
 	return self:_GetLaneEntity( self._arena_zones, laneId, iTeam )
+end
+
+-------------------------
+-- Arena Centre
+-------------------------
+function CMapController:FindArenaCentre()
+	self._arena_centre = {}
+	self:_StoreGamemodeEntitiesOfClass( self._arena_centre, self._map_entities.arena_centre )
+end
+
+function CMapController:ArenaCentre()
+	return self._arena_centre and self._arena_centre[1]
 end
