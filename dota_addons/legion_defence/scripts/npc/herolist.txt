@@ -6,6 +6,6 @@
 "CustomHeroList"
 {
 	"npc_dota_hero_ember_spirit"	"-1"
-	"npc_dota_hero_zuus"	"-1"
+	"npc_dota_hero_zuus"			"-1"
 
 }

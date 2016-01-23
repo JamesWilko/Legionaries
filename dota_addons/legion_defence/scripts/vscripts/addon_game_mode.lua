@@ -80,6 +80,7 @@ function CLegionDefence:InitGameMode()
 	self._GameMode:SetFixedRespawnTime( 3 )
 	self._GameMode:SetFogOfWarDisabled( true )
 	
+	GameRules:SetSameHeroSelectionEnabled( true )
 	GameRules:SetGoldPerTick( 0 )
 	GameRules:SetPreGameTime( 3 )
 	GameRules:SetCustomGameSetupTimeout( 3 )
