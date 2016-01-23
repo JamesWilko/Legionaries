@@ -128,3 +128,31 @@ function CLaneController:GetSpawnZonesForOccupiedLanes()
 	return spawns
 
 end
+
+-----------------------------------
+-- Build Permissions
+-----------------------------------
+function CLaneController:HasPermissionToBuildInLane( iPlayerId, iLane )
+
+	local player_lane = self:GetLaneForPlayer(iPlayerId)
+	if iLane == player_lane then
+		return true
+	else
+		self._lane_permissions = self._lane_permissions or {}
+		self._lane_permissions[iPlayerId] = self._lane_permissions[iPlayerId] or {}
+		return self._lane_permissions[iPlayerId][iLane]
+	end	
+
+end
+
+function CLaneController:GiveBuildPermission( iLane, iPlayerId )
+	self._lane_permissions = self._lane_permissions or {}
+	self._lane_permissions[iPlayerId] = self._lane_permissions[iPlayerId] or {}
+	self._lane_permissions[iPlayerId][iLane] = true
+end
+
+function CLaneController:RevokeBuildPermission( iLane, iPlayerId )
+	self._lane_permissions = self._lane_permissions or {}
+	self._lane_permissions[iPlayerId] = self._lane_permissions[iPlayerId] or {}
+	self._lane_permissions[iPlayerId][iLane] = false
+end

@@ -52,7 +52,8 @@ function modifier_upgrade_unit_think:OnIntervalThink()
 		local cUnitController = GameRules.LegionDefence:GetUnitController()
 
 		-- Spawn in new unit and show upgrade gesture
-		local hUnit = cUnitController:SpawnUnit( self:GetCaster():GetOwner(), self:GetCaster():GetTeamNumber(), self:GetAbility():GetUpgradeClass(), vPosition )
+		local unitData = cUnitController:GetUnitData( self:GetCaster() )
+		local hUnit = cUnitController:SpawnUnit( self:GetCaster():GetOwner(), self:GetCaster():GetTeamNumber(), self:GetAbility():GetUpgradeClass(), unitData.lane, vPosition )
 		if hUnit ~= nil then
 
 			-- Do upgrade gesture
@@ -64,7 +65,7 @@ function modifier_upgrade_unit_think:OnIntervalThink()
 			local food_cost = self:GetAbility():GetSpecialValueFor( "FoodCost" ) or 0
 			
 			-- Transfer costs to new unit
-			cUnitController:TransferCostsToUnit( hUnit, self:GetCaster() )
+			cUnitController:TransferUnit( hUnit, self:GetCaster() )
 
 			-- Add costs to unit
 			if gold_cost > 0 then
