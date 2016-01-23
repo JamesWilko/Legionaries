@@ -34,6 +34,16 @@ CWaveController.LEAKED_WAVE_BOUNTY_MULTIPLIERS = {
 CWaveController.WAVE_INFO_TABLE = "UpcomingWaveData"
 CWaveController.NUM_WAVES_IN_SET = 10
 
+CWaveController.FIRST_WAVE_DELAY = 60
+CWaveController.WAVE_DOWNTIME = 40
+CWaveController.PRE_WAVE_DELAY = 3
+CWaveController.POST_WAVE_DELAY = 3
+
+CWaveController.THINK_TIME = 1
+CWaveController.THINK_TIME_WAVE = 0.2
+CWaveController.THINK_TIME_ANTISTUCK = 4
+CWaveController.THINK_TIME_LEAKS = 0.5
+
 function CLegionDefence:SetupWaveController()
 	self.wave_controller = CWaveController()
 	self.wave_controller:Setup()
@@ -54,25 +64,17 @@ function CWaveController:Setup()
 	self._current_wave = 0
 	self._wave_in_progress = false
 
-	self:SetNextWaveTime( 60 )
-	self._time_between_waves = 40
-	self._before_wave_time = 3
-	self._end_of_wave_time = 3
-	self._think_time = 1
-	self._think_time_mid_wave = 0.2
-	self._antistuck_think_time = 4
-	self._leak_point_think_time = 0.5
-
 	self:BuildWaveListData()
 	self:UpdateWavesData()
 
 	-- Think entity for this controller
 	self._think_ent = IsValidEntity(self._think_ent) and self._think_ent or Entities:CreateByClassname("info_target")
-	self._think_ent:SetThink("OnThink", self, "WaveControllerThink", self._think_time)
-	self._think_ent:SetThink("OnAntiStuckThink", self, "WaveControllerAntiStickThink", self._antistuck_think_time)
-	self._think_ent:SetThink("OnLeakPointsThink", self, "WaveControllerLeakPointThink", self._leak_point_think_time)
+	self._think_ent:SetThink("OnThink", self, "WaveControllerThink", CWaveController.THINK_TIME)
+	self._think_ent:SetThink("OnAntiStuckThink", self, "WaveControllerAntiStickThink", CWaveController.THINK_TIME_ANTISTUCK)
+	self._think_ent:SetThink("OnLeakPointsThink", self, "WaveControllerLeakPointThink", CWaveController.THINK_TIME_LEAKS)
 
 	-- Events
+	ListenToGameEvent("legion_player_assigned_lane", Dynamic_Wrap(CWaveController, "OnPlayerAssignedLane"), self)
 	ListenToGameEvent("entity_killed", Dynamic_Wrap(CWaveController, "OnUnitKilled"), self)
 
 end
@@ -98,35 +100,123 @@ function CWaveController:SetupDebug()
 end
 
 function CWaveController:ThinkTime()
-	return self:IsWaveRunning() and self._think_time_mid_wave or self._think_time
+	return self:IsWaveRunning() and CWaveController.THINK_TIME_WAVE or CWaveController.THINK_TIME
+end
+
+CWaveController.WAVE_STATES = {
+	"_NextWaveCountdown",
+	"_WaveCountdown",
+	"_PreWaveCountdown",
+	"_WaveCountdown",
+	"_WaveSpawning",
+	"_PostWaveCountdown",
+	"_WaveCountdown",
+	"_NextWaveRestartLoop"
+}
+
+function CWaveController:OnPlayerAssignedLane( data )
+
+	-- Start countdown once players have joined
+	-- TODO: Wait until all players have joined or left before starting 
+
+	if not self._wave_state then
+		self:_SetWaveCountdown( CWaveController.FIRST_WAVE_DELAY )
+		self:SetNextWaveTime( CWaveController.FIRST_WAVE_DELAY )
+		self._wave_state = 2
+	end
+
 end
 
 function CWaveController:OnThink()
 
 	self._lane_controller = self._lane_controller or GameRules.LegionDefence:GetLaneController()
 	self._map_controller = self._map_controller or GameRules.LegionDefence:GetMapController()
+	self._unit_controller = self._unit_controller or GameRules.LegionDefence:GetUnitController()
 	self._spawned_units = self._spawned_units or {}
 
 	local time = GameRules:GetDOTATime(false, false)
 
-	-- Countdown to end of wave
-	if self:IsWaveRunning() and self._wave_complete ~= nil then
-		self._wave_complete = self._wave_complete - self:ThinkTime()
-		if self._wave_complete <= 0 then
-			self:WaveCompleted()
-			self._wave_complete = nil
+	-- Run state function for wave controller
+	if self._wave_state then
+
+		local state_function = CWaveController.WAVE_STATES[self._wave_state]
+		if state_function and self[state_function] then
+			self[state_function](self, time)
 		end
+
 	end
 
-	-- Countdown to next wave
-	if not self:IsWaveRunning() then
-		if time >= self._next_wave_time then
-			self:StartNextWave()
-		end
+	-- Think again
+	return self:ThinkTime()
+	
+end
+
+function CWaveController:_AdvanceWaveState()
+	self._wave_state = (self._wave_state or 0) + 1
+	print("Advancing wave state to " .. tostring(CWaveController.WAVE_STATES[self._wave_state]) .. "...")
+end
+
+function CWaveController:_RestartWaveState()
+	self._wave_state = 0
+	self:_AdvanceWaveState()
+end
+
+function CWaveController:_SetWaveCountdown( time )
+	self._wave_countdown = time
+end
+
+function CWaveController:_WaveCountdown( time )
+
+	self._wave_countdown = self._wave_countdown or 1
+	self._wave_countdown = self._wave_countdown - self:ThinkTime()
+
+	if self._wave_countdown <= 0 then
+		self:_AdvanceWaveState()
 	end
+
+end
+
+function CWaveController:_NextWaveCountdown( time )
+	self:_SetWaveCountdown( CWaveController.WAVE_DOWNTIME )
+	self:SetNextWaveTime( CWaveController.WAVE_DOWNTIME )
+	self:_AdvanceWaveState()
+end
+
+function CWaveController:_PreWaveCountdown( time )
+	self:StartNextWave()
+	self:_SetWaveCountdown( CWaveController.PRE_WAVE_DELAY )
+	self:_AdvanceWaveState()
+end
+
+function CWaveController:_WaveSpawning( time )
+
+	local think_func = self:GetWave()["wave_type"]
+	if think_func and self[think_func] then
+		self[think_func](self, time)
+	else
+		self:_AdvanceWaveState()
+	end
+
+end
+
+function CWaveController:_PostWaveCountdown( time )
+	self:_SetWaveCountdown( CWaveController.POST_WAVE_DELAY )
+	self:_AdvanceWaveState()
+end
+
+function CWaveController:_NextWaveRestartLoop( time )
+	self:WaveCompleted()
+	self:_RestartWaveState()
+end
+
+---------------------------
+-- Think Behaviours
+---------------------------
+-- Spawning to make a wave spawn its units and then attack the king
+function CWaveController:StandardWaveThink( time )
 
 	-- Spawn a unit at every spawn point every think
-	local waveIsReady = self:IsWaveRunning() and (self._wave_start_time + self._before_wave_time) < time
+	local waveIsReady = self:IsWaveRunning()
 	local unitsRemaining = self:CurrentWaveHasSpawnsRemaining()
 	local gameIsReady = not GameRules:IsGamePaused()
 	if waveIsReady and gameIsReady then
@@ -149,8 +239,8 @@ function CWaveController:OnThink()
 
 					if hUnit then
 
-						-- TODO: Make units face spawn zone regardless of spawn position
-						hUnit:SetAngles( 0, -90, 0 )
+						local angles = ent:GetAnglesAsVector()
+						hUnit:SetAngles( angles.x, angles.y, angles.z )
 
 						self:AddSpawnedUnit( hUnit, spawn.lane, entTargetZone, hKing )
 						self:PlaySpawnParticle( hUnit )
@@ -167,6 +257,58 @@ function CWaveController:OnThink()
 		FireGameEvent( "legion_perform_wave_spawn", {} )
 
 	end
+
+	self:OrderSpawnedUnitsToAttackKing()
+
+end
+
+-- Spawning for the final wave of the game, to eliminate a king
+function CWaveController:EndlessWaveThink( time )
+
+	local MAX_UNITS_TO_SPAWN = 30
+
+	-- Spawn up to a maximum amount of units and then maintain that number
+	local waveIsReady = self:IsWaveRunning()
+	local gameIsReady = not GameRules:IsGamePaused()
+	if waveIsReady and gameIsReady then
+
+		local waveUnitToSpawn = self:GetNextWaveSpawn()
+		for k, spawn in pairs( self._lane_controller:GetSpawnZonesForOccupiedLanes() ) do
+
+			local spawned_units = self:GetSpawnedUnitsInLane( spawn.lane )
+			if spawned_units < MAX_UNITS_TO_SPAWN and waveUnitToSpawn then
+				
+				-- Spawn wave unit
+				local ent = spawn.entity
+				local vPosition = RandomVectorInTrigger( spawn.entity )
+				local hUnit = CreateUnitByName( waveUnitToSpawn, vPosition, true, nil, nil, GetEnemyTeam(spawn.team) )
+				local entTargetZone = self._map_controller:GetTargetZoneForTeam( spawn.team ).entity
+				local hKing = GameRules.LegionDefence:GetKingController():GetKingForTeam(spawn.team)
+
+				if hUnit then
+
+					local angles = ent:GetAnglesAsVector()
+					hUnit:SetAngles( angles.x, angles.y, angles.z )
+
+					self:AddSpawnedUnit( hUnit, spawn.lane, entTargetZone, hKing )
+					self:PlaySpawnParticle( hUnit )
+
+				end
+
+			end
+
+		end
+
+		-- Allow other controllers to spawn units
+		FireGameEvent( "legion_perform_wave_spawn", {} )
+
+	end
+
+	self:OrderSpawnedUnitsToAttackKing()
+
+end
+
+function CWaveController:OrderSpawnedUnitsToAttackKing()
 
 	-- Move spawned units to the target zone
 	for i, unit_data in pairs( self._spawned_units ) do
@@ -205,11 +347,245 @@ function CWaveController:OnThink()
 		end
 	end
 
-	-- Think again
-	return self:ThinkTime()
-	
 end
 
+---------------------------
+-- Arena
+---------------------------
+CWaveController.ARENA_STATES = {
+	"_TeleportAllUnitsToArena",
+	"_UnlockUnitMovement",
+	"_ArenaCountdown",
+	"_ArenaFight",
+	"_ShowVictoryGestures",
+}
+CWaveController.PRE_FIGHT_COUNTDOWN = 3
+CWaveController.POST_FIGHT_COUNTDOWN = 3
+
+CWaveController.ARENA_WIN_AMOUNT = 100
+CWaveController.ARENA_WIN_CURRENCY = CURRENCY_GOLD
+
+-- Spawning to make all lanes from both teams fight each other
+function CWaveController:ArenaWaveThink( time )
+
+	self._arena_state = self._arena_state or 1
+	if not self._arena_units then
+		self._arena_units = {}
+	end
+
+	local waveIsReady = self:IsWaveRunning()
+	local gameIsReady = not GameRules:IsGamePaused()
+	if waveIsReady and gameIsReady then
+
+		local state_function = CWaveController.ARENA_STATES[self._arena_state]
+		if state_function and self[state_function] then
+			self[state_function](self, time)
+		else
+			print("Arena finished...")
+			self:_AdvanceWaveState()
+		end
+
+	end
+
+end
+
+function CWaveController:_AdvanceArenaState()
+	self._arena_state = self._arena_state or 1
+	self._arena_state = self._arena_state + 1
+	print("Advancing arena state to " .. tostring(CWaveController.ARENA_STATES[self._arena_state]) .. "...")
+end
+
+function CWaveController:_TeleportAllUnitsToArena( time )
+
+	-- TODO: Spawn handicap units if a team is missing players
+	-- TOOD: Spawn spawned mercenary units for each team
+
+	-- Teleport all units on teams into the arena spawns
+	for k, arena_spawn in pairs( self._map_controller:ArenaZones() ) do
+
+		local team_lanes = self._lane_controller:GetOccupiedLanesForTeam(arena_spawn.team)
+
+		-- Spawn units from team lanes
+		for i, lane in pairs( team_lanes ) do
+
+			local player_id = self._lane_controller:GetPlayerForLane( lane )
+			local units = self._unit_controller:GetAllUnitsForPlayer( player_id ) or {}
+
+			for x, unit_data in pairs( units ) do
+
+				-- Show particles at unit position
+				nFXIndex = ParticleManager:CreateParticle( "particles/units/heroes/hero_wisp/wisp_relocate_teleport_c.vpcf", PATTACH_WORLDORIGIN, unit_data.unit )
+				ParticleManager:SetParticleControl( nFXIndex, 0, unit_data.unit:GetOrigin() )
+				ParticleManager:ReleaseParticleIndex( nFXIndex )
+
+				-- Teleport unit to destination
+				local teleport_pos = RandomVectorInTrigger(arena_spawn.entity)
+				FindClearSpaceForUnit( unit_data.unit, teleport_pos, true )
+
+				-- Show particles at destination
+				nFXIndex = ParticleManager:CreateParticle( "particles/units/heroes/hero_wisp/wisp_relocate_teleport.vpcf", PATTACH_WORLDORIGIN, unit_data.unit )
+				ParticleManager:SetParticleControl( nFXIndex, 0, teleport_pos )
+				ParticleManager:SetParticleControl( nFXIndex, 1, RandomVector(360) )
+				ParticleManager:ReleaseParticleIndex( nFXIndex )
+
+				-- Add unit to arena units
+				local data = {
+					unit = unit_data.unit,
+					team = unit_data.unit:GetOwner():GetTeamNumber()
+				}
+				table.insert( self._arena_units, data )
+
+			end
+
+		end
+
+		-- No units on this team, spawn the backup unit instead
+		if #team_lanes == 0 then
+
+			local wave_data = self:GetWave()
+			local unit = wave_data["arena_boss_unit"]
+			local unit_amount = wave_data["arena_boss_amount"] and tonumber(wave_data["arena_boss_amount"]) or 0
+			for i = 1, unit_amount do
+				
+				local hUnit = CreateUnitByName( unit, RandomVectorInTrigger(arena_spawn.entity), false, nil, nil, arena_spawn.team )
+				local data = {
+					unit = hUnit,
+					team = arena_spawn.team
+				}
+				table.insert( self._arena_units, data )
+
+			end
+
+		end
+
+	end
+
+	-- Advance arena state
+	self:_SetArenaCountdownTime( CWaveController.PRE_FIGHT_COUNTDOWN )
+	self:_AdvanceArenaState()
+
+end
+
+function CWaveController:_UnlockUnitMovement()
+	self._unit_controller:SetUnitsFrozen(false)
+	self:_AdvanceArenaState()
+end
+
+function CWaveController:_ArenaFight( time )
+
+	local arena_centre = self._map_controller:ArenaCentre()
+	local team_counts = {}
+
+	if arena_centre then
+
+		arena_centre = arena_centre.entity:GetOrigin()
+
+		-- Run through all units
+		for k, v in pairs( self._arena_units ) do
+
+			if IsValidEntity(v.unit) and v.unit:IsAlive() then
+
+				-- Move all units to the centre of the area
+				if not v.unit:IsAttacking() then
+					local data = {
+						UnitIndex = v.unit:entindex(), 
+						OrderType = DOTA_UNIT_ORDER_ATTACK_MOVE,
+						Position = arena_centre,
+						Queue = 0
+					}
+					ExecuteOrderFromTable(data)
+				end
+
+				-- Count number of living units on each team
+				team_counts[v.team] = (team_counts[v.team] or 0) + 1
+
+			else
+
+				-- Ensure team is recorded
+				team_counts[v.team] = (team_counts[v.team] or 0)
+
+			end
+
+		end
+
+		-- End arena once one team has won
+		local winning_team = {}
+		for k, v in pairs( team_counts ) do
+			if v == 0 then
+				table.insert( winning_team, k )
+			end
+		end
+
+		if #winning_team > 0 then
+
+			if #winning_team == 1 then
+
+				-- Declare winning team
+				print(string.format("Arena winner, team %i!", winning_team[1]))
+				if winning_team[1] == DOTA_TEAM_GOODGUYS then
+					SendCustomChatMessage( "legion_arena_winner_dire", { arg_number = CWaveController.ARENA_WIN_AMOUNT, arg_string = "#legion_team_badguys" } )
+				end
+				if winning_team[1] == DOTA_TEAM_BADGUYS then
+					SendCustomChatMessage( "legion_arena_winner_radiant", { arg_number = CWaveController.ARENA_WIN_AMOUNT, arg_string = "#legion_team_goodguys" } )
+				end
+
+			else
+
+				-- Declare draw
+				print("Arena draw!")
+				SendCustomChatMessage( "legion_arena_winner_draw" )
+
+			end
+
+			self:_AdvanceArenaState()
+
+		end
+
+		-- Handle no units in the wave
+		if #team_counts == 0 then
+			print("Arena draw, no units in arena!")
+			SendCustomChatMessage( "legion_arena_winner_draw" )
+			self:_AdvanceArenaState()
+		end
+
+	end
+
+end
+
+function CWaveController:_SetArenaCountdownTime( time )
+	self._arena_countdown = time
+end
+
+function CWaveController:_ArenaCountdown( time )
+
+	self._arena_countdown = self._arena_countdown or 1
+	self._arena_countdown = self._arena_countdown - self:ThinkTime()
+
+	if self._arena_countdown <= 0 then
+		self:_AdvanceArenaState()
+	end
+
+end
+
+function CWaveController:_ShowVictoryGestures( time )
+
+	-- Lock units
+	self._unit_controller:SetUnitsFrozen(true)
+
+	-- All units on the victory side should play gestures
+	for k, v in pairs( self._arena_units ) do
+
+	end
+	self._arena_units = nil
+
+	-- Countdown to ending the wave
+	self:_AdvanceArenaState()
+
+end
+
+---------------------------
+-- Anti-Stuck
+---------------------------
 function CWaveController:OnAntiStuckThink()
 
 	-- Only run antistick when we've spawned everything
@@ -235,10 +611,13 @@ function CWaveController:OnAntiStuckThink()
 
 	end
 
-	return self._antistuck_think_time
+	return CWaveController.THINK_TIME_ANTISTUCK
 
 end
 
+---------------------------
+-- Waves Utilities
+---------------------------
 function CWaveController:AddSpawnedUnit( hUnit, laneId, hTargetZone, hTargetKing )
 	if hUnit and not hUnit:IsNull() then
 		local unit_data = {
@@ -270,8 +649,8 @@ function CWaveController:IsWaveRunning()
 end
 
 function CWaveController:SetNextWaveTime( time )
-	self._next_wave_time = time
-	CustomNetTables:SetTableValue( CWaveController.WAVE_INFO_TABLE, "next_wave_time", { time = time } )
+	local game_time = GameRules:GetDOTATime(false, false) + time
+	CustomNetTables:SetTableValue( CWaveController.WAVE_INFO_TABLE, "next_wave_time", { time = game_time } )
 end
 
 function CWaveController:BuildWaveListData()
@@ -311,7 +690,8 @@ function CWaveController:UpdateWavesData()
 	local start_of_set = math.floor(self:GetCurrentWave() / set_size) * set_size + 1
 	local end_of_set = math.floor((self:GetCurrentWave() + set_size) / set_size) * set_size
 
-	for i = start_of_set, end_of_set, 1 do
+	local i = 1
+	while i <= end_of_set do
 
 		local data = {
 			wave = self._waves_list[tostring(i)],
@@ -319,6 +699,15 @@ function CWaveController:UpdateWavesData()
 		}
 
 		table.insert( wave_data, data )
+
+		-- Arena waves don't count towards the size of the set
+		if data.wave and data.wave.arena then
+			set_size = set_size + 1
+			end_of_set = end_of_set + 1
+		end
+
+		-- Increment
+		i = i + 1
 
 	end
 
@@ -402,6 +791,25 @@ function CWaveController:CurrentWaveHasSpawnsRemaining()
 	end
 end
 
+function CWaveController:GetSpawnedUnitsInLane( iLane )
+
+	local count = 0
+	for k, v in pairs( self._spawned_units ) do
+		if v.lane == iLane then
+			count = count + 1
+		end
+	end
+	return count
+
+end
+
+function CWaveController:GetNextWaveSpawn()
+	for k, v in pairs( self._wave_spawns_remaining ) do
+		return k
+	end
+	return nil
+end
+
 function CWaveController:GetAndPopNextSpawnInWave()
 	for k, v in pairs( self._wave_spawns_remaining ) do
 		if v > 0 then
@@ -416,12 +824,21 @@ function CWaveController:PrintWaveEnemyList( iWave )
 
 	if self._waves_list[tostring(iWave)] then
 
-		print(string.format("Wave %i Enemies", iWave))
-		for k, v in pairs( self._waves_list[tostring(iWave)] ) do
-			if string.sub(k, 1, 4) == "npc_" then
-				print(string.format("\t%s x%i", k, v))
+		if self._waves_list[tostring(iWave)].arena then
+
+			print(string.format("Wave %i\n\tArena Fight", iWave))
+
+		else
+
+			print(string.format("Wave %i Enemies", iWave))
+			for k, v in pairs( self._waves_list[tostring(iWave)] ) do
+				if string.sub(k, 1, 4) == "npc_" then
+					print(string.format("\t%s x%i", k, v))
+				end
 			end
+
 		end
+
 		print("-----")
 
 	else
@@ -431,6 +848,9 @@ function CWaveController:PrintWaveEnemyList( iWave )
 end
 
 function CWaveController:OnUnitKilled( event )
+
+	local lane_controller = GameRules.LegionDefence:GetLaneController()
+	local unit_controller = GameRules.LegionDefence:GetUnitController()
 
 	local killedUnit = EntIndexToHScript(event.entindex_killed)
 	local attackerUnit = EntIndexToHScript(event.entindex_attacker)
@@ -443,7 +863,7 @@ function CWaveController:OnUnitKilled( event )
 			local remainInLane = self:GetRemainingUnitsInLane(laneId)
 			print(string.format("Remaining units in lane %i: %i", laneId, remainInLane))
 			if remainInLane <= 0 then
-				local playerId = GameRules.LegionDefence:GetLaneController():GetPlayerForLane( laneId )
+				local playerId = lane_controller:GetPlayerForLane( laneId )
 				if playerId ~= nil then
 
 					local data = {
@@ -458,15 +878,24 @@ function CWaveController:OnUnitKilled( event )
 			-- Remaining units in wave
 			local remainInWave = self:GetRemainingUnitsInCurrentWave()
 			if remainInWave <= 0 then
-				self:WavePreCompleted()
+				print(string.format("All units in wave %i killed!", self._current_wave))
+				self:_AdvanceWaveState()
 			end
 
 			-- Give bounty
 			if attackerUnit then
 
-				local owner = attackerUnit:GetOwner()
+				local attackerUnitData = unit_controller:GetUnitData( attackerUnit )
+
+				local owner_id = attackerUnitData and lane_controller:GetPlayerForLane(attackerUnitData.lane)
+				local owner = owner_id ~= nil and PlayerResource:GetPlayer(owner_id)
+				if not owner and attackerUnitData then
+					print("No player in lane " .. attackerUnitData.lane .. ", returning gold to unit owner")
+					owner = attackerUnit:GetOwner()
+				end
+
 				local hasOwnerPlayer = owner and true or false
-				local ownerUnit = attackerUnit:GetOwner() and attackerUnit:GetOwner():GetAssignedHero() or attackerUnit
+				local ownerUnit = owner and owner:GetAssignedHero() or attackerUnit
 				local bounty = killedUnit:GetGoldBounty()
 				local bounty_currency = CURRENCY_GOLD
 
@@ -538,11 +967,6 @@ function CWaveController:GetRemainingUnitsInLane( laneId )
 
 end
 
-function CWaveController:WavePreCompleted()
-	print(string.format("All units in wave %i killed!", self._current_wave))
-	self._wave_complete = self._end_of_wave_time
-end
-
 function CWaveController:WaveCompleted()
 
 	print(string.format("Completed Wave %i", self._current_wave))
@@ -555,9 +979,6 @@ function CWaveController:WaveCompleted()
 
 	-- Wave no longer in progress
 	self._wave_in_progress = false
-
-	-- Set next wave time
-	self:SetNextWaveTime( GameRules:GetDOTATime(false, false) + self._time_between_waves )
 
 	-- Update next waves data
 	self:UpdateWavesData()
@@ -585,8 +1006,7 @@ function CWaveController:DebugCompleteWave()
 	end
 
 	self._spawned_units = {}
-
-	self:WavePreCompleted()
+	self:_AdvanceWaveState()
 
 end
 
@@ -663,7 +1083,7 @@ function CWaveController:OnLeakPointsThink()
 	self:ProcessArmourPoints( self._map_controller:SmallArmourPoints(), 1 )
 	self:ProcessArmourPoints( self._map_controller:LargeArmourPoints(), 2 )
 
-	return self._leak_point_think_time
+	return CWaveController.THINK_TIME_LEAKS
 
 end
 
