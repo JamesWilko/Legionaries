@@ -1,0 +1,33 @@
+
+<root>
+
+	<styles>
+		<include src="file://{resources}/styles/custom_game/hero_picker.css" />
+	</styles>
+
+	<scripts>
+		<include src="file://{resources}/scripts/custom_game/hero_picker.js" />
+	</scripts>
+
+	<Panel class="PickerScreen">
+
+		<Panel class="HeroesScrollPanelBackground" />
+		<Panel class="HeroesScrollPanel">
+			<Panel id="HeroesScroll" class="HeroesScroll" />
+		</Panel>
+
+		<Panel class="HeroesButtonsPanel">
+
+			<Button class="SelectHeroButton" onactivate="FinalizeHero()">
+				<Label class="SelectHeroLabel" text="Select Hero"/>
+			</Button>
+
+			<Button class="SelectHeroButton RandomButton" onactivate="RandomizeHero()">
+				<Label class="SelectHeroLabel" text="Random"/>
+			</Button>
+
+		</Panel>
+
+	</Panel>
+
+</root>

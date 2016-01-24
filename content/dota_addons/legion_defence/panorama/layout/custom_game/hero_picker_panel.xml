@@ -1,0 +1,33 @@
+
+<root>
+
+	<styles>
+		<include src="file://{resources}/styles/custom_game/hero_picker.css" />
+	</styles>
+
+	<scripts>
+		<include src="file://{resources}/scripts/custom_game/hero_picker_panel.js" />
+	</scripts>
+
+	<Panel class="HeroPanel" onactivate="OnSelected()">
+
+		<Panel id="HeroImage" class="HeroImage"/>
+
+		<Panel class="HeroNamePanel">
+			<Label id="HeroName" class="HeroName" text="Zeus" />
+		</Panel>
+
+		<Panel class="AbilitiesPanel">
+			<Panel class="AbilitiesPanelFlowPanel">
+				<DOTAAbilityImage id="Ability1" onmouseover="ShowAbilityTooltip(1)" onmouseout="HideAbilityTooltip()" abilityname="antimage_blink" />
+				<DOTAAbilityImage id="Ability2" onmouseover="ShowAbilityTooltip(2)" onmouseout="HideAbilityTooltip()" abilityname="dazzle_weave" />
+				<DOTAAbilityImage id="Ability3" onmouseover="ShowAbilityTooltip(3)" onmouseout="HideAbilityTooltip()" abilityname="enigma_demonic_conversion" />
+				<DOTAAbilityImage id="Ability4" onmouseover="ShowAbilityTooltip(4)" onmouseout="HideAbilityTooltip()" abilityname="earthshaker_fissure" />
+				<DOTAAbilityImage id="Ability5" onmouseover="ShowAbilityTooltip(5)" onmouseout="HideAbilityTooltip()" abilityname="gyrocopter_flak_cannon" />
+				<DOTAAbilityImage id="Ability6" onmouseover="ShowAbilityTooltip(6)" onmouseout="HideAbilityTooltip()" abilityname="leshrac_lightning_storm" />
+			</Panel>
+		</Panel>
+
+	</Panel>
+
+</root>
