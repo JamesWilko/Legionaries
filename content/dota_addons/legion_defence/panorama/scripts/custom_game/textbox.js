@@ -1,4 +1,5 @@
 
+var m_TextboxMaxLines = 25;
 var m_TextboxLines = [];
 var m_TimestampColor = "goldenrod";
 
@@ -28,7 +29,8 @@ function OnReceivedCustomChat( data )
 		if(canShowForPlayer)
 		{
 			var message = $.Localize(data["sMessage"]);
-			message = String.format(message, data["argNumber"], data["argString"], Players.GetPlayerName(messagePlayer));
+			message = String.format(message, data["argNumber"], $.Localize(data["argString"]), Players.GetPlayerName(messagePlayer));
+			m_TextboxLines.shift();
 			m_TextboxLines.push("<span class=\"" + m_TimestampColor + "\">[" + GetTimestamp() + "]</span> " + message);
 			UpdateTextbox();
 		}
@@ -70,6 +72,11 @@ function UpdateTextbox()
 
 (function()
 {
+
+	for (var i = 0; i < m_TextboxMaxLines; ++i)
+	{
+		m_TextboxLines.push("");
+	};
 
 	GameEvents.Subscribe( "legion_custom_chat", OnReceivedCustomChat );
 
