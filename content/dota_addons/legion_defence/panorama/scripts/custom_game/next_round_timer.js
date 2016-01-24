@@ -1,4 +1,6 @@
 
+var m_TimerUpdateDelay = 0.5;
+
 function UpdateTimer()
 {
 	var nettable = CustomNetTables.GetTableValue( "UpcomingWaveData", "next_wave_time" );
@@ -25,7 +27,7 @@ function UpdateTimer()
 		}
 	}
 
-	$.Schedule(0.5, function(){
+	$.Schedule(m_TimerUpdateDelay, function(){
 		UpdateTimer();
 	});
 }
@@ -33,7 +35,7 @@ function UpdateTimer()
 (function()
 {
 	UpdateTimer();
-	$.Schedule(0.5, function(){
+	$.Schedule(m_TimerUpdateDelay, function(){
 		UpdateTimer();
 	});
 })();
