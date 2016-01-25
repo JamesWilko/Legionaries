@@ -38,6 +38,7 @@ function ShowTooltip( panel )
 	var title = "";
 	var desc = "";
 	var boss;
+	var arena;
 
 	var nettable = CustomNetTables.GetTableValue( "UpcomingWaveData", "waves" );
 	if(nettable && nettable[waveId] && nettable[waveId]["wave"])
@@ -55,11 +56,19 @@ function ShowTooltip( panel )
 		}
 
 		// Show tooltip boss wave tag
-		var boss = waveData["boss"];
-		var isBoss = boss != undefined && boss == "true";
+		var isBoss = waveData["boss"] != undefined && waveData["boss"] == "true";
 		if(isBoss)
 		{
 			boss = $.Localize("legion_boss_wave").toUpperCase();
+		}
+
+		// Show tooltip boss wave tag
+		var isArena = waveData["arena"] != undefined && waveData["arena"] == "true";
+		if(isArena)
+		{
+			arena = $.Localize("legion_arena_wave_Tag").toUpperCase();
+			title = $.Localize("legion_arena_wave").toUpperCase();
+			desc = $.Localize("legion_arena_wave_Description");
 		}
 	}
 
@@ -67,10 +76,6 @@ function ShowTooltip( panel )
 		"panelId" : panel.id,
 		"title" : title,
 		"desc" : desc,
-		"value-1-name" : "",
-		"value-2-name" : "",
-		"value-3-name" : "",
-		"value-4-name" : "",
 	};
 
 	if(waveData)
@@ -79,20 +84,37 @@ function ShowTooltip( panel )
 		var damageType = waveData["damage_type"];
 		var defenceType = waveData["defence_type"];
 
-		data["value-1-value"] = $.Localize(m_AttackTypes[attackType]);
-		data["value-1-value-color"] = m_AttackTypesColours[attackType];
-
-		data["value-2-value"] = $.Localize(m_DamageTypes[damageType]);
-		data["value-2-value-color"] = m_DamageTypesColours[damageType];
-
-		data["value-3-value"] = $.Localize(m_DefenceTypes[defenceType]);
-		data["value-3-value-color"] = m_DefenceTypesColours[defenceType];
+		if(attackType)
+		{
+			data["value-1-name"] = "";
+			data["value-1-value"] = $.Localize(m_AttackTypes[attackType]);
+			data["value-1-value-color"] = m_AttackTypesColours[attackType];
+		}
+		if(damageType)
+		{
+			data["value-2-name"] = "";
+			data["value-2-value"] = $.Localize(m_DamageTypes[damageType]);
+			data["value-2-value-color"] = m_DamageTypesColours[damageType];
+		}
+		if(defenceType)
+		{
+			data["value-3-name"] = "";
+			data["value-3-value"] = $.Localize(m_DefenceTypes[defenceType]);
+			data["value-3-value-color"] = m_DefenceTypesColours[defenceType];
+		}
 	}
 
 	if(boss)
 	{
+		data["value-4-name"] = "";
 		data["value-4-value"] = boss;
 		data["value-4-value-color"] = "red";
+	}
+	else if(arena)
+	{
+		data["value-4-name"] = "";
+		data["value-4-value"] = arena;
+		data["value-4-value-color"] = "gold";
 	}
 
 	GameEvents.SendEventClientSide("show_legion_tooltip", data );
