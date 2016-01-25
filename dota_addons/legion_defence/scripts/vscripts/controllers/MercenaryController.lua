@@ -173,6 +173,21 @@ function CMercenaryController:ConsumeMercenary( iPlayerId, mercId )
 
 end
 
+function CMercenaryController:GetMercenariesSpawnedByTeam( iTeam )
+
+	local units = {}
+
+	for k, v in pairs( self._spawned ) do
+		print(string.format("Getting units %i == %i", v.team, iTeam))
+		if v.team == iTeam then
+			table.insert( units, v )
+		end
+	end
+
+	return units
+
+end
+
 function CMercenaryController:BuildWavesMercenaryLaneSpawns()
 
 	-- Divide mercenaries into lanes
@@ -180,8 +195,12 @@ function CMercenaryController:BuildWavesMercenaryLaneSpawns()
 	self:DivideMercenariesIntoLanes( DOTA_TEAM_BADGUYS )
 
 	-- Clear spawns list
-	self._spawned = {}
+	self:ClearSpawnedMercenariesUnits()
 
+end
+
+function CMercenaryController:ClearSpawnedMercenariesUnits()
+	self._spawned = {}
 end
 
 function CMercenaryController:DivideMercenariesIntoLanes( iTeamId, bDebug )
@@ -487,6 +506,13 @@ function CMercenaryController:HandleOnWaveCompleted()
 	-- Clear lane spawns
 	self._lane_spawns = nil
 
+end
+
+function CMercenaryController:GetWaveLaneSpawns()
+	if not self._lane_spawns then
+		self:BuildWavesMercenaryLaneSpawns()
+	end
+	return self._lane_spawns
 end
 
 ---------------------------------------

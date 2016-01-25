@@ -91,6 +91,13 @@ function CLaneController:OnPlayerPickedHero( event )
 		local playerId = hero:GetOwner():GetPlayerID()
 		local playerTeamId = hero:GetOwner():GetTeam()
 
+		-- Check if player has already been assigned a lane
+		for id, lane in pairs(self.lanes) do
+			if lane.player ~= playerId then
+				return
+			end
+		end
+
 		-- Find first available lane and assign player
 		for id, lane in pairs(self.lanes) do
 			if lane.player == nil and lane.team == playerTeamId then
