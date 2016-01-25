@@ -2,62 +2,89 @@
 {
 	"1"
 	{
-		"npc_legion_enemy_donkey"		"10"
-		"image"							"file://{images}/items/courier.png"
+		"npc_legion_enemy_kobold"		"30"
+		"image"							"file://{images}/heroes/npc_dota_hero_dragon_knight.png"
+		"wave_type"						"StandardWaveThink"
 	}
 
 	"2"
 	{
-		"npc_legion_enemy_murloc"		"10"
+		"npc_legion_enemy_murloc"		"30"
 		"image"							"file://{images}/heroes/npc_dota_hero_dragon_knight.png"
+		"wave_type"						"StandardWaveThink"
 	}
 
 	"3"
 	{
-		"npc_legion_enemy_scorpion"		"10"
+		"npc_legion_enemy_scorpion"		"30"
 		"image"							"file://{images}/heroes/npc_dota_hero_dragon_knight.png"
+		"wave_type"						"StandardWaveThink"
 	}
 
 	"4"
 	{
-		"npc_legion_enemy_quillbeast"	"10"
+		"npc_legion_enemy_quillbeast"	"30"
 		"image"							"file://{images}/heroes/npc_dota_hero_dragon_knight.png"
+		"wave_type"						"StandardWaveThink"
 	}
 
 	"5"
 	{
-		"npc_legion_enemy_hawk"			"10"
+		"npc_legion_enemy_hawk"			"30"
 		"image"							"file://{images}/heroes/npc_dota_hero_dragon_knight.png"
+		"wave_type"						"StandardWaveThink"
 	}
 
 	"6"
 	{
-		"npc_legion_enemy_golem"		"10"
+		"npc_legion_enemy_golem"		"30"
 		"image"							"file://{images}/heroes/npc_dota_hero_dragon_knight.png"
+		"wave_type"						"StandardWaveThink"
 	}
 
 	"7"
 	{
-		"npc_legion_enemy_satyr"		"10"
+		"npc_legion_enemy_satyr"		"30"
 		"image"							"file://{images}/heroes/npc_dota_hero_dragon_knight.png"
+		"wave_type"						"StandardWaveThink"
 	}
 
 	"8"
 	{
-		"npc_legion_enemy_acolyte"		"10"
+		"npc_legion_enemy_acolyte"		"30"
 		"image"							"file://{images}/heroes/npc_dota_hero_dragon_knight.png"
+		"wave_type"						"StandardWaveThink"
 	}
 
 	"9"
 	{
-		"npc_legion_enemy_zombie"		"10"
+		"npc_legion_enemy_zombie"		"30"
 		"image"							"file://{images}/heroes/npc_dota_hero_dragon_knight.png"
+		"wave_type"						"StandardWaveThink"
 	}
 
 	"10"
 	{
-		"npc_legion_enemy_boss_one"		"10"
+		"npc_legion_enemy_boss_one"		"3"
 		"boss"							"true"
-		"image"							"file://{images}/heroes/npc_dota_hero_pudge.png"
+		"image"							"file://{images}/heroes/npc_dota_hero_nevermore.png"
+		"wave_type"						"StandardWaveThink"
+	}
+
+	"11"
+	{
+		"arena"							"true"
+		"arena_boss_unit"				"npc_legion_enemy_boss_one"
+		"arena_boss_amount"				"4"
+		"image"							"file://{images}/items/courier.png"
+		"wave_type"						"ArenaWaveThink"
+	}
+
+	"12"
+	{
+		"npc_legion_enemy_boss_one"		"3"
+		"boss"							"true"
+		"image"							"file://{images}/heroes/npc_dota_hero_nevermore.png"
+		"wave_type"						"EndlessWaveThink"
 	}
 }
