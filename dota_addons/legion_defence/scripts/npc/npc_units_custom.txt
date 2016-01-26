@@ -195,7 +195,6 @@
 
 
 
-
 "npc_legion_fire_heat_knight_upg"
 {
 	// General
@@ -301,7 +300,6 @@
 		}
 	}
 }
-
 
 
 
@@ -412,7 +410,6 @@
 		}
 	}
 }
-
 
 
 
@@ -631,7 +628,6 @@
 		}
 	}
 }
-
 
 
 
@@ -1182,7 +1178,6 @@
 
 
 
-
 "npc_legion_fire_flamebound_upg"
 {
 	// General
@@ -1402,7 +1397,6 @@
 
 
 
-
 "npc_legion_fire_pyromancer_upg"
 {
 	// General
@@ -1618,7 +1612,6 @@
 
 
 
-
 "npc_legion_enemy_murloc"
 {
 	// General
@@ -1711,7 +1704,6 @@
 		}
 	}
 }
-
 
 
 
@@ -1832,7 +1824,6 @@
 
 
 
-
 "npc_legion_enemy_quillbeast"
 {
 	// General
@@ -1926,7 +1917,6 @@
 		}
 	}
 }
-
 
 
 
@@ -2046,7 +2036,6 @@
 
 
 
-
 "npc_legion_enemy_golem"
 {
 	// General
@@ -2139,7 +2128,6 @@
 		}
 	}
 }
-
 
 
 
@@ -2260,7 +2248,6 @@
 
 
 
-
 "npc_legion_enemy_acolyte"
 {
 	// General
@@ -2367,7 +2354,6 @@
 
 
 
-
 "npc_legion_enemy_zombie"
 {
 	// General
@@ -2460,7 +2446,6 @@
 		}
 	}
 }
-
 
 
 
@@ -2584,7 +2569,6 @@
 
 
 
-
 "npc_legion_merc_footman"
 {
 	// General
@@ -2677,7 +2661,6 @@
 		}
 	}
 }
-
 
 
 
@@ -2796,7 +2779,6 @@
 
 
 
-
 "npc_legion_merc_ghoul"
 {
 	// General
@@ -2902,7 +2884,6 @@
 
 
 
-
 "npc_legion_merc_warrior"
 {
 	// General
@@ -2914,6 +2895,8 @@
 
 	// Upgrades
 	//----------------------------------------------------------------
+	"Ability1"	"ability_merc_warrior_bash"
+
 
 	// Status
 	//----------------------------------------------------------------
@@ -3006,9 +2989,6 @@
 
 
 
-
-
-
 "npc_legion_merc_whelp"
 {
 	// General
@@ -3052,17 +3032,18 @@
 
 	// Attack
 	//----------------------------------------------------------------
-	"AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
+	"AttackCapabilities"    "DOTA_UNIT_CAP_RANGED_ATTACK"
 	"AttackDamageType"      "DAMAGE_TYPE_ArmorPhysical"
 	"AttackDamageMin"       "37"
 	"AttackDamageMax"       "42"
 	"AttackRate"            "1.40"
 	"AttackAnimationPoint"  "0.5"
 	"AttackAcquisitionRange" "1200"
-	"AttackRange"           "120"
+	"AttackRange"           "150"
 	"CombatClassAttack"     "DOTA_COMBAT_CLASS_ATTACK_PIERCE"
 	"CombatClassDefend"     "DOTA_COMBAT_CLASS_DEFEND_SOFT"
-	"ProjectileSpeed"		"0"
+	"ProjectileModel"		"particles/neutral_fx/thunderlizard_base_attack.vpcf"
+	"ProjectileSpeed"		"900"
 
 	// Movement
 	//----------------------------------------------------------------
@@ -3113,8 +3094,6 @@
 
 
 
-
-
 "npc_legion_merc_hermit"
 {
 	// General
@@ -3126,6 +3105,8 @@
 
 	// Upgrades
 	//----------------------------------------------------------------
+	"Ability1"	"ability_merc_hermit_healing_aura"
+
 
 	// Status
 	//----------------------------------------------------------------
@@ -3218,9 +3199,6 @@
 
 
 
-
-
-
 "npc_legion_merc_dino"
 {
 	// General
@@ -3274,6 +3252,7 @@
 	"AttackRange"           "400"
 	"CombatClassAttack"     "DOTA_COMBAT_CLASS_ATTACK_PIERCE"
 	"CombatClassDefend"     "DOTA_COMBAT_CLASS_DEFEND_HERO"
+	"ProjectileModel"		"particles/neutral_fx/thunderlizard_base_attack.vpcf"
 	"ProjectileSpeed"		"900"
 
 	// Movement
@@ -3325,8 +3304,6 @@
 
 
 
-
-
 "npc_legion_merc_commander"
 {
 	// General
@@ -3338,6 +3315,8 @@
 
 	// Upgrades
 	//----------------------------------------------------------------
+	"Ability1"	"ability_merc_commander_damage_aura"
+
 
 	// Status
 	//----------------------------------------------------------------
@@ -3430,9 +3409,6 @@
 
 
 
-
-
-
 "npc_legion_merc_furbolg"
 {
 	// General
@@ -3444,6 +3420,8 @@
 
 	// Upgrades
 	//----------------------------------------------------------------
+	"Ability1"	"ability_merc_furbolg_armour_aura"
+
 
 	// Status
 	//----------------------------------------------------------------
@@ -3536,9 +3514,6 @@
 
 
 
-
-
-
 "npc_legion_merc_wyvern"
 {
 	// General
@@ -3592,6 +3567,7 @@
 	"AttackRange"           "500"
 	"CombatClassAttack"     "DOTA_COMBAT_CLASS_ATTACK_PIERCE"
 	"CombatClassDefend"     "DOTA_COMBAT_CLASS_DEFEND_SOFT"
+	"ProjectileModel"		"particles/neutral_fx/black_drake_attack.vpcf"
 	"ProjectileSpeed"		"900"
 
 	// Movement
@@ -3631,8 +3607,6 @@
 		}
 	}
 }
-
-
 
 
 
@@ -3737,7 +3711,6 @@
 		}
 	}
 }
-
 
 
 
@@ -3856,7 +3829,6 @@
 
 
 
-
 "npc_legion_merc_frost_wolf"
 {
 	// General
@@ -3868,6 +3840,8 @@
 
 	// Upgrades
 	//----------------------------------------------------------------
+	"Ability1"	"ability_merc_frost_wolf_slow_aura"
+
 
 	// Status
 	//----------------------------------------------------------------
@@ -3960,9 +3934,6 @@
 
 
 
-
-
-
 "npc_legion_merc_ice_troll"
 {
 	// General
@@ -3974,6 +3945,8 @@
 
 	// Upgrades
 	//----------------------------------------------------------------
+	"Ability1"	"ability_merc_ice_troll_slow_attack"
+
 
 	// Status
 	//----------------------------------------------------------------
@@ -4066,9 +4039,6 @@
 
 
 
-
-
-
 "npc_legion_merc_warlock"
 {
 	// General
@@ -4080,6 +4050,8 @@
 
 	// Upgrades
 	//----------------------------------------------------------------
+	"Ability1"	"ability_merc_warlock_armour_debuff"
+
 
 	// Status
 	//----------------------------------------------------------------
@@ -4122,6 +4094,7 @@
 	"AttackRange"           "450"
 	"CombatClassAttack"     "DOTA_COMBAT_CLASS_ATTACK_HERO"
 	"CombatClassDefend"     "DOTA_COMBAT_CLASS_DEFEND_SOFT"
+	"ProjectileModel"		"particles/neutral_fx/black_dragon_attack.vpcf"
 	"ProjectileSpeed"		"900"
 
 	// Movement
@@ -4171,10 +4144,6 @@
 
 
 
-
-
-
-
 "npc_legion_merc_pandaren"
 {
 	// General
@@ -4191,7 +4160,7 @@
 	//----------------------------------------------------------------
 	"Level"                 "5"
 	"StatusHealth"          "775"
-	"StatusHealthRegen"     "0"
+	"StatusHealthRegen"     "20"
 	"StatusMana"            "0"
 	"StatusManaRegen"       "0"
 	"HasInventory"          "0"
@@ -4267,7 +4236,6 @@
 		}
 	}
 }
-
 
 
 
@@ -4386,7 +4354,6 @@
 
 
 
-
 "npc_legion_merc_shaman"
 {
 	// General
@@ -4440,6 +4407,7 @@
 	"AttackRange"           "450"
 	"CombatClassAttack"     "DOTA_COMBAT_CLASS_ATTACK_HERO"
 	"CombatClassDefend"     "DOTA_COMBAT_CLASS_DEFEND_SOFT"
+	"ProjectileModel"		"particles/neutral_fx/satyr_trickster_projectile.vpcf"
 	"ProjectileSpeed"		"900"
 
 	// Movement
@@ -4491,8 +4459,6 @@
 
 
 
-
-
 "npc_legion_merc_pudge"
 {
 	// General
@@ -4504,6 +4470,8 @@
 
 	// Upgrades
 	//----------------------------------------------------------------
+	"Ability1"	"ability_merc_pudge_lifesteal_aura"
+
 
 	// Status
 	//----------------------------------------------------------------
@@ -4596,9 +4564,6 @@
 
 
 
-
-
-
 "npc_legion_merc_gargolye"
 {
 	// General
@@ -4652,6 +4617,7 @@
 	"AttackRange"           "200"
 	"CombatClassAttack"     "DOTA_COMBAT_CLASS_ATTACK_BASIC"
 	"CombatClassDefend"     "DOTA_COMBAT_CLASS_DEFEND_SOFT"
+	"ProjectileModel"		"particles/econ/items/leshrac/leshrac_tormented_staff/leshrac_base_attack_tormented.vpcf"
 	"ProjectileSpeed"		"800"
 
 	// Movement
@@ -4703,8 +4669,6 @@
 
 
 
-
-
 "npc_legion_merc_behemoth"
 {
 	// General
@@ -4716,6 +4680,9 @@
 
 	// Upgrades
 	//----------------------------------------------------------------
+	"Ability1"	"ability_merc_behemoth_armour_aura"
+	"Ability2"	"ability_merc_behemoth_magic_immunity"
+
 
 	// Status
 	//----------------------------------------------------------------
@@ -4808,9 +4775,6 @@
 
 
 
-
-
-
 "npc_legion_merc_kraken"
 {
 	// General
@@ -4822,6 +4786,10 @@
 
 	// Upgrades
 	//----------------------------------------------------------------
+	"Ability1"	"ability_merc_kraken_healing_aura"
+	"Ability2"	"ability_merc_kraken_poison_attack"
+	"Ability3"	"ability_merc_kraken_magic_immunity"
+
 
 	// Status
 	//----------------------------------------------------------------
@@ -4864,6 +4832,7 @@
 	"AttackRange"           "550"
 	"CombatClassAttack"     "DOTA_COMBAT_CLASS_ATTACK_PIERCE"
 	"CombatClassDefend"     "DOTA_COMBAT_CLASS_DEFEND_STRONG"
+	"ProjectileModel"		"particles/neutral_fx/ghost_base_attack.vpcf"
 	"ProjectileSpeed"		"900"
 
 	// Movement
@@ -4913,10 +4882,6 @@
 
 
 
-
-
-
-
 "npc_legion_merc_infernal"
 {
 	// General
@@ -4929,6 +4894,9 @@
 
 	// Upgrades
 	//----------------------------------------------------------------
+	"Ability1"	"ability_merc_infernal_bash"
+	"Ability2"	"ability_merc_infernal_immolation"
+
 
 	// Status
 	//----------------------------------------------------------------
@@ -5020,9 +4988,6 @@
 
 
 
-
-
-
 "npc_legion_merc_demon"
 {
 	// General
@@ -5034,6 +4999,9 @@
 
 	// Upgrades
 	//----------------------------------------------------------------
+	"Ability1"	"ability_merc_demon_speed_aura"
+	"Ability2"	"ability_merc_demon_damage_aura"
+
 
 	// Status
 	//----------------------------------------------------------------
@@ -5126,9 +5094,6 @@
 
 
 
-
-
-
 "npc_legion_king_dire"
 {
 	// General
@@ -5149,6 +5114,7 @@
 	"HasInventory"			"0"
 	"ConsideredHero"		"1"
 	"HealthBarOffset"		"350"
+	"AbilityLayout"			"6"
 
 	// Armor
 	//----------------------------------------------------------------
@@ -5226,6 +5192,7 @@
 	"HasInventory"			"0"
 	"ConsideredHero"		"1"
 	"HealthBarOffset"		"350"
+	"AbilityLayout"			"6"
 
 	// Armor
 	//----------------------------------------------------------------
