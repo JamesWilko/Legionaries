@@ -5,14 +5,10 @@ var HEROES_KEY = "heroes";
 var m_HeroPanels = [];
 var m_SelectedHeroIndex;
 
-function OnShowHeroPicker()
-{
-	$.GetContextPanel().visible = true;
-}
-
-function OnCloseHeroPicker()
+function CloseHeroPicker()
 {
 	$.GetContextPanel().visible = false;
+	$.GetContextPanel().DeleteAsync( 0.0 );
 }
 
 function OnSelectHero( data )
@@ -41,7 +37,7 @@ function FinalizeHero()
 	if(m_SelectedHeroIndex)
 	{
 		GameEvents.SendCustomGameEventToServer( "legion_hero_selected", { "sHeroId" : m_SelectedHeroIndex } );
-		OnCloseHeroPicker();
+		CloseHeroPicker();
 	}
 }
 
@@ -62,7 +58,8 @@ function OnHeroListUpdated()
 	{
 		for(var key in m_HeroPanels)
 		{
-			m_HeroPanels[key].RemoveAndDeleteChildren()
+			m_HeroPanels[key].visible = false;
+			m_HeroPanels[key].DeleteAsync( 0.0 );
 		}
 		m_HeroPanels = [];
 	}
@@ -80,10 +77,6 @@ function OnHeroListUpdated()
 (function()
 {
 
-	$.GetContextPanel().visible = false;
-
-	GameEvents.Subscribe( "legion_show_hero_picker", OnShowHeroPicker );
-	GameEvents.Subscribe( "legion_close_hero_picker", OnCloseHeroPicker );
 	GameEvents.Subscribe( "legion_cl_select_hero", OnSelectHero );
 	CustomNetTables.SubscribeNetTableListener( HEROES_NETTABLE, OnHeroListUpdated );
 

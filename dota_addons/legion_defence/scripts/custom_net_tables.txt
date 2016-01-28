@@ -17,6 +17,7 @@
 		"Upgrades",
 		"MercenariesData",
 		"MercenariesCooldowns",
-		"HeroesList"
+		"HeroesList",
+		"HeroPickingData"
 	]
 }

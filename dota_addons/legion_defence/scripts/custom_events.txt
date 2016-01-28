@@ -74,6 +74,21 @@
 		"argString"			"string"
 	}
 
+	"legion_start_hero_selection"
+	{
+		"lStartTime"		"short"
+		"lDuration"			"short"
+	}
+
+	"legion_show_hero_picker"
+	{
+	}
+
+	"legion_hero_selected"
+	{
+		"sHeroId"			"string"
+	}
+
 	//---------------------------------
 	// Server Only
 	//---------------------------------
@@ -102,6 +117,10 @@
 	}
 
 	"hide_legion_tooltip"
+	{
+	}
+
+	"legion_cl_select_hero"
 	{
 	}
 }

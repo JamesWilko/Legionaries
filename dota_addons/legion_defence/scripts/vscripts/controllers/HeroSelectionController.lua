@@ -93,11 +93,24 @@ function CHeroSelectionController:OnThink()
 end
 
 function CHeroSelectionController:ForceRandomPickOnUnpickedPlayers()
-	-- TODO
+	
+	for pID = 0, DOTA_MAX_PLAYERS -1 do
+		if PlayerResource:IsValidPlayer( pID ) and (not self.hero_history[pID] or #self.hero_history[pID] == 0) then
+			
+			print("Forcing random pick on player " .. tostring(pID))
+			local data = {
+				["PlayerID"] = pID,
+				["sHeroId"] = self._available_heroes[math.random(#self._available_heroes)]
+			}
+			CHeroSelectionController.HandleOnHeroSelected( -1, data )
+
+		end
+	end
+
 end
 
 function CHeroSelectionController:EndPicking()
-	-- TODO
+	CustomGameEventManager:Send_ServerToAllClients( "legion_close_hero_picker", {} )
 end
 
 function CHeroSelectionController.HandleOnHeroSelected( iCallingEntity, event )
@@ -109,14 +122,19 @@ function CHeroSelectionController.HandleOnHeroSelected( iCallingEntity, event )
 	local hero = event["sHeroId"]
 	self:AssignHeroToPlayer( player, hero )
 
+	print(string.format("Player %i picked %s", player, hero))
+
 	-- Announce hero choice
-	SendCustomChatMessage( "legion_player_picked_hero", { arg_player = player, arg_string = hero } )
+	if not self.hero_history[player] or #self.hero_history[player] <= 1 then
+		SendCustomChatMessage( "legion_player_picked_hero", { player = player, arg_string = hero } )
+	else
+		SendCustomChatMessage( "legion_player_repicked_hero", { player = player, arg_string = hero } )
+	end
 
 end
 
 function CHeroSelectionController:OnEnterHeroSelectionState()
 
-	self.hero_history = {}
 	self.hero_history = self.hero_history or {}
 	self.max_players = 0
 	self.players_picked = 0
