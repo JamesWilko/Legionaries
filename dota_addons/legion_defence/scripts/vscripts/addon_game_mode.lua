@@ -4,6 +4,7 @@ if CLegionDefence == nil then
 end
 
 require("Utils")
+require("controllers/HeroSelectionController")
 require("controllers/CurrencyController")
 require("controllers/MapController")
 require("controllers/WaveController")
@@ -85,6 +86,7 @@ function CLegionDefence:InitGameMode()
 	GameRules:SetPreGameTime( 3 )
 	GameRules:SetCustomGameSetupTimeout( 3 )
 
+	self:SetupHeroSelectionController()
 	self:SetupLaneController()
 	self:SetupMapController()
 	self:SetupCurrencyController()
@@ -98,6 +100,9 @@ function CLegionDefence:InitGameMode()
 	self:SetupMercenaryController()
 	self:SetupStatsController()
 
+	GameRules:GetGameModeEntity():SetCustomGameForceHero( "npc_dota_hero_wisp" )
+
+	ListenToGameEvent("game_rules_state_change", Dynamic_Wrap(CLegionDefence, "OnGameRulesStateChanged"), self)
 	ListenToGameEvent("dota_player_pick_hero", Dynamic_Wrap(CLegionDefence, "OnPlayerPickedHero"), self)
 
 end
@@ -110,6 +115,14 @@ function CLegionDefence:OnThink()
 		return nil
 	end
 	return 1
+end
+
+function CLegionDefence:OnGameRulesStateChanged( event )
+
+	if GameRules:State_Get() == DOTA_GAMERULES_STATE_HERO_SELECTION then
+		self:GetHeroSelectionController():OnEnterHeroSelectionState()
+	end
+
 end
 
 -- Debug, give player all levels
