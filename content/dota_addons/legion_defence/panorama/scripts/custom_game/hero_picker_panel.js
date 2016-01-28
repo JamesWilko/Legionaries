@@ -1,4 +1,7 @@
 
+var HEROES_NETTABLE = "HeroesList";
+var ABILITIES_KEY = "abilities";
+
 function SetHero( HeroId )
 {
 	$("#HeroImage").style.backgroundImage = "url( \"file://{images}/../videos/heroes/" + HeroId + ".webm\" )";
@@ -12,11 +15,17 @@ function OnSelected()
 
 function ShowAbilityTooltip( AbilityId )
 {
-	var data = {
-		"title" : "Ability " + AbilityId,
-		"desc" : "Desc for ability " + AbilityId,
-	};
-	GameEvents.SendEventClientSide("show_legion_tooltip", data );
+	var heroId = $.GetContextPanel().id;
+	var abilities = CustomNetTables.GetTableValue( HEROES_NETTABLE, ABILITIES_KEY );
+	if(abilities)
+	{
+		var ability = abilities[heroId][AbilityId];
+		var data = {
+			"title" : $.Localize("DOTA_Tooltip_Ability_" + ability),
+			"desc" : $.Localize("DOTA_Tooltip_Ability_" + ability + "_Description"),
+		};
+		GameEvents.SendEventClientSide("show_legion_tooltip", data );
+	}
 }
 
 function HideAbilityTooltip()

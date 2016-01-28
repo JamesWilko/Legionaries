@@ -18,6 +18,7 @@ end
 CHeroSelectionController.SELECTION_MAX_TIME = 60
 CHeroSelectionController.THINK_TIME = 0.5
 CHeroSelectionController.NET_TABLE = "HeroesList"
+CHeroSelectionController.PICKING_NET_TABLE = "HeroPickingData"
 
 function CHeroSelectionController:Setup()
 
@@ -30,18 +31,47 @@ end
 
 function CHeroSelectionController:BuildHeroList()
 
+	local MAX_ABILITIES = 6
+
 	self._available_heroes = {}
+	self._hero_abilities = {}
 
 	-- Build list of available heroes
 	local heroes = LoadKeyValues("scripts/npc/herolist.txt")
-	table.print(heroes, "")
+	local hero_abilities = LoadKeyValues("scripts/npc/npc_heroes_custom.txt")
 
-	for k, v in pairs( heroes ) do
-		table.insert( self._available_heroes, k )
+	for hero_id, _ in pairs( heroes ) do
+
+		for override_id, hero_data in pairs( hero_abilities ) do
+
+			-- Find overridden hero
+			if hero_data["override_hero"] == hero_id then
+
+				-- Add override abilities
+				local data = {}
+				for i = 1, MAX_ABILITIES, 1 do
+					local ability_name = hero_data["Ability" .. tostring(i)]
+					if ability_name then
+						table.insert( data, ability_name )
+					end
+				end
+
+				-- Add hero
+				table.insert( self._available_heroes, hero_id )
+				self._hero_abilities[hero_id] = data
+
+				break
+
+			end
+
+		end
+		
+
 	end
 
 	-- Send heroes to players
 	CustomNetTables:SetTableValue( CHeroSelectionController.NET_TABLE, "heroes", heroes )
+	CustomNetTables:SetTableValue( CHeroSelectionController.NET_TABLE, "abilities", self._hero_abilities )
 
 end
 
@@ -87,6 +117,7 @@ end
 function CHeroSelectionController:OnEnterHeroSelectionState()
 
 	self.hero_history = {}
+	self.hero_history = self.hero_history or {}
 	self.max_players = 0
 	self.players_picked = 0
 
@@ -106,6 +137,7 @@ function CHeroSelectionController:OnEnterHeroSelectionState()
 		["lDuration"] = CHeroSelectionController.SELECTION_MAX_TIME
 	}
 	CustomGameEventManager:Send_ServerToAllClients( "legion_start_hero_selection", data )
+	CustomNetTables:SetTableValue( CHeroSelectionController.PICKING_NET_TABLE, "data", data )
 
 end
 
