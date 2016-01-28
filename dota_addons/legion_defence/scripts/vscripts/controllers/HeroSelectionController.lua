@@ -17,11 +17,31 @@ end
 -------------------------------------
 CHeroSelectionController.SELECTION_MAX_TIME = 60
 CHeroSelectionController.THINK_TIME = 0.5
+CHeroSelectionController.NET_TABLE = "HeroesList"
 
 function CHeroSelectionController:Setup()
 
+	self:BuildHeroList()
+
 	GameRules:GetGameModeEntity():SetThink("OnThink", self, "HeroSelectionController.OnThink", CHeroSelectionController.THINK_TIME)
 	CustomGameEventManager:RegisterListener( "legion_hero_selected", Dynamic_Wrap(CHeroSelectionController, "HandleOnHeroSelected") )
+
+end
+
+function CHeroSelectionController:BuildHeroList()
+
+	self._available_heroes = {}
+
+	-- Build list of available heroes
+	local heroes = LoadKeyValues("scripts/npc/herolist.txt")
+	table.print(heroes, "")
+
+	for k, v in pairs( heroes ) do
+		table.insert( self._available_heroes, k )
+	end
+
+	-- Send heroes to players
+	CustomNetTables:SetTableValue( CHeroSelectionController.NET_TABLE, "heroes", heroes )
 
 end
 

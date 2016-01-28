@@ -1,8 +1,6 @@
 
-var m_Heroes = [];
-m_Heroes.push("npc_dota_hero_ember_spirit");
-m_Heroes.push("npc_dota_hero_lina");
-m_Heroes.push("npc_dota_hero_zuus");
+var HEROES_NETTABLE = "HeroesList";
+var HEROES_KEY = "heroes";
 
 var m_HeroPanels = [];
 var m_SelectedHeroIndex;
@@ -58,21 +56,37 @@ function RandomizeHero()
 	SelectHero( randomIndex );
 }
 
+function OnHeroListUpdated()
+{
+	if(m_HeroPanels)
+	{
+		for(var key in m_HeroPanels)
+		{
+			m_HeroPanels[key].RemoveAndDeleteChildren()
+		}
+		m_HeroPanels = [];
+	}
+
+	var heroes = CustomNetTables.GetTableValue( HEROES_NETTABLE, HEROES_KEY );
+	for( var key in heroes )
+	{
+		var m_Hero = $.CreatePanel( "Panel", $("#HeroesScroll"), key );
+		m_Hero.BLoadLayout( "file://{resources}/layout/custom_game/hero_picker_panel.xml", true, false );
+		m_Hero.AddClass("NotHighlighted");
+		m_HeroPanels[key] = m_Hero;
+	}
+}
+
 (function()
 {
 
 	$.GetContextPanel().visible = false;
 
-	for (var i = 0; i < m_Heroes.length; i++)
-	{
-		var m_Hero = $.CreatePanel( "Panel", $("#HeroesScroll"), m_Heroes[i] );
-		m_Hero.BLoadLayout( "file://{resources}/layout/custom_game/hero_picker_panel.xml", true, false );
-		m_Hero.AddClass("NotHighlighted");
-		m_HeroPanels[m_Heroes[i]] = m_Hero;
-	};	
-
 	GameEvents.Subscribe( "legion_show_hero_picker", OnShowHeroPicker );
 	GameEvents.Subscribe( "legion_close_hero_picker", OnCloseHeroPicker );
 	GameEvents.Subscribe( "legion_cl_select_hero", OnSelectHero );
+	CustomNetTables.SubscribeNetTableListener( HEROES_NETTABLE, OnHeroListUpdated );
+
+	OnHeroListUpdated();
 
 })();

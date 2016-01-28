@@ -16,6 +16,7 @@
 		"KingUpgradeData",
 		"Upgrades",
 		"MercenariesData",
-		"MercenariesCooldowns"
+		"MercenariesCooldowns",
+		"HeroesList"
 	]
 }
