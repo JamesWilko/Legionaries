@@ -1,16 +1,14 @@
 
-var m_TextboxMaxLines = 25;
 var m_TextboxLines = [];
+var m_TextboxMaxLines = 10;
+var m_TextboxCurrent = 0;
+
 var m_TimestampColor = "goldenrod";
 
-String.format = function(format)
+function GetTextboxIndex( m_TextboxCurrent )
 {
-	var args = Array.prototype.slice.call(arguments, 1);
-	return format.replace(/{(\d+)}/g, function(match, number)
-	{
-		return typeof args[number] != 'undefined' ? args[number] : match;
-	});
-};
+	return m_TextboxCurrent % m_TextboxMaxLines;
+}
 
 function OnReceivedCustomChat( data )
 {
@@ -30,8 +28,11 @@ function OnReceivedCustomChat( data )
 		{
 			var message = $.Localize(data["sMessage"]);
 			message = String.format(message, data["argNumber"], $.Localize(data["argString"]), Players.GetPlayerName(messagePlayer));
-			m_TextboxLines.shift();
-			m_TextboxLines.push("<span class=\"" + m_TimestampColor + "\">[" + GetTimestamp() + "]</span> " + message);
+			message = "<span class=\"" + m_TimestampColor + "\">[" + GetTimestamp() + "]</span> " + message;
+
+			m_TextboxLines[GetTextboxIndex(m_TextboxCurrent)] = message;
+			m_TextboxCurrent++;
+
 			UpdateTextbox();
 		}
 	}
@@ -58,26 +59,31 @@ function GetTimestamp()
 function UpdateTextbox()
 {
 	var text = "";
-	for(var i = 0; i < m_TextboxLines.length; ++i)
+	for(var i = m_TextboxCurrent; i < m_TextboxCurrent + m_TextboxMaxLines; ++i)
 	{
-		if(i > 0)
+		if(i > m_TextboxCurrent)
 		{
 			text += "\n<br/>";
 		}
-		text += m_TextboxLines[i];
+		text += m_TextboxLines[GetTextboxIndex(i)];
 	}
 	$("#TextboxText").text = text;
 	$("#TextboxParent").ScrollToBottom();
 }
 
+function Scroll()
+{
+	$("#TextboxParent").ScrollToBottom();
+	$.Schedule(0.016, Scroll);
+}
+
 (function()
 {
-
-	for (var i = 0; i < m_TextboxMaxLines; ++i)
+	for(var i = 0; i < m_TextboxMaxLines; ++i)
 	{
 		m_TextboxLines.push("");
-	};
+	}
 
 	GameEvents.Subscribe( "legion_custom_chat", OnReceivedCustomChat );
-
+	Scroll();
 })();
