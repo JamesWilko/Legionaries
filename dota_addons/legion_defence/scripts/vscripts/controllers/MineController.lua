@@ -40,7 +40,7 @@ end
 function CMineController:OnPlayerAssignedLane( data )
 
 	local playerId = data["lPlayer"]
-
+	
 	-- Give player default mines
 	self.mines[playerId] = table.copy( CMineController.DEFAULT )
 	self:UpdatePlayerIncome( playerId )

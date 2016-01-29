@@ -74,7 +74,7 @@ function CWaveController:Setup()
 	self._think_ent:SetThink("OnLeakPointsThink", self, "WaveControllerLeakPointThink", CWaveController.THINK_TIME_LEAKS)
 
 	-- Events
-	ListenToGameEvent("legion_player_assigned_lane", Dynamic_Wrap(CWaveController, "OnPlayerAssignedLane"), self)
+	ListenToGameEvent("legion_hero_selection_complete", Dynamic_Wrap(CWaveController, "OnHeroSelectionComplete"), self)
 	ListenToGameEvent("entity_killed", Dynamic_Wrap(CWaveController, "OnUnitKilled"), self)
 
 end
@@ -114,10 +114,7 @@ CWaveController.WAVE_STATES = {
 	"_NextWaveRestartLoop"
 }
 
-function CWaveController:OnPlayerAssignedLane( data )
-
-	-- Start countdown once players have joined
-	-- TODO: Wait until all players have joined or left before starting 
+function CWaveController:OnHeroSelectionComplete( data )
 
 	if not self._wave_state then
 		self:_SetWaveCountdown( CWaveController.FIRST_WAVE_DELAY )
