@@ -9,10 +9,23 @@ m_CurrencyColours["CurrencyGold"] = "yellow";
 m_CurrencyColours["CurrencyGems"] = "cyan";
 m_CurrencyColours["CurrencyFood"] = "orange";
 
-function ShowTooltip( panel )
+function GetUpgradeData( sUpgradeId )
 {
 	var upgradesData = CustomNetTables.GetTableValue( "Upgrades", "upgrades" );
-	var upgradeData = upgradesData[panel.id.toString()];
+	for(var key in upgradesData)
+	{
+		var upgrade = upgradesData[key];
+		if(sUpgradeId == upgrade["id"])
+		{
+			return upgrade;
+		}
+	}
+	return undefined;
+}
+
+function ShowTooltip( panel )
+{
+	var upgradeData = GetUpgradeData(panel.id.toString());
 	var upgradeLevelData = CustomNetTables.GetTableValue( "Upgrades", panel.id.toString() );
 
 	var max_level = false;
@@ -94,28 +107,32 @@ function CancelUpgrade( panel )
 
 function OnUpgradesUpdated()
 {
-	var upgradesData = CustomNetTables.GetTableValue( "Upgrades", "upgrades" );
-	if(upgradesData)
+	var key = $.GetContextPanel().id.toString();
+	var upgrade = GetUpgradeData(key);
+	if(upgrade)
 	{
-		var key = $.GetContextPanel().id.toString();
-		var upgrade = upgradesData[key];
-		if(upgrade)
-		{
-			var upgradeLevel = upgrade["default"];
-			var upgradeLevelData = CustomNetTables.GetTableValue( "Upgrades", key );
-			if(upgradeLevelData && upgradeLevelData[Players.GetLocalPlayer()])
-			{
-				upgradeLevel = upgradeLevelData[Players.GetLocalPlayer()];
-				if(upgradeLevel == upgrade["max_level"])
-				{
-					upgradeLevel = $.Localize("legion_upgrade_max_level_short");
-				}
-			}
+		var upgradeLevel = upgrade["default"];
+		var upgradeLevelMax = upgrade["max_level"];
+		var upgradeLevelFriendly = upgradeLevel;
+		var upgradeLevelData = CustomNetTables.GetTableValue( "Upgrades", key );
 
-			$("#Text").text = $.Localize(key + "_Short");
-			$("#Value").text = upgradeLevel;
-			$("#Image").itemname = upgrade["display_image"];
+		if(upgradeLevelData && upgradeLevelData[Players.GetLocalPlayer()])
+		{
+			upgradeLevel = upgradeLevelData[Players.GetLocalPlayer()];
+			upgradeLevelFriendly = upgradeLevel;
 		}
+		if(upgrade["count_method"] == "backwards")
+		{
+			upgradeLevelFriendly = upgradeLevelMax - upgradeLevel;
+		}
+		if(upgradeLevel == upgradeLevelMax)
+		{
+			upgradeLevelFriendly = $.Localize("legion_upgrade_max_level_short");
+		}
+
+		$("#Text").text = $.Localize(key + "_Short");
+		$("#Value").text = upgradeLevelFriendly;
+		$("#Image").itemname = upgrade["display_image"];
 	}
 }
 

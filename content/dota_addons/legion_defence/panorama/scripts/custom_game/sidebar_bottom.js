@@ -10,18 +10,19 @@ function CreateUpgrades()
 		for(var key in upgradesData)
 		{
 			var upgrade = upgradesData[key];
+			var upgradeId = upgrade["id"];
 
 			// Add or update upgrade
-			var panel = $("#" + key);
+			var panel = $("#" + upgradeId);
 			if(!panel)
 			{
-				panel = $.CreatePanel( "Panel", $("#ChildList"), key );
+				panel = $.CreatePanel( "Panel", $("#ChildList"), upgradeId );
 			}
 			panel.BLoadLayout( "file://{resources}/layout/custom_game/general_upgrade_item.xml", true, false );
-			m_Upgrades[key] = panel.GetParent();
+			m_Upgrades[upgradeId] = panel.GetParent();
 
 			var upgradeLevel = upgrade["default"];
-			var upgradeLevelData = CustomNetTables.GetTableValue( "Upgrades", key );
+			var upgradeLevelData = CustomNetTables.GetTableValue( "Upgrades", upgradeId );
 			if(upgradeLevelData && upgradeLevelData[Players.GetLocalPlayer()])
 			{
 				upgradeLevel = upgradeLevelData[Players.GetLocalPlayer()];
@@ -31,7 +32,7 @@ function CreateUpgrades()
 				}
 			}
 
-			panel.FindChild("Text").text = $.Localize(key + "_Short");
+			panel.FindChild("Text").text = $.Localize(upgradeId + "_Short");
 			panel.FindChild("Value").text = upgradeLevel;
 			panel.FindChild("UpgradeButton").FindChild("Image").itemname = upgrade["display_image"];
 		}

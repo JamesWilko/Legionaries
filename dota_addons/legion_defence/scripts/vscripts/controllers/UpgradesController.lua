@@ -20,11 +20,12 @@ CUpgradeController.NET_TABLE = "Upgrades"
 CUpgradeController.UPGRADE_FOOD_CAP = "legion_upgrade_food_capacity"
 CUpgradeController.UPGRADE_MINERS = "legion_upgrade_num_miners"
 CUpgradeController.UPGRADE_MINER_SPEED = "legion_upgrade_miner_speed"
+CUpgradeController.UPGRADE_HERO_RESELECT = "legion_upgrade_hero_reselect"
 
 CUpgradeController.UPGRADES =
 {
-	[CUpgradeController.UPGRADE_FOOD_CAP] =
-	{
+	[1] = {
+		id = CUpgradeController.UPGRADE_FOOD_CAP,
 		cost = {
 			[1] = {
 				currency = CURRENCY_GOLD,
@@ -38,14 +39,15 @@ CUpgradeController.UPGRADES =
 		time = 5,
 		default = 1,
 		max_level = ((CFoodController.MAXIMUM_FOOD - CFoodController.DEFAULT_FOOD) / CFoodController.FOOD_PER_LEVEL) + 1,
+		can_queue = true,
 		display_image = "item_tango",
 		value = CFoodController.FOOD_PER_LEVEL,
 		func = function( playerId, upgradeLevel, levelsAdded )
 			GameRules.LegionDefence:GetFoodController():OnPurchasedFoodUpgrade( playerId, upgradeLevel, levelsAdded )
 		end
 	},
-	[CUpgradeController.UPGRADE_MINERS] =
-	{
+	[2] = {
+		id = CUpgradeController.UPGRADE_MINERS,
 		cost = {
 			[1] = {
 				currency = CURRENCY_GOLD,
@@ -55,14 +57,15 @@ CUpgradeController.UPGRADES =
 		time = 30,
 		default = 1,
 		max_level = ((CMineController.MAXIMUM_MINERS - CMineController.DEFAULT.miners) / CMineController.UPGRADE_MINERS) + 1,
+		can_queue = true,
 		display_image = "item_boots",
 		value = CMineController.UPGRADE_MINERS,
 		func = function( playerId, upgradeLevel, levelsAdded )
 			GameRules.LegionDefence:GetMineController():OnPurchasedMinerUpgrade( playerId, upgradeLevel, levelsAdded )
 		end
 	},
-	[CUpgradeController.UPGRADE_MINER_SPEED] =
-	{
+	[3] = {
+		id = CUpgradeController.UPGRADE_MINER_SPEED,
 		cost = {
 			[1] = {
 				currency = CURRENCY_GEMS,
@@ -72,10 +75,30 @@ CUpgradeController.UPGRADES =
 		time = 10,
 		default = 1,
 		max_level = ((CMineController.MAXIMUM_MINING_SPEED - CMineController.DEFAULT.income_per_miner) / CMineController.UPGRADE_MINING_SPEED) + 1,
+		can_queue = true,
 		display_image = "item_mithril_hammer",
 		value = CMineController.UPGRADE_MINING_SPEED,
 		func = function( playerId, upgradeLevel, levelsAdded )
 			GameRules.LegionDefence:GetMineController():OnPurchasedMiningSpeedUpgrade( playerId, upgradeLevel, levelsAdded )
+		end
+	},
+	[4] = {
+		id = CUpgradeController.UPGRADE_HERO_RESELECT,
+		cost = {
+			[1] = {
+				currency = CURRENCY_GEMS,
+				amount = 100,
+			}
+		},
+		time = 3,
+		default = 0,
+		max_level = CHeroSelectionController.MAXIMUM_REPICKS,
+		count_method = "backwards",
+		can_queue = false,
+		display_image = "item_refresher",
+		value = CHeroSelectionController.MAXIMUM_REPICKS,
+		func = function( playerId, upgradeLevel, levelsAdded )
+			GameRules.LegionDefence:GetHeroSelectionController():PlayerRepickHero( playerId, upgradeLevel, levelsAdded )
 		end
 	}
 }
@@ -101,8 +124,17 @@ function CUpgradeController:Setup()
 
 end
 
+function CUpgradeController:GetUpgradeData( sUpgradeId )
+	for k, v in pairs( CUpgradeController.UPGRADES ) do
+		if v.id == sUpgradeId then
+			return v
+		end
+	end
+	return nil
+end
+
 function CUpgradeController:GetUpgradeLevel( sUpgradeId, iPlayerId )
-	if CUpgradeController.UPGRADES[sUpgradeId] and self._upgrades[sUpgradeId] then
+	if self:GetUpgradeData(sUpgradeId) and self._upgrades[sUpgradeId] then
 		return self._upgrades[sUpgradeId][iPlayerId] or 0
 	end
 	return -1
@@ -111,17 +143,18 @@ end
 function CUpgradeController:SetUpgradeLevel( sUpgradeId, iPlayerId, iUpgradeLevel )
 
 	-- Ensure upgrade exists
-	if CUpgradeController.UPGRADES[sUpgradeId] then
+	local upgradeData = self:GetUpgradeData(sUpgradeId)
+	if upgradeData then
 
 		-- Set upgrade level
 		self._upgrades[sUpgradeId] = self._upgrades[sUpgradeId] or {}
-		self._upgrades[sUpgradeId][iPlayerId] = self._upgrades[sUpgradeId][iPlayerId] or CUpgradeController.UPGRADES[sUpgradeId].default
+		self._upgrades[sUpgradeId][iPlayerId] = self._upgrades[sUpgradeId][iPlayerId] or upgradeData.default
 
 		local diff = iUpgradeLevel - self._upgrades[sUpgradeId][iPlayerId]
 		self._upgrades[sUpgradeId][iPlayerId] = iUpgradeLevel
 
 		-- Call update func
-		CUpgradeController.UPGRADES[sUpgradeId].func( iPlayerId, iUpgradeLevel, diff )
+		upgradeData.func( iPlayerId, iUpgradeLevel, diff )
 
 		-- Update nettable for upgrade
 		CustomNetTables:SetTableValue( CUpgradeController.NET_TABLE, sUpgradeId, self._upgrades[sUpgradeId] )
@@ -136,11 +169,12 @@ function CUpgradeController:OnPlayerAssignedLane( data )
 	local iPlayerId = data["lPlayer"]
 
 	-- Assign default values for player upgrades
-	for upgradeId, upgrade_data in pairs( CUpgradeController.UPGRADES ) do
+	for i, upgrade_data in pairs( CUpgradeController.UPGRADES ) do
 
 		-- Create upgrade tables
+		local upgradeId = upgrade_data.id
 		self._upgrades[upgradeId] = self._upgrades[upgradeId] or {}
-		self._upgrades[upgradeId][iPlayerId] = self._upgrades[upgradeId][iPlayerId] or CUpgradeController.UPGRADES[upgradeId].default
+		self._upgrades[upgradeId][iPlayerId] = self._upgrades[upgradeId][iPlayerId] or upgrade_data.default
 
 		-- Update net tables
 		CustomNetTables:SetTableValue( CUpgradeController.NET_TABLE, upgradeId, self._upgrades[upgradeId] )
@@ -149,20 +183,20 @@ function CUpgradeController:OnPlayerAssignedLane( data )
 
 end
 
-function CUpgradeController.HandleOnAttemptUpgradePurchase( iPlayerId_Wrong, eventArgs )
+function CUpgradeController.HandleOnAttemptUpgradePurchase( iCallingEntity, eventArgs )
 
 	-- Get upgrade data
 	local self = GameRules.LegionDefence:GetUpgradeController()
 	local iPlayerId = eventArgs["PlayerID"]
 	local upgradeId = eventArgs["sUpgradeId"]
-	local upgrade = CUpgradeController.UPGRADES[upgradeId]
+	local upgrade = self:GetUpgradeData(upgradeId)
 	if upgrade then
 
 		local currency_controller = GameRules.LegionDefence:GetCurrencyController()
 
 		-- Verify upgrade data
 		self._upgrades[upgradeId] = self._upgrades[upgradeId] or {}
-		self._upgrades[upgradeId][iPlayerId] = self._upgrades[upgradeId][iPlayerId] or CUpgradeController.UPGRADES[upgradeId].default
+		self._upgrades[upgradeId][iPlayerId] = self._upgrades[upgradeId][iPlayerId] or upgrade.default
 
 		-- Check upgrade for player isn't at max level
 		local playerUpgradeLevel = self._upgrades[upgradeId][iPlayerId]
@@ -179,6 +213,11 @@ function CUpgradeController.HandleOnAttemptUpgradePurchase( iPlayerId_Wrong, eve
 			end
 		end
 
+		-- Check upgrade is queuable and we're not already upgrading it
+		if self:IsUpgradePending( iPlayerId, upgradeId ) and not upgrade.can_queue then
+			return false, "already_upgrading"
+		end
+
 		-- Deduct purchase cost
 		for k, cost_data in pairs( upgrade.cost ) do
 			currency_controller:ModifyCurrency( cost_data.currency, iPlayerId, -cost_data.amount )
@@ -191,13 +230,12 @@ function CUpgradeController.HandleOnAttemptUpgradePurchase( iPlayerId_Wrong, eve
 
 end
 
-function CUpgradeController.HandleOnAttemptUpgradeCancel( iPlayerId_Wrong, eventArgs )
+function CUpgradeController.HandleOnAttemptUpgradeCancel( iCallingEntity, eventArgs )
 
 	local self = GameRules.LegionDefence:GetUpgradeController()
 	local iPlayerId = eventArgs["PlayerID"]
 	local upgradeId = eventArgs["sUpgradeId"]
-	local upgrade = CUpgradeController.UPGRADES[upgradeId]
-	if upgrade and self:IsUpgradePending( iPlayerId, upgradeId ) then
+	if self:GetUpgradeData(upgradeId) and self:IsUpgradePending( iPlayerId, upgradeId ) then
 		self:DequeuePlayerUpgrade( iPlayerId, upgradeId )
 	end
 
@@ -208,14 +246,14 @@ function CUpgradeController:PlayerUpgradeCompleted( iPlayerId, upgradeId )
 	print(string.format("Player %i upgrade %s complete", iPlayerId, upgradeId))
 
 	-- Get upgrade data
-	local upgrade = CUpgradeController.UPGRADES[upgradeId]
+	local upgrade = self:GetUpgradeData(upgradeId)
 	if upgrade then
 
 		local currency_controller = GameRules.LegionDefence:GetCurrencyController()
 
 		-- Verify upgrade data
 		self._upgrades[upgradeId] = self._upgrades[upgradeId] or {}
-		self._upgrades[upgradeId][iPlayerId] = self._upgrades[upgradeId][iPlayerId] or CUpgradeController.UPGRADES[upgradeId].default
+		self._upgrades[upgradeId][iPlayerId] = self._upgrades[upgradeId][iPlayerId] or upgrade.default
 
 		-- Check upgrade for player isn't at max level
 		local playerUpgradeLevel = self._upgrades[upgradeId][iPlayerId]
@@ -242,7 +280,7 @@ end
 
 function CUpgradeController:QueuePendingUpgrade( iPlayerId, upgradeId )
 	
-	local upgrade = CUpgradeController.UPGRADES[upgradeId]
+	local upgrade = self:GetUpgradeData(upgradeId)
 	if upgrade then
 
 		-- Verify data
@@ -277,7 +315,7 @@ function CUpgradeController:DequeuePlayerUpgrade( iPlayerId, upgradeId, bWasCanc
 		bWasCancelled = true
 	end
 
-	local upgrade_data = CUpgradeController.UPGRADES[upgradeId]
+	local upgrade_data = self:GetUpgradeData(upgradeId)
 	local upgrade = self._pending_upgrades[upgradeId]
 	if upgrade_data and upgrade then
 		local player_data = upgrade[iPlayerId]
