@@ -17,6 +17,11 @@
 			<Panel id="HeroesScroll" class="HeroesScroll" />
 		</Panel>
 
+		<Panel class="CountdownLabelPanel">
+			<Label id="CountdownLabel" class="CountdownLabel" text="0:00"/>
+			<Label id="CountdownWarningLabel" class="CountdownWarningLabel" text="#legion_random_hero_warning"/>
+		</Panel>
+
 		<Panel class="HeroesButtonsPanel">
 
 			<Button class="SelectHeroButton" onactivate="FinalizeHero()">

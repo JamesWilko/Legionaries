@@ -5,6 +5,10 @@ var HEROES_KEY = "heroes";
 var m_HeroPanels = [];
 var m_SelectedHeroIndex;
 
+var m_CountdownStart = 0;
+var m_CountdownDuration = 60;
+var m_WarningTime = 20;
+
 var m_LastFinalize = -1;
 var FINALIZE_COOLDOWN = 2;
 
@@ -87,11 +91,45 @@ function CreateHeroesList( heroesList )
 	}
 }
 
+function UpdateCountdown()
+{
+	if( m_CountdownDuration >= 0 )
+	{
+		var time = Game.GetDOTATime(false, false);
+		var remaining_time = Math.floor((m_CountdownStart + m_CountdownDuration) - time);
+
+		var remaining_minutes = Math.floor(remaining_time / 60);
+		var remaining_seconds = Math.floor(remaining_time % 60);
+		if(remaining_minutes < 0) { remaining_minutes = -remaining_minutes; }
+		if(remaining_seconds < 0) { remaining_seconds = -remaining_seconds; }
+		if(remaining_seconds < 10) { remaining_seconds = "0" + remaining_seconds; }
+
+		$("#CountdownLabel").visible = true;
+		$("#CountdownLabel").text = String.format("{2}{0}:{1}", remaining_minutes, remaining_seconds, remaining_time < 0 ? "-" : "");
+
+		if(remaining_time < m_WarningTime)
+		{
+			$("#CountdownWarningLabel").visible = true;
+			$("#CountdownWarningLabel").SetHasClass( "CountdownWarningRed", !$("#CountdownWarningLabel").BHasClass("CountdownWarningRed") );
+		}
+		else
+		{
+			$("#CountdownWarningLabel").visible = false;
+		}
+	}
+
+	$.Schedule( 0.5, UpdateCountdown );
+}
+
 (function()
 {
-	// $.GetContextPanel().visible = false;
-	CreateFullHeroList();
+	$.GetContextPanel().visible = false;
+	$("#CountdownLabel").visible = false;
+	$("#CountdownWarningLabel").visible = false;
+
+	// CreateFullHeroList();
 	GameEvents.Subscribe( "legion_cl_select_hero", OnSelectHero );
+
 })();
 
 Objects.Define({
@@ -100,12 +138,21 @@ Objects.Define({
 	{
 		CreateFullHeroList();
 		$.GetContextPanel().visible = true;
+		m_CountdownStart = -1;
+		m_CountdownDuration = -1;
 	},
 
 	ShowLimited : function( heroesList )
 	{
 		CreateHeroesList( heroesList );
 		$.GetContextPanel().visible = true;
+	},
+
+	SetCountdown : function( start, duration )
+	{
+		m_CountdownStart = start;
+		m_CountdownDuration = duration;
+		UpdateCountdown();
 	}
 
 });

@@ -49,6 +49,44 @@
 	margin-top: 600px;
 }
 
+.CountdownLabelPanel
+{
+	vertical-align: top;
+	horizontal-align: center;
+	margin-top: 3%;
+	height: 100px;
+}
+
+.CountdownLabel
+{
+	vertical-align: center;
+	horizontal-align: center;
+	text-transform: uppercase;
+	text-shadow: 1px 1px 8px 2.0 black;
+	font-family: Goudy Trajan Medium;
+	font-size: 48px;
+	color: white;
+	text-shadow: 0px 0px 8px 1.0 #ffd200;
+}
+
+.CountdownWarningLabel
+{
+	vertical-align: bottom;
+	horizontal-align: center;
+	text-transform: uppercase;
+	text-shadow: 1px 1px 8px 2.0 black;
+	font-family: Goudy Trajan Medium;
+	font-size: 20px;
+	color: white;
+	text-shadow: 0px 0px 8px 1.0 #ff7e00;
+	transition: text-shadow 0.45s ease-in-out 0.0s;
+}
+
+.CountdownWarningRed
+{
+	text-shadow: 0px 0px 8px 1.0 #ff2a00;
+}
+
 .SelectHeroButton
 {
 	margin-bottom: 16px;

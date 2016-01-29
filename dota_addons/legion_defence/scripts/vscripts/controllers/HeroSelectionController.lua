@@ -116,6 +116,7 @@ end
 
 function CHeroSelectionController:EndPicking()
 	CustomGameEventManager:Send_ServerToAllClients( "legion_close_hero_picker", {} )
+	FireGameEventLocal( "legion_hero_selection_complete", {} )
 end
 
 function CHeroSelectionController.HandleOnHeroSelected( iCallingEntity, event )

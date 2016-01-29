@@ -28,6 +28,7 @@ function OnShowHeroPicker( data )
 		}
 		m_HeroPicker.ShowLimited( heroesList );
 	}
+	m_HeroPicker.SetCountdown( data["lStartTime"], data["lDuration"] );
 }
 
 function OnCloseHeroPicker()
