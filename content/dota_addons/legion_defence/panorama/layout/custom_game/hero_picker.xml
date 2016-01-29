@@ -6,10 +6,11 @@
 	</styles>
 
 	<scripts>
+		<include src="file://{resources}/scripts/custom_game/utils.js" />
 		<include src="file://{resources}/scripts/custom_game/hero_picker.js" />
 	</scripts>
 
-	<Panel class="PickerScreen">
+	<Panel class="PickerScreen" onactivate="" hittest="true">
 
 		<Panel class="HeroesScrollPanelBackground" />
 		<Panel class="HeroesScrollPanel">

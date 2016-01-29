@@ -4,13 +4,39 @@ var m_HeroPicker;
 var NET_TABLE = "HeroPickingData";
 var TABLE_KEY = "data";
 
-function OnShowHeroPicker()
+function OnShowHeroPicker( data )
 {
-	m_HeroPicker = $.CreatePanel( "Panel", $.GetContextPanel(), "HeroPickerScreen" );
-	m_HeroPicker.BLoadLayout( "file://{resources}/layout/custom_game/hero_picker.xml", true, false );
+	$.GetContextPanel().visible = true;
+
+	if(m_HeroPicker)
+	{
+		RemoveHeroPicker();
+	}
+
+	m_HeroPicker = Objects.Instantiate("hero_picker", "HeroPickerScreen", $.GetContextPanel());
+	if(!data["bLimitedSelection"])
+	{
+		m_HeroPicker.Show();
+	}
+	else
+	{
+		var playerPickData = CustomNetTables.GetTableValue( NET_TABLE, Players.GetLocalPlayer().toString() );
+		var heroesList = [];
+		for(var key in playerPickData)
+		{
+			heroesList.push(playerPickData[key]);
+		}
+		m_HeroPicker.ShowLimited( heroesList );
+	}
 }
 
 function OnCloseHeroPicker()
+{
+	$.GetContextPanel().visible = false;
+	RemoveHeroPicker();
+}
+
+function RemoveHeroPicker()
 {
 	if(m_HeroPicker)
 	{
@@ -34,7 +60,7 @@ function OnCloseHeroPicker()
 		var time = Game.GetDOTATime(false, false);
 		if(time <= start + duration)
 		{
-			OnShowHeroPicker();
+			OnShowHeroPicker(pickingData);
 		}
 	}
 

@@ -1,0 +1,16 @@
+
+<root>
+
+	<styles>
+		<include src="file://{resources}/styles/custom_game/hero_picker.css" />
+	</styles>
+
+	<scripts>
+		<include src="file://{resources}/scripts/custom_game/utils.js" />
+		<include src="file://{resources}/scripts/custom_game/hero_picker_listener.js" />
+	</scripts>
+
+	<Panel class="ParentPanel" hittest="false">
+	</Panel>
+
+</root>

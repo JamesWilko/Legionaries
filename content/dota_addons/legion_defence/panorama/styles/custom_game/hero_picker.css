@@ -1,4 +1,10 @@
 
+.ParentPanel
+{
+	width: 100%;
+	height: 100%;
+}
+
 .PickerScreen
 {
 	width: 100%;
@@ -45,27 +51,43 @@
 
 .SelectHeroButton
 {
-	margin-bottom: 8px;
+	margin-bottom: 16px;
 	vertical-align: top;
 	horizontal-align: center;
-	background-color: black;
 	width: 300px;
 	height: 64px;
 	color: white;
 	font-size: 26px;
-	
+	background-image: url("s2r://panorama/images/backgrounds/background_play_button_large_2x_png.vtex");
+	background-size: 150% 150%;
+	background-position: 100% 100%;
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #243a67 ), to( #354f7f ) );
+	transition: background-color 0.2s ease-in-out 0.0s, box-shadow 0.2s ease-in-out 0.0s;
+	border: 1px solid #354f7f;
 }
 
 .SelectHeroButton:hover
 {
-	color: yellow;
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #2d4373 ), to( #6e90d7 ) );
+	box-shadow: #789de9 -2px -2px 16px 4px;
+	z-index: 100;
 }
 
 .RandomButton
 {
-	width: 240px;
 	height: 48px;
 	font-size: 18px;
+	background-size: 120% 200%;
+	background-position: 0% 20%;
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #6b6a13 ), to( #c6b924 ) );
+	border: 1px solid #c6b924;
+}
+
+.RandomButton:hover
+{
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #6b6a13 ), to( #bdbf0d ) );
+	box-shadow: fill #bdbf0d 0px 0px 12px 0px;
+	z-index: 100;
 }
 
 .SelectHeroLabel
@@ -73,7 +95,7 @@
 	vertical-align: center;
 	horizontal-align: center;
 	text-transform: uppercase;
-	text-shadow: 1px 1px 8px 5.0 black;
+	text-shadow: 1px 1px 8px 2.0 black;
 	font-family: Goudy Trajan Medium;
 }
 

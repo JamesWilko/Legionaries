@@ -74,14 +74,11 @@
 		"argString"			"string"
 	}
 
-	"legion_start_hero_selection"
+	"legion_show_hero_picker"
 	{
 		"lStartTime"		"short"
 		"lDuration"			"short"
-	}
-
-	"legion_show_hero_picker"
-	{
+		"bLimitedSelection"	"bool"
 	}
 
 	"legion_hero_selected"

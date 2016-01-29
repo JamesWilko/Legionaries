@@ -5,11 +5,8 @@ var HEROES_KEY = "heroes";
 var m_HeroPanels = [];
 var m_SelectedHeroIndex;
 
-function CloseHeroPicker()
-{
-	$.GetContextPanel().visible = false;
-	$.GetContextPanel().DeleteAsync( 0.0 );
-}
+var m_LastFinalize = -1;
+var FINALIZE_COOLDOWN = 2;
 
 function OnSelectHero( data )
 {
@@ -36,8 +33,11 @@ function FinalizeHero()
 {
 	if(m_SelectedHeroIndex)
 	{
-		GameEvents.SendCustomGameEventToServer( "legion_hero_selected", { "sHeroId" : m_SelectedHeroIndex } );
-		CloseHeroPicker();
+		if(m_LastFinalize < 0 || Game.Time() < m_LastFinalize + FINALIZE_COOLDOWN)
+		{
+			GameEvents.SendCustomGameEventToServer( "legion_hero_selected", { "sHeroId" : m_SelectedHeroIndex } );
+			m_LastFinalize = Game.Time();
+		}
 	}
 }
 
@@ -52,34 +52,61 @@ function RandomizeHero()
 	SelectHero( randomIndex );
 }
 
-function OnHeroListUpdated()
+function CreateFullHeroList()
 {
+	var heroes = CustomNetTables.GetTableValue( HEROES_NETTABLE, HEROES_KEY );
+	var list = [];
+	for( var id in heroes )
+	{
+		list.push(id);
+	}
+	CreateHeroesList( list );
+}
+
+function CreateHeroesList( heroesList )
+{
+	// Remove previous heroes
 	if(m_HeroPanels)
 	{
-		for(var key in m_HeroPanels)
+		for(var id in m_HeroPanels)
 		{
-			m_HeroPanels[key].visible = false;
-			m_HeroPanels[key].DeleteAsync( 0.0 );
+			m_HeroPanels[id].visible = false;
+			m_HeroPanels[id].DeleteAsync( 0.0 );
 		}
 		m_HeroPanels = [];
 	}
 
-	var heroes = CustomNetTables.GetTableValue( HEROES_NETTABLE, HEROES_KEY );
-	for( var key in heroes )
+	// Create new heroes list
+	for(var i = 0; i < heroesList.length; ++i)
 	{
-		var m_Hero = $.CreatePanel( "Panel", $("#HeroesScroll"), key );
-		m_Hero.BLoadLayout( "file://{resources}/layout/custom_game/hero_picker_panel.xml", true, false );
+		var heroId = heroesList[i];
+		var m_Hero = Objects.Instantiate("hero_picker_character", heroId, $("#HeroesScroll"));
+		m_HeroPanels[heroId] = m_Hero;
 		m_Hero.AddClass("NotHighlighted");
-		m_HeroPanels[key] = m_Hero;
+		m_Hero.SetHero(heroId);
 	}
 }
 
 (function()
 {
-
+	// $.GetContextPanel().visible = false;
+	CreateFullHeroList();
 	GameEvents.Subscribe( "legion_cl_select_hero", OnSelectHero );
-	CustomNetTables.SubscribeNetTableListener( HEROES_NETTABLE, OnHeroListUpdated );
-
-	OnHeroListUpdated();
-
 })();
+
+Objects.Define({
+
+	Show : function()
+	{
+		CreateFullHeroList();
+		$.GetContextPanel().visible = true;
+	},
+
+	ShowLimited : function( heroesList )
+	{
+		CreateHeroesList( heroesList );
+		$.GetContextPanel().visible = true;
+	}
+
+});
+
