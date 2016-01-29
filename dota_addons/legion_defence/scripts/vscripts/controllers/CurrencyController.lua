@@ -460,7 +460,11 @@ end
 
 function CCurrencyController:OnIncomeThink()
 
-	if IsServer() then
+	-- Don't increase player incomes until all players have picked heroes
+	local hero_selection = GameRules.LegionDefence:GetHeroSelectionController()
+	local allow_income = hero_selection and not hero_selection:IsHeroPickerStateActive() or true
+
+	if IsServer() and allow_income then
 
 		-- Run through all currencies for all players
 		for currency, currencyData in pairs(self._currency_types) do
