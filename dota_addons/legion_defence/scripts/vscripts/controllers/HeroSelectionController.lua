@@ -20,6 +20,7 @@ CHeroSelectionController.THINK_TIME = 0.5
 CHeroSelectionController.NET_TABLE = "HeroesList"
 CHeroSelectionController.PICKING_NET_TABLE = "HeroPickingData"
 CHeroSelectionController.MAXIMUM_REPICKS = 5
+CHeroSelectionController.REPICK_DRAFT_NUMBER = 2
 
 function CHeroSelectionController:Setup()
 
@@ -27,6 +28,14 @@ function CHeroSelectionController:Setup()
 
 	GameRules:GetGameModeEntity():SetThink("OnThink", self, "HeroSelectionController.OnThink", CHeroSelectionController.THINK_TIME)
 	CustomGameEventManager:RegisterListener( "legion_hero_selected", Dynamic_Wrap(CHeroSelectionController, "HandleOnHeroSelected") )
+
+	Convars:RegisterCommand( "legion_hero_select", function(name, parameter)
+		self:OnEnterHeroSelectionState()
+	end, "", FCVAR_CHEAT )
+
+	Convars:RegisterCommand( "legion_hero_select_limited", function(name, parameter)
+		self:PlayerRepickHero( SafeGetPlayerID(Convars:GetCommandClient()), 0, 0 )
+	end, "", FCVAR_CHEAT )
 
 end
 
@@ -216,7 +225,28 @@ function CHeroSelectionController:PlayerRepickHero( playerId, upgradeLevel, leve
 
 		-- Set hero selection data for player
 		local heroes = {}
-		table.insert( heroes, "npc_dota_hero_zuus" )
+		
+
+		while #heroes < CHeroSelectionController.REPICK_DRAFT_NUMBER do
+
+			local hero = self._available_heroes[math.random(#self._available_heroes)]
+			while true do
+				local unique = true
+				hero = self._available_heroes[math.random(#self._available_heroes)]
+				for k, v in pairs(heroes) do
+					if v == hero then
+						unique = false
+						break
+					end
+				end
+				if unique then
+					table.insert( heroes, hero )
+					break
+				end
+			end
+
+		end
+
 		CustomNetTables:SetTableValue( CHeroSelectionController.PICKING_NET_TABLE, tostring(playerId), heroes )
 
 		-- Open hero selection for player
