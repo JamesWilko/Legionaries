@@ -22,9 +22,12 @@ end
 
 
 function CHeroController:OnPlayerPickedHero( event )
-	local hero = EntIndexToHScript( event.heroindex )
-	if hero then
-		hero:AddNewModifier( hero, nil, "modifier_invulnerable", nil )
+	local player = PlayerResource:GetPlayer( event.player )
+	if player then
+		local hero = player:GetAssignedHero()
+		if hero then
+			hero:AddNewModifier( hero, nil, "modifier_invulnerable", nil )
+		end
 	end
 end
 

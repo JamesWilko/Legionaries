@@ -19,6 +19,7 @@ CHeroSelectionController.SELECTION_MAX_TIME = 60
 CHeroSelectionController.THINK_TIME = 0.5
 CHeroSelectionController.NET_TABLE = "HeroesList"
 CHeroSelectionController.PICKING_NET_TABLE = "HeroPickingData"
+CHeroSelectionController.MAXIMUM_REPICKS = 5
 
 function CHeroSelectionController:Setup()
 
@@ -75,15 +76,19 @@ function CHeroSelectionController:BuildHeroList()
 
 end
 
+function CHeroSelectionController:IsHeroPickerStateActive()
+	return self._pick_time_remaining ~= nil
+end
+
 function CHeroSelectionController:OnThink()
 
 	if self._pick_time_remaining ~= nil then
 
 		self._pick_time_remaining = self._pick_time_remaining - CHeroSelectionController.THINK_TIME
 		if self._pick_time_remaining < 0 then
+			self._pick_time_remaining = nil
 			self:ForceRandomPickOnUnpickedPlayers()
 			self:EndPicking()
-			self._pick_time_remaining = nil
 		end
 
 	end
@@ -131,30 +136,49 @@ function CHeroSelectionController.HandleOnHeroSelected( iCallingEntity, event )
 		SendCustomChatMessage( "legion_player_repicked_hero", { player = player, arg_string = hero } )
 	end
 
+	-- Close hero picker on client
+	local hPlayer = PlayerResource:GetPlayer(player)
+	if hPlayer then
+		CustomGameEventManager:Send_ServerToPlayer( hPlayer, "legion_close_hero_picker", {} )
+	end
+
+	-- Check if all players have picked and start game
+	if self:IsHeroPickerStateActive() then
+
+		local all_picked = true
+
+		for playerId = 0, DOTA_MAX_PLAYERS -1 do
+			if PlayerResource:IsValidPlayer( playerId ) then
+				if not self.hero_history[playerId] or #self.hero_history[playerId] < 1 then
+					all_picked = false
+					break
+				end
+			end
+		end
+
+		if all_picked then
+			print("All players have picked heroes...")
+			self:EndPicking()
+		end
+
+	end
+
 end
 
 function CHeroSelectionController:OnEnterHeroSelectionState()
 
 	self.hero_history = self.hero_history or {}
-	self.max_players = 0
-	self.players_picked = 0
-
-	for pID = 0, DOTA_MAX_PLAYERS -1 do
-		if PlayerResource:IsValidPlayer( pID ) then
-			self.max_players = self.max_players + 1
-		end
-	end
 
 	-- Start the pick timer, players will be forced to random at the end of the time
 	self._pick_time_remaining = CHeroSelectionController.SELECTION_MAX_TIME
 
 	-- Send pick time start and duration to clients
-	CustomGameEventManager:Send_ServerToAllClients( "legion_show_hero_picker", {} )
 	local data = {
 		["lStartTime"] = GameRules:GetDOTATime(false, false),
-		["lDuration"] = CHeroSelectionController.SELECTION_MAX_TIME
+		["lDuration"] = CHeroSelectionController.SELECTION_MAX_TIME,
+		["bLimitedSelection"] = false
 	}
-	CustomGameEventManager:Send_ServerToAllClients( "legion_start_hero_selection", data )
+	CustomGameEventManager:Send_ServerToAllClients( "legion_show_hero_picker", data )
 	CustomNetTables:SetTableValue( CHeroSelectionController.PICKING_NET_TABLE, "data", data )
 
 end
@@ -169,8 +193,38 @@ function CHeroSelectionController:AssignHeroToPlayer( playerId, heroId )
 
 		-- Cache and swap the unit
 		PrecacheUnitByNameAsync( heroId, function()
+
 			PlayerResource:ReplaceHeroWith( playerId, heroId, 0, 0 )
+
+			local data = {
+				["player"] = playerId,
+				["hero"] = heroId,
+			}
+			FireGameEventLocal("dota_player_pick_hero", data)
+
 		end, playerId)
+
+	end
+
+end
+
+function CHeroSelectionController:PlayerRepickHero( playerId, upgradeLevel, levelsAdded )
+
+	local player = PlayerResource:GetPlayer(playerId)
+	if player then
+
+		-- Set hero selection data for player
+		local heroes = {}
+		table.insert( heroes, "npc_dota_hero_zuus" )
+		CustomNetTables:SetTableValue( CHeroSelectionController.PICKING_NET_TABLE, tostring(playerId), heroes )
+
+		-- Open hero selection for player
+		local data = {
+			["lStartTime"] = GameRules:GetDOTATime(false, false),
+			["lDuration"] = -1,
+			["bLimitedSelection"] = true
+		}
+		CustomGameEventManager:Send_ServerToPlayer( player, "legion_show_hero_picker", data )
 
 	end
 
