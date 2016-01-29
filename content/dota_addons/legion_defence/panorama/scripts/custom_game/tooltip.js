@@ -17,7 +17,17 @@ function ShowTooltip( data )
 	m_SavedTooltipData = data;
 
 	m_Tooltip.FindChild("TooltipTitle").text = data["title"];
-	m_Tooltip.FindChild("TooltipDesc").text = data["desc"];
+
+	var descLabel = m_Tooltip.FindChild("TooltipDesc");
+	if(data["desc"])
+	{
+		descLabel.visible = true;
+		descLabel.text = data["desc"];
+	}
+	else
+	{
+		descLabel.visible = false;
+	}
 
 	var tooltipAltDesc = m_Tooltip.FindChild("TooltipAltDesc");
 	var altDesc = data["alt-desc"];

@@ -36,7 +36,7 @@ function ShowTooltip( panel )
 	var waveId = panel.wave.toString();
 	var waveData;
 	var title = "";
-	var desc = "";
+	var desc;
 	var boss;
 	var arena;
 
@@ -75,9 +75,12 @@ function ShowTooltip( panel )
 	var data = {
 		"panelId" : panel.id,
 		"title" : title,
-		"desc" : desc,
 	};
 
+	if(desc && desc != "")
+	{
+		data["desc"] = desc;
+	}
 	if(waveData)
 	{
 		var attackType = waveData["attack_capability"];
