@@ -6,7 +6,8 @@
 	</styles>
 
 	<scripts>
-		<include src="file://{resources}/scripts/custom_game/hero_picker_panel.js" />
+		<include src="file://{resources}/scripts/custom_game/utils.js" />
+		<include src="file://{resources}/scripts/custom_game/hero_picker_character.js" />
 	</scripts>
 
 	<Panel class="HeroPanel" onactivate="OnSelected()">
