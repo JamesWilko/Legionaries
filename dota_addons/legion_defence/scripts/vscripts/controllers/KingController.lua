@@ -468,7 +468,7 @@ function CKingController:PerformHeal( hPlayer, hKing )
 	-- Show particles and sounds
 	EmitSoundOnLocationForAllies( hKing:GetOrigin(), "Hero_Omniknight.GuardianAngel.Cast", hKing )
 
-	local nFXIndex = ParticleManager:CreateParticle( "particles/units/heroes/hero_omniknight/omniknight_guardian_angel_ally.vpcf", PATTACH_WORLDORIGIN, hKing )
+	local nFXIndex = ParticleManager:CreateParticle( "particles/units/heroes/hero_oracle/oracle_false_promise_heal.vpcf", PATTACH_WORLDORIGIN, hKing )
 	ParticleManager:SetParticleControl( nFXIndex, 0, hKing:GetOrigin() )
 	ParticleManager:SetParticleControl( nFXIndex, 1, Vector( 450, 1, 1 ) )
 	ParticleManager:ReleaseParticleIndex( nFXIndex )

@@ -34,25 +34,13 @@ function Precache( context )
 
 	PrecacheResource("particle_folder", "particles/currencies/", context)
 
-	PrecacheResource( "model", "models/items/dragon_knight/sword_davion.vmdl", context )
-	PrecacheResource( "model", "models/items/dragon_knight/shield_davion.vmdl", context )
-
-	PrecacheUnitByNameSync( "npc_dota_hero_omniknight", context ) 	-- Radiant King Unit
-	PrecacheUnitByNameSync( "npc_dota_hero_doom", context ) 		-- Dire King Unit
-	PrecacheUnitByNameSync( "npc_dota_hero_dazzle", context ) 		-- Miner Unit
-
-	PrecacheUnitByNameSync( "npc_dota_hero_clinkz", context )
-	PrecacheUnitByNameSync( "npc_dota_hero_dragon_knight", context )
-	PrecacheUnitByNameSync( "npc_dota_hero_ember_spirit", context )
-	PrecacheUnitByNameSync( "npc_dota_hero_lina", context )
-	PrecacheUnitByNameSync( "npc_dota_hero_zuus", context )
-	PrecacheUnitByNameSync( "npc_dota_hero_wisp", context )
-
-	PrecacheUnitByNameSync( "npc_dota_furion_treant", context )
-
 	-- Miner particles
 	PrecacheResource( "particle", "particles/units/heroes/hero_chen/chen_teleport_flash.vpcf", context )
 	PrecacheResource( "particle", "particles/econ/items/puck/puck_alliance_set/puck_illusory_orb_launch_aproset.vpcf", context )
+
+	-- King
+	PrecacheResource( "soundfile", "soundevents/game_sounds_heroes/game_sounds_omniknight.vsndevts", context )
+	PrecacheResource( "particle", "particles/units/heroes/hero_oracle/oracle_false_promise_heal.vpcf", context )
 
 	-- Currency, armour, crystal particles
 	PrecacheResource( "particle_folder", "particles/units/", context )
@@ -83,7 +71,7 @@ function CLegionDefence:InitGameMode()
 	
 	GameRules:SetSameHeroSelectionEnabled( true )
 	GameRules:SetGoldPerTick( 0 )
-	GameRules:SetPreGameTime( 3 )
+	GameRules:SetPreGameTime( 0 )
 	GameRules:SetCustomGameSetupTimeout( 3 )
 
 	self:SetupHeroSelectionController()
@@ -128,30 +116,33 @@ end
 -- Debug, give player all levels
 function CLegionDefence:OnPlayerPickedHero( event )
 
-	local hero = EntIndexToHScript( event.heroindex )
-	if hero then
+	local player = PlayerResource:GetPlayer( event.player )
+	if player then
+		local hero = player:GetAssignedHero()
+		if hero then
 		
-		-- Remove Dota gold
-		hero:SetGold(0, false)
-		hero:SetGold(0, true)
+			-- Remove Dota gold
+			hero:SetGold(0, false)
+			hero:SetGold(0, true)
 
-		-- Make all abilities max level
-		for i = 0, hero:GetAbilityCount() - 1, 1 do
-			local ability = hero:GetAbilityByIndex(i)
-			if ability then
-				ability:SetLevel( ability:GetMaxLevel() )
+			-- Make all abilities max level
+			for i = 0, hero:GetAbilityCount() - 1, 1 do
+				local ability = hero:GetAbilityByIndex(i)
+				if ability then
+					ability:SetLevel( ability:GetMaxLevel() )
+				end
 			end
+
+			-- Heroes can't attack
+			hero:SetAttackCapability( DOTA_UNIT_CAP_NO_ATTACK )
+
+			-- Remove skill points
+			hero:SetAbilityPoints(0)
+
+			-- Give items
+			-- hero:AddItemByName("item_necronomicon")
+
 		end
-
-		-- Heroes can't attack
-		hero:SetAttackCapability( DOTA_UNIT_CAP_NO_ATTACK )
-
-		-- Remove skill points
-		hero:SetAbilityPoints(0)
-
-		-- Give items
-		-- hero:AddItemByName("item_necronomicon")
-
 	end
 
 end
