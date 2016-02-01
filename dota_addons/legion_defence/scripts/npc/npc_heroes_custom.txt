@@ -19,9 +19,9 @@
 	"VisionNighttimeRange"		"1800"
 }
 
-"npc_legion_hero_lightning_builder"
+"npc_legion_hero_nature_builder"
 {
-	"override_hero"				"npc_dota_hero_zuus"
+	"override_hero"				"npc_dota_hero_furion"
 	"AbilityLayout"				"6"
 	"Ability1"	""
 	"Ability2"	""
@@ -35,7 +35,35 @@
 
 
 
+"npc_legion_hero_water_builder"
+{
+	"override_hero"				"npc_dota_hero_kunkka"
+	"AbilityLayout"				"6"
+	"Ability1"	""
+	"Ability2"	""
+	"Ability3"	""
+	"Ability4"	""
+	"Ability5"	""
+	"Ability6"	""
 
+	"VisionNighttimeRange"		"1800"
+}
+
+
+
+"npc_legion_hero_mech_builder"
+{
+	"override_hero"				"npc_dota_hero_disruptor"
+	"AbilityLayout"				"6"
+	"Ability1"	"spawn_tower_mech_militia"
+	"Ability2"	"spawn_tower_mech_sniper"
+	"Ability3"	"spawn_tower_mech_captain"
+	"Ability4"	"spawn_tower_mech_airship"
+	"Ability5"	"spawn_tower_mech_knight"
+	"Ability6"	"spawn_tower_mech_cyborg"
+
+	"VisionNighttimeRange"		"1800"
+}
 
 
 }

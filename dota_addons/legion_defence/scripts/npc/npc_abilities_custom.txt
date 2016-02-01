@@ -3,6 +3,1294 @@
 {
 	"Version"		"1"
 
+"spawn_tower_merc_footman"
+{
+	"BaseClass"						"ability_lua"
+	"AbilityTextureName"			"lina_dragon_slave"
+	"ScriptFile"					"abilities/spawning/spawn_tower_merc_footman"
+
+	"AbilityCastRange"				"800"
+	"AbilityCastPoint"				"0.5"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+	"FightRecapLevel"				"1"
+	"MaxLevel"						"1"
+
+	"AbilityCooldown"				"0"
+	"AbilityDuration"				"0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"GoldCost"					"0"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"PopulationCost"			"0"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"SpawnEffectAOE"			"0"
+		}
+	}
+
+	"precache"
+	{
+		"model"				"models/creeps/neutral_creeps/n_creep_troll_skeleton/n_creep_skeleton_melee.vmdl"
+		"model_folder"		"models/creeps/neutral_creeps/n_creep_troll_skeleton/"
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+"spawn_tower_merc_bowman"
+{
+	"BaseClass"						"ability_lua"
+	"AbilityTextureName"			"lina_dragon_slave"
+	"ScriptFile"					"abilities/spawning/spawn_tower_merc_bowman"
+
+	"AbilityCastRange"				"800"
+	"AbilityCastPoint"				"0.5"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+	"FightRecapLevel"				"1"
+	"MaxLevel"						"1"
+
+	"AbilityCooldown"				"0"
+	"AbilityDuration"				"0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"GoldCost"					"0"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"PopulationCost"			"0"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"SpawnEffectAOE"			"0"
+		}
+	}
+
+	"precache"
+	{
+		"model"				"models/creeps/neutral_creeps/n_creep_forest_trolls/n_creep_forest_troll_berserker.vmdl"
+		"model_folder"		"models/creeps/neutral_creeps/n_creep_forest_trolls/"
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+"spawn_tower_merc_ghoul"
+{
+	"BaseClass"						"ability_lua"
+	"AbilityTextureName"			"lina_dragon_slave"
+	"ScriptFile"					"abilities/spawning/spawn_tower_merc_ghoul"
+
+	"AbilityCastRange"				"800"
+	"AbilityCastPoint"				"0.5"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+	"FightRecapLevel"				"1"
+	"MaxLevel"						"1"
+
+	"AbilityCooldown"				"0"
+	"AbilityDuration"				"0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"GoldCost"					"0"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"PopulationCost"			"0"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"SpawnEffectAOE"			"0"
+		}
+	}
+
+	"precache"
+	{
+		"model"				"models/creeps/neutral_creeps/n_creep_ghost_b/n_creep_ghost_b.vmdl"
+		"model_folder"		"models/creeps/neutral_creeps/n_creep_ghost_b/"
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+"spawn_tower_merc_warrior"
+{
+	"BaseClass"						"ability_lua"
+	"AbilityTextureName"			"lina_dragon_slave"
+	"ScriptFile"					"abilities/spawning/spawn_tower_merc_warrior"
+
+	"AbilityCastRange"				"800"
+	"AbilityCastPoint"				"0.5"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+	"FightRecapLevel"				"1"
+	"MaxLevel"						"1"
+
+	"AbilityCooldown"				"0"
+	"AbilityDuration"				"0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"GoldCost"					"0"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"PopulationCost"			"0"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"SpawnEffectAOE"			"0"
+		}
+	}
+
+	"precache"
+	{
+		"model"				"models/creeps/neutral_creeps/n_creep_centaur_med/n_creep_centaur_med.vmdl"
+		"model_folder"		"models/creeps/neutral_creeps/n_creep_centaur_med/"
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+"spawn_tower_merc_whelp"
+{
+	"BaseClass"						"ability_lua"
+	"AbilityTextureName"			"lina_dragon_slave"
+	"ScriptFile"					"abilities/spawning/spawn_tower_merc_whelp"
+
+	"AbilityCastRange"				"800"
+	"AbilityCastPoint"				"0.5"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+	"FightRecapLevel"				"1"
+	"MaxLevel"						"1"
+
+	"AbilityCooldown"				"0"
+	"AbilityDuration"				"0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"GoldCost"					"0"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"PopulationCost"			"0"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"SpawnEffectAOE"			"0"
+		}
+	}
+
+	"precache"
+	{
+		"model"				"models/creeps/neutral_creeps/n_creep_thunder_lizard/n_creep_thunder_lizard_small.vmdl"
+		"model_folder"		"models/creeps/neutral_creeps/n_creep_thunder_lizard/"
+		"particle"			"particles/neutral_fx/thunderlizard_base_attack.vpcf"
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+"spawn_tower_merc_hermit"
+{
+	"BaseClass"						"ability_lua"
+	"AbilityTextureName"			"lina_dragon_slave"
+	"ScriptFile"					"abilities/spawning/spawn_tower_merc_hermit"
+
+	"AbilityCastRange"				"800"
+	"AbilityCastPoint"				"0.5"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+	"FightRecapLevel"				"1"
+	"MaxLevel"						"1"
+
+	"AbilityCooldown"				"0"
+	"AbilityDuration"				"0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"GoldCost"					"0"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"PopulationCost"			"0"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"SpawnEffectAOE"			"0"
+		}
+	}
+
+	"precache"
+	{
+		"model"				"models/creeps/neutral_creeps/n_creep_troll_dark_a/n_creep_troll_dark_a.vmdl"
+		"model_folder"		"models/creeps/neutral_creeps/n_creep_troll_dark_a/"
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+"spawn_tower_merc_dino"
+{
+	"BaseClass"						"ability_lua"
+	"AbilityTextureName"			"lina_dragon_slave"
+	"ScriptFile"					"abilities/spawning/spawn_tower_merc_dino"
+
+	"AbilityCastRange"				"800"
+	"AbilityCastPoint"				"0.5"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+	"FightRecapLevel"				"1"
+	"MaxLevel"						"1"
+
+	"AbilityCooldown"				"0"
+	"AbilityDuration"				"0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"GoldCost"					"0"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"PopulationCost"			"0"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"SpawnEffectAOE"			"0"
+		}
+	}
+
+	"precache"
+	{
+		"model"				"models/creeps/neutral_creeps/n_creep_thunder_lizard/n_creep_thunder_lizard_big.vmdl"
+		"model_folder"		"models/creeps/neutral_creeps/n_creep_thunder_lizard/"
+		"particle"			"particles/neutral_fx/thunderlizard_base_attack.vpcf"
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+"spawn_tower_merc_commander"
+{
+	"BaseClass"						"ability_lua"
+	"AbilityTextureName"			"lina_dragon_slave"
+	"ScriptFile"					"abilities/spawning/spawn_tower_merc_commander"
+
+	"AbilityCastRange"				"800"
+	"AbilityCastPoint"				"0.5"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+	"FightRecapLevel"				"1"
+	"MaxLevel"						"1"
+
+	"AbilityCooldown"				"0"
+	"AbilityDuration"				"0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"GoldCost"					"0"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"PopulationCost"			"0"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"SpawnEffectAOE"			"0"
+		}
+	}
+
+	"precache"
+	{
+		"model"				"models/creeps/neutral_creeps/n_creep_forest_trolls/n_creep_forest_troll_high_priest.vmdl"
+		"model_folder"		"models/creeps/neutral_creeps/n_creep_forest_trolls/"
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+"spawn_tower_merc_furbolg"
+{
+	"BaseClass"						"ability_lua"
+	"AbilityTextureName"			"lina_dragon_slave"
+	"ScriptFile"					"abilities/spawning/spawn_tower_merc_furbolg"
+
+	"AbilityCastRange"				"800"
+	"AbilityCastPoint"				"0.5"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+	"FightRecapLevel"				"1"
+	"MaxLevel"						"1"
+
+	"AbilityCooldown"				"0"
+	"AbilityDuration"				"0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"GoldCost"					"0"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"PopulationCost"			"0"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"SpawnEffectAOE"			"0"
+		}
+	}
+
+	"precache"
+	{
+		"model"				"models/creeps/neutral_creeps/n_creep_beast/n_creep_beast.vmdl"
+		"model_folder"		"models/creeps/neutral_creeps/n_creep_beast/"
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+"spawn_tower_merc_wyvern"
+{
+	"BaseClass"						"ability_lua"
+	"AbilityTextureName"			"lina_dragon_slave"
+	"ScriptFile"					"abilities/spawning/spawn_tower_merc_wyvern"
+
+	"AbilityCastRange"				"800"
+	"AbilityCastPoint"				"0.5"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+	"FightRecapLevel"				"1"
+	"MaxLevel"						"1"
+
+	"AbilityCooldown"				"0"
+	"AbilityDuration"				"0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"GoldCost"					"0"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"PopulationCost"			"0"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"SpawnEffectAOE"			"0"
+		}
+	}
+
+	"precache"
+	{
+		"model"				"models/creeps/neutral_creeps/n_creep_black_drake/n_creep_black_drake.vmdl"
+		"model_folder"		"models/creeps/neutral_creeps/n_creep_black_drake/"
+		"particle"			"particles/neutral_fx/black_drake_attack.vpcf"
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+"spawn_tower_merc_chariot"
+{
+	"BaseClass"						"ability_lua"
+	"AbilityTextureName"			"lina_dragon_slave"
+	"ScriptFile"					"abilities/spawning/spawn_tower_merc_chariot"
+
+	"AbilityCastRange"				"800"
+	"AbilityCastPoint"				"0.5"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+	"FightRecapLevel"				"1"
+	"MaxLevel"						"1"
+
+	"AbilityCooldown"				"0"
+	"AbilityDuration"				"0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"GoldCost"					"0"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"PopulationCost"			"0"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"SpawnEffectAOE"			"0"
+		}
+	}
+
+	"precache"
+	{
+		"model"				"models/creeps/lane_creeps/creep_good_siege/creep_good_siege.vmdl"
+		"model_folder"		"models/creeps/lane_creeps/creep_good_siege/"
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+"spawn_tower_merc_orc"
+{
+	"BaseClass"						"ability_lua"
+	"AbilityTextureName"			"lina_dragon_slave"
+	"ScriptFile"					"abilities/spawning/spawn_tower_merc_orc"
+
+	"AbilityCastRange"				"800"
+	"AbilityCastPoint"				"0.5"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+	"FightRecapLevel"				"1"
+	"MaxLevel"						"1"
+
+	"AbilityCooldown"				"0"
+	"AbilityDuration"				"0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"GoldCost"					"0"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"PopulationCost"			"0"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"SpawnEffectAOE"			"0"
+		}
+	}
+
+	"precache"
+	{
+		"model"				"models/creeps/neutral_creeps/n_creep_furbolg/n_creep_furbolg_disrupter.vmdl"
+		"model_folder"		"models/creeps/neutral_creeps/n_creep_furbolg/"
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+"spawn_tower_merc_frost_wolf"
+{
+	"BaseClass"						"ability_lua"
+	"AbilityTextureName"			"lina_dragon_slave"
+	"ScriptFile"					"abilities/spawning/spawn_tower_merc_frost_wolf"
+
+	"AbilityCastRange"				"800"
+	"AbilityCastPoint"				"0.5"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+	"FightRecapLevel"				"1"
+	"MaxLevel"						"1"
+
+	"AbilityCooldown"				"0"
+	"AbilityDuration"				"0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"GoldCost"					"0"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"PopulationCost"			"0"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"SpawnEffectAOE"			"0"
+		}
+	}
+
+	"precache"
+	{
+		"model"				"models/creeps/neutral_creeps/n_creep_worg_large/n_creep_worg_large.vmdl"
+		"model_folder"		"models/creeps/neutral_creeps/n_creep_worg_large/"
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+"spawn_tower_merc_ice_troll"
+{
+	"BaseClass"						"ability_lua"
+	"AbilityTextureName"			"lina_dragon_slave"
+	"ScriptFile"					"abilities/spawning/spawn_tower_merc_ice_troll"
+
+	"AbilityCastRange"				"800"
+	"AbilityCastPoint"				"0.5"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+	"FightRecapLevel"				"1"
+	"MaxLevel"						"1"
+
+	"AbilityCooldown"				"0"
+	"AbilityDuration"				"0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"GoldCost"					"0"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"PopulationCost"			"0"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"SpawnEffectAOE"			"0"
+		}
+	}
+
+	"precache"
+	{
+		"model"				"models/creeps/neutral_creeps/n_creep_ogre_lrg/n_creep_ogre_lrg.vmdl"
+		"model_folder"		"models/creeps/neutral_creeps/n_creep_ogre_lrg/"
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+"spawn_tower_merc_warlock"
+{
+	"BaseClass"						"ability_lua"
+	"AbilityTextureName"			"lina_dragon_slave"
+	"ScriptFile"					"abilities/spawning/spawn_tower_merc_warlock"
+
+	"AbilityCastRange"				"800"
+	"AbilityCastPoint"				"0.5"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+	"FightRecapLevel"				"1"
+	"MaxLevel"						"1"
+
+	"AbilityCooldown"				"0"
+	"AbilityDuration"				"0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"GoldCost"					"0"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"PopulationCost"			"0"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"SpawnEffectAOE"			"0"
+		}
+	}
+
+	"precache"
+	{
+		"model"				"models/creeps/neutral_creeps/n_creep_black_dragon/n_creep_black_dragon.vmdl"
+		"model_folder"		"models/creeps/neutral_creeps/n_creep_black_dragon/"
+		"particle"			"particles/neutral_fx/black_dragon_attack.vpcf"
+	}
+}
+
+
+
+
+
+
+
+
+
+
+"spawn_tower_merc_pandaren"
+{
+	"BaseClass"						"ability_lua"
+	"AbilityTextureName"			"lina_dragon_slave"
+	"ScriptFile"					"abilities/spawning/spawn_tower_merc_pandaren"
+
+	"AbilityCastRange"				"800"
+	"AbilityCastPoint"				"0.5"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+	"FightRecapLevel"				"1"
+	"MaxLevel"						"1"
+
+	"AbilityCooldown"				"0"
+	"AbilityDuration"				"0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"GoldCost"					"0"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"PopulationCost"			"0"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"SpawnEffectAOE"			"0"
+		}
+	}
+
+	"precache"
+	{
+		"model"				"models/creeps/neutral_creeps/n_creep_golem_b/n_creep_golem_b.vmdl"
+		"model_folder"		"models/creeps/neutral_creeps/n_creep_golem_b/"
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+"spawn_tower_merc_ballista"
+{
+	"BaseClass"						"ability_lua"
+	"AbilityTextureName"			"lina_dragon_slave"
+	"ScriptFile"					"abilities/spawning/spawn_tower_merc_ballista"
+
+	"AbilityCastRange"				"800"
+	"AbilityCastPoint"				"0.5"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+	"FightRecapLevel"				"1"
+	"MaxLevel"						"1"
+
+	"AbilityCooldown"				"0"
+	"AbilityDuration"				"0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"GoldCost"					"0"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"PopulationCost"			"0"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"SpawnEffectAOE"			"0"
+		}
+	}
+
+	"precache"
+	{
+		"model"				"models/creeps/lane_creeps/creep_good_siege/creep_good_siege.vmdl"
+		"model_folder"		"models/creeps/lane_creeps/creep_good_siege/"
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+"spawn_tower_merc_shaman"
+{
+	"BaseClass"						"ability_lua"
+	"AbilityTextureName"			"lina_dragon_slave"
+	"ScriptFile"					"abilities/spawning/spawn_tower_merc_shaman"
+
+	"AbilityCastRange"				"800"
+	"AbilityCastPoint"				"0.5"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+	"FightRecapLevel"				"1"
+	"MaxLevel"						"1"
+
+	"AbilityCooldown"				"0"
+	"AbilityDuration"				"0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"GoldCost"					"0"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"PopulationCost"			"0"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"SpawnEffectAOE"			"0"
+		}
+	}
+
+	"precache"
+	{
+		"model"				"models/creeps/neutral_creeps/n_creep_satyr_b/n_creep_satyr_b.vmdl"
+		"model_folder"		"models/creeps/neutral_creeps/n_creep_satyr_b/"
+		"particle"			"particles/neutral_fx/satyr_trickster_projectile.vpcf"
+	}
+}
+
+
+
+
+
+
+
+
+
+"spawn_tower_merc_pudge"
+{
+	"BaseClass"						"ability_lua"
+	"AbilityTextureName"			"lina_dragon_slave"
+	"ScriptFile"					"abilities/spawning/spawn_tower_merc_pudge"
+
+	"AbilityCastRange"				"800"
+	"AbilityCastPoint"				"0.5"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+	"FightRecapLevel"				"1"
+	"MaxLevel"						"1"
+
+	"AbilityCooldown"				"0"
+	"AbilityDuration"				"0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"GoldCost"					"0"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"PopulationCost"			"0"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"SpawnEffectAOE"			"0"
+		}
+	}
+
+	"precache"
+	{
+		"model"				"models/creeps/neutral_creeps/n_creep_centaur_lrg/n_creep_centaur_lrg.vmdl"
+		"model_folder"		"models/creeps/neutral_creeps/n_creep_centaur_lrg/"
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+"spawn_tower_merc_gargoyle"
+{
+	"BaseClass"						"ability_lua"
+	"AbilityTextureName"			"lina_dragon_slave"
+	"ScriptFile"					"abilities/spawning/spawn_tower_merc_gargoyle"
+
+	"AbilityCastRange"				"800"
+	"AbilityCastPoint"				"0.5"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+	"FightRecapLevel"				"1"
+	"MaxLevel"						"1"
+
+	"AbilityCooldown"				"0"
+	"AbilityDuration"				"0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"GoldCost"					"0"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"PopulationCost"			"0"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"SpawnEffectAOE"			"0"
+		}
+	}
+
+	"precache"
+	{
+		"model"				"models/creeps/neutral_creeps/n_creep_gargoyle/n_creep_gargoyle.vmdl"
+		"model_folder"		"models/creeps/neutral_creeps/n_creep_gargoyle/"
+		"particle"			"particles/econ/items/leshrac/leshrac_tormented_staff/leshrac_base_attack_tormented.vpcf"
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+"spawn_tower_merc_behemoth"
+{
+	"BaseClass"						"ability_lua"
+	"AbilityTextureName"			"lina_dragon_slave"
+	"ScriptFile"					"abilities/spawning/spawn_tower_merc_behemoth"
+
+	"AbilityCastRange"				"800"
+	"AbilityCastPoint"				"0.5"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+	"FightRecapLevel"				"1"
+	"MaxLevel"						"1"
+
+	"AbilityCooldown"				"0"
+	"AbilityDuration"				"0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"GoldCost"					"0"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"PopulationCost"			"0"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"SpawnEffectAOE"			"0"
+		}
+	}
+
+	"precache"
+	{
+		"model"				"models/creeps/neutral_creeps/n_creep_golem_a/neutral_creep_golem_a.vmdl"
+		"model_folder"		"models/creeps/neutral_creeps/n_creep_golem_a/"
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+"spawn_tower_merc_kraken"
+{
+	"BaseClass"						"ability_lua"
+	"AbilityTextureName"			"lina_dragon_slave"
+	"ScriptFile"					"abilities/spawning/spawn_tower_merc_kraken"
+
+	"AbilityCastRange"				"800"
+	"AbilityCastPoint"				"0.5"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+	"FightRecapLevel"				"1"
+	"MaxLevel"						"1"
+
+	"AbilityCooldown"				"0"
+	"AbilityDuration"				"0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"GoldCost"					"0"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"PopulationCost"			"0"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"SpawnEffectAOE"			"0"
+		}
+	}
+
+	"precache"
+	{
+		"model"				"models/creeps/neutral_creeps/n_creep_ghost_a/n_creep_ghost_a.vmdl"
+		"model_folder"		"models/creeps/neutral_creeps/n_creep_ghost_a/"
+		"particle"			"particles/neutral_fx/ghost_base_attack.vpcf"
+	}
+}
+
+
+
+
+
+
+
+
+
+
+"spawn_tower_merc_infernal"
+{
+	"BaseClass"						"ability_lua"
+	"AbilityTextureName"			"lina_dragon_slave"
+	"ScriptFile"					"abilities/spawning/spawn_tower_merc_infernal"
+
+	"AbilityCastRange"				"800"
+	"AbilityCastPoint"				"0.5"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+	"FightRecapLevel"				"1"
+	"MaxLevel"						"1"
+
+	"AbilityCooldown"				"0"
+	"AbilityDuration"				"0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"GoldCost"					"0"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"PopulationCost"			"0"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"SpawnEffectAOE"			"0"
+		}
+	}
+
+	"precache"
+	{
+		"model"				"models/heroes/warlock/warlock_demon.vmdl"
+		"model_folder"		"models/heroes/warlock/"
+	}
+}
+
+
+
+
+
+
+
+
+
+
+"spawn_tower_merc_demon"
+{
+	"BaseClass"						"ability_lua"
+	"AbilityTextureName"			"lina_dragon_slave"
+	"ScriptFile"					"abilities/spawning/spawn_tower_merc_demon"
+
+	"AbilityCastRange"				"800"
+	"AbilityCastPoint"				"0.5"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+	"FightRecapLevel"				"1"
+	"MaxLevel"						"1"
+
+	"AbilityCooldown"				"0"
+	"AbilityDuration"				"0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"GoldCost"					"0"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"PopulationCost"			"0"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"SpawnEffectAOE"			"0"
+		}
+	}
+
+	"precache"
+	{
+		"model"				"models/creeps/roshan/roshan.vmdl"
+		"model_folder"		"models/creeps/roshan/"
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
 "spawn_tower_fire_heat_knight"
 {
 	"BaseClass"						"ability_lua"
@@ -47,7 +1335,6 @@
 		"particle_folder"	"particles/units/heroes/hero_dragon_knight/"
 	}
 }
-
 
 
 
@@ -103,7 +1390,6 @@
 
 
 
-
 "spawn_tower_fire_vanguard"
 {
 	"BaseClass"						"ability_lua"
@@ -148,7 +1434,6 @@
 		"particle_folder"	"particles/units/heroes/hero_sven/"
 	}
 }
-
 
 
 
@@ -253,7 +1538,6 @@
 
 
 
-
 "spawn_tower_fire_pyromancer"
 {
 	"BaseClass"						"ability_lua"
@@ -303,15 +1587,14 @@
 
 
 
-
-"spawn_tower_merc_footman"
+"spawn_tower_mech_militia"
 {
 	"BaseClass"						"ability_lua"
-	"AbilityTextureName"			"lina_dragon_slave"
-	"ScriptFile"					"abilities/spawning/spawn_tower_merc_footman"
+	"AbilityTextureName"			"arc_warden_tempest_double"
+	"ScriptFile"					"abilities/spawning/spawn_tower_mech_militia"
 
 	"AbilityCastRange"				"800"
-	"AbilityCastPoint"				"0.5"
+	"AbilityCastPoint"				"0.4"
 
 	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
 	"FightRecapLevel"				"1"
@@ -326,7 +1609,7 @@
 		"01"
 		{
 			"var_type"					"FIELD_INTEGER"
-			"GoldCost"					"0"
+			"GoldCost"					"25"
 		}
 		"02"
 		{
@@ -336,14 +1619,16 @@
 		"03"
 		{
 			"var_type"					"FIELD_INTEGER"
-			"SpawnEffectAOE"			"0"
+			"SpawnEffectAOE"			"60"
 		}
 	}
 
 	"precache"
 	{
-		"model"				"models/creeps/neutral_creeps/n_creep_troll_skeleton/n_creep_skeleton_melee.vmdl"
-		"model_folder"		"models/creeps/neutral_creeps/n_creep_troll_skeleton/"
+		"model"				"models/heroes/arc_warden/arc_warden.vmdl"
+		"model_folder"		"models/heroes/arc_warden/"
+		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_arc_warden.vsndevts"
+		"particle_folder"	"particles/units/heroes/hero_arc_warden/"
 	}
 }
 
@@ -352,22 +1637,14 @@
 
 
 
-
-
-
-
-
-
-
-
-"spawn_tower_merc_bowman"
+"spawn_tower_mech_sniper"
 {
 	"BaseClass"						"ability_lua"
-	"AbilityTextureName"			"lina_dragon_slave"
-	"ScriptFile"					"abilities/spawning/spawn_tower_merc_bowman"
+	"AbilityTextureName"			"sniper_take_aim"
+	"ScriptFile"					"abilities/spawning/spawn_tower_mech_sniper"
 
 	"AbilityCastRange"				"800"
-	"AbilityCastPoint"				"0.5"
+	"AbilityCastPoint"				"0.4"
 
 	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
 	"FightRecapLevel"				"1"
@@ -382,7 +1659,7 @@
 		"01"
 		{
 			"var_type"					"FIELD_INTEGER"
-			"GoldCost"					"0"
+			"GoldCost"					"60"
 		}
 		"02"
 		{
@@ -392,14 +1669,16 @@
 		"03"
 		{
 			"var_type"					"FIELD_INTEGER"
-			"SpawnEffectAOE"			"0"
+			"SpawnEffectAOE"			"80"
 		}
 	}
 
 	"precache"
 	{
-		"model"				"models/creeps/neutral_creeps/n_creep_forest_trolls/n_creep_forest_troll_berserker.vmdl"
-		"model_folder"		"models/creeps/neutral_creeps/n_creep_forest_trolls/"
+		"model"				"models/heroes/sniper/sniper.vmdl"
+		"model_folder"		"models/heroes/sniper/"
+		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_sniper.vsndevts"
+		"particle_folder"	"particles/units/heroes/hero_sniper/"
 	}
 }
 
@@ -407,23 +1686,14 @@
 
 
 
-
-
-
-
-
-
-
-
-
-"spawn_tower_merc_ghoul"
+"spawn_tower_mech_captain"
 {
 	"BaseClass"						"ability_lua"
-	"AbilityTextureName"			"lina_dragon_slave"
-	"ScriptFile"					"abilities/spawning/spawn_tower_merc_ghoul"
+	"AbilityTextureName"			"shredder_whirling_death"
+	"ScriptFile"					"abilities/spawning/spawn_tower_mech_captain"
 
 	"AbilityCastRange"				"800"
-	"AbilityCastPoint"				"0.5"
+	"AbilityCastPoint"				"0.4"
 
 	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
 	"FightRecapLevel"				"1"
@@ -438,7 +1708,7 @@
 		"01"
 		{
 			"var_type"					"FIELD_INTEGER"
-			"GoldCost"					"0"
+			"GoldCost"					"110"
 		}
 		"02"
 		{
@@ -448,14 +1718,16 @@
 		"03"
 		{
 			"var_type"					"FIELD_INTEGER"
-			"SpawnEffectAOE"			"0"
+			"SpawnEffectAOE"			"100"
 		}
 	}
 
 	"precache"
 	{
-		"model"				"models/creeps/neutral_creeps/n_creep_ghost_b/n_creep_ghost_b.vmdl"
-		"model_folder"		"models/creeps/neutral_creeps/n_creep_ghost_b/"
+		"model"				"models/heroes/shredder/shredder.vmdl"
+		"model_folder"		"models/heroes/shredder/"
+		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_shredder.vsndevts"
+		"particle_folder"	"particles/units/heroes/hero_shredder/"
 	}
 }
 
@@ -463,23 +1735,14 @@
 
 
 
-
-
-
-
-
-
-
-
-
-"spawn_tower_merc_warrior"
+"spawn_tower_mech_airship"
 {
 	"BaseClass"						"ability_lua"
-	"AbilityTextureName"			"lina_dragon_slave"
-	"ScriptFile"					"abilities/spawning/spawn_tower_merc_warrior"
+	"AbilityTextureName"			"gyrocopter_flak_cannon"
+	"ScriptFile"					"abilities/spawning/spawn_tower_mech_airship"
 
 	"AbilityCastRange"				"800"
-	"AbilityCastPoint"				"0.5"
+	"AbilityCastPoint"				"0.4"
 
 	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
 	"FightRecapLevel"				"1"
@@ -494,7 +1757,7 @@
 		"01"
 		{
 			"var_type"					"FIELD_INTEGER"
-			"GoldCost"					"0"
+			"GoldCost"					"140"
 		}
 		"02"
 		{
@@ -504,14 +1767,16 @@
 		"03"
 		{
 			"var_type"					"FIELD_INTEGER"
-			"SpawnEffectAOE"			"0"
+			"SpawnEffectAOE"			"100"
 		}
 	}
 
 	"precache"
 	{
-		"model"				"models/creeps/neutral_creeps/n_creep_centaur_med/n_creep_centaur_med.vmdl"
-		"model_folder"		"models/creeps/neutral_creeps/n_creep_centaur_med/"
+		"model"				"models/heroes/gyro/gyro.vmdl"
+		"model_folder"		"models/heroes/gyro/"
+		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_gyrocopter.vsndevts"
+		"particle_folder"	"particles/units/heroes/hero_gyrocopter/"
 	}
 }
 
@@ -520,22 +1785,14 @@
 
 
 
-
-
-
-
-
-
-
-
-"spawn_tower_merc_whelp"
+"spawn_tower_mech_knight"
 {
 	"BaseClass"						"ability_lua"
-	"AbilityTextureName"			"lina_dragon_slave"
-	"ScriptFile"					"abilities/spawning/spawn_tower_merc_whelp"
+	"AbilityTextureName"			"rattletrap_power_cogs"
+	"ScriptFile"					"abilities/spawning/spawn_tower_mech_knight"
 
 	"AbilityCastRange"				"800"
-	"AbilityCastPoint"				"0.5"
+	"AbilityCastPoint"				"0.4"
 
 	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
 	"FightRecapLevel"				"1"
@@ -550,7 +1807,7 @@
 		"01"
 		{
 			"var_type"					"FIELD_INTEGER"
-			"GoldCost"					"0"
+			"GoldCost"					"210"
 		}
 		"02"
 		{
@@ -560,14 +1817,16 @@
 		"03"
 		{
 			"var_type"					"FIELD_INTEGER"
-			"SpawnEffectAOE"			"0"
+			"SpawnEffectAOE"			"120"
 		}
 	}
 
 	"precache"
 	{
-		"model"				"models/creeps/neutral_creeps/n_creep_thunder_lizard/n_creep_thunder_lizard_small.vmdl"
-		"model_folder"		"models/creeps/neutral_creeps/n_creep_thunder_lizard/"
+		"model"				"models/heroes/rattletrap/rattletrap.vmdl"
+		"model_folder"		"models/heroes/rattletrap/"
+		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_rattletrap.vsndevts"
+		"particle_folder"	"particles/units/heroes/hero_rattletrap/"
 	}
 }
 
@@ -576,22 +1835,14 @@
 
 
 
-
-
-
-
-
-
-
-
-"spawn_tower_merc_hermit"
+"spawn_tower_mech_cyborg"
 {
 	"BaseClass"						"ability_lua"
-	"AbilityTextureName"			"lina_dragon_slave"
-	"ScriptFile"					"abilities/spawning/spawn_tower_merc_hermit"
+	"AbilityTextureName"			"tinker_rearm"
+	"ScriptFile"					"abilities/spawning/spawn_tower_mech_cyborg"
 
 	"AbilityCastRange"				"800"
-	"AbilityCastPoint"				"0.5"
+	"AbilityCastPoint"				"0.4"
 
 	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
 	"FightRecapLevel"				"1"
@@ -606,7 +1857,7 @@
 		"01"
 		{
 			"var_type"					"FIELD_INTEGER"
-			"GoldCost"					"0"
+			"GoldCost"					"360"
 		}
 		"02"
 		{
@@ -616,1031 +1867,18 @@
 		"03"
 		{
 			"var_type"					"FIELD_INTEGER"
-			"SpawnEffectAOE"			"0"
+			"SpawnEffectAOE"			"150"
 		}
 	}
 
 	"precache"
 	{
-		"model"				"models/creeps/neutral_creeps/n_creep_troll_dark_a/n_creep_troll_dark_a.vmdl"
-		"model_folder"		"models/creeps/neutral_creeps/n_creep_troll_dark_a/"
+		"model"				"models/heroes/tinker/tinker.vmdl"
+		"model_folder"		"models/heroes/tinker/"
+		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_tinker.vsndevts"
+		"particle_folder"	"particles/units/heroes/hero_tinker/"
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-"spawn_tower_merc_dino"
-{
-	"BaseClass"						"ability_lua"
-	"AbilityTextureName"			"lina_dragon_slave"
-	"ScriptFile"					"abilities/spawning/spawn_tower_merc_dino"
-
-	"AbilityCastRange"				"800"
-	"AbilityCastPoint"				"0.5"
-
-	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
-	"FightRecapLevel"				"1"
-	"MaxLevel"						"1"
-
-	"AbilityCooldown"				"0"
-	"AbilityDuration"				"0"
-	"AbilityManaCost"				"0"
-
-	"AbilitySpecial"
-	{
-		"01"
-		{
-			"var_type"					"FIELD_INTEGER"
-			"GoldCost"					"0"
-		}
-		"02"
-		{
-			"var_type"					"FIELD_INTEGER"
-			"PopulationCost"			"0"
-		}
-		"03"
-		{
-			"var_type"					"FIELD_INTEGER"
-			"SpawnEffectAOE"			"0"
-		}
-	}
-
-	"precache"
-	{
-		"model"				"models/creeps/neutral_creeps/n_creep_thunder_lizard/n_creep_thunder_lizard_big.vmdl"
-		"model_folder"		"models/creeps/neutral_creeps/n_creep_thunder_lizard/"
-	}
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-"spawn_tower_merc_commander"
-{
-	"BaseClass"						"ability_lua"
-	"AbilityTextureName"			"lina_dragon_slave"
-	"ScriptFile"					"abilities/spawning/spawn_tower_merc_commander"
-
-	"AbilityCastRange"				"800"
-	"AbilityCastPoint"				"0.5"
-
-	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
-	"FightRecapLevel"				"1"
-	"MaxLevel"						"1"
-
-	"AbilityCooldown"				"0"
-	"AbilityDuration"				"0"
-	"AbilityManaCost"				"0"
-
-	"AbilitySpecial"
-	{
-		"01"
-		{
-			"var_type"					"FIELD_INTEGER"
-			"GoldCost"					"0"
-		}
-		"02"
-		{
-			"var_type"					"FIELD_INTEGER"
-			"PopulationCost"			"0"
-		}
-		"03"
-		{
-			"var_type"					"FIELD_INTEGER"
-			"SpawnEffectAOE"			"0"
-		}
-	}
-
-	"precache"
-	{
-		"model"				"models/creeps/neutral_creeps/n_creep_forest_trolls/n_creep_forest_troll_high_priest.vmdl"
-		"model_folder"		"models/creeps/neutral_creeps/n_creep_forest_trolls/"
-	}
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-"spawn_tower_merc_furbolg"
-{
-	"BaseClass"						"ability_lua"
-	"AbilityTextureName"			"lina_dragon_slave"
-	"ScriptFile"					"abilities/spawning/spawn_tower_merc_furbolg"
-
-	"AbilityCastRange"				"800"
-	"AbilityCastPoint"				"0.5"
-
-	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
-	"FightRecapLevel"				"1"
-	"MaxLevel"						"1"
-
-	"AbilityCooldown"				"0"
-	"AbilityDuration"				"0"
-	"AbilityManaCost"				"0"
-
-	"AbilitySpecial"
-	{
-		"01"
-		{
-			"var_type"					"FIELD_INTEGER"
-			"GoldCost"					"0"
-		}
-		"02"
-		{
-			"var_type"					"FIELD_INTEGER"
-			"PopulationCost"			"0"
-		}
-		"03"
-		{
-			"var_type"					"FIELD_INTEGER"
-			"SpawnEffectAOE"			"0"
-		}
-	}
-
-	"precache"
-	{
-		"model"				"models/creeps/neutral_creeps/n_creep_beast/n_creep_beast.vmdl"
-		"model_folder"		"models/creeps/neutral_creeps/n_creep_beast/"
-	}
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-"spawn_tower_merc_wyvern"
-{
-	"BaseClass"						"ability_lua"
-	"AbilityTextureName"			"lina_dragon_slave"
-	"ScriptFile"					"abilities/spawning/spawn_tower_merc_wyvern"
-
-	"AbilityCastRange"				"800"
-	"AbilityCastPoint"				"0.5"
-
-	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
-	"FightRecapLevel"				"1"
-	"MaxLevel"						"1"
-
-	"AbilityCooldown"				"0"
-	"AbilityDuration"				"0"
-	"AbilityManaCost"				"0"
-
-	"AbilitySpecial"
-	{
-		"01"
-		{
-			"var_type"					"FIELD_INTEGER"
-			"GoldCost"					"0"
-		}
-		"02"
-		{
-			"var_type"					"FIELD_INTEGER"
-			"PopulationCost"			"0"
-		}
-		"03"
-		{
-			"var_type"					"FIELD_INTEGER"
-			"SpawnEffectAOE"			"0"
-		}
-	}
-
-	"precache"
-	{
-		"model"				"models/creeps/neutral_creeps/n_creep_black_drake/n_creep_black_drake.vmdl"
-		"model_folder"		"models/creeps/neutral_creeps/n_creep_black_drake/"
-	}
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-"spawn_tower_merc_chariot"
-{
-	"BaseClass"						"ability_lua"
-	"AbilityTextureName"			"lina_dragon_slave"
-	"ScriptFile"					"abilities/spawning/spawn_tower_merc_chariot"
-
-	"AbilityCastRange"				"800"
-	"AbilityCastPoint"				"0.5"
-
-	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
-	"FightRecapLevel"				"1"
-	"MaxLevel"						"1"
-
-	"AbilityCooldown"				"0"
-	"AbilityDuration"				"0"
-	"AbilityManaCost"				"0"
-
-	"AbilitySpecial"
-	{
-		"01"
-		{
-			"var_type"					"FIELD_INTEGER"
-			"GoldCost"					"0"
-		}
-		"02"
-		{
-			"var_type"					"FIELD_INTEGER"
-			"PopulationCost"			"0"
-		}
-		"03"
-		{
-			"var_type"					"FIELD_INTEGER"
-			"SpawnEffectAOE"			"0"
-		}
-	}
-
-	"precache"
-	{
-		"model"				"models/creeps/lane_creeps/creep_good_siege/creep_good_siege.vmdl"
-		"model_folder"		"models/creeps/lane_creeps/creep_good_siege/"
-	}
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-"spawn_tower_merc_orc"
-{
-	"BaseClass"						"ability_lua"
-	"AbilityTextureName"			"lina_dragon_slave"
-	"ScriptFile"					"abilities/spawning/spawn_tower_merc_orc"
-
-	"AbilityCastRange"				"800"
-	"AbilityCastPoint"				"0.5"
-
-	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
-	"FightRecapLevel"				"1"
-	"MaxLevel"						"1"
-
-	"AbilityCooldown"				"0"
-	"AbilityDuration"				"0"
-	"AbilityManaCost"				"0"
-
-	"AbilitySpecial"
-	{
-		"01"
-		{
-			"var_type"					"FIELD_INTEGER"
-			"GoldCost"					"0"
-		}
-		"02"
-		{
-			"var_type"					"FIELD_INTEGER"
-			"PopulationCost"			"0"
-		}
-		"03"
-		{
-			"var_type"					"FIELD_INTEGER"
-			"SpawnEffectAOE"			"0"
-		}
-	}
-
-	"precache"
-	{
-		"model"				"models/creeps/neutral_creeps/n_creep_furbolg/n_creep_furbolg_disrupter.vmdl"
-		"model_folder"		"models/creeps/neutral_creeps/n_creep_furbolg/"
-	}
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-"spawn_tower_merc_frost_wolf"
-{
-	"BaseClass"						"ability_lua"
-	"AbilityTextureName"			"lina_dragon_slave"
-	"ScriptFile"					"abilities/spawning/spawn_tower_merc_frost_wolf"
-
-	"AbilityCastRange"				"800"
-	"AbilityCastPoint"				"0.5"
-
-	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
-	"FightRecapLevel"				"1"
-	"MaxLevel"						"1"
-
-	"AbilityCooldown"				"0"
-	"AbilityDuration"				"0"
-	"AbilityManaCost"				"0"
-
-	"AbilitySpecial"
-	{
-		"01"
-		{
-			"var_type"					"FIELD_INTEGER"
-			"GoldCost"					"0"
-		}
-		"02"
-		{
-			"var_type"					"FIELD_INTEGER"
-			"PopulationCost"			"0"
-		}
-		"03"
-		{
-			"var_type"					"FIELD_INTEGER"
-			"SpawnEffectAOE"			"0"
-		}
-	}
-
-	"precache"
-	{
-		"model"				"models/creeps/neutral_creeps/n_creep_worg_large/n_creep_worg_large.vmdl"
-		"model_folder"		"models/creeps/neutral_creeps/n_creep_worg_large/"
-	}
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-"spawn_tower_merc_ice_troll"
-{
-	"BaseClass"						"ability_lua"
-	"AbilityTextureName"			"lina_dragon_slave"
-	"ScriptFile"					"abilities/spawning/spawn_tower_merc_ice_troll"
-
-	"AbilityCastRange"				"800"
-	"AbilityCastPoint"				"0.5"
-
-	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
-	"FightRecapLevel"				"1"
-	"MaxLevel"						"1"
-
-	"AbilityCooldown"				"0"
-	"AbilityDuration"				"0"
-	"AbilityManaCost"				"0"
-
-	"AbilitySpecial"
-	{
-		"01"
-		{
-			"var_type"					"FIELD_INTEGER"
-			"GoldCost"					"0"
-		}
-		"02"
-		{
-			"var_type"					"FIELD_INTEGER"
-			"PopulationCost"			"0"
-		}
-		"03"
-		{
-			"var_type"					"FIELD_INTEGER"
-			"SpawnEffectAOE"			"0"
-		}
-	}
-
-	"precache"
-	{
-		"model"				"models/creeps/neutral_creeps/n_creep_ogre_lrg/n_creep_ogre_lrg.vmdl"
-		"model_folder"		"models/creeps/neutral_creeps/n_creep_ogre_lrg/"
-	}
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-"spawn_tower_merc_warlock"
-{
-	"BaseClass"						"ability_lua"
-	"AbilityTextureName"			"lina_dragon_slave"
-	"ScriptFile"					"abilities/spawning/spawn_tower_merc_warlock"
-
-	"AbilityCastRange"				"800"
-	"AbilityCastPoint"				"0.5"
-
-	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
-	"FightRecapLevel"				"1"
-	"MaxLevel"						"1"
-
-	"AbilityCooldown"				"0"
-	"AbilityDuration"				"0"
-	"AbilityManaCost"				"0"
-
-	"AbilitySpecial"
-	{
-		"01"
-		{
-			"var_type"					"FIELD_INTEGER"
-			"GoldCost"					"0"
-		}
-		"02"
-		{
-			"var_type"					"FIELD_INTEGER"
-			"PopulationCost"			"0"
-		}
-		"03"
-		{
-			"var_type"					"FIELD_INTEGER"
-			"SpawnEffectAOE"			"0"
-		}
-	}
-
-	"precache"
-	{
-		"model"				"models/creeps/neutral_creeps/n_creep_black_dragon/n_creep_black_dragon.vmdl"
-		"model_folder"		"models/creeps/neutral_creeps/n_creep_black_dragon/"
-	}
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-"spawn_tower_merc_pandaren"
-{
-	"BaseClass"						"ability_lua"
-	"AbilityTextureName"			"lina_dragon_slave"
-	"ScriptFile"					"abilities/spawning/spawn_tower_merc_pandaren"
-
-	"AbilityCastRange"				"800"
-	"AbilityCastPoint"				"0.5"
-
-	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
-	"FightRecapLevel"				"1"
-	"MaxLevel"						"1"
-
-	"AbilityCooldown"				"0"
-	"AbilityDuration"				"0"
-	"AbilityManaCost"				"0"
-
-	"AbilitySpecial"
-	{
-		"01"
-		{
-			"var_type"					"FIELD_INTEGER"
-			"GoldCost"					"0"
-		}
-		"02"
-		{
-			"var_type"					"FIELD_INTEGER"
-			"PopulationCost"			"0"
-		}
-		"03"
-		{
-			"var_type"					"FIELD_INTEGER"
-			"SpawnEffectAOE"			"0"
-		}
-	}
-
-	"precache"
-	{
-		"model"				"models/creeps/neutral_creeps/n_creep_golem_b/n_creep_golem_b.vmdl"
-		"model_folder"		"models/creeps/neutral_creeps/n_creep_golem_b/"
-	}
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-"spawn_tower_merc_ballista"
-{
-	"BaseClass"						"ability_lua"
-	"AbilityTextureName"			"lina_dragon_slave"
-	"ScriptFile"					"abilities/spawning/spawn_tower_merc_ballista"
-
-	"AbilityCastRange"				"800"
-	"AbilityCastPoint"				"0.5"
-
-	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
-	"FightRecapLevel"				"1"
-	"MaxLevel"						"1"
-
-	"AbilityCooldown"				"0"
-	"AbilityDuration"				"0"
-	"AbilityManaCost"				"0"
-
-	"AbilitySpecial"
-	{
-		"01"
-		{
-			"var_type"					"FIELD_INTEGER"
-			"GoldCost"					"0"
-		}
-		"02"
-		{
-			"var_type"					"FIELD_INTEGER"
-			"PopulationCost"			"0"
-		}
-		"03"
-		{
-			"var_type"					"FIELD_INTEGER"
-			"SpawnEffectAOE"			"0"
-		}
-	}
-
-	"precache"
-	{
-		"model"				"models/creeps/lane_creeps/creep_good_siege/creep_good_siege.vmdl"
-		"model_folder"		"models/creeps/lane_creeps/creep_good_siege/"
-	}
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-"spawn_tower_merc_shaman"
-{
-	"BaseClass"						"ability_lua"
-	"AbilityTextureName"			"lina_dragon_slave"
-	"ScriptFile"					"abilities/spawning/spawn_tower_merc_shaman"
-
-	"AbilityCastRange"				"800"
-	"AbilityCastPoint"				"0.5"
-
-	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
-	"FightRecapLevel"				"1"
-	"MaxLevel"						"1"
-
-	"AbilityCooldown"				"0"
-	"AbilityDuration"				"0"
-	"AbilityManaCost"				"0"
-
-	"AbilitySpecial"
-	{
-		"01"
-		{
-			"var_type"					"FIELD_INTEGER"
-			"GoldCost"					"0"
-		}
-		"02"
-		{
-			"var_type"					"FIELD_INTEGER"
-			"PopulationCost"			"0"
-		}
-		"03"
-		{
-			"var_type"					"FIELD_INTEGER"
-			"SpawnEffectAOE"			"0"
-		}
-	}
-
-	"precache"
-	{
-		"model"				"models/creeps/neutral_creeps/n_creep_satyr_b/n_creep_satyr_b.vmdl"
-		"model_folder"		"models/creeps/neutral_creeps/n_creep_satyr_b/"
-	}
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-"spawn_tower_merc_pudge"
-{
-	"BaseClass"						"ability_lua"
-	"AbilityTextureName"			"lina_dragon_slave"
-	"ScriptFile"					"abilities/spawning/spawn_tower_merc_pudge"
-
-	"AbilityCastRange"				"800"
-	"AbilityCastPoint"				"0.5"
-
-	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
-	"FightRecapLevel"				"1"
-	"MaxLevel"						"1"
-
-	"AbilityCooldown"				"0"
-	"AbilityDuration"				"0"
-	"AbilityManaCost"				"0"
-
-	"AbilitySpecial"
-	{
-		"01"
-		{
-			"var_type"					"FIELD_INTEGER"
-			"GoldCost"					"0"
-		}
-		"02"
-		{
-			"var_type"					"FIELD_INTEGER"
-			"PopulationCost"			"0"
-		}
-		"03"
-		{
-			"var_type"					"FIELD_INTEGER"
-			"SpawnEffectAOE"			"0"
-		}
-	}
-
-	"precache"
-	{
-		"model"				"models/creeps/neutral_creeps/n_creep_centaur_lrg/n_creep_centaur_lrg.vmdl"
-		"model_folder"		"models/creeps/neutral_creeps/n_creep_centaur_lrg/"
-	}
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-"spawn_tower_merc_gargolye"
-{
-	"BaseClass"						"ability_lua"
-	"AbilityTextureName"			"lina_dragon_slave"
-	"ScriptFile"					"abilities/spawning/spawn_tower_merc_gargolye"
-
-	"AbilityCastRange"				"800"
-	"AbilityCastPoint"				"0.5"
-
-	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
-	"FightRecapLevel"				"1"
-	"MaxLevel"						"1"
-
-	"AbilityCooldown"				"0"
-	"AbilityDuration"				"0"
-	"AbilityManaCost"				"0"
-
-	"AbilitySpecial"
-	{
-		"01"
-		{
-			"var_type"					"FIELD_INTEGER"
-			"GoldCost"					"0"
-		}
-		"02"
-		{
-			"var_type"					"FIELD_INTEGER"
-			"PopulationCost"			"0"
-		}
-		"03"
-		{
-			"var_type"					"FIELD_INTEGER"
-			"SpawnEffectAOE"			"0"
-		}
-	}
-
-	"precache"
-	{
-		"model"				"models/creeps/neutral_creeps/n_creep_gargoyle/n_creep_gargoyle.vmdl"
-		"model_folder"		"models/creeps/neutral_creeps/n_creep_gargoyle/"
-	}
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-"spawn_tower_merc_behemoth"
-{
-	"BaseClass"						"ability_lua"
-	"AbilityTextureName"			"lina_dragon_slave"
-	"ScriptFile"					"abilities/spawning/spawn_tower_merc_behemoth"
-
-	"AbilityCastRange"				"800"
-	"AbilityCastPoint"				"0.5"
-
-	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
-	"FightRecapLevel"				"1"
-	"MaxLevel"						"1"
-
-	"AbilityCooldown"				"0"
-	"AbilityDuration"				"0"
-	"AbilityManaCost"				"0"
-
-	"AbilitySpecial"
-	{
-		"01"
-		{
-			"var_type"					"FIELD_INTEGER"
-			"GoldCost"					"0"
-		}
-		"02"
-		{
-			"var_type"					"FIELD_INTEGER"
-			"PopulationCost"			"0"
-		}
-		"03"
-		{
-			"var_type"					"FIELD_INTEGER"
-			"SpawnEffectAOE"			"0"
-		}
-	}
-
-	"precache"
-	{
-		"model"				"models/creeps/neutral_creeps/n_creep_golem_a/neutral_creep_golem_a.vmdl"
-		"model_folder"		"models/creeps/neutral_creeps/n_creep_golem_a/"
-	}
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-"spawn_tower_merc_kraken"
-{
-	"BaseClass"						"ability_lua"
-	"AbilityTextureName"			"lina_dragon_slave"
-	"ScriptFile"					"abilities/spawning/spawn_tower_merc_kraken"
-
-	"AbilityCastRange"				"800"
-	"AbilityCastPoint"				"0.5"
-
-	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
-	"FightRecapLevel"				"1"
-	"MaxLevel"						"1"
-
-	"AbilityCooldown"				"0"
-	"AbilityDuration"				"0"
-	"AbilityManaCost"				"0"
-
-	"AbilitySpecial"
-	{
-		"01"
-		{
-			"var_type"					"FIELD_INTEGER"
-			"GoldCost"					"0"
-		}
-		"02"
-		{
-			"var_type"					"FIELD_INTEGER"
-			"PopulationCost"			"0"
-		}
-		"03"
-		{
-			"var_type"					"FIELD_INTEGER"
-			"SpawnEffectAOE"			"0"
-		}
-	}
-
-	"precache"
-	{
-		"model"				"models/creeps/neutral_creeps/n_creep_ghost_a/n_creep_ghost_a.vmdl"
-		"model_folder"		"models/creeps/neutral_creeps/n_creep_ghost_a/"
-	}
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-"spawn_tower_merc_infernal"
-{
-	"BaseClass"						"ability_lua"
-	"AbilityTextureName"			"lina_dragon_slave"
-	"ScriptFile"					"abilities/spawning/spawn_tower_merc_infernal"
-
-	"AbilityCastRange"				"800"
-	"AbilityCastPoint"				"0.5"
-
-	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
-	"FightRecapLevel"				"1"
-	"MaxLevel"						"1"
-
-	"AbilityCooldown"				"0"
-	"AbilityDuration"				"0"
-	"AbilityManaCost"				"0"
-
-	"AbilitySpecial"
-	{
-		"01"
-		{
-			"var_type"					"FIELD_INTEGER"
-			"GoldCost"					"0"
-		}
-		"02"
-		{
-			"var_type"					"FIELD_INTEGER"
-			"PopulationCost"			"0"
-		}
-		"03"
-		{
-			"var_type"					"FIELD_INTEGER"
-			"SpawnEffectAOE"			"0"
-		}
-	}
-
-	"precache"
-	{
-		"model"				"models/heroes/warlock/warlock_demon.vmdl"
-		"model_folder"		"models/heroes/warlock/"
-	}
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-"spawn_tower_merc_demon"
-{
-	"BaseClass"						"ability_lua"
-	"AbilityTextureName"			"lina_dragon_slave"
-	"ScriptFile"					"abilities/spawning/spawn_tower_merc_demon"
-
-	"AbilityCastRange"				"800"
-	"AbilityCastPoint"				"0.5"
-
-	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
-	"FightRecapLevel"				"1"
-	"MaxLevel"						"1"
-
-	"AbilityCooldown"				"0"
-	"AbilityDuration"				"0"
-	"AbilityManaCost"				"0"
-
-	"AbilitySpecial"
-	{
-		"01"
-		{
-			"var_type"					"FIELD_INTEGER"
-			"GoldCost"					"0"
-		}
-		"02"
-		{
-			"var_type"					"FIELD_INTEGER"
-			"PopulationCost"			"0"
-		}
-		"03"
-		{
-			"var_type"					"FIELD_INTEGER"
-			"SpawnEffectAOE"			"0"
-		}
-	}
-
-	"precache"
-	{
-		"model"				"models/creeps/roshan/roshan.vmdl"
-		"model_folder"		"models/creeps/roshan/"
-	}
-}
-
-
-
-
-
-
-
-
 
 
 
@@ -1691,7 +1929,6 @@
 		"particle_folder"	"particles/units/heroes/hero_dragon_knight/"
 	}
 }
-
 
 
 
@@ -1970,6 +2207,2175 @@
 	}
 }
 
+"upgrade_unit_mech_militia_upg"
+{
+	"BaseClass"						"ability_lua"
+	"AbilityTextureName"			"wisp_relocate"
+	"ScriptFile"					"abilities/upgrading/upgrade_unit_mech_militia_upg"
+
+	"AbilityCastRange"				"100"
+	"AbilityCastPoint"				"0.4"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+	"FightRecapLevel"				"1"
+	"MaxLevel"						"1"
+	
+	"AbilityCooldown"				"2.0"
+	"AbilityDuration"				"1.0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"GoldCost"					"125"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"PopulationCost"			"0"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_FLOAT"
+			"UpgradeDelay"				"1"
+		}
+	}
+
+	"precache"
+	{
+		"model"				"models/heroes/arc_warden/arc_warden.vmdl"
+		"model_folder"		"models/heroes/arc_warden/"
+		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_arc_warden.vsndevts"
+		"particle_folder"	"particles/units/heroes/hero_arc_warden/"
+	}
+}
+
+
+
+
+"upgrade_unit_mech_sniper_upg_range"
+{
+	"BaseClass"						"ability_lua"
+	"AbilityTextureName"			"wisp_relocate"
+	"ScriptFile"					"abilities/upgrading/upgrade_unit_mech_sniper_upg_range"
+
+	"AbilityCastRange"				"100"
+	"AbilityCastPoint"				"0.4"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+	"FightRecapLevel"				"1"
+	"MaxLevel"						"1"
+	
+	"AbilityCooldown"				"2.0"
+	"AbilityDuration"				"1.0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"GoldCost"					"155"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"PopulationCost"			"0"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_FLOAT"
+			"UpgradeDelay"				"1"
+		}
+	}
+
+	"precache"
+	{
+		"model"				"models/heroes/sniper/sniper.vmdl"
+		"model_folder"		"models/heroes/sniper/"
+		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_sniper.vsndevts"
+		"particle_folder"	"particles/units/heroes/hero_sniper/"
+	}
+}
+
+
+"upgrade_unit_mech_sniper_upg_damage"
+{
+	"BaseClass"						"ability_lua"
+	"AbilityTextureName"			"wisp_relocate"
+	"ScriptFile"					"abilities/upgrading/upgrade_unit_mech_sniper_upg_damage"
+
+	"AbilityCastRange"				"100"
+	"AbilityCastPoint"				"0.4"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+	"FightRecapLevel"				"1"
+	"MaxLevel"						"1"
+	
+	"AbilityCooldown"				"2.0"
+	"AbilityDuration"				"1.0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"GoldCost"					"170"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"PopulationCost"			"0"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_FLOAT"
+			"UpgradeDelay"				"1"
+		}
+	}
+
+	"precache"
+	{
+		"model"				"models/heroes/sniper/sniper.vmdl"
+		"model_folder"		"models/heroes/sniper/"
+		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_sniper.vsndevts"
+		"particle_folder"	"particles/units/heroes/hero_sniper/"
+	}
+}
+
+
+"upgrade_unit_mech_captain_upg"
+{
+	"BaseClass"						"ability_lua"
+	"AbilityTextureName"			"wisp_relocate"
+	"ScriptFile"					"abilities/upgrading/upgrade_unit_mech_captain_upg"
+
+	"AbilityCastRange"				"100"
+	"AbilityCastPoint"				"0.4"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+	"FightRecapLevel"				"1"
+	"MaxLevel"						"1"
+	
+	"AbilityCooldown"				"2.0"
+	"AbilityDuration"				"1.0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"GoldCost"					"190"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"PopulationCost"			"0"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_FLOAT"
+			"UpgradeDelay"				"1"
+		}
+	}
+
+	"precache"
+	{
+		"model"				"models/heroes/shredder/shredder.vmdl"
+		"model_folder"		"models/heroes/shredder/"
+		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_shredder.vsndevts"
+		"particle_folder"	"particles/units/heroes/hero_shredder/"
+	}
+}
+
+
+"upgrade_unit_mech_airship_upg"
+{
+	"BaseClass"						"ability_lua"
+	"AbilityTextureName"			"wisp_relocate"
+	"ScriptFile"					"abilities/upgrading/upgrade_unit_mech_airship_upg"
+
+	"AbilityCastRange"				"100"
+	"AbilityCastPoint"				"0.4"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+	"FightRecapLevel"				"1"
+	"MaxLevel"						"1"
+	
+	"AbilityCooldown"				"2.0"
+	"AbilityDuration"				"1.0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"GoldCost"					"280"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"PopulationCost"			"0"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_FLOAT"
+			"UpgradeDelay"				"1"
+		}
+	}
+
+	"precache"
+	{
+		"model"				"models/heroes/gyro/gyro.vmdl"
+		"model_folder"		"models/heroes/gyro/"
+		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_gyrocopter.vsndevts"
+		"particle_folder"	"particles/units/heroes/hero_gyrocopter/"
+	}
+}
+
+
+"upgrade_unit_mech_knight_upg"
+{
+	"BaseClass"						"ability_lua"
+	"AbilityTextureName"			"wisp_relocate"
+	"ScriptFile"					"abilities/upgrading/upgrade_unit_mech_knight_upg"
+
+	"AbilityCastRange"				"100"
+	"AbilityCastPoint"				"0.4"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+	"FightRecapLevel"				"1"
+	"MaxLevel"						"1"
+	
+	"AbilityCooldown"				"2.0"
+	"AbilityDuration"				"1.0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"GoldCost"					"260"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"PopulationCost"			"0"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_FLOAT"
+			"UpgradeDelay"				"1"
+		}
+	}
+
+	"precache"
+	{
+		"model"				"models/heroes/rattletrap/rattletrap.vmdl"
+		"model_folder"		"models/heroes/rattletrap/"
+		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_rattletrap.vsndevts"
+		"particle_folder"	"particles/units/heroes/hero_rattletrap/"
+	}
+}
+
+
+"upgrade_unit_mech_cyborg_upg"
+{
+	"BaseClass"						"ability_lua"
+	"AbilityTextureName"			"wisp_relocate"
+	"ScriptFile"					"abilities/upgrading/upgrade_unit_mech_cyborg_upg"
+
+	"AbilityCastRange"				"100"
+	"AbilityCastPoint"				"0.4"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+	"FightRecapLevel"				"1"
+	"MaxLevel"						"1"
+	
+	"AbilityCooldown"				"2.0"
+	"AbilityDuration"				"1.0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"GoldCost"					"430"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"PopulationCost"			"0"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_FLOAT"
+			"UpgradeDelay"				"1"
+		}
+	}
+
+	"precache"
+	{
+		"model"				"models/heroes/tinker/tinker.vmdl"
+		"model_folder"		"models/heroes/tinker/"
+		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_tinker.vsndevts"
+		"particle_folder"	"particles/units/heroes/hero_tinker/"
+	}
+}
+
+
+
+"ability_boss_armour_debuff"
+{
+	"BaseClass"						"ability_datadriven"
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_AUTOCAST | DOTA_ABILITY_BEHAVIOR_ATTACK"
+	"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+	"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+	"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"	
+	"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+
+	"precache"
+	{
+		"particle"		"particles/econ/items/shadow_fiend/sf_desolation/sf_base_attack_desolation.vpcf"
+		"particle"		"particles/econ/items/shadow_fiend/sf_desolation/sf_base_attack_desolation_arc.vpcf"
+	}
+
+	"AbilityCastRange"				"100"
+	"AbilityCastPoint"				"0.5"
+	"AbilityCooldown"				"0"
+	"AbilityDamage"					"0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"				"FIELD_FLOAT"
+			"Duration"				"10"
+		}
+		"02"
+		{
+			"var_type"				"FIELD_INTEGER"
+			"Armour"				"-5"
+		}
+	}
+
+	"Modifiers"
+	{
+		"modifier_corruption_attack_ability_boss_armour_debuff"
+		{
+			"Passive"	"1"
+			"IsHidden"	"1"
+
+			"Orb"
+			{
+				"Priority"				"DOTA_ORB_PRIORITY_ABILITY"
+				"ProjectileName"		"particles/econ/items/shadow_fiend/sf_desolation/sf_base_attack_desolation.vpcf"
+				"CastAttack"			"1"
+			}
+
+			"OnOrbFire"
+			{
+				"FireSound"
+				{
+					"EffectName"		"Item_Desolator.Target"
+					"Target"			"CASTER"
+				}
+			}
+
+			"OnOrbImpact"
+			{
+				"ApplyModifier"
+				{
+					"ModifierName"		"modifier_slow_attack_ability_boss_armour_debuff_debuff"
+					"Target"			"TARGET"
+				}
+
+				"FireSound"
+				{
+					"EffectName"		"Item_Desolator.Target"
+					"Target"			"TARGET"
+				}
+			}
+		}
+
+		"modifier_corruption_attack_ability_boss_armour_debuff_debuff"
+		{
+			"IsDebuff"					"1"
+			"Duration"					"%Duration"
+
+			"EffectName"				"particles/econ/items/shadow_fiend/sf_desolation/sf_base_attack_desolation_arc.vpcf"
+			"EffectAttachType"			"follow_origin"
+
+			"Properties"
+			{
+				"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"		"%Armour"
+			}
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+"ability_boss_bounce_attack"
+{
+	"BaseClass"						"ability_datadriven"
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+	"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
+	"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+	"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_BUILDING"
+	"AbilityTextureName"			"ember_spirit_searing_chains"
+
+	"precache"
+	{
+		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_nevermore.vsndevts"
+	}
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"								"FIELD_INTEGER"
+			"range"									"600"
+		}
+		"02"
+		{
+			"var_type"								"FIELD_INTEGER"
+			"bounces"								"2"
+		}
+		"03"
+		{
+			"var_type"								"FIELD_INTEGER"
+			"damage_reduction_percent"				"0.33"
+		}
+		"04"
+		{
+			"var_type"								"FIELD_INTEGER"
+			"damage_reduction_percent_friendly"		"33"
+		}
+	}
+
+	"Modifiers"
+	{
+		"modifier_bounce_attack"
+		{
+			"Passive" 					"1"
+			"IsHidden"					"1"
+
+			"OnAttackLanded"
+			{
+				"RunScript"
+				{
+					"ScriptFile"		"unit_abilities/BouncingAttack.lua"
+					"Function"			"BounceAttackStart"
+				}
+			}
+		}
+	}
+}
+
+"ability_boss_bounce_attack_bounce"
+{
+	"BaseClass"						"ability_datadriven"
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+
+	"OnProjectileHitUnit"
+	{
+		"DeleteOnHit"	"1"
+
+		"FireSound"
+		{
+			"EffectName"	"Hero_Nevermore.ProjectileImpact"
+			"Target" 		"TARGET"
+		}
+		
+		"RunScript"
+		{
+			"ScriptFile"	"unit_abilities/BouncingAttack.lua"
+			"Function"		"BounceAttackPerformBounce"
+		}
+
+	}
+
+	"Modifiers"
+	{
+		"modifier_bouncing_attack_dummy_unit"
+		{
+			"States"
+			{
+				"MODIFIER_STATE_INVULNERABLE"					"MODIFIER_STATE_VALUE_ENABLED"
+				"MODIFIER_STATE_NO_HEALTH_BAR"					"MODIFIER_STATE_VALUE_ENABLED"
+				"MODIFIER_STATE_NO_UNIT_COLLISION"				"MODIFIER_STATE_VALUE_ENABLED"
+				"MODIFIER_STATE_NOT_ON_MINIMAP"					"MODIFIER_STATE_VALUE_ENABLED"
+				"MODIFIER_STATE_UNSELECTABLE"					"MODIFIER_STATE_VALUE_ENABLED"
+				"MODIFIER_STATE_FLYING"							"MODIFIER_STATE_VALUE_ENABLED"
+			}
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"ability_merc_warrior_bash"
+{
+	"BaseClass"						"ability_datadriven"
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+	"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+	"AbilityCooldown"				"1"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"				"FIELD_FLOAT"
+			"Chance"				"0.2"
+		}
+		"02"
+		{
+			"var_type"				"FIELD_INTEGER"
+			"ChanceFriendly"		"0.2"
+		}
+		"03"
+		{
+			"var_type"				"FIELD_FLOAT"
+			"Damage"				"5"
+		}
+		"04"
+		{
+			"var_type"				"FIELD_FLOAT"
+			"Duration"				"1"
+		}
+	}
+
+	"Modifiers"
+	{
+		"modifier_bash_ability_merc_warrior_bash"
+		{
+			"Passive"	"1"
+			"IsHidden"	"1"
+
+			"OnAttackLanded"
+			{
+				"RunScript"
+				{
+					"ScriptFile"		"unit_abilities/Bash.lua"
+					"Function"			"OnAttackLanded"
+					"BashChance"		"%Chance"
+					"ModifierName"		"modifier_bash_ability_merc_warrior_bash_stun"
+				}
+			}
+		}
+
+		"modifier_bash_ability_merc_warrior_bash_stun"
+		{
+			"Duration"				"%Duration"
+			"Passive"				"0"
+			"IsHidden"				"0"
+			"IsBuff"				"0"
+			"IsDebuff"				"1"
+			"IsPurgable"			"1"
+			
+			"EffectName"			"particles/generic_gameplay/generic_stunned.vpcf"
+			"EffectAttachType"		"follow_overhead"
+			"OverrideAnimation"		"ACT_DOTA_DISABLED"
+			
+			"States"
+			{
+				"MODIFIER_STATE_STUNNED"		"MODIFIER_STATE_VALUE_ENABLED"
+			}
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"ability_merc_hermit_healing_aura"
+{
+	"BaseClass"						"ability_datadriven"
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+	"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+	"FightRecapLevel"				"1"
+
+	"precache"
+	{
+		"particle"			"particles/econ/items/juggernaut/bladekeeper_healing_ward/juggernaut_healing_ward_dc.vpcf"
+	}
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"		"FIELD_INTEGER"
+			"heal"			"5"
+		}
+		"02"
+		{
+			"var_type"		"FIELD_INTEGER"
+			"radius"		"600"
+		}
+	}
+
+	"Modifiers"
+	{
+		"modifier_heal_ability_merc_hermit_healing_aura"
+		{
+			"IsBuff"			"1"
+			"Passive"			"1"
+			"IsPurgable"		"0"
+	
+			"OnCreated"
+			{
+				"AttachEffect"
+				{
+					"EffectName"		"particles/econ/items/juggernaut/bladekeeper_healing_ward/juggernaut_healing_ward_dc.vpcf"
+					"EffectAttachType"	"follow_origin"
+					"Target"			"TARGET"
+				}
+			}
+
+			"Aura"					"modifier_heal_aura_ability_merc_hermit_healing_aura"
+			"Aura_Radius"			"%radius"
+			"Aura_Teams"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+			"Aura_Types"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+			"Aura_Flags"			"DOTA_UNIT_TARGET_FLAG_NONE"
+			"Aura_ApplyToCaster"	"1"
+		}
+
+		"modifier_heal_aura_ability_merc_hermit_healing_aura"
+		{
+			"IsBuff"			"1"
+			"Passive"			"1"
+			"IsPurgable"		"0"
+
+			"ThinkInterval"  	"0.2"
+			"OnIntervalThink"
+			{
+				"Heal"
+				{
+					"Target"		"TARGET"
+					"Heal"			"%heal / 5"
+				}
+			}
+		}		
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"ability_merc_commander_damage_aura"
+{
+	"BaseClass"						"ability_datadriven"
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	"AbilityUnitDamageType"			"DAMAGE_TYPE_NONE"
+	"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+	"FightRecapLevel"				"1"
+
+	"precache"
+	{
+		"particle"			"particles/items_fx/aura_assault.vpcf"
+		"particle"			"particles/status_fx/status_effect_gods_strength.vpcf"
+	}
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"radius"					"600"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_FLOAT"
+			"DamagePercent"				"0.04"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"DamagePercentFriendly"		"4"
+		}
+	}
+
+	"Modifiers"
+	{
+		"modifier_damage_ability_merc_commander_damage_aura"
+		{
+			"IsBuff"			"1"
+			"Passive"			"1"
+			"IsPurgable"		"0"
+	
+			"OnCreated"
+			{
+				"AttachEffect"
+				{
+					"EffectName"		"particles/items_fx/aura_assault.vpcf"
+					"EffectAttachType"	"follow_origin"
+					"Target"			"TARGET"
+				}
+			}
+
+			"Aura"					"modifier_damage_aura_ability_merc_commander_damage_aura"
+			"Aura_Radius"			"%radius"
+			"Aura_Teams"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+			"Aura_Types"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+			"Aura_Flags"			"DOTA_UNIT_TARGET_FLAG_NONE"
+			"Aura_ApplyToCaster"	"0"
+		}
+
+		"modifier_damage_aura_ability_merc_commander_damage_aura"
+		{
+			"IsBuff"			"1"
+			"IsPurgable"		"1"
+			"Passive"			"1"
+
+			"StatusEffectName"			"particles/status_fx/status_effect_gods_strength.vpcf"
+			"StatusEffectPriority"		"10"
+
+			"Properties"
+			{
+				"MODIFIER_PROPERTY_BASEDAMAGEOUTGOING_PERCENTAGE"	"%DamagePercentFriendly"
+			}
+		}		
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"ability_merc_furbolg_armour_aura"
+{
+	"BaseClass"						"ability_datadriven"
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	"AbilityUnitDamageType"			"DAMAGE_TYPE_NONE"
+	"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+	"FightRecapLevel"				"1"
+
+	"precache"
+	{
+		"particle"			"particles/items_fx/aura_endurance.vpcf"
+		"particle"			"particles/status_fx/status_effect_gods_strength.vpcf"
+	}
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"radius"					"600"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"Armour"					"3"
+		}
+	}
+
+	"Modifiers"
+	{
+		"modifier_armour_ability_merc_furbolg_armour_aura"
+		{
+			"IsBuff"			"1"
+			"Passive"			"1"
+			"IsPurgable"		"0"
+	
+			"OnCreated"
+			{
+				"AttachEffect"
+				{
+					"EffectName"		"particles/items_fx/aura_endurance.vpcf"
+					"EffectAttachType"	"follow_origin"
+					"Target"			"TARGET"
+				}
+			}
+
+			"Aura"					"modifier_armour_aura_ability_merc_furbolg_armour_aura"
+			"Aura_Radius"			"%radius"
+			"Aura_Teams"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+			"Aura_Types"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+			"Aura_Flags"			"DOTA_UNIT_TARGET_FLAG_NONE"
+			"Aura_ApplyToCaster"	"0"
+		}
+
+		"modifier_armour_aura_ability_merc_furbolg_armour_aura"
+		{
+			"IsBuff"			"1"
+			"IsPurgable"		"1"
+			"Passive"			"1"
+
+			"StatusEffectName"			"particles/status_fx/status_effect_gods_strength.vpcf"
+			"StatusEffectPriority"		"10"
+
+			"Properties"
+			{
+				"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"	"%Armour"
+			}
+		}		
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"ability_merc_chariot_king_damage"
+{
+	"BaseClass"					"ability_datadriven"
+	"AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	"AbilityUnitDamageType"		"DAMAGE_TYPE_PHYSICAL"
+	"SpellImmunityType"			"SPELL_IMMUNITY_ENEMIES_YES"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_FLOAT"
+			"damage_percent"			"2.00"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"damage_percent_friendly"	"200"
+		}
+	}
+	
+	"Modifiers"
+	{
+		"modifier_ability_merc_chariot_king_damage"
+		{
+			"Passive"						"1"
+			"IsHidden"						"1"
+			"IsPurgable"					"0"
+		
+			"OnAttackLanded"
+			{
+				"RunScript"
+				{
+					"ScriptFile"			"unit_abilities/RegicideAttack.lua"
+					"Function"				"ApplyRegicideDamage"
+				}
+			}
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"ability_merc_frost_wolf_slow_aura"
+{
+	"BaseClass"						"ability_datadriven"
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	"AbilityUnitDamageType"			"DAMAGE_TYPE_NONE"
+	"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+	"FightRecapLevel"				"1"
+
+	"precache"
+	{
+		"particle"			"particles/items_fx/aura_shivas.vpcf"
+		"particle"			"particles/status_fx/status_effect_frost_lich.vpcf"
+	}
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"radius"					"600"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_FLOAT"
+			"SlowPercent"				"0.15"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"SlowPercentFriendly"		"15"
+		}
+	}
+
+	"Modifiers"
+	{
+		"modifier_slow_ability_merc_frost_wolf_slow_aura"
+		{
+			"IsBuff"			"1"
+			"Passive"			"1"
+			"IsPurgable"		"0"
+	
+			"OnCreated"
+			{
+				"AttachEffect"
+				{
+					"EffectName"		"particles/items_fx/aura_shivas.vpcf"
+					"EffectAttachType"	"follow_origin"
+					"Target"			"TARGET"
+				}
+			}
+
+			"Aura"					"modifier_slow_aura_ability_merc_frost_wolf_slow_aura"
+			"Aura_Radius"			"%radius"
+			"Aura_Teams"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+			"Aura_Types"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+			"Aura_Flags"			"DOTA_UNIT_TARGET_FLAG_NONE"
+			"Aura_ApplyToCaster"	"0"
+		}
+
+		"modifier_slow_aura_ability_merc_frost_wolf_slow_aura"
+		{
+			"IsDebuff"			"1"
+			"IsPurgable"		"1"
+			"Passive"			"1"
+
+			"StatusEffectName"			"particles/status_fx/status_effect_frost_lich.vpcf"
+			"StatusEffectPriority"		"10"
+
+			"Properties"
+			{
+				"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"	"%SlowPercentFriendly"
+				"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"	"%SlowPercentFriendly"
+			}
+		}		
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"ability_merc_ice_troll_slow_attack"
+{
+	"BaseClass"						"ability_datadriven"
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_AUTOCAST | DOTA_ABILITY_BEHAVIOR_ATTACK"
+	"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+	"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+	"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"	
+	"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+
+	"precache"
+	{
+		"soundfile"		"soundevents/game_sounds_heroes/game_sounds_viper.vsndevts"
+		"particle"		"particles/units/heroes/hero_viper/viper_poison_attack.vpcf"
+		"particle"		"particles/units/heroes/hero_viper/viper_poison_debuff.vpcf"
+	}
+
+	"AbilityCastRange"				"450"
+	"AbilityCastPoint"				"0.3"
+	"AbilityCooldown"				"0"
+	"AbilityDamage"					"0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"						"FIELD_FLOAT"
+			"Duration"						"{Ability.Duration}"
+		}
+		"02"
+		{
+			"var_type"						"FIELD_FLOAT"
+			"SlowPercent"					"0.20"
+		}
+		"03"
+		{
+			"var_type"						"FIELD_FLOAT"
+			"SlowPercentFriendly"			"20"
+		}
+	}
+
+	"Modifiers"
+	{
+		"modifier_slow_attack_ability_merc_ice_troll_slow_attack"
+		{
+			"Passive"	"1"
+			"IsHidden"	"1"
+
+			"Orb"
+			{
+				"Priority"			"DOTA_ORB_PRIORITY_ABILITY"
+				"ProjectileName"	"particles/units/heroes/hero_viper/viper_poison_attack.vpcf"
+				"CastAttack"		"1"
+			}
+
+			"OnOrbFire"
+			{
+				"FireSound"
+				{
+					"EffectName"	"Hero_Viper.poisonAttack.Cast"
+					"Target"		"CASTER"
+				}
+			}
+
+			"OnOrbImpact"
+			{
+				"ApplyModifier"
+				{
+					"ModifierName"	"modifier_slow_attack_ability_merc_ice_troll_slow_attack_debuff"
+					"Target"		"TARGET"
+				}
+
+				"FireSound"
+				{
+					"EffectName"	"Hero_Viper.PoisonAttack.Target"
+					"Target"		"TARGET"
+				}
+			}
+		}
+
+		"modifier_slow_attack_ability_merc_ice_troll_slow_attack_debuff"
+		{
+			"IsDebuff"				"1"
+			"Duration"				"%Duration"
+
+			"EffectName"			"particles/units/heroes/hero_viper/viper_poison_debuff.vpcf"
+			"EffectAttachType"		"follow_origin"
+
+			"Properties"
+			{
+				"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"	"%SlowPercentFriendly"
+				"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"	"%SlowPercentFriendly"
+			}
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+"ability_merc_warlock_armour_debuff"
+{
+	"BaseClass"						"ability_datadriven"
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_AUTOCAST | DOTA_ABILITY_BEHAVIOR_ATTACK"
+	"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+	"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+	"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"	
+	"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+
+	"precache"
+	{
+		"particle"		"particles/econ/items/shadow_fiend/sf_desolation/sf_base_attack_desolation.vpcf"
+		"particle"		"particles/econ/items/shadow_fiend/sf_desolation/sf_base_attack_desolation_arc.vpcf"
+	}
+
+	"AbilityCastRange"				"450"
+	"AbilityCastPoint"				"0.94"
+	"AbilityCooldown"				"0"
+	"AbilityDamage"					"0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"				"FIELD_FLOAT"
+			"Duration"				"10"
+		}
+		"02"
+		{
+			"var_type"				"FIELD_INTEGER"
+			"Armour"				"-6"
+		}
+	}
+
+	"Modifiers"
+	{
+		"modifier_corruption_attack_ability_merc_warlock_armour_debuff"
+		{
+			"Passive"	"1"
+			"IsHidden"	"1"
+
+			"Orb"
+			{
+				"Priority"				"DOTA_ORB_PRIORITY_ABILITY"
+				"ProjectileName"		"particles/econ/items/shadow_fiend/sf_desolation/sf_base_attack_desolation.vpcf"
+				"CastAttack"			"1"
+			}
+
+			"OnOrbFire"
+			{
+				"FireSound"
+				{
+					"EffectName"		"Item_Desolator.Target"
+					"Target"			"CASTER"
+				}
+			}
+
+			"OnOrbImpact"
+			{
+				"ApplyModifier"
+				{
+					"ModifierName"		"modifier_slow_attack_ability_merc_warlock_armour_debuff_debuff"
+					"Target"			"TARGET"
+				}
+
+				"FireSound"
+				{
+					"EffectName"		"Item_Desolator.Target"
+					"Target"			"TARGET"
+				}
+			}
+		}
+
+		"modifier_corruption_attack_ability_merc_warlock_armour_debuff_debuff"
+		{
+			"IsDebuff"					"1"
+			"Duration"					"%Duration"
+
+			"EffectName"				"particles/econ/items/shadow_fiend/sf_desolation/sf_base_attack_desolation_arc.vpcf"
+			"EffectAttachType"			"follow_origin"
+
+			"Properties"
+			{
+				"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"		"%Armour"
+			}
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+"ability_merc_ballista_king_damage"
+{
+	"BaseClass"					"ability_datadriven"
+	"AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	"AbilityUnitDamageType"		"DAMAGE_TYPE_PHYSICAL"
+	"SpellImmunityType"			"SPELL_IMMUNITY_ENEMIES_YES"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_FLOAT"
+			"damage_percent"			"2.00"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"damage_percent_friendly"	"200"
+		}
+	}
+	
+	"Modifiers"
+	{
+		"modifier_ability_merc_ballista_king_damage"
+		{
+			"Passive"						"1"
+			"IsHidden"						"1"
+			"IsPurgable"					"0"
+		
+			"OnAttackLanded"
+			{
+				"RunScript"
+				{
+					"ScriptFile"			"unit_abilities/RegicideAttack.lua"
+					"Function"				"ApplyRegicideDamage"
+				}
+			}
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"ability_merc_shaman_speed_buff"
+{
+	"BaseClass"						"ability_datadriven"
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+	"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+	"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_MECHANICAL"
+	"AbilityUnitTargetFlags"		"DOTA_UNIT_TARGET_FLAG_NOT_MAGIC_IMMUNE_ALLIES"
+	"SpellImmunityType"				"SPELL_IMMUNITY_ALLIES_NO"
+	"FightRecapLevel"				"1"
+
+	"AbilityCastRange"				"400"
+	"AbilityCastPoint"				"0.3"
+	"AbilityCooldown"				"8"
+	"AbilityManaCost"				"50"
+
+	"AbilitySpecial"
+	{
+		"02"
+		{
+			"var_type"				"FIELD_INTEGER"
+			"speed_bonus"			"20"
+		}
+		"02"
+		{
+			"var_type"				"FIELD_FLOAT"
+			"duration"				"5"
+		}
+	}
+
+	"precache"
+	{
+		"soundfile"		"soundevents/game_sounds_heroes/game_sounds_ogre_magi.vsndevts"
+		"particle"		"particles/units/heroes/hero_ogre_magi/ogre_magi_bloodlust_cast.vpcf"
+		"particle"		"particles/units/heroes/hero_ogre_magi/ogre_magi_bloodlust_buff.vpcf"
+	}
+
+	"OnSpellStart"
+	{
+		"FireSound"
+		{
+			"EffectName"	"Hero_OgreMagi.Bloodlust.Cast"
+			"Target"		"CASTER"
+		}
+
+		"FireEffect"
+		{
+			"Target"			"CASTER"
+			"EffectName"		"particles/units/heroes/hero_ogre_magi/ogre_magi_bloodlust_cast.vpcf"
+			"EffectAttachType"	"follow_origin"
+		}
+	}
+
+	"Modifiers"
+	{
+		"modifier_speed_buff_ability_merc_shaman_speed_buff"
+		{
+			"IsBuff"				"1"
+			"Duration"				"%duration"
+
+			"EffectName"			"particles/units/heroes/hero_ogre_magi/ogre_magi_bloodlust_buff.vpcf"
+			"EffectAttachType"		"follow_origin"
+
+			"Properties"
+			{
+				"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"	"%speed_bonus"
+				"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"	"%speed_bonus"
+			}
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+"ability_merc_pudge_lifesteal_aura"
+{
+	"BaseClass"						"ability_datadriven"
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	"AbilityUnitDamageType"			"DAMAGE_TYPE_NONE"
+	"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+	"FightRecapLevel"				"1"
+
+	"precache"
+	{
+		"particle"			"particles/items_fx/aura_endurance.vpcf"
+		"particle"			"particles/status_fx/status_effect_gods_strength.vpcf"
+	}
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"radius"					"600"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_FLOAT"
+			"LifestealPercent"			"0.17"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"LifestealPercentFriendly"	"17"
+		}
+	}
+
+	"Modifiers"
+	{
+
+		"modifier_lifesteal_ability_merc_pudge_lifesteal_aura"
+		{
+			"Passive"				"1"
+			"IsHidden"				"1"
+			
+			"Aura" 					"modifier_lifesteal_aura_ability_merc_pudge_lifesteal_aura"
+			"Aura_Radius" 			"%radius"
+			"Aura_Teams" 			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+			"Aura_Types" 			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+			"Aura_Flags" 			"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES | DOTA_UNIT_TARGET_FLAG_INVULNERABLE"
+			"Aura_ApplyToCaster" 	"1"
+		}
+
+		"modifier_lifesteal_aura_ability_merc_pudge_lifesteal_aura"
+		{
+			"Passive"			"1"
+			"IsHidden"			"1"
+			
+			"OnDealDamage"
+			{
+				"Lifesteal"
+				{
+					"Target"			"ATTACKER"
+					"LifestealPercent"	"%LifestealPercentFriendly"
+				}
+			}
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"ability_merc_behemoth_armour_aura"
+{
+	"BaseClass"						"ability_datadriven"
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	"AbilityUnitDamageType"			"DAMAGE_TYPE_NONE"
+	"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+	"FightRecapLevel"				"1"
+
+	"precache"
+	{
+		"particle"			"particles/items_fx/aura_endurance.vpcf"
+		"particle"			"particles/status_fx/status_effect_gods_strength.vpcf"
+	}
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"radius"					"600"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"Armour"					"3"
+		}
+	}
+
+	"Modifiers"
+	{
+		"modifier_armour_ability_merc_behemoth_armour_aura"
+		{
+			"IsBuff"			"1"
+			"Passive"			"1"
+			"IsPurgable"		"0"
+	
+			"OnCreated"
+			{
+				"AttachEffect"
+				{
+					"EffectName"		"particles/items_fx/aura_endurance.vpcf"
+					"EffectAttachType"	"follow_origin"
+					"Target"			"TARGET"
+				}
+			}
+
+			"Aura"					"modifier_armour_aura_ability_merc_behemoth_armour_aura"
+			"Aura_Radius"			"%radius"
+			"Aura_Teams"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+			"Aura_Types"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+			"Aura_Flags"			"DOTA_UNIT_TARGET_FLAG_NONE"
+			"Aura_ApplyToCaster"	"0"
+		}
+
+		"modifier_armour_aura_ability_merc_behemoth_armour_aura"
+		{
+			"IsBuff"			"1"
+			"IsPurgable"		"1"
+			"Passive"			"1"
+
+			"StatusEffectName"			"particles/status_fx/status_effect_gods_strength.vpcf"
+			"StatusEffectPriority"		"10"
+
+			"Properties"
+			{
+				"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"	"%Armour"
+			}
+		}		
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"ability_merc_behemoth_magic_immunity"
+{
+	"BaseClass"						"ability_datadriven"
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	"AbilityUnitDamageType"			"DAMAGE_TYPE_NONE"
+	"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+
+	"Modifiers"
+	{
+		"modifier_magic_immunity_ability_merc_behemoth_magic_immunity"
+		{
+			"IsBuff"			"1"
+			"Passive"			"1"
+			"IsPurgable"		"0"
+
+			"States"
+			{
+				"MODIFIER_STATE_MAGIC_IMMUNE" 			"MODIFIER_STATE_VALUE_ENABLED"
+			}
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"ability_merc_kraken_healing_aura"
+{
+	"BaseClass"						"ability_datadriven"
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+	"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+	"FightRecapLevel"				"1"
+
+	"precache"
+	{
+		"particle"			"particles/econ/items/juggernaut/bladekeeper_healing_ward/juggernaut_healing_ward_dc.vpcf"
+	}
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"		"FIELD_INTEGER"
+			"heal"			"10"
+		}
+		"02"
+		{
+			"var_type"		"FIELD_INTEGER"
+			"radius"		"600"
+		}
+	}
+
+	"Modifiers"
+	{
+		"modifier_heal_ability_merc_kraken_healing_aura"
+		{
+			"IsBuff"			"1"
+			"Passive"			"1"
+			"IsPurgable"		"0"
+	
+			"OnCreated"
+			{
+				"AttachEffect"
+				{
+					"EffectName"		"particles/econ/items/juggernaut/bladekeeper_healing_ward/juggernaut_healing_ward_dc.vpcf"
+					"EffectAttachType"	"follow_origin"
+					"Target"			"TARGET"
+				}
+			}
+
+			"Aura"					"modifier_heal_aura_ability_merc_kraken_healing_aura"
+			"Aura_Radius"			"%radius"
+			"Aura_Teams"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+			"Aura_Types"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+			"Aura_Flags"			"DOTA_UNIT_TARGET_FLAG_NONE"
+			"Aura_ApplyToCaster"	"1"
+		}
+
+		"modifier_heal_aura_ability_merc_kraken_healing_aura"
+		{
+			"IsBuff"			"1"
+			"Passive"			"1"
+			"IsPurgable"		"0"
+
+			"ThinkInterval"  	"0.2"
+			"OnIntervalThink"
+			{
+				"Heal"
+				{
+					"Target"		"TARGET"
+					"Heal"			"%heal / 5"
+				}
+			}
+		}		
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+"ability_merc_kraken_poison_attack"
+{
+	"BaseClass"						"ability_datadriven"
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+	"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+	"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"	
+	"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+
+	"precache"
+	{
+		"soundfile"		"soundevents/game_sounds_heroes/game_sounds_viper.vsndevts"
+		"particle"		"particles/units/heroes/hero_viper/viper_poison_attack.vpcf"
+		"particle"		"particles/units/heroes/hero_viper/viper_poison_debuff.vpcf"
+	}
+
+	"AbilityCastRange"				"550"
+	"AbilityCastPoint"				"0.3"
+	"AbilityCooldown"				"0"
+	"AbilityDamage"					"0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"						"FIELD_FLOAT"
+			"Duration"						"4"
+		}
+		"02"
+		{
+			"var_type"						"FIELD_INTEGER"
+			"Damage"						"10"
+		}
+		"03"
+		{
+			"var_type"						"FIELD_FLOAT"
+			"SlowPercent"					"-0.20"
+		}
+		"04"
+		{
+			"var_type"						"FIELD_FLOAT"
+			"SlowPercentFriendly"			"-20"
+		}
+	}
+
+	"Modifiers"
+	{
+		"modifier_poison_attack_ability_merc_kraken_poison_attack"
+		{
+			"Passive"	"1"
+			"IsHidden"	"1"
+
+			"Orb"
+			{
+				"Priority"			"DOTA_ORB_PRIORITY_ABILITY"
+				"ProjectileName"	"particles/units/heroes/hero_viper/viper_poison_attack.vpcf"
+				"CastAttack"		"1"
+			}
+
+			"OnOrbFire"
+			{
+				"FireSound"
+				{
+					"EffectName"	"Hero_Viper.poisonAttack.Cast"
+					"Target"		"CASTER"
+				}
+			}
+
+			"OnOrbImpact"
+			{
+				"ApplyModifier"
+				{
+					"ModifierName"	"modifier_poison_attack_ability_merc_kraken_poison_attack_debuff"
+					"Target"		"TARGET"
+				}
+
+				"FireSound"
+				{
+					"EffectName"	"Hero_Viper.PoisonAttack.Target"
+					"Target"		"TARGET"
+				}
+			}
+		}
+
+		"modifier_poison_attack_ability_merc_kraken_poison_attack_debuff"
+		{
+			"IsDebuff"				"1"
+			"Duration"				"%Duration"
+
+			"EffectName"			"particles/units/heroes/hero_viper/viper_poison_debuff.vpcf"
+			"EffectAttachType"		"follow_origin"
+
+			"ThinkInterval"			"0.2"
+
+			"OnIntervalThink"
+			{
+				"Damage"
+				{
+					"Target"		"TARGET"
+					"Type"			"DAMAGE_TYPE_MAGICAL"
+					"Damage"		"%Damage / 5"
+				}
+			}
+
+			"Properties"
+			{
+				"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"	"%SlowPercentFriendly"
+				"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"	"%SlowPercentFriendly"
+			}
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+"ability_merc_kraken_magic_immunity"
+{
+	"BaseClass"						"ability_datadriven"
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	"AbilityUnitDamageType"			"DAMAGE_TYPE_NONE"
+	"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+
+	"Modifiers"
+	{
+		"modifier_magic_immunity_ability_merc_kraken_magic_immunity"
+		{
+			"IsBuff"			"1"
+			"Passive"			"1"
+			"IsPurgable"		"0"
+
+			"States"
+			{
+				"MODIFIER_STATE_MAGIC_IMMUNE" 			"MODIFIER_STATE_VALUE_ENABLED"
+			}
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+"ability_merc_infernal_bash"
+{
+	"BaseClass"						"ability_datadriven"
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+	"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+	"AbilityCooldown"				"1"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"				"FIELD_FLOAT"
+			"Chance"				"0.25"
+		}
+		"02"
+		{
+			"var_type"				"FIELD_INTEGER"
+			"ChanceFriendly"		"0.25"
+		}
+		"03"
+		{
+			"var_type"				"FIELD_FLOAT"
+			"Damage"				"120"
+		}
+		"04"
+		{
+			"var_type"				"FIELD_FLOAT"
+			"Duration"				"1"
+		}
+	}
+
+	"Modifiers"
+	{
+		"modifier_bash_ability_merc_infernal_bash"
+		{
+			"Passive"	"1"
+			"IsHidden"	"1"
+
+			"OnAttackLanded"
+			{
+				"RunScript"
+				{
+					"ScriptFile"		"unit_abilities/Bash.lua"
+					"Function"			"OnAttackLanded"
+					"BashChance"		"%Chance"
+					"ModifierName"		"modifier_bash_ability_merc_infernal_bash_stun"
+				}
+			}
+		}
+
+		"modifier_bash_ability_merc_infernal_bash_stun"
+		{
+			"Duration"				"%Duration"
+			"Passive"				"0"
+			"IsHidden"				"0"
+			"IsBuff"				"0"
+			"IsDebuff"				"1"
+			"IsPurgable"			"1"
+			
+			"EffectName"			"particles/generic_gameplay/generic_stunned.vpcf"
+			"EffectAttachType"		"follow_overhead"
+			"OverrideAnimation"		"ACT_DOTA_DISABLED"
+			
+			"States"
+			{
+				"MODIFIER_STATE_STUNNED"		"MODIFIER_STATE_VALUE_ENABLED"
+			}
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+"ability_merc_infernal_immolation"
+{
+	"BaseClass"						"ability_datadriven"
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+	"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+	"FightRecapLevel"				"1"
+
+	"precache"
+	{
+		"particle"			"particles/units/heroes/hero_doom_bringer/doom_bringer_scorched_earth_buff.vpcf"
+		"particle"			"particles/units/heroes/hero_doom_bringer/doom_scorched_earth.vpcf"			
+	}
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"		"FIELD_INTEGER"
+			"damage"		"25"
+		}
+		"02"
+		{
+			"var_type"		"FIELD_INTEGER"
+			"radius"		"{Ability.Range}"
+		}
+	}
+
+	"Modifiers"
+	{
+		"modifier_immolate_ability_merc_infernal_immolation"
+		{
+			"IsBuff"			"1"
+			"Passive"			"1"
+			"IsPurgable"		"0"
+	
+			"OnCreated"
+			{
+				"AttachEffect"
+				{
+					"EffectName"		"particles/units/heroes/hero_doom_bringer/doom_scorched_earth.vpcf"
+					"EffectAttachType"	"follow_origin"
+					"Target"			"TARGET"
+
+					"ControlPoints"
+					{
+						"01"	"%radius 0 0"
+					}
+				}
+			}
+
+			"Aura"					"modifier_immolate_aura_ability_merc_infernal_immolation"
+			"Aura_Radius"			"%radius"
+			"Aura_Teams"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+			"Aura_Types"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+			"Aura_Flags"			"DOTA_UNIT_TARGET_FLAG_NONE"
+			"Aura_ApplyToCaster"	"0"
+		}
+
+		"modifier_immolate_aura_ability_merc_infernal_immolation"
+		{
+			"IsDebuff"			"1"
+			"Passive"			"1"
+
+			"ThinkInterval"  	"0.1"
+			"OnIntervalThink"
+			{
+				"Damage"
+				{
+					"Target"		"TARGET"
+					"Type"			"DAMAGE_TYPE_MAGICAL"
+					"Damage"		"%damage / 10"
+				}
+			}
+		}		
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+"ability_merc_demon_speed_aura"
+{
+	"BaseClass"						"ability_datadriven"
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	"AbilityUnitDamageType"			"DAMAGE_TYPE_NONE"
+	"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+	"FightRecapLevel"				"1"
+
+	"precache"
+	{
+		"particle"			"particles/units/heroes/hero_lone_druid/lone_druid_rabid_buff_speed_ring.vpcf"
+		"particle"			"particles/status_fx/status_effect_forcestaff.vpcf"
+	}
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"radius"					"600"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_FLOAT"
+			"SpeedPercent"				"0.20"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"SpeedPercentFriendly"		"20"
+		}
+	}
+
+	"Modifiers"
+	{
+		"modifier_speed_ability_merc_demon_speed_aura"
+		{
+			"IsBuff"			"1"
+			"Passive"			"1"
+			"IsPurgable"		"0"
+	
+			"OnCreated"
+			{
+				"AttachEffect"
+				{
+					"EffectName"		"particles/units/heroes/hero_lone_druid/lone_druid_rabid_buff_speed_ring.vpcf"
+					"EffectAttachType"	"follow_origin"
+					"Target"			"TARGET"
+				}
+			}
+
+			"Aura"					"modifier_speed_aura_ability_merc_demon_speed_aura"
+			"Aura_Radius"			"%radius"
+			"Aura_Teams"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+			"Aura_Types"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+			"Aura_Flags"			"DOTA_UNIT_TARGET_FLAG_NONE"
+			"Aura_ApplyToCaster"	"0"
+		}
+
+		"modifier_speed_aura_ability_merc_demon_speed_aura"
+		{
+			"IsBuff"			"1"
+			"IsPurgable"		"1"
+			"Passive"			"1"
+
+			"StatusEffectName"			"particles/status_fx/status_effect_forcestaff.vpcf"
+			"StatusEffectPriority"		"10"
+
+			"Properties"
+			{
+				"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"	"%SpeedPercentFriendly"
+				"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"	"%SpeedPercentFriendly"
+			}
+		}		
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"ability_merc_demon_damage_aura"
+{
+	"BaseClass"						"ability_datadriven"
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	"AbilityUnitDamageType"			"DAMAGE_TYPE_NONE"
+	"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+	"FightRecapLevel"				"1"
+
+	"precache"
+	{
+		"particle"			"particles/items_fx/aura_assault.vpcf"
+		"particle"			"particles/status_fx/status_effect_gods_strength.vpcf"
+	}
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"radius"					"600"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_FLOAT"
+			"DamagePercent"				"0.10"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"DamagePercentFriendly"		"10"
+		}
+	}
+
+	"Modifiers"
+	{
+		"modifier_damage_ability_merc_demon_damage_aura"
+		{
+			"IsBuff"			"1"
+			"Passive"			"1"
+			"IsPurgable"		"0"
+	
+			"OnCreated"
+			{
+				"AttachEffect"
+				{
+					"EffectName"		"particles/items_fx/aura_assault.vpcf"
+					"EffectAttachType"	"follow_origin"
+					"Target"			"TARGET"
+				}
+			}
+
+			"Aura"					"modifier_damage_aura_ability_merc_demon_damage_aura"
+			"Aura_Radius"			"%radius"
+			"Aura_Teams"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+			"Aura_Types"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+			"Aura_Flags"			"DOTA_UNIT_TARGET_FLAG_NONE"
+			"Aura_ApplyToCaster"	"0"
+		}
+
+		"modifier_damage_aura_ability_merc_demon_damage_aura"
+		{
+			"IsBuff"			"1"
+			"IsPurgable"		"1"
+			"Passive"			"1"
+
+			"StatusEffectName"			"particles/status_fx/status_effect_gods_strength.vpcf"
+			"StatusEffectPriority"		"10"
+
+			"Properties"
+			{
+				"MODIFIER_PROPERTY_BASEDAMAGEOUTGOING_PERCENTAGE"	"%DamagePercentFriendly"
+			}
+		}		
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 "ability_fire_flame_archer_splitshot"
 {
 	"BaseClass"						"ability_datadriven"
@@ -2035,7 +4441,7 @@
 
 	"Modifiers"
 	{
-		"modifier_split_shot_npc_legion_fire_flame_archer_upg"
+		"modifier_split_shot_ability_fire_flame_archer_splitshot"
 		{
 			"Passive"			"1"
 			"IsHidden"			"1"
@@ -2093,7 +4499,7 @@
 		"modifier_ability_fire_vanguard_stacking_damage"
 		{
 			"Passive"						"1"
-			"IsHidden"						"0"
+			"IsHidden"						"1"
 			"IsPurgable"					"0"
 		
 			"OnAttackLanded"
@@ -2573,32 +4979,353 @@
 
 
 
-"sell_unit"
+
+
+
+
+
+
+
+
+
+
+"ability_mech_captain_damage_aura"
 {
-	"BaseClass"						"ability_lua"
-	"AbilityTextureName"			"alchemist_goblins_greed"
-	"ScriptFile"					"abilities/selling/sell_unit"
-
-	"AbilityCastRange"				"100"
-	"AbilityCastPoint"				"0.4"
-
-	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+	"BaseClass"						"ability_datadriven"
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	"AbilityUnitDamageType"			"DAMAGE_TYPE_NONE"
+	"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 	"FightRecapLevel"				"1"
-	"MaxLevel"						"1"
-	
-	"AbilityCooldown"				"2.0"
-	"AbilityDuration"				"1.0"
-	"AbilityManaCost"				"0"
+
+	"precache"
+	{
+		"particle"			"particles/items_fx/aura_assault.vpcf"
+		"particle"			"particles/status_fx/status_effect_gods_strength.vpcf"
+	}
 
 	"AbilitySpecial"
 	{
 		"01"
 		{
+			"var_type"					"FIELD_INTEGER"
+			"radius"					"600"
+		}
+		"02"
+		{
 			"var_type"					"FIELD_FLOAT"
-			"SellDelay"					"2"
+			"DamagePercent"				"0.07"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"DamagePercentFriendly"		"7"
+		}
+	}
+
+	"Modifiers"
+	{
+		"modifier_damage_ability_mech_captain_damage_aura"
+		{
+			"IsBuff"			"1"
+			"Passive"			"1"
+			"IsPurgable"		"0"
+	
+			"OnCreated"
+			{
+				"AttachEffect"
+				{
+					"EffectName"		"particles/items_fx/aura_assault.vpcf"
+					"EffectAttachType"	"follow_origin"
+					"Target"			"TARGET"
+				}
+			}
+
+			"Aura"					"modifier_damage_aura_ability_mech_captain_damage_aura"
+			"Aura_Radius"			"%radius"
+			"Aura_Teams"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+			"Aura_Types"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+			"Aura_Flags"			"DOTA_UNIT_TARGET_FLAG_NONE"
+			"Aura_ApplyToCaster"	"0"
+		}
+
+		"modifier_damage_aura_ability_mech_captain_damage_aura"
+		{
+			"IsBuff"			"1"
+			"IsPurgable"		"1"
+			"Passive"			"1"
+
+			"StatusEffectName"			"particles/status_fx/status_effect_gods_strength.vpcf"
+			"StatusEffectPriority"		"10"
+
+			"Properties"
+			{
+				"MODIFIER_PROPERTY_BASEDAMAGEOUTGOING_PERCENTAGE"	"%DamagePercentFriendly"
+			}
+		}		
+	}
+}
+
+
+
+
+
+
+
+
+"ability_mech_captain_upg_damage_aura"
+{
+	"BaseClass"						"ability_datadriven"
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	"AbilityUnitDamageType"			"DAMAGE_TYPE_NONE"
+	"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+	"FightRecapLevel"				"1"
+
+	"precache"
+	{
+		"particle"			"particles/items_fx/aura_assault.vpcf"
+		"particle"			"particles/status_fx/status_effect_gods_strength.vpcf"
+	}
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"radius"					"600"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_FLOAT"
+			"DamagePercent"				"0.12"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"DamagePercentFriendly"		"12"
+		}
+	}
+
+	"Modifiers"
+	{
+		"modifier_damage_ability_mech_captain_upg_damage_aura"
+		{
+			"IsBuff"			"1"
+			"Passive"			"1"
+			"IsPurgable"		"0"
+	
+			"OnCreated"
+			{
+				"AttachEffect"
+				{
+					"EffectName"		"particles/items_fx/aura_assault.vpcf"
+					"EffectAttachType"	"follow_origin"
+					"Target"			"TARGET"
+				}
+			}
+
+			"Aura"					"modifier_damage_aura_ability_mech_captain_upg_damage_aura"
+			"Aura_Radius"			"%radius"
+			"Aura_Teams"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+			"Aura_Types"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+			"Aura_Flags"			"DOTA_UNIT_TARGET_FLAG_NONE"
+			"Aura_ApplyToCaster"	"0"
+		}
+
+		"modifier_damage_aura_ability_mech_captain_upg_damage_aura"
+		{
+			"IsBuff"			"1"
+			"IsPurgable"		"1"
+			"Passive"			"1"
+
+			"StatusEffectName"			"particles/status_fx/status_effect_gods_strength.vpcf"
+			"StatusEffectPriority"		"10"
+
+			"Properties"
+			{
+				"MODIFIER_PROPERTY_BASEDAMAGEOUTGOING_PERCENTAGE"	"%DamagePercentFriendly"
+			}
+		}		
+	}
+}
+
+
+
+
+
+"ability_mech_airship_splitshot"
+{
+	"BaseClass"						"ability_datadriven"
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+	"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_ALL"
+	"AbilityUnitTargetFlag"			"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
+	"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
+	"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+	"AbilityTextureName"			"clinkz_strafe"
+	"AbilityCastPoint"				"0.2"
+
+	"precache"
+	{
+	}
+
+	"AbilitySpecial"
+	{
+		"01"
+		{	
+			"var_type"				"FIELD_INTEGER"
+			"shots"					"4"
+		}
+		"02"
+		{
+			"var_type"				"FIELD_INTEGER"
+			"range"					"450"
+		}
+		"03"
+		{
+			"var_type"				"FIELD_INTEGER"
+			"projectile_speed"		"900"
+		}
+		"04"
+		{
+			"var_type"				"FIELD_FLOAT"
+			"damage_percentage"		"0.80"
+		}
+		"05"
+		{
+			"var_type"				"FIELD_FLOAT"
+			"DamagePercentFriendly"	"80"
+		}
+	}
+
+	"OnProjectileHitUnit"
+	{
+		"DeleteOnHit"	"1"
+		
+		"FireSound"
+		{
+			"EffectName"	"Hero_Medusa.AttackSplit"
+			"Target" 		"TARGET"
+		}
+
+		"RunScript"
+		{
+			"ScriptFile"	"unit_abilities/SplitShot.lua"
+			"Function"		"ApplySplitShotDamage"
+		}
+	}
+
+	"Modifiers"
+	{
+		"modifier_split_shot_ability_mech_airship_splitshot"
+		{
+			"Passive"			"1"
+			"IsHidden"			"1"
+			"IsDebuff"			"0"
+	
+			"OnAttack"
+			{
+				"RunScript"
+				{
+					"ScriptFile"	"unit_abilities/SplitShot.lua"
+					"Function"		"PerformSplitShot"
+				}
+			}
 		}
 	}
 }
+
+
+
+"ability_mech_knight_critical"
+{
+	"BaseClass"						"ability_datadriven"
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+	"AbilityTextureName"			"phantom_assassin_coup_de_grace"
+
+	"precache"
+	{
+		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_phantom_assassin.vsndevts"
+	}
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"damage_percent"			"200"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"critical_chance"			"15"
+		}
+	}
+
+	
+
+	"Modifiers"
+	{
+		"modifier_critical_ability_mech_knight_critical"
+		{
+			"Passive"	"1"
+			"IsHidden"	"1"
+
+			"OnAttackStart"
+			{
+				"RemoveModifier"
+				{
+					"ModifierName"	"modifier_critical_ability_mech_knight_critical_crit"
+					"Target"		"CASTER"
+				}
+
+				"Random"
+				{
+					"Chance"		"%critical_chance"
+					"PseudoRandom"	"DOTA_PSEUDO_RANDOM_PHANTOMASSASSIN_CRIT"
+
+					"OnSuccess"
+					{
+						"ApplyModifier"
+						{
+							"ModifierName"	"modifier_critical_ability_mech_knight_critical_crit"
+							"Target"		"CASTER"
+						}
+					}
+				}
+			}
+		}
+
+		"modifier_critical_ability_mech_knight_critical_crit"
+		{
+			"IsHidden"	"1"
+
+			"Properties"
+			{
+				"MODIFIER_PROPERTY_PREATTACK_CRITICALSTRIKE"	"%damage_percent"
+			}
+
+			"OnAttackLanded"
+			{
+				"RemoveModifier"
+				{
+					"ModifierName"	"modifier_critical_ability_mech_knight_critical_crit"
+					"Target"		"CASTER"
+				}
+
+				"FireSound"
+				{
+					"EffectName"	"Hero_PhantomAssassin.CoupDeGrace"
+					"Target"		"TARGET"
+				}
+			}
+		}
+	}
+}
+
+
+
+
 "sell_unit_fire"
 {
 	"BaseClass"						"ability_lua"
@@ -2626,5 +5353,116 @@
 	}
 }
 
+"sell_unit_nature"
+{
+	"BaseClass"						"ability_lua"
+	"AbilityTextureName"			"alchemist_goblins_greed"
+	"ScriptFile"					"abilities/selling/sell_unit_nature"
+
+	"AbilityCastRange"				"100"
+	"AbilityCastPoint"				"0.4"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+	"FightRecapLevel"				"1"
+	"MaxLevel"						"1"
+	
+	"AbilityCooldown"				"2.0"
+	"AbilityDuration"				"1.0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_FLOAT"
+			"SellDelay"					"2"
+		}
+	}
+}
+
+
+
+"sell_unit_water"
+{
+	"BaseClass"						"ability_lua"
+	"AbilityTextureName"			"alchemist_goblins_greed"
+	"ScriptFile"					"abilities/selling/sell_unit_water"
+
+	"AbilityCastRange"				"100"
+	"AbilityCastPoint"				"0.4"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+	"FightRecapLevel"				"1"
+	"MaxLevel"						"1"
+	
+	"AbilityCooldown"				"2.0"
+	"AbilityDuration"				"1.0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_FLOAT"
+			"SellDelay"					"2"
+		}
+	}
+}
+
+
+
+"sell_unit_mech"
+{
+	"BaseClass"						"ability_lua"
+	"AbilityTextureName"			"alchemist_goblins_greed"
+	"ScriptFile"					"abilities/selling/sell_unit_mech"
+
+	"AbilityCastRange"				"100"
+	"AbilityCastPoint"				"0.4"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+	"FightRecapLevel"				"1"
+	"MaxLevel"						"1"
+	
+	"AbilityCooldown"				"2.0"
+	"AbilityDuration"				"1.0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_FLOAT"
+			"SellDelay"					"2"
+		}
+	}
+}
+
+"sell_unit"
+{
+	"BaseClass"						"ability_lua"
+	"AbilityTextureName"			"alchemist_goblins_greed"
+	"ScriptFile"					"abilities/selling/sell_unit"
+
+	"AbilityCastRange"				"100"
+	"AbilityCastPoint"				"0.4"
+
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+	"FightRecapLevel"				"1"
+	"MaxLevel"						"1"
+	
+	"AbilityCooldown"				"2.0"
+	"AbilityDuration"				"1.0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_FLOAT"
+			"SellDelay"					"2"
+		}
+	}
+}
 
 }
