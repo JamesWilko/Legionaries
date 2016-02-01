@@ -42,6 +42,9 @@ function Precache( context )
 	PrecacheResource( "soundfile", "soundevents/game_sounds_heroes/game_sounds_omniknight.vsndevts", context )
 	PrecacheResource( "particle", "particles/units/heroes/hero_oracle/oracle_false_promise_heal.vpcf", context )
 
+	-- Boss
+	PrecacheUnitByNameSync( "npc_dota_hero_nevermore", context )
+
 	-- Currency, armour, crystal particles
 	PrecacheResource( "particle_folder", "particles/units/", context )
 	PrecacheResource( "particle_folder", "particles/currencies/", context )

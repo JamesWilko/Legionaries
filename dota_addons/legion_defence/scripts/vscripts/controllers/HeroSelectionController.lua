@@ -55,7 +55,7 @@ function CHeroSelectionController:BuildHeroList()
 		for override_id, hero_data in pairs( hero_abilities ) do
 
 			-- Find overridden hero
-			if hero_data["override_hero"] == hero_id then
+			if type(hero_data) == "table" and hero_data["override_hero"] == hero_id then
 
 				-- Add override abilities
 				local data = {}
