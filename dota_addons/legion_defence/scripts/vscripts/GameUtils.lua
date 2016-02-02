@@ -94,6 +94,27 @@ function PlayCurrencyGainedParticles( sCurrency, lPrice, eUnit, hPlayer, vSpawnP
 
 end
 
+function ShowCurrencyPopup( player, target, currency, amount, lifetime, color )
+
+	if CurrencyPopups[currency] then
+
+		local particle_path = "particles/msg_fx/msg_gold.vpcf"
+		local particle = ParticleManager:CreateParticleForPlayer(particle_path, PATTACH_ABSORIGIN_FOLLOW, target, player)
+		local digits = amount ~= nil and #tostring(amount) or 0
+		digits = amount > 0 and digits + 1 or digits
+		local symbol = amount > 0 and 0 or 1
+		local color = CurrencyPopups[currency] and CurrencyPopups[currency].color or Vector(255, 0, 0)
+		lifetime = lifetime or 1
+
+		ParticleManager:SetParticleControl(particle, 1, Vector(symbol, math.abs(tonumber(amount)), 0))
+		ParticleManager:SetParticleControl(particle, 2, Vector(lifetime, digits, 0))
+		ParticleManager:SetParticleControl(particle, 3, color)
+		ParticleManager:ReleaseParticleIndex(particle)
+
+	end
+
+end
+
 -- Returns the abilities that are unique to a unit
 -- ie. No upgrade or sell ability
 function GetUnitUniqueAbilities( hUnit )
@@ -137,23 +158,22 @@ function GetUnitUniqueAbilities( hUnit )
 
 end
 
-function ShowCurrencyPopup( player, target, currency, amount, lifetime, color )
+-- Searches through a table of abilities to find the first ability
+-- that implements the value in its special values
+function FindAbilityThatHasSpecialValue( tAbilities, sValueKey, tOptions )
 
-	if CurrencyPopups[currency] then
+	tOptions = tOptions or {}
+	local allowOnCooldown = tOptions.allow_on_cooldown or false
 
-		local particle_path = "particles/msg_fx/msg_gold.vpcf"
-		local particle = ParticleManager:CreateParticleForPlayer(particle_path, PATTACH_ABSORIGIN_FOLLOW, target, player)
-		local digits = amount ~= nil and #tostring(amount) or 0
-		digits = amount > 0 and digits + 1 or digits
-		local symbol = amount > 0 and 0 or 1
-		local color = CurrencyPopups[currency] and CurrencyPopups[currency].color or Vector(255, 0, 0)
-		lifetime = lifetime or 1
-
-		ParticleManager:SetParticleControl(particle, 1, Vector(symbol, math.abs(tonumber(amount)), 0))
-		ParticleManager:SetParticleControl(particle, 2, Vector(lifetime, digits, 0))
-		ParticleManager:SetParticleControl(particle, 3, color)
-		ParticleManager:ReleaseParticleIndex(particle)
-
+	for k, ability in pairs(tAbilities) do
+		if ability:IsCooldownReady() or allowOnCooldown then
+			local value = ability:GetSpecialValueFor(sValueKey)
+			if value then
+				return ability
+			end
+		end
 	end
+
+	return nil
 
 end
