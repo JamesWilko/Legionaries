@@ -54,6 +54,10 @@ function CMercenaryController:BuildMercenariesList()
 
 		if string.find(k, "npc_legion_merc_") then
 
+			if not merc_icons[k] then
+				Warning("Missing spawn icon for mercenary: " .. tostring(k))
+			end
+
 			-- Add data
 			local data = {
 				id = k,
@@ -63,7 +67,7 @@ function CMercenaryController:BuildMercenariesList()
 				attack_capability = unit_data["AttackCapabilities"],
 				damage_type = unit_data["CombatClassAttack"],
 				defence_type = unit_data["CombatClassDefend"],
-				icon = merc_icons[k].image,
+				icon = merc_icons[k] and merc_icons[k].image,
 			}
 			table.insert( self._mercenaries, data )
 
