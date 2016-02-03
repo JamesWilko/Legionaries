@@ -295,6 +295,7 @@ function CUnitController:HandleOnWaveComplete( event )
 					-- Unit is alive, so freeze it, and reset position and rotation
 					v.unit:SetMoveCapability( DOTA_UNIT_CAP_MOVE_NONE )
 					v.unit:SetHealth( v.unit:GetMaxHealth() )
+					v.unit:SetMana( v.unit:GetMaxMana() )
 					v.unit:SetOrigin( v.position )
 					v.unit:SetAngles( 0, 90, 0 )
 
