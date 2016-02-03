@@ -95,7 +95,7 @@
 		"image"		"file://{images}/custom_game/mercs/merc_centaur_chief.psd"
 	}
 
-	"npc_legion_merc_gargolye"
+	"npc_legion_merc_gargoyle"
 	{
 		"image"		"file://{images}/custom_game/mercs/merc_gargoyle.psd"
 	}
