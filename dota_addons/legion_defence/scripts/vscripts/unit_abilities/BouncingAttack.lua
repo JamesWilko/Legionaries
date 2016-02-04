@@ -59,7 +59,7 @@ function BounceAttackStart( keys )
 	dummy_ability.bounceCount = 0
 	dummy_ability.maxBounces = ability:GetLevelSpecialValueFor("bounces", ability_level)
 	dummy_ability.bounceRange = ability:GetLevelSpecialValueFor("range", ability_level) 
-	dummy_ability.dmgMultiplier = ability:GetLevelSpecialValueFor("damage_reduction_percent", ability_level)
+	dummy_ability.dmgMultiplier = ability:GetLevelSpecialValueFor("DamageReduction", ability_level)
 	dummy_ability.original_ability = ability
 	dummy_ability.particle_name, dummy_ability.projectile_speed = FindProjectileInfo(caster:GetUnitName())
 	dummy_ability.projectileFrom = target
