@@ -1,4 +1,19 @@
 
+function PerformSplitShotActive( keys )
+
+	local caster = keys.caster
+	local target = keys.target
+	local ability = keys.ability
+	local ability_level = ability:GetLevel() - 1
+	local mana_cost = ability:GetManaCost(ability_level)
+
+	if caster:GetMana() >= mana_cost and ability:IsCooldownReady() then
+		caster:SpendMana( mana_cost, ability )
+		PerformSplitShot( keys )
+	end
+
+end
+
 function PerformSplitShot( keys )
 
 	-- Get variables
@@ -59,7 +74,7 @@ function ApplySplitShotDamage( keys )
 	local data = {
 		attacker = keys.caster,
 		victim = keys.target,
-		damage = keys.caster:GetAttackDamage() * keys.ability:GetSpecialValueFor("damage_percentage"),
+		damage = keys.caster:GetAttackDamage() * keys.ability:GetSpecialValueFor("DamagePercent"),
 		damage_type = keys.ability:GetAbilityDamageType(),
 	}
 	ApplyDamage(data)
