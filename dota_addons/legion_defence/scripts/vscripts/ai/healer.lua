@@ -1,7 +1,7 @@
 
 local THINK_DELAY = 1
 local HEALTH_HEAL_THRESHOLD = 0.5
-local HEAL_KV = "heal"
+local HEAL_KV = "Heal"
 
 local abilities = {}
 
