@@ -3,8 +3,7 @@ function OnAttackLanded( keys )
 
 	local chance = keys["BashChance"] or 0
 	local rand = math.random()
-	print("Checking bash chance: " .. rand .. " < " .. chance)
-
+	
 	if math.random() < chance then
 
 		-- Bash unit
