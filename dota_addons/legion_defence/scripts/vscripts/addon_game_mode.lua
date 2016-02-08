@@ -33,6 +33,8 @@ function Precache( context )
 	-- PrecacheResource( "particle_folder", "particles/units/heroes/hero_lina/", context )
 
 	PrecacheResource("particle_folder", "particles/currencies/", context)
+	PrecacheResource("particle_folder", "particles/spawns/", context)
+	PrecacheResource("particle", "particles/units/heroes/hero_rattletrap/rattletrap_cog_attack.vpcf", context)
 
 	-- Miner particles
 	PrecacheResource( "particle", "particles/units/heroes/hero_chen/chen_teleport_flash.vpcf", context )
