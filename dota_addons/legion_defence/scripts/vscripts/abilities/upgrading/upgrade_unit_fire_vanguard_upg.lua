@@ -8,3 +8,6 @@ end
 function upgrade_unit_fire_vanguard_upg:GetUpgradeClass()
 	return "npc_legion_fire_vanguard_upg"
 end
+
+
+

@@ -8,3 +8,4 @@ end
 function upgrade_unit_fire_pyromancer_upg:GetUpgradeClass()
 	return "npc_legion_fire_pyromancer_upg"
 end
+

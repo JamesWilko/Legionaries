@@ -8,3 +8,9 @@ end
 function spawn_tower_fire_heat_knight:GetSpawnUnit()
 	return "npc_legion_fire_heat_knight"
 end
+
+
+
+
+
+

@@ -8,3 +8,7 @@ end
 function spawn_tower_fire_flame_archer:GetSpawnUnit()
 	return "npc_legion_fire_flame_archer"
 end
+
+
+
+

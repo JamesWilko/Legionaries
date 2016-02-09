@@ -8,3 +8,4 @@ end
 function upgrade_unit_fire_flame_archer_upg:GetUpgradeClass()
 	return "npc_legion_fire_flame_archer_upg"
 end
+

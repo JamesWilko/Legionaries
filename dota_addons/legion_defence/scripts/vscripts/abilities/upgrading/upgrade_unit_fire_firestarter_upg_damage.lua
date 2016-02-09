@@ -8,3 +8,4 @@ end
 function upgrade_unit_fire_firestarter_upg_damage:GetUpgradeClass()
 	return "npc_legion_fire_firestarter_upg_damage"
 end
+

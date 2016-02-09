@@ -8,3 +8,7 @@ end
 function spawn_tower_fire_pyromancer:GetSpawnUnit()
 	return "npc_legion_fire_pyromancer"
 end
+
+
+
+

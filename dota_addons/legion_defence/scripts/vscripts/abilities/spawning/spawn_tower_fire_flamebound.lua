@@ -8,3 +8,9 @@ end
 function spawn_tower_fire_flamebound:GetSpawnUnit()
 	return "npc_legion_fire_flamebound"
 end
+
+
+
+
+
+
