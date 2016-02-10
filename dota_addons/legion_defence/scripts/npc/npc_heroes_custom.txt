@@ -23,33 +23,29 @@
 {
 	"override_hero"				"npc_dota_hero_furion"
 	"AbilityLayout"				"6"
-	"Ability1"	""
-	"Ability2"	""
-	"Ability3"	""
-	"Ability4"	""
-	"Ability5"	""
-	"Ability6"	""
+	"Ability1"	"spawn_tower_nature_ent"
+	"Ability2"	"spawn_tower_nature_ranger"
+	"Ability3"	"spawn_tower_nature_sprite"
+	"Ability4"	"spawn_tower_nature_travel"
+	"Ability5"	"spawn_tower_nature_halfbreed"
+	"Ability6"	"spawn_tower_nature_life"
 
 	"VisionNighttimeRange"		"1800"
 }
-
-
 
 "npc_legion_hero_water_builder"
 {
 	"override_hero"				"npc_dota_hero_kunkka"
 	"AbilityLayout"				"6"
-	"Ability1"	""
-	"Ability2"	""
-	"Ability3"	""
-	"Ability4"	""
-	"Ability5"	""
-	"Ability6"	""
+	"Ability1"	"spawn_tower_water_proton"
+	"Ability2"	"spawn_tower_water_spirit"
+	"Ability3"	"spawn_tower_water_watcher"
+	"Ability4"	"spawn_tower_water_mudman"
+	"Ability5"	"spawn_tower_water_disciple"
+	"Ability6"	"spawn_tower_water_seer"
 
 	"VisionNighttimeRange"		"1800"
 }
-
-
 
 "npc_legion_hero_mech_builder"
 {
