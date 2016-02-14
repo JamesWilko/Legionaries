@@ -24,12 +24,18 @@ GameAnalytics._URL = "http://api.gameanalytics.com/v2/%s/"
 GameAnalytics._SANDBOX_URL = "http://sandbox-api.gameanalytics.com/v2/%s/"
 GameAnalytics._TIMEOUT_MS = 10000 -- 10s
 
+GameAnalytics._THINK = 1
+GameAnalytics._QUEUE_TIME = 5
+
 GameAnalytics._CODES = {
 	["200"] = {true, ""},
 	["401"] = {false, "unauthorized"},
 	["413"] = {false, "too_large"},
 	["400"] = {false, "bad_request"},
 }
+
+GameAnalytics._EVENTS_QUEUE = {}
+GameAnalytics._MAX_EVENTS_IN_PAYLOAD = 3
 
 GameAnalytics._GAME_KEY = {
 	["live"] = "",
@@ -39,10 +45,10 @@ GameAnalytics._SECRET_KEY = {
 	["live"] = "",
 	["sandbox"] = "",
 }
-GameAnalytics._SANDBOX = true
 
-GameAnalytics._ENABLED = true
+GameAnalytics._SANDBOX = true
 GameAnalytics._LOGGING = true
+GameAnalytics._ENABLED = true
 
 function GameAnalytics:Log( str )
 	if GameAnalytics._LOGGING then
@@ -95,14 +101,23 @@ end
 
 function GameAnalytics:EncodePayload( payload )
 	local data = JSON:encode( payload )
-	data = '[' .. data .. ']'
+	if string.sub(data, 1, 1) ~= "[" then
+		data = '[' .. data .. ']'
+	end
 	return data
 end
 
 function GameAnalytics:Initialize()
 
-	local url = self:GetURL("init")
+	-- NOTE:
+	-- Dota Specific Think,
+	-- Since we don't have access to os.time to get the epoch time, we retrieve the server timestamp during initalization
+	-- and then continously increase it during the game. Then we send that timestamp as the client timestamp to the server.
+	self._think_ent = IsValidEntity(self._think_ent) and self._think_ent or Entities:CreateByClassname("info_target")
+	self._think_ent:SetThink("OnThink", self, "GameAnalyticsThink", GameAnalytics._THINK)
 
+	-- Send initialization event
+	local url = self:GetURL("init")
 	local payload = {
 		["platform"] = "dota",
 		["os_version"] = "",
@@ -148,10 +163,21 @@ function GameAnalytics:Initialize()
 
 end
 
+function GameAnalytics:OnThink()
+
+	-- Dota Specific Think
+	self._client_time = (self._client_time or 0) + GameAnalytics._THINK
+
+	if (self._client_time % GameAnalytics._QUEUE_TIME) == 0 then
+		GameAnalytics:SendEvents()
+	end
+
+	return GameAnalytics._THINK
+
+end
+
 function GameAnalytics:GetTimestamp()
-	local t = (self._server_time or 1418274202) + 1
-	self._server_time = t
-	return t
+	return (self._server_time or 1418274202) + (self._client_time or 0)
 end
 
 function GameAnalytics:GetSessionID()
@@ -196,25 +222,63 @@ function GameAnalytics:SendSessionStartEvent()
 
 	local dataTable = {}
 	self:BuildEventTable( "user", dataTable )
-
 	self:SendEvent( "events", dataTable )
-
 	return true
 
 end
 
+-- http://apidocs.gameanalytics.com/REST.html?json#progression
 function GameAnalytics:SendProgressionEvent( id, dataTable )
 
 	if not GameAnalytics._ENABLED then
 		return false
 	end
 
+	dataTable = dataTable or {}
 	dataTable["event_id"] = id
 	self:BuildEventTable( "progression", dataTable )
 
-	self:SendEvent( "events", dataTable )
-
+	self:RecordEvent( dataTable )
 	return true
+
+end
+
+-- http://apidocs.gameanalytics.com/REST.html?json#design
+function GameAnalytics:SendDesignEvent( id, dataTable )
+
+	if not GameAnalytics._ENABLED then
+		return false
+	end
+
+	dataTable = dataTable or {}
+	dataTable["event_id"] = id
+	self:BuildEventTable( "design", dataTable )
+
+	self:RecordEvent( dataTable )
+	return true
+
+end
+
+function GameAnalytics:RecordEvent( payload )
+	table.insert(GameAnalytics._EVENTS_QUEUE, payload)
+end
+
+function GameAnalytics:SendEvents()
+
+	local num_queued_events = #GameAnalytics._EVENTS_QUEUE
+	if num_queued_events < 1 then
+		return false
+	end
+
+	-- TODO: Check if the event failed to record and re-add the events back to the queue
+	local payload = {}
+	local events_num = math.min(GameAnalytics._MAX_EVENTS_IN_PAYLOAD, num_queued_events)
+	for i = 0, events_num, 1 do
+		table.insert( payload, GameAnalytics._EVENTS_QUEUE[1] )
+		table.remove( GameAnalytics._EVENTS_QUEUE, 1 )
+	end
+
+	self:SendEvent( "events", payload )
 
 end
 
@@ -230,12 +294,18 @@ function GameAnalytics:SendEvent( eventType, payload )
 	req:SetHTTPRequestRawPostBody( "application/json", data )
 	req:SetHTTPRequestAbsoluteTimeoutMS( self._TIMEOUT_MS )
 
-	self:Log("Sending GameAnalytics event...")
+	self:Log("Sending GameAnalytics events...")
 	req:Send(function(result)
 
-		self:Log("Received event response")
-		table.print(result, "\t")
+		local success, error_code = self:GetErrorCode(result)
+		if success then
+			self:Log("Successfully recorded events... ")
+		else
+			self:Log("Failed to record events, " .. tostring(error_code))
+		end
 
 	end)
+
+	return true
 
 end
