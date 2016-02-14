@@ -214,6 +214,14 @@ function CHeroSelectionController:AssignHeroToPlayer( playerId, heroId )
 
 		end, playerId)
 
+		-- Analytics
+		local history_length = #self.hero_history[playerId]
+		if #self.hero_history[playerId] <= 1 then
+			Analytics:RecordPlayerPickedHero( playerId, heroId )
+		else
+			Analytics:RecordPlayerRepickedHero( playerId, heroId )
+		end
+
 	end
 
 end
