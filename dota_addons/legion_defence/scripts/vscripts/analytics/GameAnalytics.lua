@@ -180,9 +180,25 @@ function GameAnalytics:GetTimestamp()
 	return (self._server_time or 1418274202) + (self._client_time or 0)
 end
 
+function GameAnalytics:GenerateFakeUUID()
+
+	math.randomseed( self:GetTimestamp() )
+
+	-- https://gist.github.com/jrus/3197011
+	local template = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'
+	local uuid string.gsub(template, '[xy]', function (c)
+		local v = (c == 'x') and random(0, 0xf) or random(8, 0xb)
+		return string.format('%x', v)
+	end)
+	return uuid
+
+end
+
 function GameAnalytics:GetSessionID()
-	-- TODO: Generate this
-	return "de305d54-75b4-431b-adb2-eb6b9e546014"
+	if not self._session_id then
+		self._session_id = self:GenerateFakeUUID()
+	end
+	return self._session_id
 end
 
 function GameAnalytics:BuildEventTable( category, dataTable )
@@ -192,11 +208,13 @@ function GameAnalytics:BuildEventTable( category, dataTable )
 		self._event_data = {
 			["v"] = 2,
 			["device"] = "dota2server",
-			["user_id"] = "00000000-0000-0000-0000-000000000000", -- TODO: Generate this
 			["sdk_version"] = "rest api v2",
 			["os_version"] = "windows 10.0",
 			["manufacturer"] = "valve",
 			["platform"] = "windows",
+			["user_id"] = self:GetSessionID(),
+			["session_id"] = self:GetSessionID(),
+			["session_num"] = 1
 		}
 
 	end
@@ -207,8 +225,6 @@ function GameAnalytics:BuildEventTable( category, dataTable )
 
 	dataTable["category"] = category
 	dataTable["client_ts"] = self:GetTimestamp()
-	dataTable["session_id"] = self:GetSessionID()
-	dataTable["session_num"] = 1
 
 	return dataTable
 
@@ -299,7 +315,7 @@ function GameAnalytics:SendEvent( eventType, payload )
 
 		local success, error_code = self:GetErrorCode(result)
 		if success then
-			self:Log("Successfully recorded events... ")
+			self:Log("Successfully recorded events!")
 		else
 			self:Log("Failed to record events, " .. tostring(error_code))
 		end
