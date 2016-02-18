@@ -16,7 +16,7 @@ end
 -- King Controller
 ---------------------------------------
 CKingController.KING_CLASSES = {
-	[1] = "npc_legion_fire_heat_knight_upg",
+	[1] = "npc_legion_king_radiant",
 	[DOTA_TEAM_GOODGUYS] = "npc_legion_king_radiant",
 	[DOTA_TEAM_BADGUYS] = "npc_legion_king_dire",
 }
@@ -42,7 +42,7 @@ CKingController.UPGRADES = {
 		func = function(controller, hPlayer, hKing) controller:UpgradeHealth(hPlayer, hKing) end
 	},
 	[CKingController.KEY_REGEN] = {
-		per_level = 4,
+		per_level = 2.5,
 		cost = 80,
 		max_level = 30,
 		currency = CURRENCY_GEMS,
