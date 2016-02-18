@@ -392,9 +392,22 @@ function CWaveController:_AdvanceArenaState()
 	print("Advancing arena state to " .. tostring(CWaveController.ARENA_STATES[self._arena_state]) .. "...")
 end
 
-function CWaveController:_TeleportAllUnitsToArena( time )
+function CWaveController:_SpawnExtraArenaUnit( spawnZone, unitType, iAmount )
 
-	-- TODO: Spawn handicap units if a team is missing players
+	for i = 1, unit_amount do
+				
+		local hUnit = CreateUnitByName( unitType, RandomVectorInTrigger(spawnZone.entity), false, nil, nil, spawnZone.team )
+		local data = {
+			unit = hUnit,
+			team = spawnZone.team
+		}
+		table.insert( self._arena_units, data )
+
+	end
+
+end
+
+function CWaveController:_TeleportAllUnitsToArena( time )
 
 	local mercenary_controller = GameRules.LegionDefence:GetMercenaryController()
 
@@ -422,22 +435,22 @@ function CWaveController:_TeleportAllUnitsToArena( time )
 			self:_SpawnUnitInArena( v.unit, arena_spawn )
 		end
 
+		-- Team has less players than the other team
+		local enemy_team_lanes = self._lane_controller:GetOccupiedLanesForTeam( GetEnemyTeam(arena_spawn.team) )
+		if #team_lanes > 0 and #team_lanes < #enemy_team_lanes then
+
+			local wave_data = self:GetWave()
+			local unit = wave_data["arena_boss_unit"]
+			local team_difference = #enemy_team_lanes - #team_lanes
+			self:_SpawnExtraArenaUnit( arena_spawn, unit, team_difference )
+
 		-- No units on this team, spawn the backup unit instead
-		if #team_lanes == 0 then
+		elseif #team_lanes == 0 then
 
 			local wave_data = self:GetWave()
 			local unit = wave_data["arena_boss_unit"]
 			local unit_amount = wave_data["arena_boss_amount"] and tonumber(wave_data["arena_boss_amount"]) or 0
-			for i = 1, unit_amount do
-				
-				local hUnit = CreateUnitByName( unit, RandomVectorInTrigger(arena_spawn.entity), false, nil, nil, arena_spawn.team )
-				local data = {
-					unit = hUnit,
-					team = arena_spawn.team
-				}
-				table.insert( self._arena_units, data )
-
-			end
+			self:_SpawnExtraArenaUnit( arena_spawn, unit, unit_amount )
 
 		end
 
