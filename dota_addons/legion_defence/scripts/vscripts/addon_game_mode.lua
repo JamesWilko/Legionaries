@@ -3,11 +3,6 @@ if CLegionDefence == nil then
 	_G.CLegionDefence = class({})
 end
 
-require("util/utils")
-require("util/chat")
-require("util/game")
-require("util/BuildGrid")
-
 require("controllers/HeroSelectionController")
 require("controllers/CurrencyController")
 require("controllers/MapController")
@@ -21,6 +16,11 @@ require("controllers/FoodController")
 require("controllers/UpgradesController")
 require("controllers/MercenaryController")
 require("controllers/StatsController")
+
+require("util/utils")
+require("util/chat")
+require("util/game")
+require("util/BuildGrid")
 
 require("analytics/Analytics")
 
@@ -98,7 +98,8 @@ function CLegionDefence:InitGameMode()
 
 	self:SetupAnalytics()
 
-	GameRules:GetGameModeEntity():SetCustomGameForceHero( "npc_dota_hero_wisp" )
+	self._TEMP_HERO = "npc_dota_hero_wisp"
+	GameRules:GetGameModeEntity():SetCustomGameForceHero( self._TEMP_HERO )
 
 	ListenToGameEvent("game_rules_state_change", Dynamic_Wrap(CLegionDefence, "OnGameRulesStateChanged"), self)
 	ListenToGameEvent("dota_player_pick_hero", Dynamic_Wrap(CLegionDefence, "OnPlayerPickedHero"), self)
@@ -129,36 +130,48 @@ function CLegionDefence:OnGameRulesStateChanged( event )
 
 end
 
--- Debug, give player all levels
 function CLegionDefence:OnPlayerPickedHero( event )
 
-	local player = PlayerResource:GetPlayer( event.player )
-	if player then
-		local hero = player:GetAssignedHero()
-		if hero then
-		
-			-- Remove Dota gold
-			hero:SetGold(0, false)
-			hero:SetGold(0, true)
+	if event["heroindex"] ~= nil then
 
-			-- Make all abilities max level
-			for i = 0, hero:GetAbilityCount() - 1, 1 do
-				local ability = hero:GetAbilityByIndex(i)
-				if ability then
-					ability:SetLevel( ability:GetMaxLevel() )
-				end
+		local player = PlayerResource:GetPlayer( event.player )
+		local hero = EntIndexToHScript( event["heroindex"] )
+		self:SetupPlayerHero( player, hero )
+
+	else
+
+		local player = PlayerResource:GetPlayer( event.player )
+		if player then
+			local hero = player:GetAssignedHero()
+			if hero then
+				self:SetupPlayerHero( player, hero )
 			end
+		end
 
-			-- Heroes can't attack
-			hero:SetAttackCapability( DOTA_UNIT_CAP_NO_ATTACK )
+	end
 
-			-- Remove skill points
-			hero:SetAbilityPoints(0)
+end
 
-			-- Give items
-			-- hero:AddItemByName("item_necronomicon")
+function CLegionDefence:SetupPlayerHero( player, hero )
 
+	-- Remove Dota gold
+	hero:SetGold(0, false)
+	hero:SetGold(0, true)
+
+	-- Make all abilities max level
+	if hero:GetName() ~= self._TEMP_HERO then
+		for i = 0, hero:GetAbilityCount() - 1, 1 do
+			local ability = hero:GetAbilityByIndex(i)
+			if ability then
+				ability:SetLevel( ability:GetMaxLevel() )
+			end
 		end
 	end
+
+	-- Heroes can't attack
+	hero:SetAttackCapability( DOTA_UNIT_CAP_NO_ATTACK )
+
+	-- Remove skill points
+	hero:SetAbilityPoints(0)
 
 end
