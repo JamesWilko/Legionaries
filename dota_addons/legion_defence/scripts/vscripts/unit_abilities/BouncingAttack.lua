@@ -28,8 +28,8 @@ function FindProjectileInfo(class_name)
 	else
 
 		Particles[class_name] = {
-			particle = kv_unit["default"],
-			speed = kv_unit["default"]
+			particle = Particles["default"],
+			speed = Particles["default"]
 		}
 
 	end
