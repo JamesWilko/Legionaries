@@ -19,6 +19,7 @@ end
 
 function table.print( t, indent )
 	print( "table.print( t, indent ): " )
+	indent = indent or ""
 	if type(t) ~= "table" then return end
 
 	for k,v in pairs( t ) do

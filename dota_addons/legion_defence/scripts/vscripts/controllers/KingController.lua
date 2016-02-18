@@ -86,23 +86,23 @@ CKingController.UPGRADES = {
 CKingController.ABILITY_UPGRADES = {
 	[1] = {
 		level = 5,
-		ability_name = "ability_merc_behemoth_armour_aura",
+		ability_name = "ability_king_shockwave",
 	},
 	[2] = {
 		level = 10,
-		ability_name = "ability_merc_kraken_poison_attack",
+		ability_name = "ability_king_aoe_bash",
 	},
 	[3] = {
 		level = 15,
-		ability_name = "ability_merc_infernal_bash",
+		ability_name = "ability_king_immolation",
 	},
 	[4] = {
 		level = 20,
-		ability_name = "ability_merc_infernal_immolation",
+		ability_name = "ability_king_corruption_attack",
 	},
 	[5] = {
 		level = 25,
-		ability_name = "ability_merc_demon_speed_aura",
+		ability_name = "ability_king_bouncing_attack",
 	}
 }
 
