@@ -3,7 +3,11 @@ if CLegionDefence == nil then
 	_G.CLegionDefence = class({})
 end
 
-require("Utils")
+require("util/utils")
+require("util/chat")
+require("util/game")
+require("util/BuildGrid")
+
 require("controllers/HeroSelectionController")
 require("controllers/CurrencyController")
 require("controllers/MapController")
@@ -17,9 +21,7 @@ require("controllers/FoodController")
 require("controllers/UpgradesController")
 require("controllers/MercenaryController")
 require("controllers/StatsController")
-require("BuildGrid")
-require("GameUtils")
-require("ChatUtils")
+
 require("analytics/Analytics")
 
 function Precache( context )
