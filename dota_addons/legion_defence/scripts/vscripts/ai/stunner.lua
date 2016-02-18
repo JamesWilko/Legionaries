@@ -1,5 +1,5 @@
 
-local STUN_KV = "StunDuration"
+local STUN_KV = "Duration"
 local ai
 
 function Spawn( entityKeyValues )
