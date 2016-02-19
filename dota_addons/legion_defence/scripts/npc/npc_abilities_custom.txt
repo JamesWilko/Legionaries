@@ -58,6 +58,8 @@
 
 
 
+
+
 "spawn_tower_merc_bowman"
 {
 	"BaseClass"						"ability_lua"
@@ -101,6 +103,8 @@
 		"particle"			"particles/units/heroes/hero_clinkz/clinkz_base_attack.vpcf"
 	}
 }
+
+
 
 
 
@@ -168,6 +172,8 @@
 
 
 
+
+
 "spawn_tower_merc_warrior"
 {
 	"BaseClass"						"ability_lua"
@@ -210,6 +216,8 @@
 		"model_folder"		"models/creeps/neutral_creeps/n_creep_centaur_med/"
 	}
 }
+
+
 
 
 
@@ -276,6 +284,8 @@
 
 
 
+
+
 "spawn_tower_merc_hermit"
 {
 	"BaseClass"						"ability_lua"
@@ -319,6 +329,8 @@
 		"particle"			"particles/neutral_fx/gnoll_base_attack.vpcf"
 	}
 }
+
+
 
 
 
@@ -384,6 +396,8 @@
 
 
 
+
+
 "spawn_tower_merc_commander"
 {
 	"BaseClass"						"ability_lua"
@@ -437,6 +451,8 @@
 
 
 
+
+
 "spawn_tower_merc_furbolg"
 {
 	"BaseClass"						"ability_lua"
@@ -479,6 +495,8 @@
 		"model_folder"		"models/creeps/neutral_creeps/n_creep_beast/"
 	}
 }
+
+
 
 
 
@@ -545,6 +563,8 @@
 
 
 
+
+
 "spawn_tower_merc_chariot"
 {
 	"BaseClass"						"ability_lua"
@@ -587,6 +607,8 @@
 		"model_folder"		"models/creeps/lane_creeps/creep_good_siege/"
 	}
 }
+
+
 
 
 
@@ -653,6 +675,8 @@
 
 
 
+
+
 "spawn_tower_merc_frost_wolf"
 {
 	"BaseClass"						"ability_lua"
@@ -695,6 +719,8 @@
 		"model_folder"		"models/creeps/neutral_creeps/n_creep_worg_large/"
 	}
 }
+
+
 
 
 
@@ -759,6 +785,8 @@
 
 
 
+
+
 "spawn_tower_merc_warlock"
 {
 	"BaseClass"						"ability_lua"
@@ -812,6 +840,8 @@
 
 
 
+
+
 "spawn_tower_merc_pandaren"
 {
 	"BaseClass"						"ability_lua"
@@ -854,6 +884,8 @@
 		"model_folder"		"models/creeps/neutral_creeps/n_creep_golem_b/"
 	}
 }
+
+
 
 
 
@@ -920,6 +952,8 @@
 
 
 
+
+
 "spawn_tower_merc_shaman"
 {
 	"BaseClass"						"ability_lua"
@@ -972,6 +1006,7 @@
 
 
 
+
 "spawn_tower_merc_pudge"
 {
 	"BaseClass"						"ability_lua"
@@ -1014,6 +1049,8 @@
 		"model_folder"		"models/creeps/neutral_creeps/n_creep_centaur_lrg/"
 	}
 }
+
+
 
 
 
@@ -1080,6 +1117,8 @@
 
 
 
+
+
 "spawn_tower_merc_behemoth"
 {
 	"BaseClass"						"ability_lua"
@@ -1122,6 +1161,8 @@
 		"model_folder"		"models/creeps/neutral_creeps/n_creep_golem_a/"
 	}
 }
+
+
 
 
 
@@ -1186,6 +1227,8 @@
 
 
 
+
+
 "spawn_tower_merc_infernal"
 {
 	"BaseClass"						"ability_lua"
@@ -1228,6 +1271,8 @@
 		"model_folder"		"models/heroes/warlock/"
 	}
 }
+
+
 
 
 
@@ -1291,6 +1336,8 @@
 
 
 
+
+
 "spawn_tower_fire_heat_knight"
 {
 	"BaseClass"						"ability_lua"
@@ -1335,6 +1382,8 @@
 		"particle_folder"	"particles/units/heroes/hero_dragon_knight/"
 	}
 }
+
+
 
 
 
@@ -1390,6 +1439,8 @@
 
 
 
+
+
 "spawn_tower_fire_vanguard"
 {
 	"BaseClass"						"ability_lua"
@@ -1434,6 +1485,8 @@
 		"particle_folder"	"particles/units/heroes/hero_sven/"
 	}
 }
+
+
 
 
 
@@ -1488,6 +1541,7 @@
 
 
 
+
 "spawn_tower_fire_flamebound"
 {
 	"BaseClass"						"ability_lua"
@@ -1532,6 +1586,8 @@
 		"particle_folder"	"particles/units/heroes/hero_ember_spirit/"
 	}
 }
+
+
 
 
 
@@ -1587,6 +1643,8 @@
 
 
 
+
+
 "spawn_tower_mech_militia"
 {
 	"BaseClass"						"ability_lua"
@@ -1631,6 +1689,8 @@
 		"particle_folder"	"particles/units/heroes/hero_arc_warden/"
 	}
 }
+
+
 
 
 
@@ -1686,6 +1746,8 @@
 
 
 
+
+
 "spawn_tower_mech_captain"
 {
 	"BaseClass"						"ability_lua"
@@ -1730,6 +1792,8 @@
 		"particle_folder"	"particles/units/heroes/hero_shredder/"
 	}
 }
+
+
 
 
 
@@ -1785,6 +1849,8 @@
 
 
 
+
+
 "spawn_tower_mech_knight"
 {
 	"BaseClass"						"ability_lua"
@@ -1829,6 +1895,8 @@
 		"particle_folder"	"particles/units/heroes/hero_rattletrap/"
 	}
 }
+
+
 
 
 
@@ -1885,6 +1953,8 @@
 
 
 
+
+
 "spawn_tower_nature_ent"
 {
 	"BaseClass"						"ability_lua"
@@ -1927,6 +1997,8 @@
 		"model_folder"		"models/heroes/furion/"
 	}
 }
+
+
 
 
 
@@ -1985,6 +2057,7 @@
 
 
 
+
 "spawn_tower_nature_sprite"
 {
 	"BaseClass"						"ability_lua"
@@ -2033,6 +2106,8 @@
 
 
 
+
+
 "spawn_tower_nature_travel"
 {
 	"BaseClass"						"ability_lua"
@@ -2077,6 +2152,8 @@
 		"particle_folder"	"particles/units/heroes/hero_treant/"
 	}
 }
+
+
 
 
 
@@ -2132,6 +2209,8 @@
 
 
 
+
+
 "spawn_tower_nature_life"
 {
 	"BaseClass"						"ability_lua"
@@ -2179,6 +2258,7 @@
 
 
 
+
 "spawn_tower_water_proton"
 {
 	"BaseClass"						"ability_lua"
@@ -2223,6 +2303,8 @@
 		"particle_folder"	"particles/units/heroes/hero_wisp/"
 	}
 }
+
+
 
 
 
@@ -2278,6 +2360,8 @@
 
 
 
+
+
 "spawn_tower_water_watcher"
 {
 	"BaseClass"						"ability_lua"
@@ -2323,6 +2407,8 @@
 		"particle_folder"	"particles/units/heroes/hero_drow/"
 	}
 }
+
+
 
 
 
@@ -2377,6 +2463,8 @@
 
 
 
+
+
 "spawn_tower_water_disciple"
 {
 	"BaseClass"						"ability_lua"
@@ -2422,6 +2510,8 @@
 		"particle_folder"	"particles/units/heroes/hero_crystalmaiden/"
 	}
 }
+
+
 
 
 
@@ -2474,6 +2564,8 @@
 
 
 
+
+
 "upgrade_unit_fire_heat_knight_upg"
 {
 	"BaseClass"						"ability_lua"
@@ -2518,6 +2610,8 @@
 		"particle_folder"	"particles/units/heroes/hero_dragon_knight/"
 	}
 }
+
+
 
 
 
@@ -2567,6 +2661,8 @@
 	}
 }
 
+
+
 "upgrade_unit_fire_vanguard_upg"
 {
 	"BaseClass"						"ability_lua"
@@ -2611,6 +2707,8 @@
 		"particle_folder"	"particles/units/heroes/hero_sven/"
 	}
 }
+
+
 
 
 
@@ -2659,6 +2757,7 @@
 		"particle_folder"	"particles/units/heroes/hero_lina/"
 	}
 }
+
 "upgrade_unit_fire_firestarter_upg_damage"
 {
 	"BaseClass"						"ability_lua"
@@ -2705,6 +2804,8 @@
 	}
 }
 
+
+
 "upgrade_unit_fire_flamebound_upg"
 {
 	"BaseClass"						"ability_lua"
@@ -2749,6 +2850,7 @@
 		"particle_folder"	"particles/units/heroes/hero_ember_spirit/"
 	}
 }
+
 
 "upgrade_unit_fire_pyromancer_upg"
 {
@@ -2796,6 +2898,8 @@
 	}
 }
 
+
+
 "upgrade_unit_mech_militia_upg"
 {
 	"BaseClass"						"ability_lua"
@@ -2840,6 +2944,8 @@
 		"particle_folder"	"particles/units/heroes/hero_arc_warden/"
 	}
 }
+
+
 
 
 
@@ -2890,6 +2996,8 @@
 	}
 }
 
+
+
 "upgrade_unit_mech_sniper_upg_damage"
 {
 	"BaseClass"						"ability_lua"
@@ -2935,6 +3043,8 @@
 		"particle_folder"	"particles/units/heroes/hero_sniper/"
 	}
 }
+
+
 
 
 "upgrade_unit_mech_captain_upg"
@@ -2983,6 +3093,8 @@
 }
 
 
+
+
 "upgrade_unit_mech_airship_upg"
 {
 	"BaseClass"						"ability_lua"
@@ -3029,6 +3141,8 @@
 	}
 }
 
+
+
 "upgrade_unit_mech_knight_upg"
 {
 	"BaseClass"						"ability_lua"
@@ -3073,6 +3187,8 @@
 		"particle_folder"	"particles/units/heroes/hero_rattletrap/"
 	}
 }
+
+
 
 
 "upgrade_unit_mech_cyborg_upg"
@@ -3122,6 +3238,8 @@
 }
 
 
+
+
 "upgrade_unit_nature_ent_upg"
 {
 	"BaseClass"						"ability_lua"
@@ -3164,6 +3282,7 @@
 		"model_folder"		"models/heroes/furion/"
 	}
 }
+
 
 
 
@@ -3215,6 +3334,8 @@
 	}
 }
 
+
+
 "upgrade_unit_nature_travel_upg"
 {
 	"BaseClass"						"ability_lua"
@@ -3259,6 +3380,8 @@
 		"particle_folder"	"particles/units/heroes/hero_treant/"
 	}
 }
+
+
 
 
 "upgrade_unit_nature_halfbreed_upg"
@@ -3308,6 +3431,8 @@
 
 
 
+
+
 "upgrade_unit_nature_life_upg_heal"
 {
 	"BaseClass"						"ability_lua"
@@ -3353,6 +3478,7 @@
 	}
 }
 
+
 "upgrade_unit_nature_life_upg_dmg"
 {
 	"BaseClass"						"ability_lua"
@@ -3397,6 +3523,8 @@
 		"particle_folder"	"particles/units/heroes/hero_treant/"
 	}
 }
+
+
 
 
 "upgrade_unit_water_proton_upg"
@@ -3447,6 +3575,8 @@
 
 
 
+
+
 "upgrade_unit_water_spirit_upg"
 {
 	"BaseClass"						"ability_lua"
@@ -3492,6 +3622,8 @@
 		"particle_folder"	"particles/units/heroes/hero_morphling/"
 	}
 }
+
+
 
 "upgrade_unit_water_watcher_upg"
 {
@@ -3539,6 +3671,8 @@
 	}
 }
 
+
+
 "upgrade_unit_water_mudman_upg"
 {
 	"BaseClass"						"ability_lua"
@@ -3583,6 +3717,8 @@
 		"particle_folder"	"particles/units/heroes/hero_siren/"
 	}
 }
+
+
 
 
 
@@ -3632,6 +3768,8 @@
 	}
 }
 
+
+
 "upgrade_unit_water_seer_upg"
 {
 	"BaseClass"						"ability_lua"
@@ -3677,6 +3815,8 @@
 		"particle_folder"	"particles/units/heroes/hero_ancient_apparition/"
 	}
 }
+
+
 
 "ability_boss_armour_debuff"
 {
@@ -3768,6 +3908,8 @@
 		}
 	}
 }
+
+
 
 
 
@@ -3884,6 +4026,8 @@
 
 
 
+
+
 "ability_boss_shockwave"
 {
 	"BaseClass"						"ability_datadriven"
@@ -3977,6 +4121,399 @@
 
 
 
+
+"ability_king_shockwave"
+{
+	"BaseClass"						"ability_datadriven"
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+	"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+	"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_MECHANICAL"
+	"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"	
+	"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+	"FightRecapLevel"				"1"
+	"AbilityTextureName"			"keeper_of_the_light_illuminate"
+	"AbilityCastRange"				"1800"
+	"AbilityCastPoint"				"0.35"
+	"AbilityCooldown"				"8"
+	"AbilityManaCost"				"80"
+
+	"precache"
+	{
+		"soundfile"					"soundevents/game_sounds_heroes/game_sounds_keeper_of_the_light.vsndevts"
+		"particle"					"particles/units/heroes/hero_keeper_of_the_light/keeper_of_the_light_illuminate.vpcf"
+		"particle"					"particles/units/heroes/hero_keeper_of_the_light/keeper_of_the_light_illuminate_impact.vpcf"
+	}
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"				"FIELD_FLOAT"
+			"Damage"				"100"
+		}
+		"02"
+		{
+			"var_type"				"FIELD_INTEGER"
+			"Radius"				"300"
+		}
+		"03"
+		{
+			"var_type"				"FIELD_INTEGER"
+			"Range"					"1000"
+		}
+		"04"
+		{
+			"var_type"				"FIELD_FLOAT"
+			"Speed"					"1200"
+		}
+	}
+
+	"OnSpellStart"
+	{
+		"FireSound"
+		{
+			"EffectName"			"Hero_KeeperOfTheLight.Illuminate.Discharge"
+			"Target"				"CASTER"
+		}
+		
+		"RunScript"
+		{
+			"ScriptFile"			"unit_abilities/Shockwave.lua"
+			"Function"				"ShockwaveOnSpellStart"
+			"Projectile"			"particles/units/heroes/hero_keeper_of_the_light/keeper_of_the_light_illuminate.vpcf"
+		}
+	}
+
+	"OnProjectileHitUnit"
+	{
+		"DeleteOnHit"				"0"
+		"FireSound"
+		{
+			"EffectName"			"Hero_KeeperOfTheLight.Illuminate.Target"
+			"Target"				"TARGET"
+		}
+		
+		"FireEffect"
+		{
+			"EffectName"			"particles/units/heroes/hero_keeper_of_the_light/keeper_of_the_light_illuminate_impact.vpcf"
+			"EffectAttachType"		"follow_origin"
+			"Target"				"TARGET"
+		}
+
+		"RunScript"
+		{
+			"ScriptFile"			"unit_abilities/Shockwave.lua"
+			"Function"				"ShockwaveOnProjectileHitUnit"
+		}
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"ability_king_slow"
+{
+	"BaseClass"						"ability_datadriven"
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+	"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+	"FightRecapLevel"				"1"
+	"AbilityTextureName"			"warlock_golem_permanent_immolation"
+
+	"precache"
+	{
+		"particle"			"particles/units/heroes/hero_doom_bringer/doom_bringer_scorched_earth_buff.vpcf"
+		"particle"			"particles/units/heroes/hero_doom_bringer/doom_scorched_earth.vpcf"			
+	}
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"		"FIELD_INTEGER"
+			"damage"		"40"
+		}
+		"02"
+		{
+			"var_type"		"FIELD_INTEGER"
+			"radius"		"{Ability.Range}"
+		}
+	}
+
+	"Modifiers"
+	{
+		"modifier_immolate_ability_king_slow"
+		{
+			"IsBuff"			"1"
+			"Passive"			"1"
+			"IsPurgable"		"0"
+	
+			"OnCreated"
+			{
+				"AttachEffect"
+				{
+					"EffectName"		"particles/units/heroes/hero_doom_bringer/doom_scorched_earth.vpcf"
+					"EffectAttachType"	"follow_origin"
+					"Target"			"TARGET"
+
+					"ControlPoints"
+					{
+						"01"	"%radius 0 0"
+					}
+				}
+			}
+
+			"Aura"					"modifier_immolate_aura_ability_king_slow"
+			"Aura_Radius"			"%radius"
+			"Aura_Teams"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+			"Aura_Types"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+			"Aura_Flags"			"DOTA_UNIT_TARGET_FLAG_NONE"
+			"Aura_ApplyToCaster"	"0"
+		}
+
+		"modifier_immolate_aura_ability_king_slow"
+		{
+			"IsDebuff"			"1"
+			"Passive"			"1"
+
+			"ThinkInterval"  	"0.1"
+			"OnIntervalThink"
+			{
+				"Damage"
+				{
+					"Target"		"TARGET"
+					"Type"			"DAMAGE_TYPE_MAGICAL"
+					"Damage"		"%damage / 10"
+				}
+			}
+		}		
+	}
+}
+
+
+
+
+
+
+
+
+"ability_king_corruption_attack"
+{
+	"BaseClass"						"ability_datadriven"
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+	"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+	"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"	
+	"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+	"AbilityTextureName"			"slardar_amplify_damage"
+
+	"precache"
+	{
+		"particle"		"particles/econ/items/shadow_fiend/sf_desolation/sf_base_attack_desolation.vpcf"
+		"particle"		"particles/econ/items/shadow_fiend/sf_desolation/sf_base_attack_desolation_arc.vpcf"
+	}
+
+	"AbilityCastRange"				"600"
+	"AbilityCastPoint"				"0.35"
+	"AbilityCooldown"				"0"
+	"AbilityDamage"					"0"
+	"AbilityManaCost"				"0"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"				"FIELD_FLOAT"
+			"Duration"				"5"
+		}
+		"02"
+		{
+			"var_type"				"FIELD_INTEGER"
+			"Armour"				"-3"
+		}
+	}
+
+	"Modifiers"
+	{
+		"modifier_corruption_attack_ability_king_corruption_attack"
+		{
+			"Passive"	"1"
+			"IsHidden"	"1"
+
+			"Orb"
+			{
+				"Priority"				"DOTA_ORB_PRIORITY_ABILITY"
+				"ProjectileName"		"particles/econ/items/shadow_fiend/sf_desolation/sf_base_attack_desolation.vpcf"
+				"CastAttack"			"1"
+			}
+
+			"OnOrbFire"
+			{
+				"FireSound"
+				{
+					"EffectName"		"Item_Desolator.Target"
+					"Target"			"CASTER"
+				}
+			}
+
+			"OnOrbImpact"
+			{
+				"ApplyModifier"
+				{
+					"ModifierName"		"modifier_slow_attack_ability_king_corruption_attack_debuff"
+					"Target"			"TARGET"
+				}
+
+				"FireSound"
+				{
+					"EffectName"		"Item_Desolator.Target"
+					"Target"			"TARGET"
+				}
+			}
+		}
+
+		"modifier_corruption_attack_ability_king_corruption_attack_debuff"
+		{
+			"IsDebuff"					"1"
+			"Duration"					"%Duration"
+
+			"EffectName"				"particles/econ/items/shadow_fiend/sf_desolation/sf_base_attack_desolation_arc.vpcf"
+			"EffectAttachType"			"follow_origin"
+
+			"Properties"
+			{
+				"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"		"%Armour"
+			}
+		}
+	}
+}
+
+
+
+
+
+
+
+"ability_king_bouncing_attack"
+{
+	"BaseClass"						"ability_datadriven"
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+	"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
+	"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+	"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_BUILDING"
+	"AbilityTextureName"			"ember_spirit_searing_chains"
+
+	"precache"
+	{
+		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_shadow_demon.vsndevts"
+		"particle"			"particles/units/heroes/hero_shadow_demon/shadow_demon_base_attack.vpcf"
+	}
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"								"FIELD_INTEGER"
+			"range"									"400"
+		}
+		"02"
+		{
+			"var_type"								"FIELD_INTEGER"
+			"bounces"								"2"
+		}
+		"03"
+		{
+			"var_type"								"FIELD_INTEGER"
+			"DamageReduction"						"0.33"
+		}
+		"04"
+		{
+			"var_type"								"FIELD_INTEGER"
+			"DamageReductionFriendly"				"33"
+		}
+	}
+
+	"Modifiers"
+	{
+		"modifier_bounce_attack"
+		{
+			"Passive" 					"1"
+			"IsHidden"					"1"
+
+			"OnAttackLanded"
+			{
+				"RunScript"
+				{
+					"ScriptFile"		"unit_abilities/BouncingAttack.lua"
+					"Function"			"BounceAttackStart"
+				}
+			}
+		}
+	}
+}
+
+"ability_king_bouncing_attack_bounce"
+{
+	"BaseClass"						"ability_datadriven"
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+
+	"OnProjectileHitUnit"
+	{
+		"DeleteOnHit"	"1"
+
+		"FireSound"
+		{
+			"EffectName"	"Hero_ShadowDemon.ProjectileImpact"
+			"Target" 		"TARGET"
+		}
+		
+		"RunScript"
+		{
+			"ScriptFile"	"unit_abilities/BouncingAttack.lua"
+			"Function"		"BounceAttackPerformBounce"
+		}
+
+	}
+
+	"Modifiers"
+	{
+		"modifier_bouncing_attack_dummy_unit"
+		{
+			"States"
+			{
+				"MODIFIER_STATE_INVULNERABLE"					"MODIFIER_STATE_VALUE_ENABLED"
+				"MODIFIER_STATE_NO_HEALTH_BAR"					"MODIFIER_STATE_VALUE_ENABLED"
+				"MODIFIER_STATE_NO_UNIT_COLLISION"				"MODIFIER_STATE_VALUE_ENABLED"
+				"MODIFIER_STATE_NOT_ON_MINIMAP"					"MODIFIER_STATE_VALUE_ENABLED"
+				"MODIFIER_STATE_UNSELECTABLE"					"MODIFIER_STATE_VALUE_ENABLED"
+				"MODIFIER_STATE_FLYING"							"MODIFIER_STATE_VALUE_ENABLED"
+			}
+		}
+	}
+}
+
+
+
+
+
+
+
+
 "ability_merc_warrior_bash"
 {
 	"BaseClass"						"ability_datadriven"
@@ -4048,6 +4585,8 @@
 		}
 	}
 }
+
+
 
 
 
@@ -4133,6 +4672,8 @@
 		}		
 	}
 }
+
+
 
 
 
@@ -4233,6 +4774,8 @@
 
 
 
+
+
 "ability_merc_furbolg_armour_aura"
 {
 	"BaseClass"						"ability_datadriven"
@@ -4317,6 +4860,8 @@
 
 
 
+
+
 "ability_merc_chariot_king_damage"
 {
 	"BaseClass"					"ability_datadriven"
@@ -4358,6 +4903,8 @@
 		}
 	}
 }
+
+
 
 
 
@@ -4448,6 +4995,8 @@
 		}		
 	}
 }
+
+
 
 
 
@@ -4569,6 +5118,8 @@
 
 
 
+
+
 "ability_merc_warlock_armour_debuff"
 {
 	"BaseClass"						"ability_datadriven"
@@ -4670,6 +5221,8 @@
 
 
 
+
+
 "ability_merc_ballista_king_damage"
 {
 	"BaseClass"					"ability_datadriven"
@@ -4724,6 +5277,8 @@
 
 
 
+
+
 "ability_merc_shaman_speed_buff"
 {
 	"BaseClass"						"ability_datadriven"
@@ -4745,12 +5300,12 @@
 		"02"
 		{
 			"var_type"				"FIELD_INTEGER"
-			"speed_bonus"			"20"
+			"SpeedPercentFriendly"	"20"
 		}
 		"02"
 		{
 			"var_type"				"FIELD_FLOAT"
-			"duration"				"7"
+			"Duration"				"7"
 		}
 	}
 
@@ -4784,7 +5339,7 @@
 		{
 			"ModifierName"		"modifier_speed_buff_ability_merc_shaman_speed_buff"
 			"Target"			"TARGET"
-			"Duration"			"%duration"
+			"Duration"			"%Duration"
 		}
 	}
 
@@ -4793,7 +5348,7 @@
 		"modifier_speed_buff_ability_merc_shaman_speed_buff"
 		{
 			"IsBuff"				"1"
-			"Duration"				"%duration"
+			"Duration"				"%Duration"
 
 			"EffectName"			"particles/units/heroes/hero_ogre_magi/ogre_magi_bloodlust_buff.vpcf"
 			"EffectAttachType"		"follow_origin"
@@ -4810,6 +5365,7 @@
 		}
 	}
 }
+
 
 
 
@@ -4886,6 +5442,8 @@
 		}
 	}
 }
+
+
 
 
 
@@ -4983,6 +5541,8 @@
 
 
 
+
+
 "ability_merc_behemoth_magic_immunity"
 {
 	"BaseClass"						"ability_datadriven"
@@ -5006,6 +5566,8 @@
 		}
 	}
 }
+
+
 
 
 
@@ -5091,6 +5653,8 @@
 		}		
 	}
 }
+
+
 
 
 
@@ -5228,6 +5792,8 @@
 
 
 
+
+
 "ability_merc_kraken_magic_immunity"
 {
 	"BaseClass"						"ability_datadriven"
@@ -5251,6 +5817,8 @@
 		}
 	}
 }
+
+
 
 
 
@@ -5334,6 +5902,8 @@
 		}
 	}
 }
+
+
 
 
 
@@ -5436,6 +6006,8 @@
 
 
 
+
+
 "ability_merc_demon_speed_aura"
 {
 	"BaseClass"						"ability_datadriven"
@@ -5513,6 +6085,8 @@
 		}		
 	}
 }
+
+
 
 
 
@@ -5615,6 +6189,8 @@
 
 
 
+
+
 "ability_fire_flame_archer_splitshot"
 {
 	"BaseClass"						"ability_datadriven"
@@ -5700,6 +6276,8 @@
 }
 
 
+
+
 "ability_fire_vanguard_stacking_damage"
 {
 	"BaseClass"					"ability_datadriven"
@@ -5772,6 +6350,8 @@
 		}
 	}
 }
+
+
 
 
 
@@ -5849,6 +6429,7 @@
 		}
 	}
 }
+
 
 
 
@@ -5947,6 +6528,7 @@
 	}
 }
 
+
 "ability_fire_firestarter_immolate"
 {
 	"BaseClass"						"ability_datadriven"
@@ -6029,6 +6611,8 @@
 
 
 
+
+
 "ability_fire_flamebound_stun"
 {
 	"BaseClass"						"ability_datadriven"
@@ -6058,7 +6642,7 @@
 		"01"
 		{
 			"var_type"				"FIELD_FLOAT"
-			"StunDuration"			"1.0"
+			"Duration"				"1.0"
 		}
 		"02"
 		{
@@ -6110,10 +6694,11 @@
 		"Stun"
 		{
 			"Target"	"TARGET"
-			"Duration"	"%StunDuration"
+			"Duration"	"%Duration"
 		}
 	}
 }
+
 
 
 "ability_fire_pyromancer_bounce_attack"
@@ -6218,6 +6803,8 @@
 
 
 
+
+
 "ability_mech_sniper_headshot"
 {
 	"BaseClass"						"ability_datadriven"
@@ -6258,6 +6845,8 @@
 		}
 	}
 }
+
+
 
 
 
@@ -6337,6 +6926,8 @@
 		}		
 	}
 }
+
+
 
 
 
@@ -6424,6 +7015,8 @@
 
 
 
+
+
 "ability_mech_airship_splitshot"
 {
 	"BaseClass"						"ability_datadriven"
@@ -6507,6 +7100,8 @@
 		}
 	}
 }
+
+
 
 
 "ability_mech_knight_critical"
@@ -6598,6 +7193,80 @@
 
 
 
+
+
+
+"ability_nature_ent_entangle"
+{
+	"BaseClass"								"ability_datadriven"
+	"AbilityBehavior"						"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+	"AbilityUnitTargetTeam"					"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+	"AbilityUnitTargetType"					"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_MECHANICAL"
+	"AbilityUnitTargetFlags"				"DOTA_UNIT_TARGET_FLAG_NOT_MAGIC_IMMUNE_ALLIES"
+	"SpellImmunityType"						"SPELL_IMMUNITY_ALLIES_NO"
+	"FightRecapLevel"						"1"
+	"AbilityTextureName"					"furion_sprout"
+
+	"AbilityCastRange"						"150"
+	"AbilityCastPoint"						"0.467"
+	"AbilityCooldown"						"12"
+	"AbilityManaCost"						"10"
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"						"FIELD_INTEGER"
+			"Duration"						"6"
+		}
+	}
+
+	"precache"
+	{
+		"soundfile"							"soundevents/game_sounds_heroes/game_sounds_treant.vsndevts"
+		"particle"							"particles/units/heroes/hero_treant/treant_overgrowth_vines.vpcf"
+		"particle"							"particles/units/heroes/hero_treant/treant_overgrowth_area_beam.vpcf"
+
+	}
+
+	"OnSpellStart"
+	{
+		"FireSound"
+		{
+			"EffectName"					"Hero_Treant.Overgrowth.Cast"
+			"Target"						"TARGET"
+		}
+		
+		"FireEffect"
+		{
+			"Target"						"CASTER"
+			"EffectName"					"particles/units/heroes/hero_treant/treant_overgrowth_area_beam.vpcf"
+			"EffectAttachType"				"follow_origin"
+		}
+
+		"ApplyModifier"
+		{
+			"Target"						"TARGET"
+			"ModifierName"					"modifier_root_unit_ability_nature_ent_entangle"
+			"Duration"						"%Duration"
+		}
+	}
+
+	"modifier_root_unit_ability_nature_ent_entangle"
+	{
+		"IsDebuff"							"1"
+		"IsPurgable"						"0"
+		"Duration"							"%Duration"
+
+		"StatusEffectName"					"particles/units/heroes/hero_treant/treant_overgrowth_vines.vpcf" 	   
+		"StatusEffectPriority"				"10"
+
+		"States"
+		{
+			"MODIFIER_STATE_FROZEN"			"MODIFIER_STATE_VALUE_ENABLED"
+		}
+	}
+}
 
 
 
@@ -6697,6 +7366,168 @@
 
 
 
+
+"ability_nature_ranger_critical"
+{
+	"BaseClass"						"ability_datadriven"
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+	"AbilityTextureName"			"windrunner_powershot"
+
+	"precache"
+	{
+		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_phantom_assassin.vsndevts"
+	}
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"DamagePercent"				"160"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"Chance"					"33"
+		}
+	}
+
+	
+
+	"Modifiers"
+	{
+		"modifier_critical_ability_nature_ranger_critical"
+		{
+			"Passive"	"1"
+			"IsHidden"	"1"
+
+			"OnAttackStart"
+			{
+				"RemoveModifier"
+				{
+					"ModifierName"	"modifier_critical_ability_nature_ranger_critical_crit"
+					"Target"		"CASTER"
+				}
+
+				"Random"
+				{
+					"Chance"		"%Chance"
+					"PseudoRandom"	"DOTA_PSEUDO_RANDOM_PHANTOMASSASSIN_CRIT"
+
+					"OnSuccess"
+					{
+						"ApplyModifier"
+						{
+							"ModifierName"	"modifier_critical_ability_nature_ranger_critical_crit"
+							"Target"		"CASTER"
+						}
+					}
+				}
+			}
+		}
+
+		"modifier_critical_ability_nature_ranger_critical_crit"
+		{
+			"IsHidden"	"1"
+
+			"Properties"
+			{
+				"MODIFIER_PROPERTY_PREATTACK_CRITICALSTRIKE"	"%Chance"
+			}
+
+			"OnAttackLanded"
+			{
+				"RemoveModifier"
+				{
+					"ModifierName"	"modifier_critical_ability_nature_ranger_critical_crit"
+					"Target"		"CASTER"
+				}
+
+				"FireSound"
+				{
+					"EffectName"	"Hero_PhantomAssassin.CoupDeGrace"
+					"Target"		"TARGET"
+				}
+			}
+		}
+	}
+}
+
+
+
+
+
+"ability_nature_ranger_pierce_mark"
+{
+	"BaseClass"						"ability_datadriven"
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+	"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_ALL"
+	"AbilityUnitTargetFlag"			"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
+	"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
+	"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+	"AbilityTextureName"			"windrunner_focusfire"
+	"AbilityCastPoint"				"0.4"
+
+	"precache"
+	{
+		"particle"			"particles/units/heroes/hero_windrunner/windrunner_base_attack.vpcf"
+	}
+
+	"AbilitySpecial"
+	{
+		"01"
+		{	
+			"var_type"				"FIELD_FLOAT"
+			"Duration"				"{Ability.Duration}"
+		}
+	}
+
+	"Modifiers"
+	{
+		"modifier_damage_type_bonus_ability_nature_ranger_pierce_mark"
+		{
+			"Passive"			"1"
+			"IsHidden"			"0"
+			"IsDebuff"			"0"
+	
+			"OnAttackLanded"
+			{
+				"ApplyModifier"
+				{
+					"Target"		"TARGET"
+					"Modifier"		"modifier_damage_type_bonus_target_ability_nature_ranger_pierce_mark"
+					"Duration"		"%Duration"
+				}
+			}
+		}
+
+		"modifier_damage_type_bonus_target_ability_nature_ranger_pierce_mark"
+		{
+			"IsHidden"			"0"
+			"IsDebuff"			"0"
+			"Duration"			"%Duration"
+	
+			"OnTakeDamage"
+			{
+				"RunScript"
+				{
+					"ScriptFile"	"unit_abilities/DamageTypeBonus.lua"
+					"Function"		"DamageTypeBonusOnTakeDamage"
+					"DamageTaken"	"%attack_damage"
+					"DamageType"	"DOTA_COMBAT_CLASS_ATTACK_PIERCE"
+				}
+			}
+		}
+
+	}
+}
+
+
+
+
+
 "ability_nature_sprite_evasion"
 {
 	"BaseClass"						"ability_datadriven"
@@ -6725,6 +7556,8 @@
 		}
 	}
 }
+
+
 
 
 
@@ -6819,6 +7652,8 @@
 
 
 
+
+
 "ability_nature_travel_speed_aura"
 {
 	"BaseClass"						"ability_datadriven"
@@ -6896,6 +7731,8 @@
 		}		
 	}
 }
+
+
 
 
 
@@ -6984,6 +7821,8 @@
 
 
 
+
+
 "ability_nature_halfbreed_armour"
 {
 	"BaseClass"						"ability_datadriven"
@@ -7060,6 +7899,8 @@
 
 
 
+
+
 "ability_nature_halfbreed_resistance"
 {
 	"BaseClass"						"ability_datadriven"
@@ -7107,6 +7948,8 @@
 		}
 	}
 }
+
+
 
 
 
@@ -7228,6 +8071,7 @@
 
 
 
+
 "ability_nature_life_mass_heal"
 {
 	"BaseClass"						"ability_datadriven"
@@ -7342,6 +8186,7 @@
 }
 
 
+
 "ability_nature_life_reflect"
 {
 	"BaseClass"						"ability_datadriven"
@@ -7381,6 +8226,8 @@
 		}
 	}
 }
+
+
 
 
 
@@ -7459,6 +8306,8 @@
 	}
 
 }
+
+
 
 
 
@@ -7568,6 +8417,8 @@
 
 
 
+
+
 "ability_water_spirit_upg_deluge"
 {
 	"BaseClass"						"ability_datadriven"
@@ -7667,6 +8518,8 @@
 		}
 	}
 }
+
+
 
 
 
@@ -7786,6 +8639,8 @@
 }
 
 
+
+
 "ability_water_disciple_damage"
 {
 	"BaseClass"						"ability_datadriven"
@@ -7826,6 +8681,8 @@
 		}
 	}
 }
+
+
 
 
 
@@ -7907,70 +8764,6 @@
 
 
 
-"ability_water_seer_shield"
-{
-	"BaseClass"					"ability_datadriven"
-	"AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-	"AbilityTextureName"		"medusa_mana_shield"
-
-	"precache"
-	{
-		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_medusa.vsndevts"
-		"particle"			"particles/units/heroes/hero_medusa/medusa_mana_shield.vpcf"
-		"particle"			"particles/units/heroes/hero_medusa/medusa_mana_shield_impact.vpcf"
-	}
-
-	"AbilitySpecial"
-	{
-		"01"
-		{
-			"var_type"					"FIELD_FLOAT"
-			"DamagePerMana"				"4"
-		}
-		"02"
-		{
-			"var_type"					"FIELD_FLOAT"
-			"MaxDamagePercent"			"0.9"
-		}
-		"02"
-		{
-			"var_type"					"FIELD_FLOAT"
-			"MaxDamagePercentFriendly"	"90"
-		}
-	}
-
-	"Modifiers"
-	{
-		"modifier_mana_shield_ability_water_seer_shield"
-		{
-			"Passive"			"1"
-			"IsBuff"			"1"
-	
-			"EffectName"		"particles/units/heroes/hero_medusa/medusa_mana_shield.vpcf"
-			"EffectAttachType"	"follow_origin"
-
-			"OnTakeDamage"
-			{
-				"FireSound"
-				{
-					"EffectName"	"Hero_Medusa.ManaShield.Proc"
-					"Target" 		"UNIT"
-				}
-				"RunScript"
-				{
-					"ScriptFile"	"unit_abilities/ManaShield.lua"
-					"Function"		"ManaShieldOnTakeDamage"
-					"Damage"		"%attack_damage"
-				}
-			}
-		}
-	}
-
-}
-
-
-
-
 
 
 "ability_water_seer_shield"
@@ -8033,6 +8826,76 @@
 	}
 
 }
+
+
+
+
+
+
+
+
+"ability_water_seer_shield"
+{
+	"BaseClass"					"ability_datadriven"
+	"AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	"AbilityTextureName"		"medusa_mana_shield"
+
+	"precache"
+	{
+		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_medusa.vsndevts"
+		"particle"			"particles/units/heroes/hero_medusa/medusa_mana_shield.vpcf"
+		"particle"			"particles/units/heroes/hero_medusa/medusa_mana_shield_impact.vpcf"
+	}
+
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_FLOAT"
+			"DamagePerMana"				"4"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_FLOAT"
+			"MaxDamagePercent"			"0.9"
+		}
+		"02"
+		{
+			"var_type"					"FIELD_FLOAT"
+			"MaxDamagePercentFriendly"	"90"
+		}
+	}
+
+	"Modifiers"
+	{
+		"modifier_mana_shield_ability_water_seer_shield"
+		{
+			"Passive"			"1"
+			"IsBuff"			"1"
+	
+			"EffectName"		"particles/units/heroes/hero_medusa/medusa_mana_shield.vpcf"
+			"EffectAttachType"	"follow_origin"
+
+			"OnTakeDamage"
+			{
+				"FireSound"
+				{
+					"EffectName"	"Hero_Medusa.ManaShield.Proc"
+					"Target" 		"UNIT"
+				}
+				"RunScript"
+				{
+					"ScriptFile"	"unit_abilities/ManaShield.lua"
+					"Function"		"ManaShieldOnTakeDamage"
+					"Damage"		"%attack_damage"
+				}
+			}
+		}
+	}
+
+}
+
+
 
 
 
@@ -8071,6 +8934,8 @@
 		}
 	}
 }
+
+
 
 
 

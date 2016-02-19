@@ -189,6 +189,8 @@
 
 
 
+
+
 "npc_legion_enemy_murloc"
 {
 	// General
@@ -281,6 +283,8 @@
 		}
 	}
 }
+
+
 
 
 
@@ -401,6 +405,8 @@
 
 
 
+
+
 "npc_legion_enemy_quillbeast"
 {
 	// General
@@ -494,6 +500,8 @@
 		}
 	}
 }
+
+
 
 
 
@@ -613,6 +621,8 @@
 
 
 
+
+
 "npc_legion_enemy_golem"
 {
 	// General
@@ -705,6 +715,8 @@
 		}
 	}
 }
+
+
 
 
 
@@ -825,6 +837,8 @@
 
 
 
+
+
 "npc_legion_enemy_acolyte"
 {
 	// General
@@ -931,6 +945,8 @@
 
 
 
+
+
 "npc_legion_enemy_zombie"
 {
 	// General
@@ -1023,6 +1039,8 @@
 		}
 	}
 }
+
+
 
 
 
@@ -1147,6 +1165,8 @@
 
 
 
+
+
 "npc_legion_enemy_goblin"
 {
 	// General
@@ -1239,6 +1259,8 @@
 		}
 	}
 }
+
+
 
 
 
@@ -1359,6 +1381,8 @@
 
 
 
+
+
 "npc_legion_enemy_wildwing"
 {
 	// General
@@ -1451,6 +1475,8 @@
 		}
 	}
 }
+
+
 
 
 
@@ -1571,6 +1597,8 @@
 
 
 
+
+
 "npc_legion_enemy_centaur"
 {
 	// General
@@ -1663,6 +1691,8 @@
 		}
 	}
 }
+
+
 
 
 
@@ -1783,6 +1813,8 @@
 
 
 
+
+
 "npc_legion_enemy_hellbear"
 {
 	// General
@@ -1875,6 +1907,8 @@
 		}
 	}
 }
+
+
 
 
 
@@ -1995,6 +2029,8 @@
 
 
 
+
+
 "npc_legion_enemy_wolf"
 {
 	// General
@@ -2087,6 +2123,8 @@
 		}
 	}
 }
+
+
 
 
 
@@ -2210,6 +2248,8 @@
 
 
 
+
+
 "npc_legion_enemy_drake"
 {
 	// General
@@ -2302,6 +2342,8 @@
 		}
 	}
 }
+
+
 
 
 
@@ -2422,6 +2464,8 @@
 
 
 
+
+
 "npc_legion_enemy_wildwing_ripper"
 {
 	// General
@@ -2514,6 +2558,8 @@
 		}
 	}
 }
+
+
 
 
 
@@ -2634,6 +2680,8 @@
 
 
 
+
+
 "npc_legion_enemy_hellbear_bloodletter"
 {
 	// General
@@ -2726,6 +2774,8 @@
 		}
 	}
 }
+
+
 
 
 
@@ -2846,6 +2896,8 @@
 
 
 
+
+
 "npc_legion_enemy_dino_alpha"
 {
 	// General
@@ -2938,6 +2990,8 @@
 		}
 	}
 }
+
+
 
 
 
@@ -3059,6 +3113,8 @@
 
 
 
+
+
 "npc_legion_enemy_ghost"
 {
 	// General
@@ -3153,6 +3209,8 @@
 		}
 	}
 }
+
+
 
 
 
@@ -3275,6 +3333,7 @@
 
 
 
+
 "npc_legion_enemy_boss_endless"
 {
 	// General
@@ -3384,6 +3443,346 @@
 
 
 
+
+
+"npc_legion_king_radiant"
+{
+	// General
+	//----------------------------------------------------------------
+	"BaseClass"             "npc_dota_creature"
+	"Model"                 "models/heroes/skywrath_mage/skywrath_mage.vmdl"
+	"ModelScale"            "1.40"
+	"SoundSet"              "Hero_SkywrathMage"
+	"GameSoundsFile"        "soundevents/game_sounds_heroes/game_sounds_skywrath_mage.vsndevts"
+	"VoiceFile" 			"soundevents/voscripts/game_sounds_vo_skywrath_mage.vsndevts"
+	"particle_folder"		"particles/units/heroes/hero_skywrath_mage/"
+	"vscripts"				"ai/King.lua"
+
+	// Upgrades
+	//----------------------------------------------------------------
+
+	// Status
+	//----------------------------------------------------------------
+	"Level"                 "5"
+	"StatusHealth"          "4000"
+	"StatusHealthRegen"     "6"
+	"StatusMana"            "1000"
+	"StatusManaRegen"       "5"
+	"HasInventory"          "0"
+
+	"AttributePrimary"			"DOTA_ATTRIBUTE_STRENGTH"
+	"AttributeBaseStrength"		"0"
+	"AttributeStrengthGain"		"0"
+	"AttributeBaseIntelligence"	"0"
+	"AttributeIntelligenceGain"	"0"	
+	"AttributeBaseAgility"		"0"
+	"AttributeAgilityGain"		"0"	
+
+	// Mercenary Units
+	//----------------------------------------------------------------
+	"GemsCost"					"0"
+	"GoldIncome"				"0"
+	"SpawnCooldown"				"-1"
+	"LevelRequired"				"-1"
+
+	// Armor
+	//----------------------------------------------------------------
+	"ArmorPhysical"         "2"
+	"MagicalResistance"     "2"
+
+	// Attack
+	//----------------------------------------------------------------
+	"AttackCapabilities"    "DOTA_UNIT_CAP_RANGED_ATTACK"
+	"AttackDamageType"      "DAMAGE_TYPE_ArmorPhysical"
+	"AttackDamageMin"       "200"
+	"AttackDamageMax"       "200"
+	"AttackRate"            "1.00"
+	"AttackAnimationPoint"  "0.4"
+	"AttackAcquisitionRange" "1200"
+	"AttackRange"           "600"
+	"CombatClassAttack"     "DOTA_COMBAT_CLASS_ATTACK_BASIC"
+	"CombatClassDefend"     "DOTA_COMBAT_CLASS_DEFEND_STRONG"
+	"ProjectileModel"		"particles/units/heroes/hero_skywrath_mage/skywrath_mage_base_attack.vpcf"
+	"ProjectileSpeed"		"1000"
+
+	// Movement
+	//----------------------------------------------------------------
+	"MovementCapabilities"  "DOTA_UNIT_CAP_MOVE_GROUND"
+	"MovementSpeed"         "0"
+	"MovementTurnRate"      "0.55"
+
+	// Bounty
+	//----------------------------------------------------------------
+	"BountyXP"				"0"
+	"BountyGoldMin"         "0"
+	"BountyGoldMax"         "0"
+
+	// Bounds
+	//----------------------------------------------------------------
+	"BoundsHullName"        "DOTA_HULL_SIZE_HERO"
+	"RingRadius"            "70"
+
+	// Vision
+	//----------------------------------------------------------------
+	"VisionDaytimeRange"    "1400"
+	"VisionNighttimeRange"  "800"
+
+	// Team
+	//----------------------------------------------------------------
+	"TeamName"              "DOTA_TEAM_NEUTRALS"
+	"UnitRelationShipClass" "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+	// Creature Data
+	//----------------------------------------------------------------
+	"Creature"
+	{
+		"DisableClumpingBehavior"       "1"
+		"AttachWearables"
+		{
+			"Wearable0" { "ItemDef" "420" }
+			"Wearable1" { "ItemDef" "421" }
+			"Wearable2" { "ItemDef" "422" }
+			"Wearable3" { "ItemDef" "423" }
+			"Wearable4" { "ItemDef" "424" }
+			"Wearable5" { "ItemDef" "425" }
+
+		}
+	}
+}
+
+
+
+
+
+
+
+
+"npc_legion_king_dire"
+{
+	// General
+	//----------------------------------------------------------------
+	"BaseClass"             "npc_dota_creature"
+	"Model"                 "models/heroes/shadow_demon/shadow_demon.vmdl"
+	"ModelScale"            "1.40"
+	"SoundSet"              "Hero_ShadowDemon"
+	"GameSoundsFile"        "soundevents/game_sounds_heroes/game_sounds_shadow_demon.vsndevts"
+	"VoiceFile" 			"soundevents/voscripts/game_sounds_vo_shadow_demon.vsndevts"
+	"particle_folder"		"particles/units/heroes/hero_shadow_demon/"
+	"vscripts"				"ai/King.lua"
+
+	// Upgrades
+	//----------------------------------------------------------------
+
+	// Status
+	//----------------------------------------------------------------
+	"Level"                 "5"
+	"StatusHealth"          "4000"
+	"StatusHealthRegen"     "6"
+	"StatusMana"            "1000"
+	"StatusManaRegen"       "5"
+	"HasInventory"          "0"
+
+	"AttributePrimary"			"DOTA_ATTRIBUTE_STRENGTH"
+	"AttributeBaseStrength"		"0"
+	"AttributeStrengthGain"		"0"
+	"AttributeBaseIntelligence"	"0"
+	"AttributeIntelligenceGain"	"0"	
+	"AttributeBaseAgility"		"0"
+	"AttributeAgilityGain"		"0"	
+
+	// Mercenary Units
+	//----------------------------------------------------------------
+	"GemsCost"					"0"
+	"GoldIncome"				"0"
+	"SpawnCooldown"				"-1"
+	"LevelRequired"				"-1"
+
+	// Armor
+	//----------------------------------------------------------------
+	"ArmorPhysical"         "2"
+	"MagicalResistance"     "2"
+
+	// Attack
+	//----------------------------------------------------------------
+	"AttackCapabilities"    "DOTA_UNIT_CAP_RANGED_ATTACK"
+	"AttackDamageType"      "DAMAGE_TYPE_ArmorPhysical"
+	"AttackDamageMin"       "200"
+	"AttackDamageMax"       "200"
+	"AttackRate"            "1.00"
+	"AttackAnimationPoint"  "0.35"
+	"AttackAcquisitionRange" "1200"
+	"AttackRange"           "600"
+	"CombatClassAttack"     "DOTA_COMBAT_CLASS_ATTACK_BASIC"
+	"CombatClassDefend"     "DOTA_COMBAT_CLASS_DEFEND_STRONG"
+	"ProjectileModel"		"particles/units/heroes/hero_shadow_demon/shadow_demon_base_attack.vpcf"
+	"ProjectileSpeed"		"1000"
+
+	// Movement
+	//----------------------------------------------------------------
+	"MovementCapabilities"  "DOTA_UNIT_CAP_MOVE_GROUND"
+	"MovementSpeed"         "0"
+	"MovementTurnRate"      "0.55"
+
+	// Bounty
+	//----------------------------------------------------------------
+	"BountyXP"				"0"
+	"BountyGoldMin"         "0"
+	"BountyGoldMax"         "0"
+
+	// Bounds
+	//----------------------------------------------------------------
+	"BoundsHullName"        "DOTA_HULL_SIZE_HERO"
+	"RingRadius"            "70"
+
+	// Vision
+	//----------------------------------------------------------------
+	"VisionDaytimeRange"    "1400"
+	"VisionNighttimeRange"  "800"
+
+	// Team
+	//----------------------------------------------------------------
+	"TeamName"              "DOTA_TEAM_NEUTRALS"
+	"UnitRelationShipClass" "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+	// Creature Data
+	//----------------------------------------------------------------
+	"Creature"
+	{
+		"DisableClumpingBehavior"       "1"
+		"AttachWearables"
+		{
+			"Wearable0" { "ItemDef" "396" }
+			"Wearable1" { "ItemDef" "397" }
+			"Wearable2" { "ItemDef" "398" }
+			"Wearable3" { "ItemDef" "399" }
+			"Wearable4" { "ItemDef" "545" }
+
+		}
+	}
+}
+
+
+
+
+
+
+
+
+"npc_legion_king_dummy"
+{
+	// General
+	//----------------------------------------------------------------
+	"BaseClass"             "npc_dota_creature"
+	"Model"                 "models/heroes/shadow_demon/shadow_demon.vmdl"
+	"ModelScale"            "1.40"
+	"SoundSet"              "Hero_ShadowDemon"
+	"GameSoundsFile"        "soundevents/game_sounds_heroes/game_sounds_shadow_demon.vsndevts"
+	"VoiceFile" 			"soundevents/voscripts/game_sounds_vo_shadow_demon.vsndevts"
+	"particle_folder"		"particles/units/heroes/hero_shadow_demon/"
+	"vscripts"				"ai/King.lua"
+
+	// Upgrades
+	//----------------------------------------------------------------
+	"Ability1"	"ability_king_shockwave"
+	"Ability2"	"ability_king_aoe_bash"
+	"Ability3"	"ability_king_slow"
+	"Ability4"	"ability_king_corruption_attack"
+	"Ability5"	"ability_king_bouncing_attack"
+
+
+	// Status
+	//----------------------------------------------------------------
+	"Level"                 "5"
+	"StatusHealth"          "4000"
+	"StatusHealthRegen"     "6"
+	"StatusMana"            "1000"
+	"StatusManaRegen"       "5"
+	"HasInventory"          "0"
+
+	"AttributePrimary"			"DOTA_ATTRIBUTE_STRENGTH"
+	"AttributeBaseStrength"		"0"
+	"AttributeStrengthGain"		"0"
+	"AttributeBaseIntelligence"	"0"
+	"AttributeIntelligenceGain"	"0"	
+	"AttributeBaseAgility"		"0"
+	"AttributeAgilityGain"		"0"	
+
+	// Mercenary Units
+	//----------------------------------------------------------------
+	"GemsCost"					"0"
+	"GoldIncome"				"0"
+	"SpawnCooldown"				"-1"
+	"LevelRequired"				"-1"
+
+	// Armor
+	//----------------------------------------------------------------
+	"ArmorPhysical"         "2"
+	"MagicalResistance"     "2"
+
+	// Attack
+	//----------------------------------------------------------------
+	"AttackCapabilities"    "DOTA_UNIT_CAP_RANGED_ATTACK"
+	"AttackDamageType"      "DAMAGE_TYPE_ArmorPhysical"
+	"AttackDamageMin"       "200"
+	"AttackDamageMax"       "200"
+	"AttackRate"            "1.00"
+	"AttackAnimationPoint"  "0.35"
+	"AttackAcquisitionRange" "1200"
+	"AttackRange"           "600"
+	"CombatClassAttack"     "DOTA_COMBAT_CLASS_ATTACK_BASIC"
+	"CombatClassDefend"     "DOTA_COMBAT_CLASS_DEFEND_STRONG"
+	"ProjectileModel"		"particles/units/heroes/hero_shadow_demon/shadow_demon_base_attack.vpcf"
+	"ProjectileSpeed"		"1000"
+
+	// Movement
+	//----------------------------------------------------------------
+	"MovementCapabilities"  "DOTA_UNIT_CAP_MOVE_GROUND"
+	"MovementSpeed"         "0"
+	"MovementTurnRate"      "0.55"
+
+	// Bounty
+	//----------------------------------------------------------------
+	"BountyXP"				"0"
+	"BountyGoldMin"         "0"
+	"BountyGoldMax"         "0"
+
+	// Bounds
+	//----------------------------------------------------------------
+	"BoundsHullName"        "DOTA_HULL_SIZE_HERO"
+	"RingRadius"            "70"
+
+	// Vision
+	//----------------------------------------------------------------
+	"VisionDaytimeRange"    "1400"
+	"VisionNighttimeRange"  "800"
+
+	// Team
+	//----------------------------------------------------------------
+	"TeamName"              "DOTA_TEAM_NEUTRALS"
+	"UnitRelationShipClass" "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+	// Creature Data
+	//----------------------------------------------------------------
+	"Creature"
+	{
+		"DisableClumpingBehavior"       "1"
+		"AttachWearables"
+		{
+			"Wearable0" { "ItemDef" "396" }
+			"Wearable1" { "ItemDef" "397" }
+			"Wearable2" { "ItemDef" "398" }
+			"Wearable3" { "ItemDef" "399" }
+			"Wearable4" { "ItemDef" "545" }
+
+		}
+	}
+}
+
+
+
+
+
+
 "npc_legion_merc_footman"
 {
 	// General
@@ -3476,6 +3875,8 @@
 		}
 	}
 }
+
+
 
 
 
@@ -3594,6 +3995,8 @@
 
 
 
+
+
 "npc_legion_merc_ghoul"
 {
 	// General
@@ -3686,6 +4089,8 @@
 		}
 	}
 }
+
+
 
 
 
@@ -3804,6 +4209,8 @@
 
 
 
+
+
 "npc_legion_merc_whelp"
 {
 	// General
@@ -3897,6 +4304,8 @@
 		}
 	}
 }
+
+
 
 
 
@@ -4014,6 +4423,8 @@
 
 
 
+
+
 "npc_legion_merc_dino"
 {
 	// General
@@ -4107,6 +4518,8 @@
 		}
 	}
 }
+
+
 
 
 
@@ -4224,6 +4637,8 @@
 
 
 
+
+
 "npc_legion_merc_furbolg"
 {
 	// General
@@ -4329,6 +4744,8 @@
 
 
 
+
+
 "npc_legion_merc_wyvern"
 {
 	// General
@@ -4422,6 +4839,8 @@
 		}
 	}
 }
+
+
 
 
 
@@ -4539,6 +4958,8 @@
 
 
 
+
+
 "npc_legion_merc_orc"
 {
 	// General
@@ -4631,6 +5052,8 @@
 		}
 	}
 }
+
+
 
 
 
@@ -4749,6 +5172,8 @@
 
 
 
+
+
 "npc_legion_merc_ice_troll"
 {
 	// General
@@ -4844,6 +5269,8 @@
 		}
 	}
 }
+
+
 
 
 
@@ -4959,6 +5386,8 @@
 
 
 
+
+
 "npc_legion_merc_pandaren"
 {
 	// General
@@ -5051,6 +5480,8 @@
 		}
 	}
 }
+
+
 
 
 
@@ -5169,6 +5600,8 @@
 
 
 
+
+
 "npc_legion_merc_shaman"
 {
 	// General
@@ -5265,6 +5698,7 @@
 		}
 	}
 }
+
 
 
 
@@ -5379,6 +5813,8 @@
 
 
 
+
+
 "npc_legion_merc_gargoyle"
 {
 	// General
@@ -5472,6 +5908,8 @@
 		}
 	}
 }
+
+
 
 
 
@@ -5590,6 +6028,8 @@
 
 
 
+
+
 "npc_legion_merc_kraken"
 {
 	// General
@@ -5687,6 +6127,8 @@
 		}
 	}
 }
+
+
 
 
 
@@ -5803,6 +6245,8 @@
 
 
 
+
+
 "npc_legion_merc_demon"
 {
 	// General
@@ -5909,6 +6353,8 @@
 
 
 
+
+
 "npc_legion_fire_heat_knight"
 {
 	// General
@@ -5979,8 +6425,8 @@
 	// Bounty
 	//----------------------------------------------------------------
 	"BountyXP"				"0"
-	"BountyGoldMin"         "5"
-	"BountyGoldMax"         "5"
+	"BountyGoldMin"         "0"
+	"BountyGoldMax"         "0"
 
 	// Bounds
 	//----------------------------------------------------------------
@@ -6015,6 +6461,8 @@
 		}
 	}
 }
+
+
 
 
 
@@ -6090,8 +6538,8 @@
 	// Bounty
 	//----------------------------------------------------------------
 	"BountyXP"				"0"
-	"BountyGoldMin"         "10"
-	"BountyGoldMax"         "10"
+	"BountyGoldMin"         "0"
+	"BountyGoldMax"         "0"
 
 	// Bounds
 	//----------------------------------------------------------------
@@ -6126,6 +6574,8 @@
 		}
 	}
 }
+
+
 
 
 
@@ -6200,8 +6650,8 @@
 	// Bounty
 	//----------------------------------------------------------------
 	"BountyXP"				"0"
-	"BountyGoldMin"         "7"
-	"BountyGoldMax"         "7"
+	"BountyGoldMin"         "0"
+	"BountyGoldMax"         "0"
 
 	// Bounds
 	//----------------------------------------------------------------
@@ -6236,6 +6686,8 @@
 		}
 	}
 }
+
+
 
 
 
@@ -6311,8 +6763,8 @@
 	// Bounty
 	//----------------------------------------------------------------
 	"BountyXP"				"0"
-	"BountyGoldMin"         "12"
-	"BountyGoldMax"         "12"
+	"BountyGoldMin"         "0"
+	"BountyGoldMax"         "0"
 
 	// Bounds
 	//----------------------------------------------------------------
@@ -6347,6 +6799,8 @@
 		}
 	}
 }
+
+
 
 "npc_legion_fire_vanguard"
 {
@@ -6418,8 +6872,8 @@
 	// Bounty
 	//----------------------------------------------------------------
 	"BountyXP"				"0"
-	"BountyGoldMin"         "10"
-	"BountyGoldMax"         "10"
+	"BountyGoldMin"         "0"
+	"BountyGoldMax"         "0"
 
 	// Bounds
 	//----------------------------------------------------------------
@@ -6454,6 +6908,8 @@
 		}
 	}
 }
+
+
 
 
 
@@ -6530,8 +6986,8 @@
 	// Bounty
 	//----------------------------------------------------------------
 	"BountyXP"				"0"
-	"BountyGoldMin"         "15"
-	"BountyGoldMax"         "15"
+	"BountyGoldMin"         "0"
+	"BountyGoldMax"         "0"
 
 	// Bounds
 	//----------------------------------------------------------------
@@ -6566,6 +7022,8 @@
 		}
 	}
 }
+
+
 
 
 
@@ -6643,8 +7101,8 @@
 	// Bounty
 	//----------------------------------------------------------------
 	"BountyXP"				"0"
-	"BountyGoldMin"         "15"
-	"BountyGoldMax"         "15"
+	"BountyGoldMin"         "0"
+	"BountyGoldMax"         "0"
 
 	// Bounds
 	//----------------------------------------------------------------
@@ -6677,6 +7135,7 @@
 		}
 	}
 }
+
 
 
 
@@ -6752,8 +7211,8 @@
 	// Bounty
 	//----------------------------------------------------------------
 	"BountyXP"				"0"
-	"BountyGoldMin"         "25"
-	"BountyGoldMax"         "25"
+	"BountyGoldMin"         "0"
+	"BountyGoldMax"         "0"
 
 	// Bounds
 	//----------------------------------------------------------------
@@ -6786,6 +7245,7 @@
 		}
 	}
 }
+
 "npc_legion_fire_firestarter_upg_damage"
 {
 	// General
@@ -6857,8 +7317,8 @@
 	// Bounty
 	//----------------------------------------------------------------
 	"BountyXP"				"0"
-	"BountyGoldMin"         "22"
-	"BountyGoldMax"         "22"
+	"BountyGoldMin"         "0"
+	"BountyGoldMax"         "0"
 
 	// Bounds
 	//----------------------------------------------------------------
@@ -6892,6 +7352,8 @@
 		}
 	}
 }
+
+
 
 "npc_legion_fire_flamebound"
 {
@@ -6963,8 +7425,8 @@
 	// Bounty
 	//----------------------------------------------------------------
 	"BountyXP"				"0"
-	"BountyGoldMin"         "20"
-	"BountyGoldMax"         "20"
+	"BountyGoldMin"         "0"
+	"BountyGoldMax"         "0"
 
 	// Bounds
 	//----------------------------------------------------------------
@@ -6998,6 +7460,8 @@
 		}
 	}
 }
+
+
 
 
 
@@ -7075,8 +7539,8 @@
 	// Bounty
 	//----------------------------------------------------------------
 	"BountyXP"				"0"
-	"BountyGoldMin"         "35"
-	"BountyGoldMax"         "35"
+	"BountyGoldMin"         "0"
+	"BountyGoldMax"         "0"
 
 	// Bounds
 	//----------------------------------------------------------------
@@ -7110,6 +7574,7 @@
 		}
 	}
 }
+
 
 "npc_legion_fire_pyromancer"
 {
@@ -7182,8 +7647,8 @@
 	// Bounty
 	//----------------------------------------------------------------
 	"BountyXP"				"0"
-	"BountyGoldMin"         "30"
-	"BountyGoldMax"         "30"
+	"BountyGoldMin"         "0"
+	"BountyGoldMax"         "0"
 
 	// Bounds
 	//----------------------------------------------------------------
@@ -7219,6 +7684,8 @@
 		}
 	}
 }
+
+
 
 
 
@@ -7294,8 +7761,8 @@
 	// Bounty
 	//----------------------------------------------------------------
 	"BountyXP"				"0"
-	"BountyGoldMin"         "50"
-	"BountyGoldMax"         "50"
+	"BountyGoldMin"         "0"
+	"BountyGoldMax"         "0"
 
 	// Bounds
 	//----------------------------------------------------------------
@@ -7331,6 +7798,8 @@
 		}
 	}
 }
+
+
 
 "npc_legion_mech_militia"
 {
@@ -7441,6 +7910,8 @@
 
 
 
+
+
 "npc_legion_mech_militia_upg"
 {
 	// General
@@ -7543,6 +8014,8 @@
 		}
 	}
 }
+
+
 
 
 
@@ -7657,6 +8130,8 @@
 
 
 
+
+
 "npc_legion_mech_sniper_upg_range"
 {
 	// General
@@ -7763,6 +8238,8 @@
 	}
 }
 
+
+
 "npc_legion_mech_sniper_upg_damage"
 {
 	// General
@@ -7867,6 +8344,8 @@
 		}
 	}
 }
+
+
 
 
 "npc_legion_mech_captain"
@@ -7982,6 +8461,8 @@
 
 
 
+
+
 "npc_legion_mech_captain_upg"
 {
 	// General
@@ -8089,6 +8570,8 @@
 		}
 	}
 }
+
+
 
 
 "npc_legion_mech_airship"
@@ -8203,6 +8686,8 @@
 
 
 
+
+
 "npc_legion_mech_airship_upg"
 {
 	// General
@@ -8310,6 +8795,8 @@
 		}
 	}
 }
+
+
 
 "npc_legion_mech_knight"
 {
@@ -8421,6 +8908,8 @@
 
 
 
+
+
 "npc_legion_mech_knight_upg"
 {
 	// General
@@ -8525,6 +9014,8 @@
 		}
 	}
 }
+
+
 
 
 "npc_legion_mech_cyborg"
@@ -8639,6 +9130,8 @@
 
 
 
+
+
 "npc_legion_mech_cyborg_upg"
 {
 	// General
@@ -8747,6 +9240,8 @@
 }
 
 
+
+
 "npc_legion_nature_ent"
 {
 	// General
@@ -8853,6 +9348,8 @@
 
 
 
+
+
 "npc_legion_nature_ent_upg"
 {
 	// General
@@ -8861,7 +9358,7 @@
 	"Model"                 "models/heroes/furion/treant.vmdl"
 	"ModelScale"            "1.00"
 	"SoundSet"              "Furion_Treant"
-	"vscripts"				"IMPLEMENT"
+	"vscripts"				"ai/Stunner.lua"
 
 	// Upgrades
 	//----------------------------------------------------------------
@@ -8956,6 +9453,7 @@
 
 
 
+
 "npc_legion_nature_ranger"
 {
 	// General
@@ -8970,8 +9468,9 @@
 
 	// Upgrades
 	//----------------------------------------------------------------
-	"Ability1"	"upgrade_unit_nature_ranger_upg"
-	"Ability2"	"sell_unit_nature"
+	"Ability1"	"ability_nature_ranger_critical"
+	"Ability2"	"upgrade_unit_nature_ranger_upg"
+	"Ability3"	"sell_unit_nature"
 
 
 	// Status
@@ -9061,6 +9560,7 @@
 		}
 	}
 }
+
 
 
 
@@ -9172,6 +9672,8 @@
 	}
 }
 
+
+
 "npc_legion_nature_sprite"
 {
 	// General
@@ -9281,6 +9783,8 @@
 
 
 
+
+
 "npc_legion_nature_sprite_upg"
 {
 	// General
@@ -9385,6 +9889,8 @@
 		}
 	}
 }
+
+
 
 "npc_legion_nature_travel"
 {
@@ -9495,6 +10001,8 @@
 
 
 
+
+
 "npc_legion_nature_travel_upg"
 {
 	// General
@@ -9598,6 +10106,8 @@
 		}
 	}
 }
+
+
 
 
 "npc_legion_nature_halfbreed"
@@ -9706,6 +10216,8 @@
 		}
 	}
 }
+
+
 
 
 
@@ -9822,6 +10334,8 @@
 
 
 
+
+
 "npc_legion_nature_life"
 {
 	// General
@@ -9931,6 +10445,7 @@
 
 
 
+
 "npc_legion_nature_life_upg_heal"
 {
 	// General
@@ -10036,6 +10551,7 @@
 	}
 }
 
+
 "npc_legion_nature_life_upg_dmg"
 {
 	// General
@@ -10140,6 +10656,8 @@
 		}
 	}
 }
+
+
 
 
 "npc_legion_water_proton"
@@ -10248,6 +10766,8 @@
 
 
 
+
+
 "npc_legion_water_proton_upg"
 {
 	// General
@@ -10347,6 +10867,8 @@
 		}
 	}
 }
+
+
 
 
 
@@ -10462,6 +10984,8 @@
 
 
 
+
+
 "npc_legion_water_spirit_upg"
 {
 	// General
@@ -10568,6 +11092,8 @@
 		}
 	}
 }
+
+
 
 "npc_legion_water_watcher"
 {
@@ -10680,6 +11206,8 @@
 
 
 
+
+
 "npc_legion_water_watcher_upg"
 {
 	// General
@@ -10788,6 +11316,8 @@
 	}
 }
 
+
+
 "npc_legion_water_mudman"
 {
 	// General
@@ -10893,6 +11423,8 @@
 		}
 	}
 }
+
+
 
 
 
@@ -11006,6 +11538,8 @@
 
 
 
+
+
 "npc_legion_water_disciple"
 {
 	// General
@@ -11116,6 +11650,8 @@
 
 
 
+
+
 "npc_legion_water_disciple_upg"
 {
 	// General
@@ -11222,6 +11758,8 @@
 		}
 	}
 }
+
+
 
 "npc_legion_water_seer"
 {
@@ -11330,6 +11868,8 @@
 
 
 
+
+
 "npc_legion_water_seer_upg"
 {
 	// General
@@ -11434,162 +11974,8 @@
 	}
 }
 
-"npc_legion_king_dire"
-{
-	// General
-	//----------------------------------------------------------------
-	"BaseClass"				"npc_dota_creature"
-	"Model"					"models/heroes/omniknight/omniknight.vmdl"
-	"ModelScale"			"1.5"
-	"SoundSet"				"Hero_DragonKnight"
-	"GameSoundsFile"		"soundevents/game_sounds_heroes/game_sounds_dragon_knight.vsndevts"
 
-	// Status
-	//----------------------------------------------------------------
-	"Level"					"50"
-	"StatusHealth"			"4000"
-	"StatusHealthRegen"		"10"
-	"StatusMana"			"1000"
-	"StatusManaRegen"		"2"
-	"HasInventory"			"0"
-	"ConsideredHero"		"1"
-	"HealthBarOffset"		"350"
 
-	// Armor
-	//----------------------------------------------------------------
-	"ArmorPhysical"			"5"
-	"MagicalResistance"		"2"
-
-	// Attack
-	//----------------------------------------------------------------
-	"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
-	"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
-	"AttackDamageMin"			"200.0"
-	"AttackDamageMax"			"200.0"
-	"AttackRate"				"1.0"
-	"AttackAnimationPoint"		"0.5"
-	"AttackAcquisitionRange"	"500"
-	"AttackRange"				"500"
-	"AttackRangeBuffer"			"250"
-	"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
-	"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRONG"
-	"AbilityLayout"				"6"
-
-	// Movement
-	//----------------------------------------------------------------
-	"MovementCapabilities"  "DOTA_UNIT_CAP_MOVE_NONE"
-	"MovementSpeed"         "0"
-	"MovementTurnRate"      "0.7"
-
-	// Bounds
-	//----------------------------------------------------------------
-	"BoundsHullName"        "DOTA_HULL_SIZE_FILLER"
-	"RingRadius"            "100"
-
-	// Vision
-	//----------------------------------------------------------------
-	"VisionDaytimeRange"    "1800"
-	"VisionNighttimeRange"  "1400"
-
-	// Team
-	//----------------------------------------------------------------
-	"TeamName"              "DOTA_TEAM_GOODGUYS"
-	"UnitRelationShipClass" "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
-
-	// Creature Data
-	//----------------------------------------------------------------
-	"Creature"
-	{
-			"DisableClumpingBehavior"       "1"
-			"AttachWearables"
-			{
-					"Wearable1" { "ItemDef" "13" }
-					"Wearable2" { "ItemDef" "42" }
-					"Wearable3" { "ItemDef" "43" }
-					"Wearable4" { "ItemDef" "44" }
-					"Wearable5" { "ItemDef" "45" }
-					"Wearable6" { "ItemDef" "46" }
-			}
-	}
-}
-"npc_legion_king_radiant"
-{
-	// General
-	//----------------------------------------------------------------
-	"BaseClass"				"npc_dota_creature"
-	"Model"					"models/heroes/omniknight/omniknight.vmdl"
-	"ModelScale"			"1.5"
-	"SoundSet"				"Hero_DragonKnight"
-	"GameSoundsFile"		"soundevents/game_sounds_heroes/game_sounds_dragon_knight.vsndevts"
-
-	// Status
-	//----------------------------------------------------------------
-	"Level"					"50"
-	"StatusHealth"			"4000"
-	"StatusHealthRegen"		"10"
-	"StatusMana"			"1000"
-	"StatusManaRegen"		"2"
-	"HasInventory"			"0"
-	"ConsideredHero"		"1"
-	"HealthBarOffset"		"350"
-
-	// Armor
-	//----------------------------------------------------------------
-	"ArmorPhysical"			"5"
-	"MagicalResistance"		"2"
-
-	// Attack
-	//----------------------------------------------------------------
-	"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
-	"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
-	"AttackDamageMin"			"200.0"
-	"AttackDamageMax"			"200.0"
-	"AttackRate"				"1.0"
-	"AttackAnimationPoint"		"0.5"
-	"AttackAcquisitionRange"	"500"
-	"AttackRange"				"500"
-	"AttackRangeBuffer"			"250"
-	"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
-	"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRONG"
-	"AbilityLayout"				"6"
-
-	// Movement
-	//----------------------------------------------------------------
-	"MovementCapabilities"  "DOTA_UNIT_CAP_MOVE_NONE"
-	"MovementSpeed"         "0"
-	"MovementTurnRate"      "0.7"
-
-	// Bounds
-	//----------------------------------------------------------------
-	"BoundsHullName"        "DOTA_HULL_SIZE_FILLER"
-	"RingRadius"            "100"
-
-	// Vision
-	//----------------------------------------------------------------
-	"VisionDaytimeRange"    "1800"
-	"VisionNighttimeRange"  "1400"
-
-	// Team
-	//----------------------------------------------------------------
-	"TeamName"              "DOTA_TEAM_GOODGUYS"
-	"UnitRelationShipClass" "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
-
-	// Creature Data
-	//----------------------------------------------------------------
-	"Creature"
-	{
-			"DisableClumpingBehavior"       "1"
-			"AttachWearables"
-			{
-					"Wearable1" { "ItemDef" "13" }
-					"Wearable2" { "ItemDef" "42" }
-					"Wearable3" { "ItemDef" "43" }
-					"Wearable4" { "ItemDef" "44" }
-					"Wearable5" { "ItemDef" "45" }
-					"Wearable6" { "ItemDef" "46" }
-			}
-	}
-}
 "npc_legion_miner"
 {
 	// General
