@@ -141,14 +141,14 @@ end
 -----------------------------------
 function CLaneController:HasPermissionToBuildInLane( iPlayerId, iLane )
 
-	local player_lane = self:GetLaneForPlayer(iPlayerId)
+	local player_lane = self:GetLaneForPlayer(iPlayerId) or -1
 	if iLane == player_lane then
 		return true
 	else
 		self._lane_permissions = self._lane_permissions or {}
 		self._lane_permissions[iPlayerId] = self._lane_permissions[iPlayerId] or {}
-		return self._lane_permissions[iPlayerId][iLane]
-	end	
+		return self._lane_permissions[iPlayerId][iLane] or false
+	end
 
 end
 
