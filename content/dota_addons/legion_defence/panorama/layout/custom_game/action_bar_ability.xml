@@ -25,6 +25,22 @@
 						</Panel>
 						<Panel id="ActiveAbility" />
 						<Label id="ManaCost" />
+
+						<Panel id="GoldCost">
+							<Image id="GoldCostIcon" src="file://{images}/custom_game/icons/icon_coins_small.png" />
+							<Label id="GoldCostText" text="??" />
+						</Panel>
+
+						<Panel id="GemCost">
+							<Image id="GemCostIcon" src="file://{images}/custom_game/icons/icon_gems_small.png" />
+							<Label id="GemCostText" text="??" />
+						</Panel>
+
+						<Panel id="FoodCost">
+							<Image id="FoodCostIcon" src="file://{images}/custom_game/icons/icon_food_small.png" />
+							<Label id="FoodCostText" text="??" />
+						</Panel>
+
 					</Button>
 				</Panel>
 			</Panel>

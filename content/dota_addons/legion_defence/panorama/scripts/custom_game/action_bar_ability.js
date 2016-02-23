@@ -53,6 +53,7 @@ function UpdateAbility()
 	$( "#AbilityImage" ).abilityname = abilityName;
 	$( "#AbilityImage" ).contextEntityIndex = m_Ability;
 	
+	$( "#ManaCost" ).SetHasClass( "hidden", manaCost <= 0 );
 	$( "#ManaCost" ).text = manaCost;
 	
 	if ( Abilities.IsCooldownReady( m_Ability ) )
@@ -70,7 +71,26 @@ function UpdateAbility()
 		$( "#CooldownTimer" ).text = Math.ceil( cooldownRemaining );
 		$( "#CooldownOverlay" ).style.width = cooldownPercent+"%";
 	}
-	
+
+	// Gold/Gem Costs
+	var goldCost = Abilities.GetSpecialValueFor( m_Ability, "GoldCost" );
+	var gemCost = Abilities.GetSpecialValueFor( m_Ability, "GemCost" );
+
+	$( "#GoldCost" ).SetHasClass( "hidden", goldCost <= 0 );
+	$( "#GoldCostText" ).text = goldCost;
+
+	$( "#GemCost" ).SetHasClass( "hidden", gemCost <= 0 );
+	$( "#GemCostText" ).text = gemCost;
+
+	$( "#FoodCost" ).SetHasClass( "hidden", true );
+
+	// Sell unit
+	if( abilityName.indexOf( "sell_unit" ) >= 0 )
+	{
+		$( "#GoldCost" ).SetHasClass( "hidden", false );
+		$( "#GoldCostText" ).text = "?";
+	}
+
 }
 
 function AbilityShowTooltip()
@@ -78,10 +98,10 @@ function AbilityShowTooltip()
 	var abilityButton = $( "#AbilityButton" );
 	var abilityName = Abilities.GetAbilityName( m_Ability );
 	// If you don't have an entity, you can still show a tooltip that doesn't account for the entity
-	$.DispatchEvent( "DOTAShowAbilityTooltip", abilityButton, abilityName );
+	// $.DispatchEvent( "DOTAShowAbilityTooltip", abilityButton, abilityName );
 	
 	// If you have an entity index, this will let the tooltip show the correct level / upgrade information
-	// $.DispatchEvent( "DOTAShowAbilityTooltipForEntityIndex", abilityButton, abilityName, m_QueryUnit );
+	$.DispatchEvent( "DOTAShowAbilityTooltipForEntityIndex", abilityButton, abilityName, m_QueryUnit );
 }
 
 function AbilityHideTooltip()
